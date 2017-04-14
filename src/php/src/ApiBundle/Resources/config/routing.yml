@@ -1,0 +1,7 @@
+api_homepage:
+    path:     /
+    defaults: { _controller: ApiBundle:Default:index }
+
+api_get:
+    path:     /get
+    defaults: { _controller: ApiBundle:Default:index }
