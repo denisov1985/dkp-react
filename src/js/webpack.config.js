@@ -2,10 +2,10 @@ var webpack = require("webpack");
 
 module.exports = {
     entry: [
-        './react/index.js'
+        './src/index.js'
     ],
     output: {
-        path: __dirname + '/backend/web/build',
+        path: __dirname + '/../../public/build',
         publicPath: '/build/',
         filename: 'bundle.js'
     },
@@ -54,11 +54,5 @@ module.exports = {
     plugins: [
         new webpack.OldWatchingPlugin()
     ],
-
-    externals: {
-        'Config': {
-            ololo: 'trololo'
-        }
-    }
 
 };
