@@ -32,7 +32,7 @@ class Users extends Component {
                     </div>
                 </div>
 
-                <button className="ui labeled icon button">
+                <button className="ui labeled icon button orange">
                     <i className="add user icon"></i>
                     Add member
                 </button>
