@@ -6,7 +6,7 @@ import Layout from '../Layout';
 class Users extends Component {
     render() {
         return (
-            <Layout>
+            <Layout router={this.props.router}>
                 <h2 className="ui header">
                     <i className="users icon"></i>
                         <div className="content">
