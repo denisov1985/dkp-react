@@ -10,7 +10,7 @@ class Users extends Component {
     componentDidMount() {
         console.log('DID MOUNT');
         console.log(this.props);
-        this.props.actions.request();
+        this.props.actions.findAll();
         console.log('Dispatched');
     }
 
@@ -57,12 +57,14 @@ class Users extends Component {
 }
 
 function mapStateToProps(state) {
-    return {}
+    return {
+        users: state.userReducer
+    }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(ActionFactory.create(), dispatch)
+        actions: bindActionCreators(ActionFactory.create('user'), dispatch)
     }
 }
 
