@@ -9,8 +9,20 @@ export default class TableView extends CoreComponent {
     }
 
     render() {
+        console.log('IS FETCHING');
+        console.log(this.props.isFetching);
+
+        let className = "ui inverted dimmer transition ";
+        if (this.props.isFetching === true) {
+            className = className + "active visible";
+        }
+
         return (
-            <table className={this.getClass()}>
+            <div className="ui dimmable dimmed">
+                <div className={className}>
+                    <div className="ui text loader">Loading</div>
+                </div>
+                <table className={this.getClass()}>
                 <thead>
                 <tr><th>Header</th>
                     <th className="sorted descending">Header</th>
@@ -43,6 +55,7 @@ export default class TableView extends CoreComponent {
                 </tr>
                 </tfoot>
             </table>
+            </div>
         )
     }
 }

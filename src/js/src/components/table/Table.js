@@ -5,7 +5,7 @@ import TableView from './view/TableView';
 export default class Table extends CoreComponent {
     render() {
         return (
-            <TableView />
+            <TableView isFetching={this.props.isFetchind} />
         )
     }
 }

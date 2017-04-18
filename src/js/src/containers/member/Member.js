@@ -13,7 +13,7 @@ class Member extends Component {
         this.props.actions.findAll();
         console.log('Dispatched');
     }
-    
+
     render() {
 
         console.log('_________RENDER___________');
@@ -51,7 +51,7 @@ class Member extends Component {
                     Add member
                 </button>
 
-                <Table>
+                <Table dataset={this.props.member.find.dataset} isFetchind={this.props.member.find.status === 1}>
 
                 </Table>
 
