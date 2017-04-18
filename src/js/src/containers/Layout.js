@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Menu from '../components/menu/Menu';
+import Link from '../router/Link';
 
 export default class Layout extends Component {
 
@@ -14,7 +15,7 @@ export default class Layout extends Component {
         return (
             <div className="app-layout">
 
-                <Menu items={this.props.router.routes[0].children} />
+                <Menu itemTitle="title" itemData="route" items={this.props.router.routes[0].children} ><Link /></Menu>
 
                 <div className="ui container">
                     <div className="ui breadcrumb">

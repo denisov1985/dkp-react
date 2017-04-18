@@ -43,7 +43,15 @@ export const routes =
                     title: "Types",
                     path: "/events/types",
                     alias: "dkp_users_manage",
-                    component: UnderConstruction
+                    component: UnderConstruction,
+                    children: [
+                        {
+                            title: "Demo Sub",
+                            path: "/events/type/demo",
+                            alias: "dkp_users_manage",
+                            component: UnderConstruction
+                        },
+                    ]
                 },
                 {
                     title: "Settings",
