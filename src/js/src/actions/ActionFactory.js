@@ -2,17 +2,18 @@ import ActionHelper from '../utils/ActionHelper';
 
 class ActionFactory
 {
+    constructor(){
+        this.STATUS_EMPTY    = 0;
+        this.STATUS_FETCHING = 1;
+        this.STATUS_COMPLETE = 2;
+        this.STATUS_ERROR    = 3;
+    }
+
     create(entity) {
         return {
-            test() {
-                return (dispatch, getState) => {
-                    dispatch(ActionHelper.requestAction(entity, 'find', 'lalalal123'))
-                }
-            },
-
             findAll() {
                 return (dispatch, getState) => {
-                    dispatch(dispatch(ActionHelper.requestAction(entity, 'find', {})));
+                    dispatch(ActionHelper.requestAction(entity, 'find', {}));
                     return fetch('/api/' + entity.replace('_', '/'))
                         .then(response  => response.json())
                         .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'find', payload)))
@@ -22,10 +23,5 @@ class ActionFactory
         }
     }
 }
-
-ActionFactory.STATUS_EMPTY    = 0;
-ActionFactory.STATUS_FETCHING = 1;
-ActionFactory.STATUS_COMPLETE = 2;
-ActionFactory.STATUS_ERROR    = 3;
 
 export default new ActionFactory();

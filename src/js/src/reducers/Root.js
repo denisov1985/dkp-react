@@ -7,11 +7,11 @@ function initialReducer(state = initialState, action) {
     return state;
 }
 
-let userReducer = ReducerFactory.create('user');
+let memberReducer = ReducerFactory.create('member');
 
 const rootReducer = combineReducers({
     initialReducer,
-    userReducer
+    memberReducer
 });
 
 export default rootReducer;

@@ -5,17 +5,13 @@ namespace ApiBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class DefaultController extends Controller
+class MemberController extends Controller
 {
     public function indexAction()
     {
         return new JsonResponse([
-            'ololo' => 'trololo'
+            'ololo' => 'rtololo'
         ]);
     }
 
-    public function getAction()
-    {
-        return $this->render('ApiBundle:Default:index.html.twig');
-    }
 }

@@ -5,7 +5,7 @@ import ActionFactory from '../../actions/ActionFactory';
 import Layout from '../Layout';
 import Table from '../../components/table/Table'
 
-class Users extends Component {
+class Member extends Component {
 
     componentDidMount() {
         console.log('DID MOUNT');
@@ -13,8 +13,12 @@ class Users extends Component {
         this.props.actions.findAll();
         console.log('Dispatched');
     }
-
+    
     render() {
+
+        console.log('_________RENDER___________');
+        console.log(this.props);
+
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -58,14 +62,14 @@ class Users extends Component {
 
 function mapStateToProps(state) {
     return {
-        users: state.userReducer
+        member: state.memberReducer
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(ActionFactory.create('user'), dispatch)
+        actions: bindActionCreators(ActionFactory.create('member'), dispatch)
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default connect(mapStateToProps, mapDispatchToProps)(Member)

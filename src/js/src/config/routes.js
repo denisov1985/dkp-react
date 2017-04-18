@@ -1,4 +1,4 @@
-import Users from '../containers/users/Users';
+import Member from '../containers/member/Member';
 import UnderConstruction from '../containers/common/UnderConstruction';
  
 /**
@@ -8,20 +8,20 @@ import UnderConstruction from '../containers/common/UnderConstruction';
 export const routes =
     [
         {
-            title: "Users",
-            path: "/users",
+            title: "Members",
+            path: "/member",
             alias: "dkp_users",
-            component: Users,
+            component: Member,
             children: [
                 {
                     title: "Manage",
-                    path: "/users/manage",
+                    path: "/member/manage",
                     alias: "dkp_users_manage",
-                    component: Users
+                    component: Member
                 },
                 {
                     title: "Classes",
-                    path: "/users/classes",
+                    path: "/member/classes",
                     alias: "dkp_users_classes",
                     component: UnderConstruction
                 }

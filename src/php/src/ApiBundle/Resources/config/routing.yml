@@ -5,3 +5,7 @@ api_homepage:
 api_get:
     path:     /get
     defaults: { _controller: ApiBundle:Default:index }
+
+index:
+    path:     /member
+    defaults: { _controller: ApiBundle:Member:index }
