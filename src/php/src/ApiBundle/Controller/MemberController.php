@@ -2,16 +2,12 @@
 
 namespace ApiBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class MemberController extends Controller
+class MemberController extends DefaultController
 {
-    public function indexAction()
+    protected function _getEntityName()
     {
-        return new JsonResponse([
-            'ololo' => 'rtololo'
-        ]);
+        return 'Member';
     }
-
 }
