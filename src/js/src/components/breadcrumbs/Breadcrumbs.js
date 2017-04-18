@@ -39,10 +39,9 @@ export default class Breadcrumbs extends CoreComponent {
                 <a href="#/" className="section">Home</a>
                 {items.reverse().map((row, index) => {
                     let style = row.isActive() ? {color: '#777'} : {};
-                    return (<span><i className="right angle icon divider"></i><Link
+                    return (<span key={index}><i className="right angle icon divider"></i><Link
                         style={style}
                         route={row}
-                        key={index}
                         className="section"
                     >{row.title}</Link>
                     </span>)

@@ -2,6 +2,22 @@ import React, {Component} from 'react'
 
 export default class DefaultComponent extends Component {
 
+    getElementClass() {
+        return '';
+    }
+
+    getClass() {
+        return [
+            this.getProp('color'),
+            this.getProp('size'),
+            this.getElementClass()
+        ].join(' ');
+    }
+
+    getProp(propName) {
+        return this.props[propName] == undefined ? '' : this.props[this.props[propName]];
+    }
+
     /**
      * Render children element with props
      * Has different behavior depending on children number

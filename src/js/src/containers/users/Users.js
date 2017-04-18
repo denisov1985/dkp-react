@@ -1,12 +1,22 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import ActionFactory from '../../actions/ActionFactory';
 import Layout from '../Layout';
+import Table from '../../components/table/Table'
 
 class Users extends Component {
+
+    componentDidMount() {
+        console.log('DID MOUNT');
+        console.log(this.props);
+        this.props.actions.request();
+        console.log('Dispatched');
+    }
+
     render() {
         return (
-            <Layout router={this.props.router}>
+            <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
                     <i className="users icon"></i>
                         <div className="content">
@@ -32,54 +42,15 @@ class Users extends Component {
                     </div>
                 </div>
 
-                <button className="ui labeled icon button orange">
+                <button className="ui labeled icon button">
                     <i className="add user icon"></i>
                     Add member
                 </button>
 
-                <table className="ui celled table">
-                    <thead>
-                    <tr><th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                    </tr></thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div className="ui ribbon label">First</div>
-                        </td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                    </tr>
-                    <tr>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                    </tr>
-                    <tr>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                        <td>Cell</td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th colSpan="3">
-                        <div className="ui right floated pagination menu">
-                            <a className="icon item">
-                                <i className="left chevron icon"></i>
-                            </a>
-                            <a className="item">1</a>
-                            <a className="item">2</a>
-                            <a className="item">3</a>
-                            <a className="item">4</a>
-                            <a className="icon item">
-                                <i className="right chevron icon"></i>
-                            </a>
-                        </div>
-                    </th>
-                    </tr></tfoot>
-                </table>
+                <Table>
+
+                </Table>
+
             </Layout>
         )
     }
@@ -90,7 +61,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {}
+    return {
+        actions: bindActionCreators(ActionFactory.create(), dispatch)
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users)
