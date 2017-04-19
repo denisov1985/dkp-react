@@ -12,7 +12,9 @@ import TextCell from '../../components/table/cell/TextCell'
 class Member extends Component {
 
     componentDidMount() {
-        this.props.actions.findAll();
+        if (this.props.member.find.status === 0) {
+            this.props.actions.findAll();
+        }
     }
 
     render() {
