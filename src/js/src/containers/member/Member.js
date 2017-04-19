@@ -4,21 +4,16 @@ import {connect} from 'react-redux'
 import ActionFactory from '../../actions/ActionFactory';
 import Layout from '../Layout';
 import Table from '../../components/table/Table'
+import Column from '../../components/table/Column'
+import TextCell from '../../components/table/cell/TextCell'
 
 class Member extends Component {
 
     componentDidMount() {
-        console.log('DID MOUNT');
-        console.log(this.props);
         this.props.actions.findAll();
-        console.log('Dispatched');
     }
 
     render() {
-
-        console.log('_________RENDER___________');
-        console.log(this.props);
-
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -52,7 +47,17 @@ class Member extends Component {
                 </button>
 
                 <Table dataset={this.props.member.find.dataset} isFetchind={this.props.member.find.status === 1}>
+                    <Column title="ID" width="50px">
+                        <TextCell field="id"></TextCell>
+                    </Column>
 
+                    <Column title="Name" width="300px">
+                        <TextCell field="name"></TextCell>
+                    </Column>
+
+                    <Column title="Email">
+                        <TextCell field="email"></TextCell>
+                    </Column>
                 </Table>
 
             </Layout>

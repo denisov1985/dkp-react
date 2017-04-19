@@ -14,7 +14,7 @@ class ReducerFactory
                 dataset: {}
             };
 
-        return function(state = initialState, action) {
+        return (state = initialState, action) => {
             switch (action.type) {
                 case ActionHelper.format('request', entity, 'find'):
                     return {

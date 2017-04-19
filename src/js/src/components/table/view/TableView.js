@@ -8,10 +8,31 @@ export default class TableView extends CoreComponent {
         return "ui celled table sortable small";
     }
 
-    render() {
-        console.log('IS FETCHING');
-        console.log(this.props.isFetching);
+    getHeaderStyle(column) {
+        let style = {};
+        if (typeof column.props.width !== 'undefined') {
+            style.width = column.props.width;
+        }
+        return style;
+    }
 
+    getSortingClass(column) {
+        if (column.props.title === '') {
+            return '';
+        }
+        let classParts = [''];
+        if (this.props.sortColumn === column.props.children.props.field) {
+            this.props.sortOrder ? classParts.push('sorted descending') : classParts.push('sorted ascending');
+        }
+        return classParts.join(' ');
+    }
+
+    onSortClick(column, e) {
+        e.preventDefault();
+        this.props.onSortClick(column);
+    }
+
+    render() {
         let className = "ui inverted dimmer transition ";
         if (this.props.isFetching === true) {
             className = className + "active visible";
@@ -24,33 +45,35 @@ export default class TableView extends CoreComponent {
                 </div>
                 <table className={this.getClass()}>
                 <thead>
-                <tr><th>Header</th>
-                    <th className="sorted descending">Header</th>
-                    <th>Header</th>
-                </tr></thead>
+                <tr>
+                    {this.props.columns.map((column, index) => {
+                        return (<th
+                            onClick={this.onSortClick.bind(this, column)}
+                            className={this.getSortingClass(column)}
+                            style={this.getHeaderStyle(column)}
+                            key={index}>
+                            {column.props.title}
+                        </th>)
+                    })}
+                </tr>
+                </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        Cell
-                    </td>
-                    <td>Cell</td>
-                    <td>Cell</td>
-                </tr>
-                <tr>
-                    <td>Cell</td>
-                    <td>Cell</td>
-                    <td>Cell</td>
-                </tr>
-                <tr>
-                    <td>Cell</td>
-                    <td>Cell</td>
-                    <td>Cell</td>
-                </tr>
+                    {this.props.dataset.map((row, index) => (
+                        <tr key={index}>
+                            {this.props.columns.map((cell, key) => {
+                                return (<td key={key}>
+                                    {this.renderElementWithProps({
+                                        record: row
+                                    }, cell.props.children)}
+                                </td>)
+                            })}
+                        </tr>
+                    ))}
                 </tbody>
                 <tfoot>
                 <tr>
                     <th colSpan="3">
-                        <PagerView />
+                        <PagerView table={this.props.table} />
                     </th>
                 </tr>
                 </tfoot>
