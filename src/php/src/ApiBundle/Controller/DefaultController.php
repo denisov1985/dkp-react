@@ -25,6 +25,23 @@ abstract class DefaultController extends Controller
         );
     }
 
+    /**
+     * Get item details
+     * @param $id
+     * @return Response
+     */
+    public function getAction($id)
+    {
+        $item = $this->getDoctrine()
+            ->getRepository('ApiBundle:' . $this->_getEntityName())
+            ->find($id);
+        return new Response(
+            $this->serialize($item),
+            Response::HTTP_OK,
+            ['Content-Type', 'application/json']
+        );
+    }
+
     protected function serialize($content) {
         $serializer = $this->get('jms_serializer');
         return $serializer->serialize($content, 'json', SerializationContext::create()->setSerializeNull(true));

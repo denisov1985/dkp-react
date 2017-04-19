@@ -9,3 +9,8 @@ api_get:
 index:
     path:     /member
     defaults: { _controller: ApiBundle:Member:index }
+
+index_get:
+    path:     /member/{id}
+    defaults: { _controller: ApiBundle:Member:get }
+

@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import ActionFactory from '../../actions/ActionFactory';
 import Layout from '../Layout';
 import Table from '../../components/table/Table'
+import Modal from '../../components/modal/Modal'
+import Button from '../../components/button/Button'
 import Column from '../../components/table/Column'
 import TextCell from '../../components/table/cell/TextCell'
 
@@ -18,7 +20,7 @@ class Member extends Component {
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
                     <i className="users icon"></i>
-                        <div className="content">
+                    <div className="content">
                         Members
                         <div className="sub header">Manage your guild members, roles and settings</div>
                     </div>
@@ -58,23 +60,35 @@ class Member extends Component {
                     <Column title="Email">
                         <TextCell field="email"></TextCell>
                     </Column>
+
+                    <Column width="62px">
+                        <Button onClick={this.onEditUserButtonClick}>Edit</Button>
+                    </Column>
                 </Table>
 
+                <Modal isFetchind={this.props.member.get.status === 1}
+                    isVisible={this.props.member.get.status > 0}>
+                </Modal>
+
             </Layout>
-        )
+    )
     }
-}
 
-function mapStateToProps(state) {
-    return {
-        member: state.memberReducer
+    onEditUserButtonClick = (button) => {
+        this.props.actions.get(button.record.id);
     }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(ActionFactory.create('member'), dispatch)
     }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Member)
+    function mapStateToProps(state) {
+        return {
+            member: state.memberReducer
+        }
+    }
+
+    function mapDispatchToProps(dispatch) {
+        return {
+            actions: bindActionCreators(ActionFactory.create('member'), dispatch)
+        }
+    }
+
+    export default connect(mapStateToProps, mapDispatchToProps)(Member)

@@ -24,7 +24,7 @@ class ActionFactory
             get(id) {
                 return (dispatch, getState) => {
                     dispatch(ActionHelper.requestAction(entity, 'get', {}));
-                    return fetch('/api/' + entity.replace('_', '/') + id)
+                    return fetch('/api/' + entity.replace('_', '/') + '/' + id)
                         .then(response  => response.json())
                         .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'get', payload)))
                         .catch(payload => dispatch(ActionHelper.errorAction(entity, 'get', payload)));

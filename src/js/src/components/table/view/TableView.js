@@ -5,7 +5,7 @@ import PagerView from './PagerView';
 export default class TableView extends CoreComponent {
 
     getElementClass() {
-        return "ui celled table sortable small";
+        return "ui celled  table sortable small";
     }
 
     getHeaderStyle(column) {
@@ -72,7 +72,7 @@ export default class TableView extends CoreComponent {
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colSpan="3">
+                    <th colSpan="4">
                         <PagerView table={this.props.table} />
                     </th>
                 </tr>

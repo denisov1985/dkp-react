@@ -2,6 +2,12 @@ import React, {Component} from 'react'
 
 export default class DefaultComponent extends Component {
 
+    onClick = () => {
+        if (this.props.onClick !== undefined) {
+            this.props.onClick(this.props);
+        }
+    }
+
     getElementClass() {
         return '';
     }

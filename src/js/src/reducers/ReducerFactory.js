@@ -16,6 +16,9 @@ class ReducerFactory
 
         return (state = initialState, action) => {
             switch (action.type) {
+                /**
+                 * FIND
+                 */
                 case ActionHelper.format('request', entity, 'find'):
                     return {
                         ...state,
@@ -30,6 +33,29 @@ class ReducerFactory
                     return {
                         ...state,
                         find: {
+                            dataset: action.payload,
+                            status: ActionFactory.STATUS_COMPLETE
+                        }
+                    };
+                    break;
+
+                /**
+                 * GET
+                  */
+                case ActionHelper.format('request', entity, 'get'):
+                    return {
+                        ...state,
+                        get: {
+                            ...state.get,
+                            status: ActionFactory.STATUS_FETCHING
+                        }
+                    };
+                    break;
+
+                case ActionHelper.format('receive', entity, 'get'):
+                    return {
+                        ...state,
+                        get: {
                             dataset: action.payload,
                             status: ActionFactory.STATUS_COMPLETE
                         }
