@@ -12,6 +12,9 @@ export default class Button extends CoreComponent {
         if (this.props.children !== undefined) {
             this.addClass('labeled');
         }
+        if (this.props.isFetching) {
+            this.addClass('loading');
+        }
     }
 
     render() {

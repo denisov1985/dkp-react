@@ -14,7 +14,19 @@ export default class DefaultComponent extends Component {
     }
 
     getIcon() {
-        return this.props.icon !== undefined ? (<i className="edit icon"></i>) : null;
+        if (this.props.icon === undefined) {
+            return null;
+        }
+        let className = 'icon ' + this.props.icon;
+        return (<i className={className}></i>)
+    }
+
+    getPosition() {
+        if (this.props.position === undefined) {
+            return '';
+        }
+        let className = this.props.position + ' floated';
+        return className;
     }
 
     addClass(className) {
@@ -25,17 +37,21 @@ export default class DefaultComponent extends Component {
         return '';
     }
 
+    reset() {
+        this.classData = [];
+    }
+
     getClass() {
         return [
             this.classData.join(' '),
             this.getProp('color'),
             this.getProp('size'),
+            this.getPosition(),
             this.getElementClass()
         ].join(' ');
     }
 
     getProp(propName) {
-        console.log(this.props[propName]);
         return this.props[propName] == undefined ? '' : this.props[propName];
     }
 

@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
+import Button from '../button/Button';
+import Body from './Body';
+import Loader from '../loader/Loader';
 
 export default class Modal extends CoreComponent {
 
@@ -22,75 +25,18 @@ export default class Modal extends CoreComponent {
         });
     }
 
-    renderContent() {
-        return (<div onClick={this.onModalClick} className="ui animating drop in transition small second coupled modal visible  active" style={{top: 20 + '%'}} >
-            <div className="header">
-                Modal #2
-            </div>
-            <div className="content">
-                <div className="description">
-                    <p>That's everything!</p>
-                </div>
-            </div>
-            <div className="actions">
-                <div className="ui approve button">
-                    <i className="checkmark icon"></i>
-                    All Done
-                </div>
-            </div>
-        </div>)
-    }
-
-    renderLoading() {
+    renderContent = () => {
         return (
-            <div className="ui animating drop in transition small second coupled modal visible  active" style={{top: 20 + '%'}} >
-                <div className="header">
-
-                </div>
-                <div className="content">
-                    <div className="description">
-                        <div className="ui inverted dimmer transition visible active">
-                            <div className="ui text loader">Loading</div>
-                        </div>
-                        asdasdsd
-                    </div>
-                </div>
-                <div className="actions">
-
-                </div>
-            </div>);
-    }
-
-    renderContentTest = () => {
-        return (
-            <div onClick={this.onModalClick} className="ui animating drop in transition small second coupled modal visible  active transition-height" style={{
-                top: 20 + '%'
-            }} >
-
+            <div onClick={this.onModalClick} className="ui animating drop in transition small second coupled modal visible  active transition-height" style={{top: 20 + '%'}} >
                 <div className="header">
                     Modal #2
                 </div>
-                <div className="content">
-                    <div className="description">
-                        {this.renderLoadingTest()}
-                        {this.renderData()}
-                    </div>
-                </div>
+                <Loader visible={this.props.isFetching} />
+                <Body>lalala</Body>
                 <div className="actions">
-                    <button style={{marginLeft: 0}} className="ui labeled icon button negative left floated">
-                        <i className="trash outline icon"></i>
-                        Delete
-                    </button>
-
-                    <button className="ui labeled icon button">
-                        <i className="remove icon"></i>
-                        Cancel
-                    </button>
-
-                    <button className="ui labeled icon button positive">
-                        <i className="checkmark icon"></i>
-                        Save
-                    </button>
+                    <Button position="left" color="negative" icon="trash">Delete</Button>
+                    <Button icon="remove">Cancel</Button>
+                    <Button color="positive" icon="checkmark">Save</Button>
                 </div>
             </div>
         );
@@ -115,7 +61,7 @@ export default class Modal extends CoreComponent {
         </form>);
     }
 
-    renderLoadingTest = () => {
+    renderLoading = () => {
         if (!this.props.isFetching) {
             return null;
         }
@@ -148,7 +94,7 @@ export default class Modal extends CoreComponent {
         console.log(this.props);
         let className = this.state.isVisible ? "ui dimmer modals page transition visible active animating fade in" : "ui dimmer modals page transition";
         return (<div onClick={this.hideModal} className={className}>
-            {this.renderContentTest()}
+            {this.renderContent()}
         </div>)
     }
 }
