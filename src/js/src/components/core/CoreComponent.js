@@ -2,10 +2,23 @@ import React, {Component} from 'react'
 
 export default class DefaultComponent extends Component {
 
+    constructor(props) {
+        super(props);
+        this.classData = [];
+    }
+
     onClick = () => {
         if (this.props.onClick !== undefined) {
             this.props.onClick(this.props);
         }
+    }
+
+    getIcon() {
+        return this.props.icon !== undefined ? (<i className="edit icon"></i>) : null;
+    }
+
+    addClass(className) {
+        this.classData.push(className);
     }
 
     getElementClass() {
@@ -14,6 +27,7 @@ export default class DefaultComponent extends Component {
 
     getClass() {
         return [
+            this.classData.join(' '),
             this.getProp('color'),
             this.getProp('size'),
             this.getElementClass()
@@ -21,7 +35,8 @@ export default class DefaultComponent extends Component {
     }
 
     getProp(propName) {
-        return this.props[propName] == undefined ? '' : this.props[this.props[propName]];
+        console.log(this.props[propName]);
+        return this.props[propName] == undefined ? '' : this.props[propName];
     }
 
     /**

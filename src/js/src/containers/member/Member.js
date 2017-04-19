@@ -63,8 +63,8 @@ class Member extends Component {
                         <TextCell field="email"></TextCell>
                     </Column>
 
-                    <Column width="62px">
-                        <Button onClick={this.onEditUserButtonClick}>Edit</Button>
+                    <Column width="120px">
+                        <Button size="small" icon="edit" onClick={this.onEditUserButtonClick}>Edit</Button>
                     </Column>
                 </Table>
 

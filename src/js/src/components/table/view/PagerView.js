@@ -34,7 +34,9 @@ export default class PagerView extends CoreComponent {
         let pageEnd = this.getTable().state.offset + pageOffset;
         let pages = [];
         if (pageStart < 0) {
+            let offset = 0 - pageStart;
             pageStart = 0;
+            pageEnd = pageEnd + offset;
         }
 
         if (pageEnd > this.getPagesCount() - 1) {
