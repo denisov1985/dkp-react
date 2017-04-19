@@ -119,7 +119,12 @@ export default class Modal extends CoreComponent {
         if (!this.props.isFetching) {
             return null;
         }
-        return (<div className="ui inverted dimmer transition visible active">
+        return (<div style={{
+            borderTopLeftRadius: 4 + 'px',
+            borderTopRightRadius: 4 + 'px',
+            borderBottomLeftRadius: 4 + 'px',
+            borderBottomRightRadius: 4 + 'px',
+        }} className="ui inverted dimmer transition visible active">
             <div className="ui text loader">Loading</div>
         </div>);
     }
