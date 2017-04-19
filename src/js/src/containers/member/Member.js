@@ -66,7 +66,7 @@ class Member extends Component {
                     </Column>
                 </Table>
 
-                <Modal isFetchind={this.props.member.get.status === 1}
+                <Modal isFetching={this.props.member.get.status === 1}
                     isVisible={this.props.member.get.status > 0}>
                 </Modal>
 

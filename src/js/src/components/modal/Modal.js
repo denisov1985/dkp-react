@@ -23,7 +23,7 @@ export default class Modal extends CoreComponent {
     }
 
     renderContent() {
-        return (<div  onClick={this.onModalClick} className="ui small second coupled modal visible  active" style={{top: 20 + '%'}} >
+        return (<div onClick={this.onModalClick} className="ui animating drop in transition small second coupled modal visible  active" style={{top: 20 + '%'}} >
             <div className="header">
                 Modal #2
             </div>
@@ -43,16 +43,16 @@ export default class Modal extends CoreComponent {
 
     renderLoading() {
         return (
-            <div className="ui small second coupled modal visible  active" style={{top: 20 + '%'}} >
-                <div className="ui inverted dimmer transition visible active">
-                    <div className="ui text loader">Loading</div>
-                </div>
+            <div className="ui animating drop in transition small second coupled modal visible  active" style={{top: 20 + '%'}} >
                 <div className="header">
 
                 </div>
                 <div className="content">
                     <div className="description">
-
+                        <div className="ui inverted dimmer transition visible active">
+                            <div className="ui text loader">Loading</div>
+                        </div>
+                        asdasdsd
                     </div>
                 </div>
                 <div className="actions">
@@ -61,8 +61,71 @@ export default class Modal extends CoreComponent {
             </div>);
     }
 
+    renderContentTest = () => {
+        return (
+            <div onClick={this.onModalClick} className="ui animating drop in transition small second coupled modal visible  active transition-height" style={{
+                top: 20 + '%'
+            }} >
+
+                <div className="header">
+                    Modal #2
+                </div>
+                <div className="content">
+                    <div className="description">
+                        {this.renderLoadingTest()}
+                        {this.renderData()}
+                    </div>
+                </div>
+                <div className="actions">
+                    <button style={{marginLeft: 0}} className="ui labeled icon button negative left floated">
+                        <i className="trash outline icon"></i>
+                        Delete
+                    </button>
+
+                    <button className="ui labeled icon button">
+                        <i className="remove icon"></i>
+                        Cancel
+                    </button>
+
+                    <button className="ui labeled icon button positive">
+                        <i className="checkmark icon"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+    renderData = () => {
+        return (<form className="ui form">
+            <div className="field">
+                <label>First Name</label>
+                <input type="text" name="first-name" placeholder="First Name" />
+            </div>
+            <div className="field">
+                <label>Last Name</label>
+                <input type="text" name="last-name" placeholder="Last Name" />
+            </div>
+            <div className="field">
+                <div className="ui checkbox">
+                    <input type="checkbox" tabindex="0" className="hidden" />
+                        <label>I agree to the Terms and Conditions</label>
+                </div>
+            </div>
+        </form>);
+    }
+
+    renderLoadingTest = () => {
+        if (!this.props.isFetching) {
+            return null;
+        }
+        return (<div className="ui inverted dimmer transition visible active">
+            <div className="ui text loader">Loading</div>
+        </div>);
+    }
+
     hideModal = (e) => {
-        if (this.props.isFetchind) {
+        if (this.props.isFetching) {
             return true;
         }
         this.setState({
@@ -78,9 +141,9 @@ export default class Modal extends CoreComponent {
     render() {
         console.log('MODAL');
         console.log(this.props);
-        let className = this.state.isVisible ? "ui dimmer modals page transition visible active" : "ui dimmer modals page transition";
+        let className = this.state.isVisible ? "ui dimmer modals page transition visible active animating fade in" : "ui dimmer modals page transition";
         return (<div onClick={this.hideModal} className={className}>
-            {this.props.isFetchind ? this.renderLoading() : this.renderContent()}
+            {this.renderContentTest()}
         </div>)
     }
 }
