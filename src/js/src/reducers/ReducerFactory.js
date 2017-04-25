@@ -11,7 +11,8 @@ class ReducerFactory
             = initialState.find
             = {
                 status: ActionFactory.STATUS_EMPTY,
-                dataset: {}
+                dataset: {},
+                params: {}
             };
 
         return (state = initialState, action) => {
@@ -70,7 +71,8 @@ class ReducerFactory
                         ...state,
                         save: {
                             dataset: action.payload.data,
-                            status: ActionFactory.STATUS_FETCHING
+                            status: ActionFactory.STATUS_FETCHING,
+                            params:  action.payload.params
                         },
                         get: {
                             ...state.get,
@@ -94,8 +96,9 @@ class ReducerFactory
                     return {
                         ...state,
                         save: {
-                            dataset: action.payload,
-                            status: ActionFactory.STATUS_COMPLETE
+                            dataset: action.payload.object,
+                            status: ActionFactory.STATUS_COMPLETE,
+                            params: action.payload.params
                         },
                         find: {
                             ...state.find,

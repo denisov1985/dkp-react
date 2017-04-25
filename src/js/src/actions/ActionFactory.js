@@ -34,6 +34,9 @@ class ActionFactory
             },
 
             save(data, params) {
+                if (params === undefined) {
+                    params = {};
+                }
                 return (dispatch, getState) => {
                     dispatch(ActionHelper.requestAction(entity, 'save', {
                         data: data,
@@ -45,7 +48,10 @@ class ActionFactory
                             'Accept': 'application/json, text/plain, */*',
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(data)
+                        body: JSON.stringify({
+                            data: data,
+                            params: params
+                        })
                     })
                         .then(response  => response.json())
                         .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'save', payload)))

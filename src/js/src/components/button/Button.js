@@ -34,10 +34,15 @@ export default class Button extends CoreComponent {
             return false;
         }
 
+        console.log('DETAILS');
         console.log(nextProps.details);
 
-        if (nextProps.details.dataset.id === nextProps.record.id) {
+        if (nextProps.details.dataset.id === nextProps.record.id && nextProps.details.params.tag === 'ban' && nextProps.details.status === 1) {
             this.addClass('loading');
+            this.addClass('disabled');
+        }
+
+        if (nextProps.record.name === 'BANNED USER') {
             this.addClass('disabled');
         }
     }

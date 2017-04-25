@@ -3,10 +3,6 @@ import CoreComponent from '../../core/CoreComponent';
 
 export default class Element extends CoreComponent {
 
-    componentDidMount = () => {
-        console.log('did mount');
-    }
-
     /**
      * Get full name
      * @returns {string}
@@ -34,7 +30,6 @@ export default class Element extends CoreComponent {
     getValue() {
         let name = this.props.name;
         let parts = name.split('.');
-        console.log(this.props);
         if (this.props.form.state == undefined) {
             return '';
         }

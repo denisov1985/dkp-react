@@ -101,19 +101,16 @@ class Member extends Component {
     }
 
     isBanFetching = (e) => {
-        console.log('BAN');
-        console.log(e);
         return false;
     }
 
     onBanUserButtonClick = (element) => {
         let data = {...element.record};
         data.name = 'BANNED USER';
-        this.props.actions.save(data);
+        this.props.actions.save(data, {tag: 'ban'});
     }
 
     onUnloadUser = () => {
-        console.log('UNLOAD');
         this.props.actions.unload();
     }
 

@@ -20,7 +20,6 @@ export default class TableView extends CoreComponent {
         if (column.props.title === ''  || column.props.title === undefined) {
             return '';
         }
-        console.log(column.props.title);
         let classParts = [''];
         if (this.props.sortColumn === column.props.children.props.field) {
             this.props.sortOrder ? classParts.push('sorted descending') : classParts.push('sorted ascending');

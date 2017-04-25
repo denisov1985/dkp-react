@@ -54,6 +54,8 @@ abstract class DefaultController extends Controller
         if (!empty($content))
         {
             $data = json_decode($content, true); // 2nd param to get as array
+            $params = isset($data['params']) ? $data['params'] : [];
+            $data   = $data['data'];
         }
 
         if (!empty($data['id'])) {
@@ -98,7 +100,8 @@ abstract class DefaultController extends Controller
             'valid'  => count($errorsCollection) === 0,
             'errors' => $errorsCollection,
             'data'   => $data,
-            'object' => json_decode($userData)
+            'params' => $params,
+            'object' => json_decode($userData),
         ]);
     }
 
