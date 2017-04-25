@@ -67,10 +67,8 @@ export default class Router extends Component {
      * @returns {XML}
      */
     render() {
-        console.log('Render root');
         const {children} = this.props;
         const Child = this.resolve().component;
-        console.log(Child);
         return (
             <div>
                 <Child title={this.resolve().title} currentRoute={this.state.route} router={this} />

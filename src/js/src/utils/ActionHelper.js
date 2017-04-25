@@ -1,7 +1,6 @@
 export default class ActionHelper
 {
     static requestAction(entity, type, payload) {
-        console.log('request');
         return {
             type: ['REQUEST', entity.toUpperCase(), type.toUpperCase()].join('_'),
             payload: payload
@@ -9,7 +8,6 @@ export default class ActionHelper
     }
 
     static receiveAction(entity, type, payload) {
-        console.log('receive');
         return {
             type: ['RECEIVE', entity.toUpperCase(), type.toUpperCase()].join('_'),
             payload: payload

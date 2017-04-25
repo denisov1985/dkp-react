@@ -5,6 +5,7 @@ import ActionFactory from '../../actions/ActionFactory';
 import Layout from '../Layout';
 import Table from '../../components/table/Table'
 import Modal from '../../components/modal/Modal'
+import Form from '../../components/form/Form'
 import Button from '../../components/button/Button'
 
 class Member extends Component {
@@ -16,6 +17,8 @@ class Member extends Component {
     }
 
     render() {
+        console.log('Member props');
+        console.log(this.props.member);
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -70,32 +73,39 @@ class Member extends Component {
                     isVisible={this.props.member.get.status > 0}>
                     <Modal.Header>Modal Title</Modal.Header>
                     <Modal.Body>
-                        <form className="ui form">
-                            <div className="field">
-                                <label>First Name</label>
-                                <input type="text" name="first-name" placeholder="First Name" />
-                            </div>
-                            <div className="field">
-                                <label>Last Name</label>
-                                <input type="text" name="last-name" placeholder="Last Name" />
-                            </div>
+                        <Form ref="userForm">
+                            <Form.Row title="User Name">
+                                <Form.Input.Text name="user.name" />
+                            </Form.Row>
+                            <Form.Row title="User Email">
+                                <Form.Input.Text name="user.email" />
+                            </Form.Row>
                             <div className="field">
                                 <div className="ui checkbox">
                                     <input type="checkbox" tabIndex="0" className="hidden" />
                                     <label>I agree to the Terms and Conditions</label>
                                 </div>
                             </div>
-                        </form>
+                        </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button position="left" color="negative" icon="trash">Delete</Button>
-                        <Button icon="remove">Cancel</Button>
-                        <Button color="positive" icon="checkmark">Save</Button>
+                        <Button disabled={this.props.member.save.status === 1} position="left" color="negative" icon="trash">Delete</Button>
+                        <Button onClick={this.onUnloadUser} icon="remove">Cancel</Button>
+                        <Button isFetching={this.props.member.save.status === 1} onClick={this.onSaveUser} color="positive" icon="checkmark">Save</Button>
                     </Modal.Footer>
                 </Modal>
 
             </Layout>
     )
+    }
+
+    onUnloadUser = () => {
+        console.log('UNLOAD');
+        this.props.actions.unload();
+    }
+
+    onSaveUser = (element) => {
+        this.props.actions.save(this.refs.userForm.state);
     }
 
     onEditUserButtonClick = (button) => {

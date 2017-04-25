@@ -3,7 +3,6 @@ import CoreComponent from '../core/CoreComponent';
 
 export default class Menu extends CoreComponent {
     buildItems(items, template) {
-        console.log(template)
         let result = [];
         if (Array.isArray(items)) {
             result = items.map((e, i) => {

@@ -23,11 +23,38 @@ class ActionFactory
 
             get(id) {
                 return (dispatch, getState) => {
-                    dispatch(ActionHelper.requestAction(entity, 'get', {}));
+                    dispatch(ActionHelper.requestAction(entity, 'get', {
+                        id: id
+                    }));
                     return fetch('/api/' + entity.replace('_', '/') + '/' + id)
                         .then(response  => response.json())
                         .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'get', payload)))
                         .catch(payload => dispatch(ActionHelper.errorAction(entity, 'get', payload)));
+                }
+            },
+
+            save(state) {
+                return (dispatch, getState) => {
+                    dispatch(ActionHelper.requestAction(entity, 'save', {
+                        state: state
+                    }));
+                    return fetch('/api/' + entity.replace('_', '/') + '/save', {
+                        method: 'post',
+                        headers: {
+                            'Accept': 'application/json, text/plain, */*',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(state)
+                    })
+                        .then(response  => response.json())
+                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'save', payload)))
+                        .catch(payload => dispatch(ActionHelper.errorAction(entity, 'save', payload)));
+                }
+            },
+
+            unload() {
+                return (dispatch, getState) => {
+                    dispatch(ActionHelper.receiveAction(entity, 'unload', {}));
                 }
             },
         }

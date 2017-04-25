@@ -41,7 +41,7 @@ class ReducerFactory
 
                 /**
                  * GET
-                  */
+                 */
                 case ActionHelper.format('request', entity, 'get'):
                     return {
                         ...state,
@@ -59,6 +59,41 @@ class ReducerFactory
                             dataset: action.payload,
                             status: ActionFactory.STATUS_COMPLETE
                         }
+                    };
+                    break;
+
+                /**
+                 * SAVE
+                 */
+                case ActionHelper.format('request', entity, 'save'):
+                    return {
+                        ...state,
+                        save: {
+                            ...state.get,
+                            status: ActionFactory.STATUS_FETCHING
+                        }
+                    };
+                    break;
+
+                case ActionHelper.format('receive', entity, 'save'):
+                    return {
+                        ...state,
+                        save: {
+                            dataset: action.payload,
+                            status: ActionFactory.STATUS_COMPLETE
+                        }
+                    };
+                    break;
+
+                /**
+                 * UNLOAD
+                 */
+                case ActionHelper.format('receive', entity, 'unload'):
+                    return {
+                        ...state,
+                        save: initialState.save,
+                        delete: initialState.delete,
+                        get: initialState.get,
                     };
                     break;
             }
