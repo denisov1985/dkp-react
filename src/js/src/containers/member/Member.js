@@ -73,7 +73,7 @@ class Member extends Component {
                     isVisible={this.props.member.get.status > 0}>
                     <Modal.Header>Modal Title</Modal.Header>
                     <Modal.Body>
-                        <Form ref="userForm">
+                        <Form ref="userForm" dataset={this.props.member.get.dataset}>
                             <Form.Row title="User Name">
                                 <Form.Input.Text name="user.name" />
                             </Form.Row>

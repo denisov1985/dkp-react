@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
-import Loader from '../loader/Loader';
 import InputText from './elements/InputText';
 import Row from './Row';
 
@@ -15,10 +14,15 @@ export default class Form extends CoreComponent {
         this.state = {}
     }
 
-    componentDidMount() {
+    /**
+     * On receive new props
+     * May me need to invoke on did mount
+     * @param nextProps
+     */
+    componentWillReceiveProps(nextProps) {
         let data = {};
-        if (this.props.data !== null && this.props.data !== undefined) {
-            data = this.props.data;
+        if (nextProps.dataset !== null && nextProps.dataset !== undefined) {
+            data = nextProps.dataset;
         }
         this.setState(data);
     }

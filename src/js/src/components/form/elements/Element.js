@@ -5,7 +5,6 @@ export default class Element extends CoreComponent {
 
     componentDidMount = () => {
         console.log('did mount');
-        this.onChange();
     }
 
     /**
@@ -35,19 +34,19 @@ export default class Element extends CoreComponent {
     getValue() {
         let name = this.props.name;
         let parts = name.split('.');
-        if (this.props.dataset.state == undefined) {
+        console.log(this.props);
+        if (this.props.form.state == undefined) {
             return '';
         }
-        if (this.props.dataset.state[parts[1]] == null) {
+        if (this.props.form.state[parts[1]] == null) {
             return '';
         }
-        let item = this.props.dataset.state;
+        let item = this.props.form.state;
         for (let i in parts) {
             if (i > 0) {
                 item = item[parts[i]];
             }
         }
-
         return item;
     }
 
