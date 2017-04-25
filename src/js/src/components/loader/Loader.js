@@ -14,7 +14,12 @@ export default class Loader extends CoreComponent {
             this.addClass('visible active');
         }
         return (
-            <div className={this.getClass()}>
+            <div style={{
+                borderTopLeftRadius: 4 + 'px',
+                borderTopRightRadius: 4 + 'px',
+                borderBottomLeftRadius: 4 + 'px',
+                borderBottomRightRadius: 4 + 'px',
+            }} className={this.getClass()}>
                 <div className="ui text loader">Loading</div>
             </div>
         );

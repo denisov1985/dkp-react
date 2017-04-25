@@ -80,6 +80,10 @@ export default class DefaultComponent extends Component {
         }
     }
 
+    stopPropagate = (e) => {
+        e.stopPropagation();
+    }
+
     render() {
         return null;
     }
