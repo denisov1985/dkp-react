@@ -3,6 +3,9 @@ import CoreComponent from '../core/CoreComponent';
 import TableView from './view/TableView';
 import Multisort from '../../utils/Multisort';
 
+import Column from './Column';
+import TextCell from './cell/TextCell';
+
 export default class Table extends CoreComponent {
 
     /**
@@ -79,3 +82,7 @@ export default class Table extends CoreComponent {
         )
     }
 }
+
+Table.Column    = Column;
+Table.Cell      = TextCell;
+Table.Cell.Text = TextCell;

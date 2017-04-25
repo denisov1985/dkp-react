@@ -6,8 +6,6 @@ import Layout from '../Layout';
 import Table from '../../components/table/Table'
 import Modal from '../../components/modal/Modal'
 import Button from '../../components/button/Button'
-import Column from '../../components/table/Column'
-import TextCell from '../../components/table/cell/TextCell'
 
 class Member extends Component {
 
@@ -51,21 +49,21 @@ class Member extends Component {
                 </button>
 
                 <Table dataset={this.props.member.find.dataset} isFetchind={this.props.member.find.status === 1}>
-                    <Column title="ID" width="50px">
-                        <TextCell field="id"></TextCell>
-                    </Column>
+                    <Table.Column title="ID" width="50px">
+                        <Table.Cell.Text field="id"></Table.Cell.Text>
+                    </Table.Column>
 
-                    <Column title="Name" width="300px">
-                        <TextCell field="name"></TextCell>
-                    </Column>
+                    <Table.Column title="Name" width="300px">
+                        <Table.Cell.Text field="name"></Table.Cell.Text>
+                    </Table.Column>
 
-                    <Column title="Email">
-                        <TextCell field="email"></TextCell>
-                    </Column>
+                    <Table.Column title="Email">
+                        <Table.Cell.Text field="email"></Table.Cell.Text>
+                    </Table.Column>
 
-                    <Column width="120px">
+                    <Table.Column width="120px">
                         <Button size="small" icon="edit" onClick={this.onEditUserButtonClick}>Edit</Button>
-                    </Column>
+                    </Table.Column>
                 </Table>
 
                 <Modal isFetching={this.props.member.get.status === 1}
