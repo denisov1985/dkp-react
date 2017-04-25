@@ -33,10 +33,11 @@ class ActionFactory
                 }
             },
 
-            save(state) {
+            save(data, params) {
                 return (dispatch, getState) => {
                     dispatch(ActionHelper.requestAction(entity, 'save', {
-                        data: state
+                        data: data,
+                        params: params
                     }));
                     return fetch('/api/' + entity.replace('_', '/') + '/save/', {
                         method: 'post',
@@ -44,7 +45,7 @@ class ActionFactory
                             'Accept': 'application/json, text/plain, */*',
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(state)
+                        body: JSON.stringify(data)
                     })
                         .then(response  => response.json())
                         .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'save', payload)))
