@@ -17,9 +17,10 @@ export default class TableView extends CoreComponent {
     }
 
     getSortingClass(column) {
-        if (column.props.title === '') {
+        if (column.props.title === ''  || column.props.title === undefined) {
             return '';
         }
+        console.log(column.props.title);
         let classParts = [''];
         if (this.props.sortColumn === column.props.children.props.field) {
             this.props.sortOrder ? classParts.push('sorted descending') : classParts.push('sorted ascending');
@@ -29,6 +30,9 @@ export default class TableView extends CoreComponent {
 
     onSortClick(column, e) {
         e.preventDefault();
+        if (column.props.title === ''  || column.props.title === undefined) {
+            return false;
+        }
         this.props.onSortClick(column);
     }
 

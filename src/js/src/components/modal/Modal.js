@@ -31,6 +31,11 @@ export default class Modal extends CoreComponent {
         if (this.props.isFetching) {
             return true;
         }
+
+        if (this.props.onClose !== undefined) {
+            this.props.onClose();
+        }
+
         this.setState({
             isVisible: false
         });

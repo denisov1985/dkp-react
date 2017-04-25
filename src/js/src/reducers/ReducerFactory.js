@@ -69,18 +69,37 @@ class ReducerFactory
                     return {
                         ...state,
                         save: {
-                            ...state.get,
+                            dataset: action.payload,
                             status: ActionFactory.STATUS_FETCHING
+                        },
+                        get: {
+                            ...state.get,
+                            dataset: action.payload
                         }
                     };
                     break;
 
                 case ActionHelper.format('receive', entity, 'save'):
+                    let collection = state.find.dataset;
+                    let foundInCollection = false;
+                    collection.map((element, index) => {
+                        if (element.id === action.payload.object.id) {
+                            collection[index] = action.payload.object;
+                            foundInCollection = true;
+                        }
+                    });
+                    if (!foundInCollection) {
+                        collection.push(action.payload.object)
+                    }
                     return {
                         ...state,
                         save: {
                             dataset: action.payload,
                             status: ActionFactory.STATUS_COMPLETE
+                        },
+                        find: {
+                            ...state.find,
+                            dataset: collection
                         }
                     };
                     break;

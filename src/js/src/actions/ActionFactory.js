@@ -35,10 +35,8 @@ class ActionFactory
 
             save(state) {
                 return (dispatch, getState) => {
-                    dispatch(ActionHelper.requestAction(entity, 'save', {
-                        state: state
-                    }));
-                    return fetch('/api/' + entity.replace('_', '/') + '/save', {
+                    dispatch(ActionHelper.requestAction(entity, 'save', state));
+                    return fetch('/api/' + entity.replace('_', '/') + '/save/', {
                         method: 'post',
                         headers: {
                             'Accept': 'application/json, text/plain, */*',

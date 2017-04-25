@@ -14,3 +14,6 @@ index_get:
     path:     /member/{id}
     defaults: { _controller: ApiBundle:Member:get }
 
+index_save:
+    path:     /member/save/
+    defaults: { _controller: ApiBundle:Member:save }

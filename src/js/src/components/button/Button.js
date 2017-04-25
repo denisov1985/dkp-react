@@ -29,6 +29,17 @@ export default class Button extends CoreComponent {
         if (nextProps.disabled) {
             this.addClass('disabled');
         }
+
+        if (nextProps.details === undefined) {
+            return false;
+        }
+
+        console.log(nextProps.details);
+
+        if (nextProps.details.dataset.id === nextProps.record.id) {
+            this.addClass('loading');
+            this.addClass('disabled');
+        }
     }
     render() {
         return (<button onClick={this.onClick} className={this.getClass()} type="button">{this.getIcon()}{this.props.children}</button>)

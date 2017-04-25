@@ -17,8 +17,6 @@ class Member extends Component {
     }
 
     render() {
-        console.log('Member props');
-        console.log(this.props.member);
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -64,13 +62,16 @@ class Member extends Component {
                         <Table.Cell.Text field="email"></Table.Cell.Text>
                     </Table.Column>
 
-                    <Table.Column width="120px">
+                    <Table.Column width="228px">
+                        <Button details={this.props.member.save} color="negative" size="small" icon="ban" onClick={this.onBanUserButtonClick}>Block</Button>
                         <Button size="small" icon="edit" onClick={this.onEditUserButtonClick}>Edit</Button>
                     </Table.Column>
                 </Table>
 
                 <Modal isFetching={this.props.member.get.status === 1}
-                    isVisible={this.props.member.get.status > 0}>
+                    isVisible={this.props.member.get.status > 0}
+                    onClose={this.onUnloadUser}
+                >
                     <Modal.Header>Modal Title</Modal.Header>
                     <Modal.Body>
                         <Form ref="userForm" dataset={this.props.member.get.dataset}>
@@ -97,6 +98,18 @@ class Member extends Component {
 
             </Layout>
     )
+    }
+
+    isBanFetching = (e) => {
+        console.log('BAN');
+        console.log(e);
+        return false;
+    }
+
+    onBanUserButtonClick = (element) => {
+        let data = {...element.record};
+        data.name = 'BANNED USER';
+        this.props.actions.save(data);
     }
 
     onUnloadUser = () => {

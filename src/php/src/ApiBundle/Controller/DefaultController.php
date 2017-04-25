@@ -5,6 +5,7 @@ namespace ApiBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use JMS\Serializer\SerializationContext;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 abstract class DefaultController extends Controller
@@ -40,6 +41,65 @@ abstract class DefaultController extends Controller
             Response::HTTP_OK,
             ['Content-Type', 'application/json']
         );
+    }
+
+    /**
+     * Save action
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function saveAction(Request $request)
+    {
+        $content = $request->getContent();
+        if (!empty($content))
+        {
+            $data = json_decode($content, true); // 2nd param to get as array
+        }
+
+        if (!empty($data['id'])) {
+            $user = $this->getDoctrine()
+                ->getRepository('ApiBundle:' . $this->_getEntityName())
+                ->find($data['id']);
+        }   else  {
+            $user = $this->_createEntity();
+        }
+
+        foreach ($data as $key => $value) {
+            if ($key == 'id') {
+                continue;
+            }
+            $method = "set" . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+            $value = $value === '' ? null : $value;
+            $user->$method($value);
+        }
+
+        $validator = $this->get('validator');
+        $errors = $validator->validate($user);
+
+        $errorsCollection = [];
+        foreach ($errors as $key => $error) {
+            $errorsCollection[$error->getPropertyPath()] = [
+                'property' => $error->getPropertyPath(),
+                'message'  => $error->getMessage()
+            ];
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($user);
+        $em->flush();
+
+        $user = $this->getDoctrine()
+            ->getRepository('ApiBundle:' . $this->_getEntityName())
+            ->find($user->getId());
+
+        $userData = $this->serialize($user);
+
+        return new JsonResponse([
+            'valid'  => count($errorsCollection) === 0,
+            'errors' => $errorsCollection,
+            'data'   => $data,
+            'object' => json_decode($userData)
+        ]);
     }
 
     protected function serialize($content) {
