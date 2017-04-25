@@ -69,12 +69,12 @@ class ReducerFactory
                     return {
                         ...state,
                         save: {
-                            dataset: action.payload,
+                            dataset: action.payload.data,
                             status: ActionFactory.STATUS_FETCHING
                         },
                         get: {
                             ...state.get,
-                            dataset: action.payload
+                            dataset: action.payload.data
                         }
                     };
                     break;

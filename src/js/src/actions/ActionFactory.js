@@ -35,7 +35,9 @@ class ActionFactory
 
             save(state) {
                 return (dispatch, getState) => {
-                    dispatch(ActionHelper.requestAction(entity, 'save', state));
+                    dispatch(ActionHelper.requestAction(entity, 'save', {
+                        data: state
+                    }));
                     return fetch('/api/' + entity.replace('_', '/') + '/save/', {
                         method: 'post',
                         headers: {
@@ -46,7 +48,7 @@ class ActionFactory
                     })
                         .then(response  => response.json())
                         .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'save', payload)))
-                        .catch(payload => dispatch(ActionHelper.errorAction(entity, 'save', payload)));
+                        .catch(payload  => dispatch(ActionHelper.errorAction(entity, 'save', payload)));
                 }
             },
 
