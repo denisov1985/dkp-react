@@ -54,6 +54,17 @@ export default class Button extends CoreComponent {
             //console.log('_________________________________________');
             this.addClass('disabled');
         }
+
+        if (this.props.details.dataset.id !== this.props.record.id) {
+            return true;
+        }
+
+        if (this.props.details.status === 1) {
+            this.addClass('disabled');
+        }
+
+        console.log('OK');
+
     }
 
     render() {

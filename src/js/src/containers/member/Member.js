@@ -66,7 +66,7 @@ class Member extends Component {
                     <Table.Column width="340px">
                         <Button disabledKey="name" disabledValueNot="BANNED USER" type="active" details={this.props.member.save} color="positive" size="small" icon="user" onClick={this.onActiveUserButtonClick}>Active</Button>
                         <Button disabledKey="name" disabledValue="BANNED USER" type="ban" details={this.props.member.save} color="negative" size="small" icon="ban" onClick={this.onBanUserButtonClick}>Block</Button>
-                        <Button size="small" icon="edit" onClick={this.onEditUserButtonClick}>Edit</Button>
+                        <Button details={this.props.member.save} size="small" icon="edit" onClick={this.onEditUserButtonClick}>Edit</Button>
                     </Table.Column>
                 </Table>
 
