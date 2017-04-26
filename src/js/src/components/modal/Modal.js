@@ -42,6 +42,10 @@ export default class Modal extends CoreComponent {
     }
 
     render() {
+
+        console.log('MODAL');
+        console.log(this.props);
+
         let className = this.state.isVisible ? "ui dimmer modals page transition visible active animating fade in" : "ui dimmer modals page transition";
         return (<div onClick={this.hideModal} className={className}>
             <div onClick={this.stopPropagate} className="ui animating drop in transition small second coupled modal visible  active transition-height" style={{top: 20 + '%'}} >

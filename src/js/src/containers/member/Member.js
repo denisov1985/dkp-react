@@ -17,6 +17,7 @@ class Member extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -62,8 +63,9 @@ class Member extends Component {
                         <Table.Cell.Text field="email"></Table.Cell.Text>
                     </Table.Column>
 
-                    <Table.Column width="228px">
-                        <Button details={this.props.member.save} color="negative" size="small" icon="ban" onClick={this.onBanUserButtonClick}>Block</Button>
+                    <Table.Column width="340px">
+                        <Button disabledKey="name" disabledValueNot="BANNED USER" type="active" details={this.props.member.save} color="positive" size="small" icon="user" onClick={this.onActiveUserButtonClick}>Active</Button>
+                        <Button disabledKey="name" disabledValue="BANNED USER" type="ban" details={this.props.member.save} color="negative" size="small" icon="ban" onClick={this.onBanUserButtonClick}>Block</Button>
                         <Button size="small" icon="edit" onClick={this.onEditUserButtonClick}>Edit</Button>
                     </Table.Column>
                 </Table>
@@ -107,7 +109,19 @@ class Member extends Component {
     onBanUserButtonClick = (element) => {
         let data = {...element.record};
         data.name = 'BANNED USER';
-        this.props.actions.save(data, {tag: 'ban'});
+        this.props.actions.save(data, {
+            type: 'ban'
+        });
+    }
+
+    onActiveUserButtonClick = (element) => {
+        let data = {
+            id: element.record.id
+        };
+        data.name = 'ACTIVE USER';
+        this.props.actions.save(data, {
+            type: 'active'
+        });
     }
 
     onUnloadUser = () => {

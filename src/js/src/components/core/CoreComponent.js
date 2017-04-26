@@ -41,18 +41,28 @@ export default class DefaultComponent extends Component {
         this.classData = [];
     }
 
+    buildClass() {
+        return [];
+    }
+
     getClass() {
+        this.reset();
+        this.buildClass();
         return [
             this.classData.join(' '),
             this.getProp('color'),
             this.getProp('size'),
+            this.getProp('disabled'),
             this.getPosition(),
             this.getElementClass()
         ].join(' ');
     }
 
-    getProp(propName) {
-        return this.props[propName] == undefined ? '' : this.props[propName];
+    getProp(propName, defaultValue) {
+        if (defaultValue === undefined) {
+            defaultValue = '';
+        }
+        return this.props[propName] == undefined ? defaultValue : this.props[propName];
     }
 
     /**

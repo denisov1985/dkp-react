@@ -7,12 +7,14 @@ export default class Loader extends CoreComponent {
         super(props);
     }
 
-    render() {
-        this.reset();
+    buildClass() {
         this.addClass('ui inverted dimmer transition');
         if (this.props.visible) {
             this.addClass('visible active');
         }
+    }
+
+    render() {
         return (
             <div style={{
                 borderTopLeftRadius: 4 + 'px',

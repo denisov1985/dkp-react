@@ -3,49 +3,59 @@ import CoreComponent from '../core/CoreComponent';
 
 export default class Button extends CoreComponent {
 
-    constructor(props) {
-        super(props);
-        this.initClasses(props);
-    }
+    shouldComponentUpdate(nextProps, nextState) {
 
-    componentWillUpdate = (nextProps) => {
-        this.initClasses(nextProps);
-    }
-
-    initClasses = (nextProps) => {
-        this.reset();
-        this.addClass('ui button');
-        if (nextProps.icon !== undefined) {
-            this.addClass('icon');
-        }
-        if (nextProps.children !== undefined) {
-            this.addClass('labeled');
-        }
-        if (nextProps.isFetching) {
-            this.addClass('loading');
-            this.addClass('disabled');
+        if(nextProps.details === undefined) {
+            return true;
         }
 
-        if (nextProps.disabled) {
-            this.addClass('disabled');
-        }
-
-        if (nextProps.details === undefined) {
+        if (nextProps.details.dataset.id !== nextProps.record.id) {
             return false;
         }
 
-        console.log('DETAILS');
-        console.log(nextProps.details);
+        //console.log('_______________');
+        //console.log(this.props);
+        //console.log(this.props.details.status + ' ' + nextProps.details.status + ' --- ' + nextProps.details.dataset.id + ' ' + nextProps.record.id + ' : ' + nextProps.type + ' ' + nextProps.details.params.type) ;
+        return true;
+    }
 
-        if (nextProps.details.dataset.id === nextProps.record.id && nextProps.details.params.tag === 'ban' && nextProps.details.status === 1) {
+    buildClass() {
+        this.addClass('ui button');
+
+        if (this.props.icon !== undefined) {
+            this.addClass('icon');
+        }
+
+        if (this.props.children !== undefined) {
+            this.addClass('labeled');
+        }
+
+        if (this.props.isFetching) {
             this.addClass('loading');
             this.addClass('disabled');
         }
 
-        if (nextProps.record.name === 'BANNED USER') {
+        if (this.props.details === undefined) {
+            return false;
+        }
+
+        if (this.props.details.dataset.id === this.props.record.id && this.props.details.params.type === this.getProp('type') && this.props.details.status === 1) {
+            this.addClass('loading');
+            this.addClass('disabled');
+        }
+
+        if (this.props.record[this.getProp('disabledKey', 1)] === this.getProp('disabledValue')) {
+            this.addClass('disabled');
+        }
+
+        if (this.props.record[this.getProp('disabledKey', 'id')] !== this.getProp('disabledValueNot', this.props.record[this.getProp('disabledKey', 'id')])) {
+            //console.log(this.props.record[this.getProp('disabledKey', 'id')]);
+            //console.log(this.getProp('disabledValueNot', 'id'));
+            //console.log('_________________________________________');
             this.addClass('disabled');
         }
     }
+
     render() {
         return (<button onClick={this.onClick} className={this.getClass()} type="button">{this.getIcon()}{this.props.children}</button>)
     }
