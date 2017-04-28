@@ -14,7 +14,7 @@ export default class Table extends CoreComponent {
      */
     constructor(props) {
         super(props);
-        this.defaultLimit = 10;
+        this.defaultLimit = 2;
 
         this.state = {
             offset: 0,

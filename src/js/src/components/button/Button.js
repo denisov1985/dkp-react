@@ -20,6 +20,9 @@ export default class Button extends CoreComponent {
     }
 
     buildClass() {
+
+        super.buildClass();
+
         this.addClass('ui button');
 
         if (this.props.icon !== undefined) {
@@ -33,6 +36,10 @@ export default class Button extends CoreComponent {
         if (this.props.isFetching) {
             this.addClass('loading');
             this.addClass('disabled');
+        }
+
+        if (this.props.logic !== undefined) {
+            let isFetching = this.props.logic(this.props);
         }
 
         if (this.props.details === undefined) {
@@ -49,9 +56,6 @@ export default class Button extends CoreComponent {
         }
 
         if (this.props.record[this.getProp('disabledKey', 'id')] !== this.getProp('disabledValueNot', this.props.record[this.getProp('disabledKey', 'id')])) {
-            //console.log(this.props.record[this.getProp('disabledKey', 'id')]);
-            //console.log(this.getProp('disabledValueNot', 'id'));
-            //console.log('_________________________________________');
             this.addClass('disabled');
         }
 
@@ -64,6 +68,10 @@ export default class Button extends CoreComponent {
         }
 
         console.log('OK');
+
+    }
+
+    getDisabledState() {
 
     }
 

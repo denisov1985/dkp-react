@@ -42,6 +42,7 @@ export default class DefaultComponent extends Component {
     }
 
     buildClass() {
+        console.log('super');
         return [];
     }
 

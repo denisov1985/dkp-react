@@ -64,6 +64,7 @@ class Member extends Component {
                     </Table.Column>
 
                     <Table.Column width="340px">
+                        <Button logic={this.test} color="blue" size="small" icon="settings">Active</Button>
                         <Button disabledKey="name" disabledValueNot="BANNED USER" type="active" details={this.props.member.save} color="positive" size="small" icon="user" onClick={this.onActiveUserButtonClick}>Active</Button>
                         <Button disabledKey="name" disabledValue="BANNED USER" type="ban" details={this.props.member.save} color="negative" size="small" icon="ban" onClick={this.onBanUserButtonClick}>Block</Button>
                         <Button details={this.props.member.save} size="small" icon="edit" onClick={this.onEditUserButtonClick}>Edit</Button>
@@ -101,6 +102,13 @@ class Member extends Component {
             </Layout>
     )
     }
+
+    test = (props) => {
+        if (this.props.member.save.dataset.id !== props.record.id) {
+            return false;
+        }
+        console.log('TRUE');
+    };
 
     isBanFetching = (e) => {
         return false;
