@@ -7,6 +7,9 @@ import Table from '../../components/table/Table'
 import Modal from '../../components/modal/Modal'
 import Form from '../../components/form/Form'
 import Button from '../../components/button/Button'
+import SaveButton from '../../components/button/SaveButton'
+import BanButton from './elements/button/BanButton';
+import ActiveButton from './elements/button/ActiveButton';
 
 class Member extends Component {
 
@@ -64,9 +67,21 @@ class Member extends Component {
                     </Table.Column>
 
                     <Table.Column width="340px">
-                        <Button logic={this.test} color="blue" size="small" icon="settings">Active</Button>
-                        <Button disabledKey="name" disabledValueNot="BANNED USER" type="active" details={this.props.member.save} color="positive" size="small" icon="user" onClick={this.onActiveUserButtonClick}>Active</Button>
-                        <Button disabledKey="name" disabledValue="BANNED USER" type="ban" details={this.props.member.save} color="negative" size="small" icon="ban" onClick={this.onBanUserButtonClick}>Block</Button>
+                        <BanButton
+                            scope={this.props.member}
+                            onClick={this.onActiveNewTestUserButtonClick}
+                            color="orange"
+                            size="small"
+                            icon="settings"
+                        >Ban</BanButton>
+
+                        <ActiveButton
+                            scope={this.props.member}
+                            onClick={this.onActiveNewUserButtonClick}
+                            color="blue"
+                            size="small"
+                            icon="user"
+                        >Active</ActiveButton>
                         <Button details={this.props.member.save} size="small" icon="edit" onClick={this.onEditUserButtonClick}>Edit</Button>
                     </Table.Column>
                 </Table>
@@ -123,12 +138,33 @@ class Member extends Component {
     }
 
     onActiveUserButtonClick = (element) => {
+        this.props.actions.save({
+            id: element.record.id,
+            name: 'ACTIVE USER'
+        }, {
+            type: 'active'
+        });
+    }
+
+    onActiveNewUserButtonClick = (element) => {
         let data = {
             id: element.record.id
         };
-        data.name = 'ACTIVE USER';
+        data.is_active = true;
+        data.name = 'EDITED ' + Math.floor(Date.now() / 1000);
         this.props.actions.save(data, {
-            type: 'active'
+            type: element.type
+        });
+    }
+
+    onActiveNewTestUserButtonClick = (element) => {
+        let data = {
+            id: element.record.id
+        };
+        data.is_active = false;
+        data.name = 'TESTED ' + Math.floor(Date.now() / 1000);
+        this.props.actions.save(data, {
+            type: element.type
         });
     }
 

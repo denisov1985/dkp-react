@@ -13,11 +13,10 @@ export default class Button extends CoreComponent {
             return false;
         }
 
-        //console.log('_______________');
-        //console.log(this.props);
-        //console.log(this.props.details.status + ' ' + nextProps.details.status + ' --- ' + nextProps.details.dataset.id + ' ' + nextProps.record.id + ' : ' + nextProps.type + ' ' + nextProps.details.params.type) ;
         return true;
     }
+
+    proccessDisabled() {}
 
     buildClass() {
 
@@ -66,9 +65,6 @@ export default class Button extends CoreComponent {
         if (this.props.details.status === 1) {
             this.addClass('disabled');
         }
-
-        console.log('OK');
-
     }
 
     getDisabledState() {

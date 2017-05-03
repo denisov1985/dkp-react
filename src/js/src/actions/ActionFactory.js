@@ -35,7 +35,9 @@ class ActionFactory
 
             save(data, params) {
                 if (params === undefined) {
-                    params = {};
+                    params = {
+                        type: 'default'
+                    };
                 }
                 return (dispatch, getState) => {
                     dispatch(ActionHelper.requestAction(entity, 'save', {

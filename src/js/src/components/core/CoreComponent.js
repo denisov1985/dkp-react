@@ -11,6 +11,7 @@ export default class DefaultComponent extends Component {
         if (this.props.onClick !== undefined) {
             this.props.onClick(this.props);
         }
+        console.log('Default click');
     }
 
     getIcon() {
@@ -42,7 +43,6 @@ export default class DefaultComponent extends Component {
     }
 
     buildClass() {
-        console.log('super');
         return [];
     }
 
