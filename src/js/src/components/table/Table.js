@@ -5,6 +5,11 @@ import Multisort from '../../utils/Multisort';
 
 import Column from './Column';
 import TextCell from './cell/TextCell';
+import ControlCell from './cell/ControlCell';
+import BooleanCell from './cell/BooleanCell';
+
+import Button from './controls/button/Button';
+import ActiveProp from './controls/condition/ActiveProp';
 
 export default class Table extends CoreComponent {
 
@@ -14,7 +19,7 @@ export default class Table extends CoreComponent {
      */
     constructor(props) {
         super(props);
-        this.defaultLimit = 2;
+        this.defaultLimit = 20;
 
         this.state = {
             offset: 0,
@@ -86,3 +91,11 @@ export default class Table extends CoreComponent {
 Table.Column    = Column;
 Table.Cell      = TextCell;
 Table.Cell.Text = TextCell;
+Table.Cell.Boolean = BooleanCell;
+Table.Cell.Control = ControlCell;
+
+Table.Control   = {};
+Table.Control.Button = Button;
+
+Table.Control.Condition = {};
+Table.Control.Condition.ActiveProp = ActiveProp;

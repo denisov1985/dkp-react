@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
 
-export default class SaveButton extends CoreComponent {
+export default class GetButton extends CoreComponent {
 
     shouldComponentUpdate(nextProps, nextState) {
         if(nextProps.scope === undefined) {
@@ -9,7 +9,7 @@ export default class SaveButton extends CoreComponent {
         }
 
         if (nextProps.scope.save.dataset.id !== nextProps.record.id) {
-            //return false;
+            return false;
         }
 
         return true;
@@ -32,23 +32,6 @@ export default class SaveButton extends CoreComponent {
         let save = this.props.scope.save;
         let del  = this.props.scope.delete;
         let get  = this.props.scope.get;
-
-        if (save.status === 1 && this.props.type === save.params.type) {
-            this.addClass('loading');
-            this.addClass('disabled');
-        }
-
-        if (save.status === 1) {
-            this.addClass('disabled');
-        }
-
-        if (del.status === 1) {
-            this.addClass('disabled');
-        }
-
-        if (get.status === 1) {
-            this.addClass('disabled');
-        }
 
         this.proccessDisabled();
     }

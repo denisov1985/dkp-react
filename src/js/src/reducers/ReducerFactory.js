@@ -1,4 +1,5 @@
 import ActionHelper from '../utils/ActionHelper';
+import CollectionHelper from '../utils/CollectionHelper';
 import ActionFactory from '../actions/ActionFactory';
 
 class ReducerFactory
@@ -31,10 +32,19 @@ class ReducerFactory
                     break;
 
                 case ActionHelper.format('receive', entity, 'find'):
+                    let collectionFind = []
+                    action.payload.map((element, index) => {
+                        collectionFind[index] = {
+                            data: element,
+                            status: {
+                                default: 2
+                            }
+                        }
+                    })
                     return {
                         ...state,
                         find: {
-                            dataset: action.payload,
+                            dataset: collectionFind,
                             status: ActionFactory.STATUS_COMPLETE
                         }
                     };
@@ -77,22 +87,15 @@ class ReducerFactory
                         get: {
                             ...state.get,
                             dataset: action.payload.data
+                        },
+                        find: {
+                            ...state.find,
+                            dataset: CollectionHelper.updateStatus(action.payload.data.id, action.payload.params.type, 1, state.find.dataset)
                         }
                     };
                     break;
 
                 case ActionHelper.format('receive', entity, 'save'):
-                    let collection = state.find.dataset;
-                    let foundInCollection = false;
-                    collection.map((element, index) => {
-                        if (element.id === action.payload.object.id) {
-                            collection[index] = action.payload.object;
-                            foundInCollection = true;
-                        }
-                    });
-                    if (!foundInCollection) {
-                        collection.push(action.payload.object)
-                    }
                     return {
                         ...state,
                         save: {
@@ -102,7 +105,7 @@ class ReducerFactory
                         },
                         find: {
                             ...state.find,
-                            dataset: collection
+                            dataset: CollectionHelper.updateData(action.payload.data, action.payload.params.type, state.find.dataset)
                         }
                     };
                     break;

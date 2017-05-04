@@ -20,7 +20,9 @@ class Member extends Component {
     }
 
     render() {
+
         console.log(this.props);
+
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -62,27 +64,28 @@ class Member extends Component {
                         <Table.Cell.Text field="name"></Table.Cell.Text>
                     </Table.Column>
 
+                    <Table.Column title="Is active" width="50px">
+                        <Table.Cell.Boolean field="is_active" />
+                    </Table.Column>
+
                     <Table.Column title="Email">
-                        <Table.Cell.Text field="email"></Table.Cell.Text>
+                        <Table.Cell.Text field="email" />
                     </Table.Column>
 
                     <Table.Column width="340px">
-                        <BanButton
-                            scope={this.props.member}
-                            onClick={this.onActiveNewTestUserButtonClick}
-                            color="orange"
-                            size="small"
-                            icon="settings"
-                        >Ban</BanButton>
-
-                        <ActiveButton
-                            scope={this.props.member}
-                            onClick={this.onActiveNewUserButtonClick}
+                        <Table.Control.Button
+                            condition={Table.Control.Condition.ActiveProp.not.bind('is_active')}
                             color="blue"
-                            size="small"
-                            icon="user"
-                        >Active</ActiveButton>
-                        <Button details={this.props.member.save} size="small" icon="edit" onClick={this.onEditUserButtonClick}>Edit</Button>
+                            type="user.active"
+                            value={true}
+                            onClick={this.onActiveNewUserButtonClick}>Active</Table.Control.Button>
+
+                        <Table.Control.Button
+                            condition={Table.Control.Condition.ActiveProp.is.bind('is_active')}
+                            color="orange"
+                            type="user.ban"
+                            value={false}
+                            onClick={this.onActiveNewUserButtonClick}>Ban</Table.Control.Button>
                     </Table.Column>
                 </Table>
 
@@ -122,7 +125,6 @@ class Member extends Component {
         if (this.props.member.save.dataset.id !== props.record.id) {
             return false;
         }
-        console.log('TRUE');
     };
 
     isBanFetching = (e) => {
@@ -130,7 +132,7 @@ class Member extends Component {
     }
 
     onBanUserButtonClick = (element) => {
-        let data = {...element.record};
+        let data = {...element.record.data};
         data.name = 'BANNED USER';
         this.props.actions.save(data, {
             type: 'ban'
@@ -146,12 +148,16 @@ class Member extends Component {
         });
     }
 
+    /**
+     * THIS IS SPARTA
+     * @param element
+     */
     onActiveNewUserButtonClick = (element) => {
         let data = {
-            id: element.record.id
+            id: element.record.data.id
         };
-        data.is_active = true;
-        data.name = 'EDITED ' + Math.floor(Date.now() / 1000);
+        data.is_active = element.value;
+        data.name = 'BANNED ' + Math.floor(Date.now() / 1000);
         this.props.actions.save(data, {
             type: element.type
         });
