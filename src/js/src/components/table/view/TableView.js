@@ -75,7 +75,7 @@ export default class TableView extends CoreComponent {
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th colSpan="4">
+                    <th colSpan="5">
                         <PagerView table={this.props.table} />
                     </th>
                 </tr>

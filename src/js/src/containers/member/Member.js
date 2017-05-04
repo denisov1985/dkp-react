@@ -60,6 +60,24 @@ class Member extends Component {
                         <Table.Cell.Text field="id"></Table.Cell.Text>
                     </Table.Column>
 
+                    <Table.Column width="62px">
+                        <Table.Control.Button
+                            condition={Table.Control.Condition.VisibleProp.not.bind('is_active')}
+                            color="blue"
+                            type="user.active"
+                            icon="checkmark"
+                            value={true}
+                            onClick={this.onActiveNewUserButtonClick}></Table.Control.Button>
+
+                        <Table.Control.Button
+                            condition={Table.Control.Condition.VisibleProp.is.bind('is_active')}
+                            color="orange"
+                            type="user.ban"
+                            icon="ban"
+                            value={false}
+                            onClick={this.onActiveNewUserButtonClick}></Table.Control.Button>
+                    </Table.Column>
+
                     <Table.Column title="Name" width="300px">
                         <Table.Cell.Text field="name"></Table.Cell.Text>
                     </Table.Column>
@@ -72,21 +90,14 @@ class Member extends Component {
                         <Table.Cell.Text field="email" />
                     </Table.Column>
 
-                    <Table.Column width="340px">
-                        <Table.Control.Button
-                            condition={Table.Control.Condition.ActiveProp.not.bind('is_active')}
-                            color="blue"
-                            type="user.active"
-                            value={true}
-                            onClick={this.onActiveNewUserButtonClick}>Active</Table.Control.Button>
-
+                    <Table.Column width="100px">
                         <Table.Control.Button
                             condition={Table.Control.Condition.ActiveProp.is.bind('is_active')}
-                            color="orange"
-                            type="user.ban"
-                            value={false}
-                            onClick={this.onActiveNewUserButtonClick}>Ban</Table.Control.Button>
+                            icon="write"
+                            type="user.details"
+                            onClick={this.onEditUserButtonClick}>Edit</Table.Control.Button>
                     </Table.Column>
+
                 </Table>
 
                 <Modal isFetching={this.props.member.get.status === 1}
@@ -113,41 +124,13 @@ class Member extends Component {
                     <Modal.Footer>
                         <Button disabled={this.props.member.save.status === 1} position="left" color="negative" icon="trash">Delete</Button>
                         <Button onClick={this.onUnloadUser} icon="remove">Cancel</Button>
-                        <Button isFetching={this.props.member.save.status === 1} onClick={this.onSaveUser} color="positive" icon="checkmark">Save</Button>
+                        <Button loading={this.props.member.save.status === 1} onClick={this.onSaveUser} color="positive" icon="checkmark">Save</Button>
                     </Modal.Footer>
                 </Modal>
 
             </Layout>
     )
     }
-
-    test = (props) => {
-        if (this.props.member.save.dataset.id !== props.record.id) {
-            return false;
-        }
-    };
-
-    isBanFetching = (e) => {
-        return false;
-    }
-
-    onBanUserButtonClick = (element) => {
-        let data = {...element.record.data};
-        data.name = 'BANNED USER';
-        this.props.actions.save(data, {
-            type: 'ban'
-        });
-    }
-
-    onActiveUserButtonClick = (element) => {
-        this.props.actions.save({
-            id: element.record.id,
-            name: 'ACTIVE USER'
-        }, {
-            type: 'active'
-        });
-    }
-
     /**
      * THIS IS SPARTA
      * @param element
@@ -163,17 +146,6 @@ class Member extends Component {
         });
     }
 
-    onActiveNewTestUserButtonClick = (element) => {
-        let data = {
-            id: element.record.id
-        };
-        data.is_active = false;
-        data.name = 'TESTED ' + Math.floor(Date.now() / 1000);
-        this.props.actions.save(data, {
-            type: element.type
-        });
-    }
-
     onUnloadUser = () => {
         this.props.actions.unload();
     }
@@ -183,7 +155,7 @@ class Member extends Component {
     }
 
     onEditUserButtonClick = (button) => {
-        this.props.actions.get(button.record.id);
+        this.props.actions.get(button.record.data.id);
     }
     }
 

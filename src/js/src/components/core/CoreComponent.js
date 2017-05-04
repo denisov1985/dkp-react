@@ -13,6 +13,7 @@ export default class DefaultComponent extends Component {
         }
     }
 
+
     getIcon() {
         if (this.props.icon === undefined) {
             return null;
@@ -65,6 +66,10 @@ export default class DefaultComponent extends Component {
             defaultValue = '';
         }
         return this.props[propName] == undefined ? defaultValue : this.props[propName];
+    }
+
+    addHidden() {
+        this.addClass('hidden');
     }
 
     /**

@@ -8,8 +8,8 @@ export default class Button extends CoreComponent {
         if (this.props.icon !== undefined) {
             this.addClass('icon');
         }
-        if (this.props.children !== undefined) {
-            //this.addClass('labeled');
+        if (this.props.children !== undefined && this.props.icon !== undefined) {
+            this.addClass('labeled');
         }
         if (this.isLoading()) {
             this.addLoading();

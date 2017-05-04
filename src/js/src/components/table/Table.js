@@ -10,6 +10,7 @@ import BooleanCell from './cell/BooleanCell';
 
 import Button from './controls/button/Button';
 import ActiveProp from './controls/condition/ActiveProp';
+import VisibleProp from './controls/condition/VisibleProp';
 
 export default class Table extends CoreComponent {
 
@@ -99,3 +100,4 @@ Table.Control.Button = Button;
 
 Table.Control.Condition = {};
 Table.Control.Condition.ActiveProp = ActiveProp;
+Table.Control.Condition.VisibleProp = VisibleProp;
