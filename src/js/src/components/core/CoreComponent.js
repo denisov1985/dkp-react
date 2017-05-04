@@ -45,6 +45,9 @@ export default class DefaultComponent extends Component {
     }
 
     buildClass() {
+        if (this.props.condition !== undefined) {
+            this.props.condition(this);
+        }
         return [];
     }
 
@@ -70,6 +73,15 @@ export default class DefaultComponent extends Component {
 
     addHidden() {
         this.addClass('hidden');
+    }
+
+    addDisabled() {
+        this.addClass('disabled');
+    }
+
+    addLoading() {
+        this.addClass('loading');
+        this.addClass('disabled');
     }
 
     /**

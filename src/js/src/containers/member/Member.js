@@ -155,6 +155,7 @@ class Member extends Component {
     }
 
     onEditUserButtonClick = (button) => {
+        console.log(button);
         this.props.actions.get(button.record.data.id);
     }
     }
