@@ -4,6 +4,7 @@ import TableView from './view/TableView';
 import Multisort from '../../utils/Multisort';
 
 import Column from './Column';
+import Row from './Row';
 import TextCell from './cell/TextCell';
 import ControlCell from './cell/ControlCell';
 import BooleanCell from './cell/BooleanCell';
@@ -20,8 +21,7 @@ export default class Table extends CoreComponent {
      */
     constructor(props) {
         super(props);
-        this.defaultLimit = 20;
-
+        this.defaultLimit = 15;
         this.state = {
             offset: 0,
             limit: this.props.limit !== undefined ? this.props.limit : this.defaultLimit,
@@ -77,6 +77,7 @@ export default class Table extends CoreComponent {
     render() {
         return (
             <TableView
+                rowCondition={this.props.rowCondition}
                 columns={this.props.children}
                 dataset={this.getDatasetPage()}
                 onSortClick={this.onSortClick}

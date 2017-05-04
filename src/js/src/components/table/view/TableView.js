@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import CoreComponent from '../../core/CoreComponent';
 import PagerView from './PagerView';
+import Row from '../Row';
 
 export default class TableView extends CoreComponent {
 
@@ -41,6 +42,8 @@ export default class TableView extends CoreComponent {
             className = className + "active visible";
         }
 
+        console.log(this.props.rowCondition);
+
         return (
             <div className="ui dimmable dimmed">
                 <div className={className}>
@@ -62,7 +65,7 @@ export default class TableView extends CoreComponent {
                 </thead>
                 <tbody>
                     {this.props.dataset.map((row, index) => (
-                        <tr key={index}>
+                        <Row condition={this.props.rowCondition} key={index} record={row}>
                             {this.props.columns.map((cell, key) => {
                                 return (<td key={key}>
                                     {this.renderElementWithProps({
@@ -70,7 +73,7 @@ export default class TableView extends CoreComponent {
                                     }, cell.props.children)}
                                 </td>)
                             })}
-                        </tr>
+                        </Row>
                     ))}
                 </tbody>
                 <tfoot>

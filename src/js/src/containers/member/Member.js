@@ -10,6 +10,7 @@ import Button from '../../components/button/Button'
 import SaveButton from '../../components/button/SaveButton'
 import BanButton from './elements/button/BanButton';
 import ActiveButton from './elements/button/ActiveButton';
+import ClassProp from '../../components/condition/ClassProp';
 
 class Member extends Component {
 
@@ -51,13 +52,16 @@ class Member extends Component {
                 </div>
 
                 <button className="ui labeled icon button">
-                    <i className="add user icon"></i>
+                    <i className="add user icon" />
                     Add member
                 </button>
 
-                <Table dataset={this.props.member.find.dataset} isFetchind={this.props.member.find.status === 1}>
+                <Table
+                    rowCondition={ClassProp.is.bind('is_active', 'negative')}
+                    dataset={this.props.member.find.dataset}
+                    isFetchind={this.props.member.find.status === 1}>
                     <Table.Column title="ID" width="50px">
-                        <Table.Cell.Text field="id"></Table.Cell.Text>
+                        <Table.Cell.Text field="id" />
                     </Table.Column>
 
                     <Table.Column width="62px">
@@ -67,7 +71,7 @@ class Member extends Component {
                             type="user.active"
                             icon="checkmark"
                             value={true}
-                            onClick={this.onActiveNewUserButtonClick}></Table.Control.Button>
+                            onClick={this.onActiveNewUserButtonClick} />
 
                         <Table.Control.Button
                             condition={Table.Control.Condition.VisibleProp.is.bind('is_active')}
@@ -75,11 +79,11 @@ class Member extends Component {
                             type="user.ban"
                             icon="ban"
                             value={false}
-                            onClick={this.onActiveNewUserButtonClick}></Table.Control.Button>
+                            onClick={this.onActiveNewUserButtonClick} />
                     </Table.Column>
 
                     <Table.Column title="Name" width="300px">
-                        <Table.Cell.Text field="name"></Table.Cell.Text>
+                        <Table.Cell.Text field="name" />
                     </Table.Column>
 
                     <Table.Column title="Is active" width="50px">

@@ -61,7 +61,7 @@ export default class DefaultComponent extends Component {
             this.getProp('disabled'),
             this.getPosition(),
             this.getElementClass()
-        ].join(' ');
+        ].join(' ').trim();
     }
 
     getProp(propName, defaultValue) {
