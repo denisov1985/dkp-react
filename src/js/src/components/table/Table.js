@@ -9,7 +9,8 @@ import TextCell from './cell/TextCell';
 import ControlCell from './cell/ControlCell';
 import BooleanCell from './cell/BooleanCell';
 
-import Button from './controls/button/Button';
+import Button   from './controls/button/Button';
+import Checkbox from './controls/form/Checkbox';
 import ActiveProp from './controls/condition/ActiveProp';
 import VisibleProp from './controls/condition/VisibleProp';
 
@@ -97,7 +98,8 @@ Table.Cell.Boolean = BooleanCell;
 Table.Cell.Control = ControlCell;
 
 Table.Control   = {};
-Table.Control.Button = Button;
+Table.Control.Button   = Button;
+Table.Control.Checkbox = Checkbox;
 
 Table.Control.Condition = {};
 Table.Control.Condition.ActiveProp = ActiveProp;

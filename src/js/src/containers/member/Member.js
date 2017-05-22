@@ -60,6 +60,11 @@ class Member extends Component {
                     rowCondition={ClassProp.is.bind('is_active', 'negative')}
                     dataset={this.props.member.find.dataset}
                     isFetchind={this.props.member.find.status === 1}>
+
+                    <Table.Column width="45px">
+                        <Table.Control.Checkbox />
+                    </Table.Column>
+
                     <Table.Column title="ID" width="50px">
                         <Table.Cell.Text field="id" />
                     </Table.Column>
@@ -71,6 +76,7 @@ class Member extends Component {
                             type="user.active"
                             icon="checkmark"
                             value={true}
+                            size="small"
                             onClick={this.onActiveNewUserButtonClick} />
 
                         <Table.Control.Button
@@ -78,6 +84,7 @@ class Member extends Component {
                             color="orange"
                             type="user.ban"
                             icon="ban"
+                            size="small"
                             value={false}
                             onClick={this.onActiveNewUserButtonClick} />
                     </Table.Column>
