@@ -66,6 +66,12 @@ class ActionFactory
                     dispatch(ActionHelper.receiveAction(entity, 'unload', {}));
                 }
             },
+
+            select(record) {
+                return (dispatch, getState) => {
+                    dispatch(ActionHelper.receiveAction(entity, 'select', record));
+                }
+            }
         }
     }
 }

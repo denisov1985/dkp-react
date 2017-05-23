@@ -17,10 +17,50 @@ class ReducerFactory
             };
 
         return (state = initialState, action) => {
+
+            console.log(action);
+
             switch (action.type) {
                 /**
                  * FIND
                  */
+
+                case ActionHelper.format('receive', entity, 'select'):
+                    let collection = [...state.find.dataset];
+                    let result = collection.reduce((items, element) => {
+                        let newItems = [];
+                        if (typeof items !== 'undefined') {
+                            newItems = [...items];
+                        }
+                        newItems.push({
+                            ...element,
+                            selected: true
+                        });
+                        return newItems;
+                    })
+
+                    console.log(collection);
+                    console.log(result);
+
+
+                    return {
+                        ...state,
+                        find: {
+                            ...state.find
+                        }
+                    };
+                    break;
+
+                case ActionHelper.format('unselect', entity, 'find'):
+                    return {
+                        ...state,
+                        find: {
+                            ...state.find,
+                            selected: false
+                        }
+                    };
+                    break;
+
                 case ActionHelper.format('request', entity, 'find'):
                     return {
                         ...state,
@@ -38,12 +78,14 @@ class ReducerFactory
                             data: element,
                             status: {
                                 default: 2
-                            }
+                            },
+                            selected: false
                         }
                     })
                     return {
                         ...state,
                         find: {
+                            ...state.find,
                             dataset: collectionFind,
                             status: ActionFactory.STATUS_COMPLETE
                         }

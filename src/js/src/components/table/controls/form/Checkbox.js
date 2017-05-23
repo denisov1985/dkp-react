@@ -3,16 +3,34 @@ import CoreComponent from '../../../core/CoreComponent';
 
 export default class Checkbox extends CoreComponent {
 
-    getLabel() {
-        if (this.props.children !== undefined) {
-            return (<label>Checkbox</label>)
+    constructor(props) {
+        super(props);
+        this.state = {
+            checked: false
         }
-        return null;
+        console.log(props);
+    }
+
+    onChange = () => {
+        console.log('ij1');
+        console.log(this.state.checked);
+
+        this.props.row.setState({
+            selected: !this.props.row.state.selected
+        })
+
+        this.setState({
+            checked: !this.state.checked
+        });
+
+        this.props.onSelect && this.props.onSelect(this);
     }
 
     render() {
-        return (<div className="ui checkbox checked">
-            <input type="checkbox" className="hidden" />
+        let checkboxClass = "ui checkbox";
+        this.state.checked && (checkboxClass += ' checked');
+        return (<div onClick={this.onChange} className={checkboxClass}>
+            <input onChange={this.onChange} type="checkbox" className="hidden" checked={this.state.checked} />
             <label>{this.props.children}</label>
         </div>);
     }

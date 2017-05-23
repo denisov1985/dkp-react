@@ -62,7 +62,7 @@ class Member extends Component {
                     isFetchind={this.props.member.find.status === 1}>
 
                     <Table.Column width="45px">
-                        <Table.Control.Checkbox />
+                        <Table.Control.Checkbox onSelect={this.onSelectRecord} />
                     </Table.Column>
 
                     <Table.Column title="ID" width="50px">
@@ -72,7 +72,7 @@ class Member extends Component {
                     <Table.Column width="62px">
                         <Table.Control.Button
                             condition={Table.Control.Condition.VisibleProp.not.bind('is_active')}
-                            color="blue"
+                            color="b`lue"
                             type="user.active"
                             icon="checkmark"
                             value={true}
@@ -139,9 +139,29 @@ class Member extends Component {
                     </Modal.Footer>
                 </Modal>
 
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
             </Layout>
     )
     }
+
+    onSelectRecord = (element) => {
+        console.log('lalala');
+        console.log(element);
+        this.props.actions.select(element.props.record.data)
+    }
+
     /**
      * THIS IS SPARTA
      * @param element
