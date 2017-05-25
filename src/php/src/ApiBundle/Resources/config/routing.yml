@@ -17,3 +17,7 @@ index_get:
 index_save:
     path:     /member/save/
     defaults: { _controller: ApiBundle:Member:save }
+
+index_delete:
+    path:     /member/delete/
+    defaults: { _controller: ApiBundle:Member:delete }

@@ -61,6 +61,34 @@ class ActionFactory
                 }
             },
 
+            delete(data, params) {
+                if (params === undefined) {
+                    params = {
+                        type: 'default'
+                    };
+                }
+                return (dispatch, getState) => {
+                    dispatch(ActionHelper.requestAction(entity, 'delete', {
+                        data: data,
+                        params: params
+                    }));
+                    return fetch('/api/' + entity.replace('_', '/') + '/delete/', {
+                        method: 'post',
+                        headers: {
+                            'Accept': 'application/json, text/plain, */*',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            data: data,
+                            params: params
+                        })
+                    })
+                        .then(response  => response.json())
+                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'delete', payload)))
+                        .catch(payload  => dispatch(ActionHelper.errorAction(entity, 'delete', payload)));
+                }
+            },
+
             unload() {
                 return (dispatch, getState) => {
                     dispatch(ActionHelper.receiveAction(entity, 'unload', {}));

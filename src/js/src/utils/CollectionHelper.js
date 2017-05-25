@@ -22,4 +22,21 @@ export default class CollectionHelper
         });
         return [...collection];
     }
+
+    static updateCollection(action, collection) {
+        collection.map((element, index) => {
+            action(element, index);
+        });
+        return [...collection];
+    }
+
+    static deleteCollection(action, collection) {
+        let items = [];
+        collection.map((element, index) => {
+            if (!action(element, index)) {
+                items.push(element)
+            }
+        });
+        return items;
+    }
 }

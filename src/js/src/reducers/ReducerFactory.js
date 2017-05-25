@@ -18,7 +18,6 @@ class ReducerFactory
 
         return (state = initialState, action) => {
 
-            console.log(action);
 
             switch (action.type) {
                 /**
@@ -26,27 +25,17 @@ class ReducerFactory
                  */
 
                 case ActionHelper.format('receive', entity, 'select'):
-                    let collection = [...state.find.dataset];
-                    let result = collection.reduce((items, element) => {
-                        let newItems = [];
-                        if (typeof items !== 'undefined') {
-                            newItems = [...items];
+                    let collection = state.find.dataset.map(a => Object.assign({}, a));
+                    collection.map((element, index) => {
+                        if (element.data.id === action.payload.id) {
+                            element.selected = true;
                         }
-                        newItems.push({
-                            ...element,
-                            selected: true
-                        });
-                        return newItems;
                     })
-
-                    console.log(collection);
-                    console.log(result);
-
-
                     return {
                         ...state,
                         find: {
-                            ...state.find
+                            ...state.find,
+                            dataset: collection
                         }
                     };
                     break;
@@ -111,6 +100,35 @@ class ReducerFactory
                         get: {
                             dataset: action.payload,
                             status: ActionFactory.STATUS_COMPLETE
+                        }
+                    };
+                    break;
+
+                /**
+                 * SAVE
+                 */
+                case ActionHelper.format('request', entity, 'delete'):
+                    return {
+                        ...state,
+                        find: {
+                            ...state.find,
+                            dataset: CollectionHelper.updateCollection((element, index) => {
+                                if (element.selected) {
+                                    element.status[action.payload.params.type] = 1;
+                                }
+                            }, state.find.dataset)
+                        }
+                    };
+                    break;
+
+                case ActionHelper.format('receive', entity, 'delete'):
+                    return {
+                        ...state,
+                        find: {
+                            ...state.find,
+                            dataset: CollectionHelper.deleteCollection((element, index) => {
+                                return (element.selected)
+                            }, state.find.dataset)
                         }
                     };
                     break;

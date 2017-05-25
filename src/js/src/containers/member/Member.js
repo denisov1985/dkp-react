@@ -21,9 +21,6 @@ class Member extends Component {
     }
 
     render() {
-
-        console.log(this.props);
-
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -57,6 +54,7 @@ class Member extends Component {
                 </button>
 
                 <Table
+                    onDeleteBatchClick={this.onDelAll}
                     rowCondition={ClassProp.is.bind('is_active', 'negative')}
                     dataset={this.props.member.find.dataset}
                     isFetchind={this.props.member.find.status === 1}>
@@ -156,9 +154,19 @@ class Member extends Component {
     )
     }
 
+    onDelAll = (element) => {
+        console.log('Delete all clicked!!!111');
+        console.log(this.props.member);
+        let collection = [];
+        this.props.member.find.dataset.map((element, index) => {
+            if (element.selected) {
+                collection.push(element);
+            }
+        })
+        this.props.actions.delete(collection);
+    }
+
     onSelectRecord = (element) => {
-        console.log('lalala');
-        console.log(element);
         this.props.actions.select(element.props.record.data)
     }
 

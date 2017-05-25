@@ -105,6 +105,33 @@ abstract class DefaultController extends Controller
         ]);
     }
 
+    public function deleteAction(Request $request)
+    {
+        $content = $request->getContent();
+        if (!empty($content))
+        {
+            $data = json_decode($content, true); // 2nd param to get as array
+            $params = isset($data['params']) ? $data['params'] : [];
+            $data   = $data['data'];
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+        foreach ($data as $recordToDelete) {
+            $record = $this->getDoctrine()
+                ->getRepository('ApiBundle:' . $this->_getEntityName())
+                ->find($recordToDelete['data']['id']);
+            $em->remove($record);
+        }
+
+        $em->flush();
+
+        return new JsonResponse([
+            'valid'  => true,
+            'errors' => [],
+            'data'   => $data,
+            'params' => $params
+        ]);
+    }
+
     protected function serialize($content) {
         $serializer = $this->get('jms_serializer');
         return $serializer->serialize($content, 'json', SerializationContext::create()->setSerializeNull(true));

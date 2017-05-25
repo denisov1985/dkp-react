@@ -22,7 +22,7 @@ export default class Table extends CoreComponent {
      */
     constructor(props) {
         super(props);
-        this.defaultLimit = 15;
+        this.defaultLimit = 5;
         this.state = {
             offset: 0,
             limit: this.props.limit !== undefined ? this.props.limit : this.defaultLimit,
@@ -86,6 +86,7 @@ export default class Table extends CoreComponent {
                 sortOrder={this.state.sortOrder}
                 isFetching={this.props.isFetchind}
                 table={this}
+                onDeleteBatchClick={this.props.onDeleteBatchClick}
             />
         )
     }

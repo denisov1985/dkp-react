@@ -12,7 +12,7 @@ export default class Row extends CoreComponent {
 
     buildClass() {
         super.buildClass();
-        if (this.state.selected) {
+        if (this.props.record.selected) {
             this.addClass('active');
         }
     }
