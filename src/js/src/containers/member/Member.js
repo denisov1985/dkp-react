@@ -21,6 +21,9 @@ class Member extends Component {
     }
 
     render() {
+
+        console.log(this);
+
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -155,6 +158,9 @@ class Member extends Component {
     }
 
     onDelAll = (element) => {
+
+        this.props.actions2.save({});
+        return true;
         console.log('Delete all clicked!!!111');
         console.log(this.props.member);
         let collection = [];
@@ -200,6 +206,7 @@ class Member extends Component {
     }
 
     function mapStateToProps(state) {
+        console.log(state);
         return {
             member: state.memberReducer
         }
@@ -207,7 +214,8 @@ class Member extends Component {
 
     function mapDispatchToProps(dispatch) {
         return {
-            actions: bindActionCreators(ActionFactory.create('member'), dispatch)
+            actions: bindActionCreators(ActionFactory.create('member'), dispatch),
+            actions2: bindActionCreators(ActionFactory.create('some'), dispatch)
         }
     }
 

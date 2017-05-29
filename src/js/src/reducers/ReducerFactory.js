@@ -18,7 +18,6 @@ class ReducerFactory
 
         return (state = initialState, action) => {
 
-
             switch (action.type) {
                 /**
                  * FIND
@@ -137,6 +136,9 @@ class ReducerFactory
                  * SAVE
                  */
                 case ActionHelper.format('request', entity, 'save'):
+                    console.log('DATA');
+                    console.log(action);
+                    console.log(state);
                     return {
                         ...state,
                         save: {

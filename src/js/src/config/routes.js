@@ -1,4 +1,5 @@
 import Member from '../containers/member/Member';
+import Classes from '../containers/member/Classes';
 import UnderConstruction from '../containers/common/UnderConstruction';
  
 /**
@@ -23,7 +24,7 @@ export const routes =
                     title: "Classes",
                     path: "/member/classes",
                     alias: "dkp_users_classes",
-                    component: UnderConstruction
+                    component: Classes
                 }
             ]
         },

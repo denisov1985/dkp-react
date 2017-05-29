@@ -56,7 +56,7 @@ export default class Table extends CoreComponent {
             dataset = [];
         }
 
-        let sortedDataset = Multisort.sort(dataset, [this.state.sortColumn], [this.state.sortOrder ? 'ASC' : 'DESC']);
+        //let sortedDataset = Multisort.sort(dataset, [this.state.sortColumn], [this.state.sortOrder ? 'ASC' : 'DESC']);
         return dataset;
     }
 
@@ -76,6 +76,7 @@ export default class Table extends CoreComponent {
      * @returns {XML}
      */
     render() {
+
         return (
             <TableView
                 rowCondition={this.props.rowCondition}

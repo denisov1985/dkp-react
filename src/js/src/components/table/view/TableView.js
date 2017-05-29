@@ -47,6 +47,7 @@ export default class TableView extends CoreComponent {
         if (this.props.isFetching === true) {
             className = className + "active visible";
         }
+
         return (
             <div className="ui dimmable dimmed">
                 <div className={className}>
