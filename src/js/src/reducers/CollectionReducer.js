@@ -9,7 +9,7 @@ class ReducerFactory
             status: {
                 default: ActionFactory.STATUS_EMPTY
             },
-            dataset: {}
+            dataset: []
         };
 
         return (state = initialState, action) => {

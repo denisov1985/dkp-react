@@ -64,6 +64,8 @@ export default class DefaultComponent extends Component {
         ].join(' ').trim();
     }
 
+    getClassName = () => this.getClass();
+
     getProp(propName, defaultValue) {
         if (defaultValue === undefined) {
             defaultValue = '';
@@ -111,6 +113,14 @@ export default class DefaultComponent extends Component {
 
     stopPropagate = (e) => {
         e.stopPropagation();
+    }
+
+    camelToDash = (str) => {
+        return str.replace(/([A-Z])/g, function($1){return "-"+$1.toLowerCase();}).substr(1);
+    }
+
+    getKey(index) {
+        return this.camelToDash(this.constructor.name) + '-children-' + index;
     }
 
     render() {

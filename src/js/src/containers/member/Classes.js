@@ -5,7 +5,7 @@ import ActionFactory from '../../actions/ActionFactory';
 import CollectionAction from '../../actions/CollectionAction';
 import Layout from '../Layout';
 import Button from 'components/button/Button';
-import Table from 'components/table/Table';
+import DataTable from 'components/data-table/DataTable';
 
 class Classes extends Component {
 
@@ -23,26 +23,31 @@ class Classes extends Component {
 
                 <Button onClick={this.pressMeClick}>Press me</Button>
 
-                <Table dataset={this.props.member.collection.dataset}
-                    isFetchind={this.props.member.collection.status === 1}>
+                <DataTable
+                    dataset={this.props.member.collection.dataset}
+                    status={this.props.member.collection.status}
+                >
+                    <DataTable.Row>
+                        <DataTable.Column title="ID">
+                            <DataTable.Cell.Text field="id" />
+                        </DataTable.Column>
 
+                        <DataTable.Column title="User Name" >
+                            <DataTable.Cell.Text field="name" />
+                        </DataTable.Column>
 
-                    <Table.Column title="ID" width="50px">
-                        <Table.Cell.Text field="id" />
-                    </Table.Column>
-
-                    <Table.Column title="Name">
-                        <Table.Cell.Text field="name" />
-                    </Table.Column>
-
-                </Table>
+                        <DataTable.Column title="User Email">
+                            <DataTable.Cell.Text field="email" />
+                        </DataTable.Column>
+                    </DataTable.Row>
+                </DataTable>
 
             </Layout>
         )
     }
 
     pressMeClick = (e) => {
-        this.props.actions.findAll();
+        this.props.actions.collection.findAll();
     }
 }
 
@@ -54,7 +59,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(CollectionAction.create('member'), dispatch)
+        actions: {
+            collection: bindActionCreators(CollectionAction.create('member'), dispatch)
+        }
     }
 }
 
