@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
 import DataPager from './addons/DataPager';
 
-export default class DataTableFooter extends CoreComponent {
+export default class DataTablePanel extends CoreComponent {
 
     renderPager = () => {
         if (typeof this.props.parentProps.pagination === 'undefined') {
@@ -15,9 +15,9 @@ export default class DataTableFooter extends CoreComponent {
      * @returns {XML}
      */
     render() {
-        return (<tfoot>
-
-        </tfoot>)
+        return (<div>
+            ololo
+        </div>)
     }
 }
 

@@ -8,6 +8,9 @@ export default class DataTableHeader extends CoreComponent {
      * @returns {XML}
      */
     render() {
+
+        console.log(this.props.parentProps.children[0].constructor.name);
+
         return (<thead>
             <tr>
                 {this.props.parentProps.children.props.children.map((column, index) => {

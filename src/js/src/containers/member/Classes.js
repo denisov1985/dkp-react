@@ -25,7 +25,9 @@ class Classes extends Component {
 
                 <DataTable
                     dataset={this.props.member.collection.dataset}
-                    status={this.props.member.collection.status}>
+                    status={this.props.member.collection.status}
+                    pagination="default"
+                >
                     <DataTable.Row onClick={this.onSelectTableRow}>
                         <DataTable.Column title="ID">
                             <DataTable.Cell.Text field="id" />
@@ -39,6 +41,10 @@ class Classes extends Component {
                             <DataTable.Cell.Text field="email" />
                         </DataTable.Column>
                     </DataTable.Row>
+
+                    <DataTable.Panel>
+
+                    </DataTable.Panel>
                 </DataTable>
 
             </Layout>
