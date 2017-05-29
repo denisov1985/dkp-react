@@ -25,9 +25,8 @@ class Classes extends Component {
 
                 <DataTable
                     dataset={this.props.member.collection.dataset}
-                    status={this.props.member.collection.status}
-                >
-                    <DataTable.Row>
+                    status={this.props.member.collection.status}>
+                    <DataTable.Row onClick={this.onSelectTableRow}>
                         <DataTable.Column title="ID">
                             <DataTable.Cell.Text field="id" />
                         </DataTable.Column>
@@ -44,6 +43,11 @@ class Classes extends Component {
 
             </Layout>
         )
+    }
+
+    onSelectTableRow = (props) => {
+        console.log('select row');
+        console.log(props);
     }
 
     pressMeClick = (e) => {

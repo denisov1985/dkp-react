@@ -8,8 +8,7 @@ export default class DataTableRow extends CoreComponent {
      * @returns {XML}
      */
     render() {
-
-        return (<tr>
+        return (<tr onClick={this.onClick}>
             {this.props.children.map((cell, index) => {
                 return (<td key={this.getKey(index)}>
                     {this.renderElementWithProps({
