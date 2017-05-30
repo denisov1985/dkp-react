@@ -25,6 +25,7 @@ export default class DataTable extends CoreComponent {
         }
     }
 
+
     buildClass() {
         super.buildClass();
         this.addClass('ui celled table sortable small');
@@ -37,13 +38,10 @@ export default class DataTable extends CoreComponent {
         if (initial) {
             return this.props.dataset;
         }
-        let dataset = this.props.dataset;
-        console.log('getDataset');
-        console.log(this);
         if (this.state.max !== null) {
-            return dataset.slice(this.state.min, this.state.max);
+            return this.props.dataset.slice(this.state.min, this.state.max);
         }   else  {
-            return dataset;
+            return this.props.dataset;
         }
     }
 
@@ -53,7 +51,7 @@ export default class DataTable extends CoreComponent {
      */
     render() {
         return (<table className={this.getClassName()}>
-            <DataTableHeader columns={this.props.children.props.children} />
+            <DataTableHeader parent={this} columns={this.props.children.props.children} />
             <DataTableBody dataset={this.getDataset()} column={this.props.children} />
             <DataTableFooter columns={this.props.children.props.children} >
                 <DataPager parent={this} />

@@ -29,7 +29,7 @@ class Classes extends Component {
                     pagination="default"
                 >
                     <DataTable.Row onClick={this.onSelectTableRow}>
-                        <DataTable.Column title="ID">
+                        <DataTable.Column title="ID" width="50px" sortable="1">
                             <DataTable.Cell.Text field="id" />
                         </DataTable.Column>
 
