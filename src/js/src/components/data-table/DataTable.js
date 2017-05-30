@@ -7,6 +7,7 @@ import DataTableColumn from './DataTableColumn';
 import DataTableRow from './DataTableRow';
 import DataTablePanel from './DataTablePanel';
 import DataTextCell from './cells/DataTextCell';
+import DataPager from './addons/DataPager';
 
 export default class DataTable extends CoreComponent {
 
@@ -19,6 +20,8 @@ export default class DataTable extends CoreComponent {
         this.state = {
             sortColumn: this.props.sortColumn !== undefined ? this.props.sortColumn : null,
             sortOrder: this.props.sortOrder !== undefined ? this.props.sortOrder : null,
+            min: 0,
+            max: null
         }
     }
 
@@ -27,8 +30,21 @@ export default class DataTable extends CoreComponent {
         this.addClass('ui celled table sortable small');
     }
 
-    getDataset = () => {
-
+    /**
+     * Get dataset
+     */
+    getDataset = (initial) => {
+        if (initial) {
+            return this.props.dataset;
+        }
+        let dataset = this.props.dataset;
+        console.log('getDataset');
+        console.log(this);
+        if (this.state.max !== null) {
+            return dataset.slice(this.state.min, this.state.max);
+        }   else  {
+            return dataset;
+        }
     }
 
     /**
@@ -37,9 +53,11 @@ export default class DataTable extends CoreComponent {
      */
     render() {
         return (<table className={this.getClassName()}>
-            <DataTableHeader parentProps={this.props} />
-            <DataTableBody parentProps={this.props} />
-            <DataTableFooter parentProps={this.props} />
+            <DataTableHeader columns={this.props.children.props.children} />
+            <DataTableBody dataset={this.getDataset()} column={this.props.children} />
+            <DataTableFooter columns={this.props.children.props.children} >
+                <DataPager parent={this} />
+            </DataTableFooter>
         </table>)
     }
 }

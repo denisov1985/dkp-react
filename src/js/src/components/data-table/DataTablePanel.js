@@ -5,7 +5,7 @@ import DataPager from './addons/DataPager';
 export default class DataTablePanel extends CoreComponent {
 
     renderPager = () => {
-        if (typeof this.props.parentProps.pagination === 'undefined') {
+        if (typeof this.props.parents.pagination === 'undefined') {
             return null;
         }
     }

@@ -20,22 +20,14 @@ class ReducerFactory
                  */
                 case ActionHelper.format('request', entity, 'find'):
                     return {
-                        ...state,
+                        dataset: [],
                         status: ActionFactory.STATUS_FETCHING
                     };
                     break;
 
                 case ActionHelper.format('receive', entity, 'find'):
-                    let result = action.payload.map((element, index) => {
-                        return {
-                            dataset: element,
-                            params: {}
-                        }
-                    });
-
                     return {
-                        ...state,
-                        dataset: result,
+                        dataset: action.payload,
                         status: ActionFactory.STATUS_COMPLETE
                     };
 

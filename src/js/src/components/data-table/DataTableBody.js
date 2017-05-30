@@ -8,13 +8,12 @@ export default class DataTableBody extends CoreComponent {
      * @returns {XML}
      */
     render() {
-        console.log(this.props.parentProps.dataset);
         return (<tbody>
-            {this.props.parentProps.dataset.map((record, index) => {
+            {this.props.dataset.map((record, index) => {
                 return this.renderElementWithProps({
                     record: record,
                     key: this.getKey(index)
-                }, this.props.parentProps.children)
+                }, this.props.column)
             })}
         </tbody>)
     }

@@ -42,9 +42,7 @@ class Classes extends Component {
                         </DataTable.Column>
                     </DataTable.Row>
 
-                    <DataTable.Panel>
 
-                    </DataTable.Panel>
                 </DataTable>
 
             </Layout>
