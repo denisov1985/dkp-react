@@ -15,6 +15,7 @@ export default class Layout extends Component {
                 <Menu itemTitle="title" itemData="route" items={this.props.router.routes[0].children} ><Link /></Menu>
                 <div className="ui container">
                     <Breadcrumbs router={this.props.router} />
+
                     {this.props.children}
                 </div>
             </div>

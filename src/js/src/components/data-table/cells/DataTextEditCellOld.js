@@ -5,62 +5,44 @@ export default class DataTextEditCell extends DataCell {
 
     constructor(props) {
         super(props);
-        this.state = {
-            active: false,
-            editable: false,
-            value: this.getValue()
-        }
-    }
-
-    /**
-     * On new props
-     * @param nextProps
-     */
-    componentWillReceiveProps(nextProps) {
-
     }
 
     onMouseEnter = () => {
         this.setState({
-            hovered: true
+            active: true
         });
-    }
+    };
 
     onMouseLeave = () => {
         this.setState({
-            hovered: false
+            active: false
         });
-    }
-
-    onClick = (e) => {
-        e.stopPropagation();
-        let state = this.setNested(this.props.table.state, this.getPath(), true);
-        this.props.table.setState(state);
     };
 
-    getPath() {
-        return ['rows', 'editable', this.props.record.id, this.props.column.props.field, 'active'];
-    }
+    onClick = (e) => {
 
-    isActive() {
-        return this.getNested(this.props.table.state, this.getPath(), false);
-    }
+    };
+
+    isEditable() {
+
+    };
 
     onClose = (e) => {
-        console.log('a');
-        let state = this.setNested(this.props.table.state, this.getPath(), false);
-        this.props.table.setState(state);
-        console.log('b');
-        console.log(state);
-        e.stopPropagation();
-    }
+
+    };
 
     onSave = (e) => {
+        let record = {...this.props.record};
+        record[this.props.column.props.field] = this.state.value
+        this.props.onSave(record);
+        e.stopPropagation();
         this.onClose(e);
     }
 
     onChange = (e) => {
-
+        this.setState({
+            value: e.target.value
+        })
     }
 
     renderInput() {
@@ -86,14 +68,13 @@ export default class DataTextEditCell extends DataCell {
         }}>{this.getValue()}</span><i style={{marginLeft: '3px'}} className="write icon" /></span>)
     }
 
-    renderContent() {
-        if (this.isActive()) {
-            return this.renderInput();
-        }
-        return this.state.hovered ? this.renderActiveText() : this.renderText();
-    }
-
     render() {
-        return <td style={{cursor: 'pointer'}} onMouseLeave={this.onMouseLeave} onMouseEnter={this.onMouseEnter} onClick={this.onClick}>{this.renderContent()}</td>
+        let content = null;
+        if (this.isEditable()) {
+            content = this.renderInput();
+        }   else  {
+            content = this.state.active ? this.renderActiveText() : this.renderText();
+        }
+        return <td style={{cursor: 'pointer'}} onMouseLeave={this.onMouseLeave} onMouseEnter={this.onMouseEnter} onClick={this.onClick}>{content}</td>
     }
 }

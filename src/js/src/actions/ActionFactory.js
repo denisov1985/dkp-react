@@ -99,6 +99,12 @@ class ActionFactory
                 return (dispatch, getState) => {
                     dispatch(ActionHelper.receiveAction(entity, 'select', record));
                 }
+            },
+
+            select(record) {
+                return (dispatch, getState) => {
+                    dispatch(ActionHelper.receiveAction(entity, 'select', record));
+                }
             }
         }
     }

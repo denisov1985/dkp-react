@@ -13,13 +13,41 @@ export default class DefaultComponent extends Component {
         }
     }
 
+    setNested(obj, keyPath, value) {
+        let result = {...obj}
+        this.assign(result, keyPath, value);
+        return result;
+    }
+
+    getNested(obj, keyPath, value) {
+        let result = {...obj}
+        let lastKeyIndex = keyPath.length-1;
+        for (let i = 0; i < lastKeyIndex; ++ i) {
+            let key = keyPath[i];
+            if (!(key in result))
+                return value;
+            result = result[key];
+        }
+        return result[keyPath[lastKeyIndex]];
+    }
+
+    assign(obj, keyPath, value) {
+        let lastKeyIndex = keyPath.length-1;
+        for (let i = 0; i < lastKeyIndex; ++ i) {
+            let key = keyPath[i];
+            if (!(key in obj))
+                obj[key] = {}
+            obj = obj[key];
+        }
+        obj[keyPath[lastKeyIndex]] = value;
+    }
 
     getIcon() {
         if (this.props.icon === undefined) {
             return null;
         }
         let className = 'icon ' + this.props.icon;
-        return (<i className={className}></i>)
+        return (<i className={className} />)
     }
 
     getPosition() {

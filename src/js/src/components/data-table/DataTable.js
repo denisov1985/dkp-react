@@ -63,7 +63,6 @@ export default class DataTable extends CoreComponent {
      * @returns {XML}
      */
     render() {
-        console.log(this);
         if (this.props.dataset.length === 0) {
             return (<DataTableEmpty loading={this.props.status === 1} />)
         }

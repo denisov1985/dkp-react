@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import ActionFactory from '../../actions/ActionFactory';
 import CollectionAction from '../../actions/CollectionAction';
+import UpdateAction from '../../actions/UpdateAction';
 import Layout from '../Layout';
 import Button from 'components/button/Button';
 import DataTable from 'components/data-table/DataTable';
@@ -10,10 +11,12 @@ import DataTable from 'components/data-table/DataTable';
 class Classes extends Component {
 
     render() {
+        console.log(this);
+
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
-                    <i className="users icon"></i>
+                    <i className="users icon" />
                     <div className="content">
                         Classes
                         <div className="sub header">Manage your guild members, roles and settings</div>
@@ -49,8 +52,8 @@ class Classes extends Component {
         )
     }
 
-    onSaveMember = (field, value) => {
-        console.log(field, value);
+    onSaveMember = (record) => {
+        this.props.actions.update.save(record);
     }
 
     onSelectTableRow = (props) => {
@@ -72,7 +75,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            collection: bindActionCreators(CollectionAction.create('member'), dispatch)
+            collection: bindActionCreators(CollectionAction.create('member'), dispatch),
+            update: bindActionCreators(UpdateAction.create('member'), dispatch)
         }
     }
 }

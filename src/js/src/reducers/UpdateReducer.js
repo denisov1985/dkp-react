@@ -2,14 +2,14 @@ import ActionHelper from '../actions/helpers/ActionHelper';
 import CollectionHelper from '../utils/CollectionHelper';
 import ActionFactory from '../actions/ActionFactory';
 
-class CollectionReducer
+class UpdateReducer
 {
     create(entity) {
         let initialState = {
             status: {
                 default: ActionFactory.STATUS_EMPTY
             },
-            dataset: []
+            dataset: {}
         };
 
         return (state = initialState, action) => {
@@ -18,14 +18,14 @@ class CollectionReducer
                 /**
                  * COLLECTION
                  */
-                case ActionHelper.format('request', entity, 'find'):
+                case ActionHelper.format('request', entity, 'update'):
                     return {
-                        dataset: [],
+                        dataset: {},
                         status: ActionFactory.STATUS_FETCHING
                     };
                     break;
 
-                case ActionHelper.format('receive', entity, 'find'):
+                case ActionHelper.format('receive', entity, 'update'):
                     return {
                         dataset: action.payload,
                         status: ActionFactory.STATUS_COMPLETE
@@ -38,4 +38,4 @@ class CollectionReducer
     }
 }
 
-export default new CollectionReducer();
+export default new UpdateReducer();
