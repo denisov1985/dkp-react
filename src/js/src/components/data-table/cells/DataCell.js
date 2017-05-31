@@ -7,7 +7,7 @@ export default class CoreCell extends CoreComponent {
      * Get cell value from dataset
      */
     getValue() {
-        let parts = this.props.field.split('.');
+        let parts = this.props.column.props.field.split('.');
         let item = this.props.record;
         for (let i in parts) {
             item = item[parts[i]];

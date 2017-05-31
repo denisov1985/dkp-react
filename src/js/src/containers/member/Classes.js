@@ -29,20 +29,18 @@ class Classes extends Component {
                     pagination="default"
                 >
                     <DataTable.Row onClick={this.onSelectTableRow}>
-                        <DataTable.Column title="ID" width="50px" sortable="1">
-                            <DataTable.Cell.Text field="id" />
+                        <DataTable.Column title="ID" width="50" sortable="1" field="id">
+                            <DataTable.Cell.Text />
                         </DataTable.Column>
 
-                        <DataTable.Column title="User Name" >
-                            <DataTable.Cell.Text field="name" />
+                        <DataTable.Column title="User Name" width="300" field="name" sortable="1">
+                            <DataTable.Cell.Text />
                         </DataTable.Column>
 
-                        <DataTable.Column title="User Email">
-                            <DataTable.Cell.Text field="email" />
+                        <DataTable.Column title="User Email" field="email" sortable="1">
+                            <DataTable.Cell.Text  />
                         </DataTable.Column>
                     </DataTable.Row>
-
-
                 </DataTable>
 
             </Layout>

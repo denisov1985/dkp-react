@@ -17,7 +17,7 @@ export default class DataTableEmpty extends CoreComponent {
                 <div className="content">
                     <div className="center">
                         <h2 className="ui inverted icon header">
-                            <div className="ui text loader"></div>
+                            <div className="ui loader"></div>
                         </h2>
                     </div>
                 </div>

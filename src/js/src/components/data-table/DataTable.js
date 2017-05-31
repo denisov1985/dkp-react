@@ -9,6 +9,7 @@ import DataTablePanel from './DataTablePanel';
 import DataTextCell from './cells/DataTextCell';
 import DataPager from './addons/DataPager';
 import DataTableEmpty from './DataTableEmpty';
+import DataSorter from './addons/DataSorter';
 
 export default class DataTable extends CoreComponent {
 
@@ -19,10 +20,13 @@ export default class DataTable extends CoreComponent {
     constructor(props) {
         super(props);
         this.state = {
-            sortColumn: this.props.sortColumn !== undefined ? this.props.sortColumn : null,
-            sortOrder: this.props.sortOrder !== undefined ? this.props.sortOrder : null,
             min: 0,
-            max: null
+            max: null,
+            sorter: {
+                column: this.props.sortColumn !== undefined ? this.props.sortColumn : null,
+                order: this.props.sortOrder !== undefined ? this.props.sortOrder : null,
+                type: 'default'
+            }
         }
     }
 
@@ -39,10 +43,16 @@ export default class DataTable extends CoreComponent {
         if (initial) {
             return this.props.dataset;
         }
+        let dataset = this.props.dataset;
+
+        if (this.state.sorter.column !== null) {
+            dataset = dataset.sort(DataSorter.sort(this.state.sorter.column, this.state.sorter.order)(this.state.sorter.type))
+        }
+
         if (this.state.max !== null) {
-            return this.props.dataset.slice(this.state.min, this.state.max);
+            return dataset.slice(this.state.min, this.state.max);
         }   else  {
-            return this.props.dataset;
+            return dataset;
         }
     }
 
@@ -51,6 +61,9 @@ export default class DataTable extends CoreComponent {
      * @returns {XML}
      */
     render() {
+
+        console.log(this.state);
+
         if (this.props.dataset.length === 0) {
             return (<DataTableEmpty loading={this.props.status === 1} />)
         }
