@@ -4,7 +4,7 @@ import DataCell from './DataCell';
 export default class DataTextCell extends DataCell {
     render() {
         return (
-            <span>{this.getValue()}</span>
+            <td>{this.getValue()}</td>
         )
     }
 }

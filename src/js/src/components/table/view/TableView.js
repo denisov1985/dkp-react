@@ -38,7 +38,6 @@ export default class TableView extends CoreComponent {
     }
 
     onClick = () => {
-        console.log('On Delete All click');
         this.props.onDeleteBatchClick && this.props.onDeleteBatchClick(this);
     }
 

@@ -10,7 +10,6 @@ import DataTable from 'components/data-table/DataTable';
 class Classes extends Component {
 
     render() {
-        console.log(this);
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -34,17 +33,24 @@ class Classes extends Component {
                         </DataTable.Column>
 
                         <DataTable.Column title="User Name" width="300" field="name" sortable="1">
-                            <DataTable.Cell.Text />
+                            <DataTable.Cell.TextEdit onSave={this.onSaveMember} />
                         </DataTable.Column>
 
                         <DataTable.Column title="User Email" field="email" sortable="1">
-                            <DataTable.Cell.Text  />
+                            <DataTable.Cell.TextEdit onSave={this.onSaveMember} />
+                        </DataTable.Column>
+
+                        <DataTable.Column title="Actions" width="300" field="password" sortable="1">
+                            <DataTable.Cell.TextEdit onSave={this.onSaveMember} />
                         </DataTable.Column>
                     </DataTable.Row>
                 </DataTable>
-
             </Layout>
         )
+    }
+
+    onSaveMember = (field, value) => {
+        console.log(field, value);
     }
 
     onSelectTableRow = (props) => {

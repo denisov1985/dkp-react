@@ -12,7 +12,8 @@ export default class DataTableBody extends CoreComponent {
             {this.props.dataset.map((record, index) => {
                 return this.renderElementWithProps({
                     record: record,
-                    key: this.getKey(index)
+                    key: this.getKey(index),
+                    table: this.props.parent
                 }, this.props.column)
             })}
         </tbody>)

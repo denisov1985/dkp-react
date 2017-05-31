@@ -86,6 +86,10 @@ export default class DefaultComponent extends Component {
         this.addClass('disabled');
     }
 
+    getNestedValue(target, defaultValue) {
+
+    }
+
     /**
      * Render children element with props
      * Has different behavior depending on children number

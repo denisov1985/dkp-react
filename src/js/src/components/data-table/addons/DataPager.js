@@ -48,7 +48,6 @@ export default class DataPager extends CoreComponent {
      * @returns {XML}
      */
     renderItem(val, index) {
-        console.log(val);
         if (typeof index === 'undefined') {
             index = val;
         }

@@ -21,9 +21,6 @@ class Member extends Component {
     }
 
     render() {
-
-        console.log(this);
-
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -161,8 +158,6 @@ class Member extends Component {
 
         this.props.actions2.save({});
         return true;
-        console.log('Delete all clicked!!!111');
-        console.log(this.props.member);
         let collection = [];
         this.props.member.find.dataset.map((element, index) => {
             if (element.selected) {
@@ -200,13 +195,11 @@ class Member extends Component {
     }
 
     onEditUserButtonClick = (button) => {
-        console.log(button);
         this.props.actions.get(button.record.data.id);
     }
     }
 
     function mapStateToProps(state) {
-        console.log(state);
         return {
             member: state.memberReducer
         }

@@ -10,12 +10,12 @@ export default class DataTableRow extends CoreComponent {
     render() {
         return (<tr onClick={this.onClick}>
             {this.props.children.map((column, index) => {
-                return (<td key={this.getKey(index)}>
-                    {this.renderElementWithProps({
+                return this.renderElementWithProps({
                         record: this.props.record,
-                        column: column
-                    }, column.props.children)}
-                </td>)
+                        column: column,
+                        key: this.getKey(index),
+                        table: this.props.table
+                    }, column.props.children)
             })}
         </tr>)
     }

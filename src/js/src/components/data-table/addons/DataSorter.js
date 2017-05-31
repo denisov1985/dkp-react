@@ -20,9 +20,9 @@ export default class DataSorter extends CoreComponent {
      */
     render() {
         let {column, table} = {...this.props};
-        let className = 'sorted';
+        let className = '';
         if (column.props.field === table.state.sorter.column) {
-            className += table.state.sorter.order ? ' ascending' : ' descending'
+            className += table.state.sorter.order ? 'sorted ascending' : 'sorted descending'
         }
         return this.renderElementWithProps({
             onClick: this.onSortClick,

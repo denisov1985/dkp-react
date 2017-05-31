@@ -7,6 +7,7 @@ import DataTableColumn from './DataTableColumn';
 import DataTableRow from './DataTableRow';
 import DataTablePanel from './DataTablePanel';
 import DataTextCell from './cells/DataTextCell';
+import DataTextEditCell from './cells/DataTextEditCell';
 import DataPager from './addons/DataPager';
 import DataTableEmpty from './DataTableEmpty';
 import DataSorter from './addons/DataSorter';
@@ -26,7 +27,8 @@ export default class DataTable extends CoreComponent {
                 column: this.props.sortColumn !== undefined ? this.props.sortColumn : null,
                 order: this.props.sortOrder !== undefined ? this.props.sortOrder : null,
                 type: 'default'
-            }
+            },
+            rows: {}
         }
     }
 
@@ -61,16 +63,14 @@ export default class DataTable extends CoreComponent {
      * @returns {XML}
      */
     render() {
-
-        console.log(this.state);
-
+        console.log(this);
         if (this.props.dataset.length === 0) {
             return (<DataTableEmpty loading={this.props.status === 1} />)
         }
         return (
             <table className={this.getClassName()}>
             <DataTableHeader parent={this} columns={this.props.children.props.children} />
-            <DataTableBody dataset={this.getDataset()} column={this.props.children} />
+            <DataTableBody parent={this} dataset={this.getDataset()} column={this.props.children} />
             <DataTableFooter columns={this.props.children.props.children} >
                 <DataPager parent={this} />
             </DataTableFooter>
@@ -83,5 +83,6 @@ DataTable.Row    = DataTableRow;
 DataTable.DataTablePanel = DataTablePanel;
 
 DataTable.Cell = {
-    Text: DataTextCell
+    Text: DataTextCell,
+    TextEdit: DataTextEditCell,
 }
