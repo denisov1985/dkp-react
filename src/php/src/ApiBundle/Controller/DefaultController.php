@@ -50,6 +50,7 @@ abstract class DefaultController extends Controller
      */
     public function saveAction(Request $request)
     {
+        sleep(1);
         $content = $request->getContent();
         if (!empty($content))
         {

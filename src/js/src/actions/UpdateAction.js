@@ -27,8 +27,8 @@ class UpdateAction
                         })
                     })
                         .then(response  => response.json())
-                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'save', payload)))
-                        .catch(payload  => dispatch(ActionHelper.errorAction(entity, 'save', payload)));
+                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'update', payload)))
+                        .catch(payload  => dispatch(ActionHelper.errorAction(entity, 'update', payload)));
                 }
             }
         }

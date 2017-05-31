@@ -34,38 +34,39 @@ export default class DataTextEditCell extends DataCell {
 
     onClick = (e) => {
         e.stopPropagation();
-        let state = this.setNested(this.props.table.state, this.getPath(), true);
+        let state = this.setNested(this.props.table.state, this.getPath('active'), true);
         this.props.table.setState(state);
     };
 
-    getPath() {
-        return ['rows', 'editable', this.props.record.id, this.props.column.props.field, 'active'];
+    getPath(item) {
+        return ['rows', 'editable', this.props.record.id, this.props.column.props.field, item];
     }
 
     isActive() {
-        return this.getNested(this.props.table.state, this.getPath(), false);
+        return this.getNested(this.props.table.state, this.getPath('active'), false);
     }
 
     onClose = (e) => {
-        console.log('a');
-        let state = this.setNested(this.props.table.state, this.getPath(), false);
+        let state = this.setNested(this.props.table.state, this.getPath('active'), false);
         this.props.table.setState(state);
-        console.log('b');
-        console.log(state);
         e.stopPropagation();
     }
 
     onSave = (e) => {
+        let record = {...this.props.record};
+        record[this.props.column.props.field] = this.getNested(this.props.table.state, this.getPath('value'), this.getValue());
+        this.props.onSave(record);
         this.onClose(e);
     }
 
     onChange = (e) => {
-
+        let state = this.setNested(this.props.table.state, this.getPath('value'), e.target.value);
+        this.props.table.setState(state);
     }
 
     renderInput() {
         return (<div className="ui action input fluid">
-            <input onChange={this.onChange} type="text" placeholder="Search..." value={this.state.value} />
+            <input onChange={this.onChange} type="text" placeholder="Search..." value={this.getNested(this.props.table.state, this.getPath('value'), this.getValue())} />
             <button onClick={this.onSave} className="ui icon button primary">
                 <i className="save icon" />
             </button>

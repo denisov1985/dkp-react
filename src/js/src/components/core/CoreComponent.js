@@ -28,7 +28,11 @@ export default class DefaultComponent extends Component {
                 return value;
             result = result[key];
         }
-        return result[keyPath[lastKeyIndex]];
+        if (result[keyPath[lastKeyIndex]] === undefined) {
+            return value;
+        }   else  {
+            return result[keyPath[lastKeyIndex]];
+        }
     }
 
     assign(obj, keyPath, value) {

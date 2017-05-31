@@ -9,15 +9,14 @@ export default class CollectionHelper
         return [...collection];
     }
 
-    static updateData(data, type, collection) {
+    static updateData(data, collection) {
         let found = false;
         collection.map((element, index) => {
-            if (element.data.id === data.id) {
+            if (element.id === data.id) {
                 found = true;
                 for (let i in data) {
-                    collection[index].data[i] = data[i];
+                    collection[index][i] = data[i];
                 }
-                collection[index].status[type] = 2;
             }
         });
         return [...collection];

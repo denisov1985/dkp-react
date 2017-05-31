@@ -32,6 +32,16 @@ class CollectionReducer
                     };
 
                     break;
+
+                case ActionHelper.format('receive', entity, 'update'):
+                    let newState = {...state}
+                    newState.dataset = CollectionHelper.updateData(action.payload.data, state.dataset);
+                    return {
+                        ...state,
+                        dataset: CollectionHelper.updateData(action.payload.data, state.dataset)
+                    };
+
+                    break;
             }
             return state;
         }

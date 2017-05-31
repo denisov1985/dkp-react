@@ -156,6 +156,8 @@ class ReducerFactory
                     break;
 
                 case ActionHelper.format('receive', entity, 'save'):
+                    console.log('receive save');
+                    console.log(state);
                     return {
                         ...state,
                         save: {
