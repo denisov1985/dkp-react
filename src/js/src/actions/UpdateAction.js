@@ -11,11 +11,16 @@ class UpdateAction
 
     create(entity) {
         return {
-            save(data) {
+            save(data, params) {
+                let request = {
+                    data: data,
+                    params: params
+                }
+                if (typeof params === 'undefined') {
+                    params = {};
+                }
                 return (dispatch, getState) => {
-                    dispatch(ActionHelper.requestAction(entity, 'update', {
-                        data: data
-                    }));
+                    dispatch(ActionHelper.requestAction(entity, 'update', request));
                     return fetch('/api/' + entity.replace('_', '/') + '/save/', {
                         method: 'post',
                         headers: {
@@ -27,7 +32,7 @@ class UpdateAction
                         })
                     })
                         .then(response  => response.json())
-                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'update', payload)))
+                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'update', payload, request)))
                         .catch(payload  => dispatch(ActionHelper.errorAction(entity, 'update', payload)));
                 }
             }

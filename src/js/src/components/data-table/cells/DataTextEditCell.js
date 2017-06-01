@@ -55,7 +55,7 @@ export default class DataTextEditCell extends DataCell {
     onSave = (e) => {
         let record = {...this.props.record};
         record[this.props.column.props.field] = this.getNested(this.props.table.state, this.getPath('value'), this.getValue());
-        this.props.onSave(record);
+        this.props.onSave(record, this.props.column.props.field);
         this.onClose(e);
     }
 
@@ -64,8 +64,20 @@ export default class DataTextEditCell extends DataCell {
         this.props.table.setState(state);
     }
 
+    onChangeDummy() {
+        // do nothing
+    }
+
+    renderInputLoading() {
+        console.log(this);
+        return (<div className="ui icon input loading fluid">
+            <input onChange={this.onChangeDummy} type="text" placeholder="Search..." value={this.getNested(this.props.table.state, this.getPath('value'), this.getValue())} />
+                <i className="search icon"></i>
+        </div>)
+    }
+
     renderInput() {
-        return (<div className="ui action input fluid">
+        return (<div className="ui action input fluid loading">
             <input onChange={this.onChange} type="text" placeholder="Search..." value={this.getNested(this.props.table.state, this.getPath('value'), this.getValue())} />
             <button onClick={this.onSave} className="ui icon button primary">
                 <i className="save icon" />
@@ -88,6 +100,10 @@ export default class DataTextEditCell extends DataCell {
     }
 
     renderContent() {
+        let status = this.getNested(this.props.table.props, ['join', this.props.record.id, this.props.column.props.field, 'status'], 0);
+        if (status === 1) {
+            return this.renderInputLoading();
+        }
         if (this.isActive()) {
             return this.renderInput();
         }

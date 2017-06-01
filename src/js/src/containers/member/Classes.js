@@ -7,6 +7,7 @@ import UpdateAction from '../../actions/UpdateAction';
 import Layout from '../Layout';
 import Button from 'components/button/Button';
 import DataTable from 'components/data-table/DataTable';
+import ReducerHelper from '../../utils/ReducerHelper';
 
 class Classes extends Component {
 
@@ -28,6 +29,7 @@ class Classes extends Component {
                 <DataTable
                     dataset={this.props.member.collection.dataset}
                     status={this.props.member.collection.status}
+                    join={this.props.member.collection.join}
                     pagination="default"
                 >
                     <DataTable.Row onClick={this.onSelectTableRow}>
@@ -48,12 +50,24 @@ class Classes extends Component {
                         </DataTable.Column>
                     </DataTable.Row>
                 </DataTable>
+
+                Data: {this.getData()}
             </Layout>
         )
     }
 
-    onSaveMember = (record) => {
-        this.props.actions.update.save(record);
+    getData = () => {
+        return ReducerHelper.getNested(this.props.member.collection, ['join', '46', 'name', 'status'], 'NONE')
+    }
+
+    onSaveMember = (record, field) => {
+        let data = {
+            id: record.id
+        }
+        data[field] = record[field];
+        this.props.actions.update.save(data, {
+            field: field
+        });
     }
 
     onSelectTableRow = (props) => {

@@ -21,10 +21,12 @@ export default class ActionHelper
      * @param payload
      * @returns {{type: string, payload: *}}
      */
-    static receiveAction(entity, type, payload) {
+    static receiveAction(entity, type, payload, request) {
+        request || (request = {});
         return {
             type: ['RECEIVE', entity.toUpperCase(), type.toUpperCase()].join('_'),
-            payload: payload
+            payload: payload,
+            request: request
         };
     }
 
