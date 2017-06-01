@@ -21,10 +21,9 @@ export default class CoreCell extends CoreComponent {
 
     /**
      * Abstract class don't render
-     * @returns {null}
+     * @returns {XML}
      */
     render() {
-        throw new Error('Should not be rendered')
-        return null;
+        return (<td className="center aligned">{this.props.children}</td>);
     }
 }

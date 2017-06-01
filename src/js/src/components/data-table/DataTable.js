@@ -7,6 +7,7 @@ import DataTableColumn from './DataTableColumn';
 import DataTableRow from './DataTableRow';
 import DataTablePanel from './DataTablePanel';
 import DataTextCell from './cells/DataTextCell';
+import DataCell from './cells/DataCell';
 import DataTextEditCell from './cells/DataTextEditCell';
 import DataPager from './addons/DataPager';
 import DataTableEmpty from './DataTableEmpty';
@@ -84,6 +85,7 @@ DataTable.Row    = DataTableRow;
 DataTable.DataTablePanel = DataTablePanel;
 
 DataTable.Cell = {
+    Default: DataCell,
     Text: DataTextCell,
     TextEdit: DataTextEditCell,
 }

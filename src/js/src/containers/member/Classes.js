@@ -8,6 +8,7 @@ import Layout from '../Layout';
 import Button from 'components/button/Button';
 import DataTable from 'components/data-table/DataTable';
 import ReducerHelper from '../../utils/ReducerHelper';
+import Checkbox from 'components/controls/Checkbox';
 
 class Classes extends Component {
 
@@ -33,6 +34,12 @@ class Classes extends Component {
                     pagination="default"
                 >
                     <DataTable.Row onClick={this.onSelectTableRow}>
+                        <DataTable.Column title="" width="40" sortable="1" field="id">
+                            <DataTable.Cell.Default>
+                                <Checkbox />
+                            </DataTable.Cell.Default>
+                        </DataTable.Column>
+
                         <DataTable.Column title="ID" width="50" sortable="1" field="id">
                             <DataTable.Cell.Text />
                         </DataTable.Column>
@@ -51,7 +58,39 @@ class Classes extends Component {
                     </DataTable.Row>
                 </DataTable>
 
+
                 Data: {this.getData()}
+
+                <DataTable
+                    dataset={this.props.member.collection.dataset}
+                    status={this.props.member.collection.status}
+                    join={this.props.member.collection.join}
+                    pagination="default"
+                >
+                    <DataTable.Row onClick={this.onSelectTableRow}>
+                        <DataTable.Column title="" width="40" sortable="1" field="id">
+                            <DataTable.Cell.Default>
+                                <Checkbox />
+                            </DataTable.Cell.Default>
+                        </DataTable.Column>
+
+                        <DataTable.Column title="ID" width="50" sortable="1" field="id">
+                            <DataTable.Cell.Text />
+                        </DataTable.Column>
+
+                        <DataTable.Column title="User Name" width="300" field="name" sortable="1">
+                            <DataTable.Cell.TextEdit onSave={this.onSaveMember} />
+                        </DataTable.Column>
+
+                        <DataTable.Column title="User Email" field="email" sortable="1">
+                            <DataTable.Cell.TextEdit onSave={this.onSaveMember} />
+                        </DataTable.Column>
+
+                        <DataTable.Column title="Actions" width="300" field="password" sortable="1">
+                            <DataTable.Cell.TextEdit onSave={this.onSaveMember} />
+                        </DataTable.Column>
+                    </DataTable.Row>
+                </DataTable>
             </Layout>
         )
     }
