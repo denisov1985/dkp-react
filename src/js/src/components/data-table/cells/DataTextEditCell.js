@@ -17,7 +17,8 @@ export default class DataTextEditCell extends DataCell {
      * @param nextProps
      */
     componentWillReceiveProps(nextProps) {
-
+        //console.log(this.getValue());
+        //console.log(this.getNested(this.props.table.state, this.getPath('value'), this.getValue()));
     }
 
     onMouseEnter = () => {
@@ -46,17 +47,22 @@ export default class DataTextEditCell extends DataCell {
         return this.getNested(this.props.table.state, this.getPath('active'), false);
     }
 
+
+
     onClose = (e) => {
         let state = this.setNested(this.props.table.state, this.getPath('active'), false);
-        this.props.table.setState(state);
+        let stateVal = this.setNested(state, this.getPath('value'), this.getValue());
+        this.props.table.setState(stateVal);
         e.stopPropagation();
     }
 
     onSave = (e) => {
+        e.stopPropagation();
         let record = {...this.props.record};
         record[this.props.column.props.field] = this.getNested(this.props.table.state, this.getPath('value'), this.getValue());
         this.props.onSave(record, this.props.column.props.field);
-        this.onClose(e);
+        let state = this.setNested(this.props.table.state, this.getPath('active'), false);
+        this.props.table.setState(state);
     }
 
     onChange = (e) => {

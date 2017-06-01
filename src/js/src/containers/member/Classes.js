@@ -12,7 +12,7 @@ import ReducerHelper from '../../utils/ReducerHelper';
 class Classes extends Component {
 
     render() {
-        console.log(this);
+        console.log('Re-render main');
 
         return (
             <Layout title="Users Management" router={this.props.router}>
