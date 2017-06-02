@@ -37,7 +37,7 @@ class Classes extends Component {
                     <DataTable.Row onClick={this.onSelectTableRow}>
                         <DataTable.Column title="" width="40" sortable="1" field="id">
                             <DataTable.Cell.Default>
-                                <Checkbox />
+                                <DataTable.Controls.Checkbox />
                             </DataTable.Cell.Default>
                         </DataTable.Column>
 

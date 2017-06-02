@@ -3,10 +3,9 @@ import CoreComponent from '../core/CoreComponent';
 
 export default class Checkbox extends CoreComponent {
 
-    /**
-     * Should override
-     */
-    onChange = () => {}
+    onChange = () => {
+        this.props.onChange(this);
+    }
 
     /**
      * Abstract class don't render
@@ -14,7 +13,7 @@ export default class Checkbox extends CoreComponent {
      */
     render() {
         return (<div style={{width: '17px'}} className="ui checkbox">
-            <input onChange={this.onChange} checked={false} type="checkbox" />
+            <input onChange={this.onChange} checked={this.props.checked} type="checkbox" />
             <label></label>
         </div>);
     }

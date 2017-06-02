@@ -24,6 +24,10 @@ export default class CoreCell extends CoreComponent {
      * @returns {XML}
      */
     render() {
-        return (<td className="center aligned">{this.props.children}</td>);
+        return (<td className="center aligned">{ this.renderElementWithProps({
+            record: this.props.record,
+            column: this.props.column,
+            table: this.props.table
+        }, this.props.children)}</td>);
     }
 }
