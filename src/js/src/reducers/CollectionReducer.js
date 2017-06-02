@@ -41,7 +41,7 @@ class CollectionReducer
                 case ActionHelper.format('request', entity, 'update'):
                     return {
                         ...state,
-                        join: ReducerHelper.setNested(state.join, this.getPath(action.payload.data.id, action.payload.params.field), ActionFactory.STATUS_FETCHING)
+                        join: ReducerHelper.setNested(state.join, this.getPath(action.payload.data.id, action.payload.params.field, action.payload.params.type), ActionFactory.STATUS_FETCHING)
                     };
                     break;
 
@@ -51,7 +51,7 @@ class CollectionReducer
                     return {
                         ...state,
                         dataset: CollectionHelper.updateData(action.payload.data, state.dataset),
-                        join: ReducerHelper.setNested(state.join, this.getPath(action.request.data.id, action.request.params.field), ActionFactory.STATUS_COMPLETE)
+                        join: ReducerHelper.setNested(state.join, this.getPath(action.request.data.id, action.request.params.field, action.request.params.type), ActionFactory.STATUS_COMPLETE)
                     };
 
                     break;
@@ -60,8 +60,8 @@ class CollectionReducer
         }
     }
 
-    getPath(id, field) {
-        return [id, field, 'status'];
+    getPath(id, field, type) {
+        return [id, field, type, 'status'];
     }
 }
 

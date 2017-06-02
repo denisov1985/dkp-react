@@ -14,6 +14,7 @@ class Classes extends Component {
 
     render() {
         console.log('Re-render main');
+        console.log(DataTable.Controls);
 
         return (
             <Layout title="Users Management" router={this.props.router}>
@@ -59,18 +60,17 @@ class Classes extends Component {
                 </DataTable>
 
 
-                Data: {this.getData()}
-
                 <DataTable
                     dataset={this.props.member.collection.dataset}
                     status={this.props.member.collection.status}
                     join={this.props.member.collection.join}
                     pagination="default"
+                    name="table1"
                 >
                     <DataTable.Row onClick={this.onSelectTableRow}>
                         <DataTable.Column title="" width="40" sortable="1" field="id">
                             <DataTable.Cell.Default>
-                                <Checkbox />
+                                <DataTable.Controls.Checkbox />
                             </DataTable.Cell.Default>
                         </DataTable.Column>
 
@@ -95,17 +95,14 @@ class Classes extends Component {
         )
     }
 
-    getData = () => {
-        return ReducerHelper.getNested(this.props.member.collection, ['join', '46', 'name', 'status'], 'NONE')
-    }
-
-    onSaveMember = (record, field) => {
+    onSaveMember = (record, field, type) => {
         let data = {
             id: record.id
         }
         data[field] = record[field];
         this.props.actions.update.save(data, {
-            field: field
+            field: field,
+            type: type
         });
     }
 

@@ -6,9 +6,7 @@ export default class DataTextEditCell extends DataCell {
     constructor(props) {
         super(props);
         this.state = {
-            active: false,
-            editable: false,
-            value: this.getValue()
+            active: false
         }
     }
 
@@ -16,10 +14,7 @@ export default class DataTextEditCell extends DataCell {
      * On new props
      * @param nextProps
      */
-    componentWillReceiveProps(nextProps) {
-        //console.log(this.getValue());
-        //console.log(this.getNested(this.props.table.state, this.getPath('value'), this.getValue()));
-    }
+    componentWillReceiveProps(nextProps) {}
 
     onMouseEnter = () => {
         this.setState({
@@ -60,7 +55,7 @@ export default class DataTextEditCell extends DataCell {
         e.stopPropagation();
         let record = {...this.props.record};
         record[this.props.column.props.field] = this.getNested(this.props.table.state, this.getPath('value'), this.getValue());
-        this.props.onSave(record, this.props.column.props.field);
+        this.props.onSave(record, this.props.column.props.field, this.props.table.props.name || 'default');
         let state = this.setNested(this.props.table.state, this.getPath('active'), false);
         this.props.table.setState(state);
     }
@@ -75,7 +70,6 @@ export default class DataTextEditCell extends DataCell {
     }
 
     renderInputLoading() {
-        console.log(this);
         return (<div className="ui icon input loading fluid">
             <input onChange={this.onChangeDummy} type="text" placeholder="Search..." value={this.getNested(this.props.table.state, this.getPath('value'), this.getValue())} />
                 <i className="search icon"></i>
@@ -106,7 +100,7 @@ export default class DataTextEditCell extends DataCell {
     }
 
     renderContent() {
-        let status = this.getNested(this.props.table.props, ['join', this.props.record.id, this.props.column.props.field, 'status'], 0);
+        let status = this.getNested(this.props.table.props, ['join', this.props.record.id, this.props.column.props.field, this.props.table.props.name || 'default', 'status'], 0);
         if (status === 1) {
             return this.renderInputLoading();
         }

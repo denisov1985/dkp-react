@@ -13,6 +13,11 @@ import DataPager from './addons/DataPager';
 import DataTableEmpty from './DataTableEmpty';
 import DataSorter from './addons/DataSorter';
 
+/**
+ * Controls
+ */
+import DataCheckbox from './controls/DataCheckbox';
+
 export default class DataTable extends CoreComponent {
 
     /**
@@ -88,4 +93,8 @@ DataTable.Cell = {
     Default: DataCell,
     Text: DataTextCell,
     TextEdit: DataTextEditCell,
+}
+
+DataTable.Controls = {
+    Checkbox: DataCheckbox
 }

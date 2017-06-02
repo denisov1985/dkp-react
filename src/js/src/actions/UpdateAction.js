@@ -19,6 +19,9 @@ class UpdateAction
                 if (typeof params === 'undefined') {
                     params = {};
                 }
+                if (typeof params.type === 'undefined') {
+                    params.type = 'default';
+                }
                 return (dispatch, getState) => {
                     dispatch(ActionHelper.requestAction(entity, 'update', request));
                     return fetch('/api/' + entity.replace('_', '/') + '/save/', {
