@@ -5,6 +5,7 @@ export default class DefaultComponent extends Component {
     constructor(props) {
         super(props);
         this.classData = [];
+        this.styleData = {};
     }
 
     onClick = () => {
@@ -68,23 +69,32 @@ export default class DefaultComponent extends Component {
         }
     }
 
+    addStyle(styleKey, styleValue) {
+        this.styleData[styleKey] = styleValue;
+    }
+
     getElementClass() {
         return '';
     }
 
     reset() {
         this.classData = [];
+        this.styleData = {};
     }
 
     buildClass() {
-        if (this.props.condition !== undefined) {
-            this.props.condition(this);
-        }
         return [];
+    }
+
+    buildStyle() {
+        return {};
     }
 
     getClass() {
         this.reset();
+        if (this.props.condition !== undefined) {
+            this.props.condition(this);
+        }
         this.buildClass();
         return [
             this.classData.join(' '),
@@ -94,6 +104,10 @@ export default class DefaultComponent extends Component {
             this.getPosition(),
             this.getElementClass()
         ].join(' ').trim();
+    }
+
+    getStyle() {
+        return this.styleData;
     }
 
     getClassName = () => this.getClass();

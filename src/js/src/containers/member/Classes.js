@@ -5,10 +5,11 @@ import ActionFactory from '../../actions/ActionFactory';
 import CollectionAction from '../../actions/CollectionAction';
 import UpdateAction from '../../actions/UpdateAction';
 import Layout from '../Layout';
-import Button from 'components/button/Button';
+import Button from 'components/controls/Button';
 import DataTable from 'components/data-table/DataTable';
 import ReducerHelper from '../../utils/ReducerHelper';
 import Checkbox from 'components/controls/Checkbox';
+import Modal from 'components/modal/Modal';
 
 class Classes extends Component {
 
@@ -27,6 +28,8 @@ class Classes extends Component {
                 </h2>
 
                 <Button onClick={this.pressMeClick}>Press me</Button>
+
+                <Modal visible={true} />
 
                 <DataTable
                     dataset={this.props.member.collection.dataset}
@@ -57,9 +60,10 @@ class Classes extends Component {
                             <DataTable.Cell.TextEdit onSave={this.onSaveMember} />
                         </DataTable.Column>
 
-                        <DataTable.Column title="" width="100" field="id">
+                        <DataTable.Column title="" width="85" field="id">
                             <DataTable.Cell.Default>
-                                <Button>Edit</Button>
+                                <Button icon="write" color="primary" size="mini" />
+                                <Button icon="trash" color="negative" size="mini" />
                             </DataTable.Cell.Default>
                         </DataTable.Column>
                     </DataTable.Row>

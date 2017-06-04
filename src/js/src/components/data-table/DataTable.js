@@ -41,7 +41,7 @@ export default class DataTable extends CoreComponent {
 
     buildClass() {
         super.buildClass();
-        this.addClass('ui celled table sortable small');
+        this.addClass('ui celled table sortable small blue');
     }
 
     /**

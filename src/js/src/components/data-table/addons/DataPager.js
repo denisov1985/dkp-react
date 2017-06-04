@@ -53,7 +53,7 @@ export default class DataPager extends CoreComponent {
         }
         let className = "item";
         let style = {};
-        (this.state.offset === val - 1) && (className += ' active') && (style = { backgroundColor: 'rgb(231, 233, 234)' });
+        (this.state.offset === val - 1) && (className += ' active') && (style = {color: 'rgba(40, 40, 40, 0.3)' });
         return (<a key={index} style={style} onClick={this.onItemClick.bind(this, val)} className={className}>{val}</a>);
     }
 
