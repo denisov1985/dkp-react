@@ -29,7 +29,17 @@ class Classes extends Component {
 
                 <Button onClick={this.pressMeClick}>Press me</Button>
 
-                <Modal visible={true} />
+                <Modal visible={true}>
+                    <Modal.Header>Ololo</Modal.Header>
+                    <Modal.Body >
+                        lalala
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button position="left" color="negative" icon="trash">Delete</Button>
+                        <Button icon="remove">Cancel</Button>
+                        <Button color="positive" icon="checkmark">Save</Button>
+                    </Modal.Footer>
+                </Modal>
 
                 <DataTable
                     dataset={this.props.member.collection.dataset}
