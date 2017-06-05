@@ -23,7 +23,6 @@ class Classes extends Component {
 
     render() {
         console.log(this);
-
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -37,7 +36,7 @@ class Classes extends Component {
                 <Button onClick={this.pressMeClick}>Press me</Button>
 
                 <ModalDetails visible={this.props.member.details.status > 0} onClose={this.onCloseModal} onSave={this.onSaveModal} onDelete={this.onDeleteModal}>
-                    <Form dataset={{}}>
+                    <Form dataset={this.props.member.details.dataset}>
                         <Form.Row title="User Name">
                             <Form.Input.Text name="user.name" />
                         </Form.Row>

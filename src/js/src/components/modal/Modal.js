@@ -88,7 +88,7 @@ export default class Modal extends CoreComponent {
      */
     render = () => (
         <Dimmer visible={this.state.visible} onClick={this.hideModal}>
-            <div className={this.getClass()} style={this.getStyle()}>
+            <div onClick={this.stopPropagate} className={this.getClass()} style={this.getStyle()}>
                 {this.props.children}
             </div>
         </Dimmer>

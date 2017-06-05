@@ -41,6 +41,17 @@ class DetailsAction
                     request: {}
                 };
             },
+
+            update(field, value) {
+                return {
+                    type: ActionHelper.format('update', entity, 'details'),
+                    payload: {
+                        field: field,
+                        value: value
+                    },
+                    request: {}
+                };
+            }
         }
     }
 }
