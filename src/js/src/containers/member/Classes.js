@@ -36,7 +36,7 @@ class Classes extends Component {
                 <Button onClick={this.pressMeClick}>Press me</Button>
 
                 <ModalDetails visible={this.props.member.details.status > 0} onClose={this.onCloseModal} onSave={this.onSaveModal} onDelete={this.onDeleteModal}>
-                    <Form dataset={this.props.member.details.dataset}>
+                    <Form handler={this.props.actions.details.update} dataset={this.props.member.details.dataset}>
                         <Form.Row title="User Name">
                             <Form.Input.Text name="user.name" />
                         </Form.Row>

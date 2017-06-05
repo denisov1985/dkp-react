@@ -25,7 +25,6 @@ class DetailsReducer
                     break;
 
                 case ActionHelper.format('receive', entity, 'details'):
-                    console.log('okoko');
                     return {
                         ...state,
                         dataset: action.payload,
@@ -38,6 +37,15 @@ class DetailsReducer
                         ...state,
                         dataset: {},
                         status: ActionFactory.STATUS_EMPTY
+                    };
+                    break;
+
+                case ActionHelper.format('update', entity, 'details'):
+                    let dataset = {...state.dataset};
+                    dataset[action.payload.field] = action.payload.value;
+                    return {
+                        ...state,
+                        dataset: dataset
                     };
                     break;
             }

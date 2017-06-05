@@ -56,7 +56,7 @@ export default class Element extends CoreComponent {
         }   else  {
             state[this.getFieldName()] = e.target.value;
         }
-
+        this.props.form.props.handler(this.getFieldName(), e.target.value);
         this.props.form.setState(state);
     }
 
