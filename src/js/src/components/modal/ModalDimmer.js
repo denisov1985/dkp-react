@@ -23,13 +23,18 @@ export default class ModalDimmer extends CoreComponent {
         }
     }
 
+    onClick = (e) => {
+        console.log('dimmer click');
+        this.props.onClick();
+    }
+
     /**
      * Render
      * @returns {XML}
      */
     render() {
         return (
-            <div className={this.getClass()} style={this.getStyle()}>
+            <div onClick={this.onClick} className={this.getClass()} style={this.getStyle()}>
                 {this.props.children}
             </div>
         )

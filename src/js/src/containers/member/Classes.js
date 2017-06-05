@@ -7,11 +7,16 @@ import UpdateAction from '../../actions/UpdateAction';
 import Layout from '../Layout';
 import Button from 'components/controls/Button';
 import DataTable from 'components/data-table/DataTable';
-import ReducerHelper from '../../utils/ReducerHelper';
-import Checkbox from 'components/controls/Checkbox';
-import Modal from 'components/modal/Modal';
+import ModalDetails from 'components/modal/common/ModalDetails';
+import Form from '../../components/form/Form'
 
 class Classes extends Component {
+
+    onCloseModal = () => {};
+
+    onSaveModal = () => {};
+
+    onDeleteModal = () => {};
 
     render() {
         console.log('Re-render main');
@@ -29,17 +34,16 @@ class Classes extends Component {
 
                 <Button onClick={this.pressMeClick}>Press me</Button>
 
-                <Modal visible={true}>
-                    <Modal.Header>Ololo</Modal.Header>
-                    <Modal.Body >
-                        lalala
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button position="left" color="negative" icon="trash">Delete</Button>
-                        <Button icon="remove">Cancel</Button>
-                        <Button color="positive" icon="checkmark">Save</Button>
-                    </Modal.Footer>
-                </Modal>
+                <ModalDetails onClose={this.onCloseModal} onSave={this.onSaveModal} onDelete={this.onDeleteModal}>
+                    <Form dataset={{}}>
+                        <Form.Row title="User Name">
+                            <Form.Input.Text name="user.name" />
+                        </Form.Row>
+                        <Form.Row title="User Email">
+                            <Form.Input.Text name="user.email" />
+                        </Form.Row>
+                    </Form>
+                </ModalDetails>
 
                 <DataTable
                     dataset={this.props.member.collection.dataset}

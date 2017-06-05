@@ -2,6 +2,10 @@ import React, {Component} from 'react'
 
 export default class DefaultComponent extends Component {
 
+    /**
+     * Constructor
+     * @param props
+     */
     constructor(props) {
         super(props);
         this.classData = [];
@@ -107,6 +111,8 @@ export default class DefaultComponent extends Component {
     }
 
     getStyle() {
+        this.reset();
+        this.buildStyle();
         return this.styleData;
     }
 

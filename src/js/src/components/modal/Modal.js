@@ -4,7 +4,6 @@ import Body from './ModalBody';
 import Header from './ModalHeader';
 import Footer from './ModalFooter';
 import Dimmer from './ModalDimmer';
-import Loader from '../loader/Loader';
 
 export default class Modal extends CoreComponent {
 
@@ -44,7 +43,12 @@ export default class Modal extends CoreComponent {
         this.updateState(nextProps);
     }
 
-    hideModal = (e) => {
+    /**
+     * Hide modal
+     * @param e
+     * @returns {boolean}
+     */
+    hideModal = () => {
         if (this.props.loading) {
             return true;
         }
@@ -56,39 +60,40 @@ export default class Modal extends CoreComponent {
         this.setState({
             visible: false
         });
-    }
+    };
 
+    /**
+     * Build class
+     */
     buildClass() {
         super.buildClass();
-        this.addClass("ui standard test modal transition");
-        if(this.state.visible) {
+        this.addClass("ui standard test modal transition small");
+        if (this.state.visible) {
             this.addClass("visible active")
         }
     }
 
+    /**
+     * Build style
+     */
     buildStyle() {
         if (this.props.visible) {
             this.addStyle('display', 'block !important');
-            this.addStyle('marginTop', '-234px')
+            this.addStyle('marginTop', '-320px')
         }
     }
 
+    /**
+     * Render
+     */
     render = () => (
-        <Dimmer visible={this.props.visible}>
-            <div className={this.getClass()} style={this.buildStyle()}>
+        <Dimmer visible={this.state.visible} onClick={this.hideModal}>
+            <div className={this.getClass()} style={this.getStyle()}>
                 {this.props.children}
             </div>
         </Dimmer>
-);
+    );
 
-render1() {
-    return (<div onClick={this.hideModal} className={this.getClass()}>
-    <div onClick={this.stopPropagate} className="ui animating drop in transition small second coupled modal visible  active transition-height" style={{top: 20 + '%'}} >
-    {this.props.children}
-    <Loader visible={this.props.loading} />
-    </div>
-    </div>)
-}
 }
 
 Modal.Header = Header;
