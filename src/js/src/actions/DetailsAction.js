@@ -11,6 +11,7 @@ class DetailsAction
 
     create(entity) {
         return {
+
             get(id, params) {
                 let request = {
                     id: id,
@@ -23,14 +24,22 @@ class DetailsAction
                     params.type = 'default';
                 }
                 return (dispatch, getState) => {
-                    dispatch(ActionHelper.requestAction(entity, 'get', {
+                    dispatch(ActionHelper.requestAction(entity, 'details', {
                         id: id
                     }));
                     return fetch('/api/' + entity.replace('_', '/') + '/' + id)
                         .then(response  => response.json())
-                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'get', payload, request)))
-                        .catch(payload => dispatch(ActionHelper.errorAction(entity, 'get', payload)));
+                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'details', payload, request)))
+                        .catch(payload => dispatch(ActionHelper.errorAction(entity, 'details', payload)));
                 }
+            },
+
+            unset() {
+                return {
+                    type: ActionHelper.format('unset', entity, 'details'),
+                    payload: {},
+                    request: {}
+                };
             },
         }
     }

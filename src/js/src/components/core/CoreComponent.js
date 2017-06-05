@@ -12,12 +12,6 @@ export default class DefaultComponent extends Component {
         this.styleData = {};
     }
 
-    onClick = () => {
-        if (this.props.onClick !== undefined) {
-            this.props.onClick(this.props);
-        }
-    }
-
     setNested(obj, keyPath, value) {
         let result = {...obj}
         this.assign(result, keyPath, value);

@@ -29,6 +29,10 @@ export default class Button extends CoreComponent {
         this.addClass('disabled');
     }
 
+    onClick = (e) => {
+        this.props.onClick(e, this);
+    }
+
     render() {
         return (<button onClick={this.onClick} className={this.getClass()} type="button">{this.getIcon()}{this.props.children}</button>)
     }

@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import ActionFactory from '../../actions/ActionFactory';
 import CollectionAction from '../../actions/CollectionAction';
 import UpdateAction from '../../actions/UpdateAction';
+import DetailsAction from '../../actions/DetailsAction';
 import Layout from '../Layout';
 import Button from 'components/controls/Button';
 import DataTable from 'components/data-table/DataTable';
@@ -12,15 +13,16 @@ import Form from '../../components/form/Form'
 
 class Classes extends Component {
 
-    onCloseModal = () => {};
+    onCloseModal = () => {
+        this.props.actions.details.unset();
+    };
 
     onSaveModal = () => {};
 
     onDeleteModal = () => {};
 
     render() {
-        console.log('Re-render main');
-        console.log(DataTable.Controls);
+        console.log(this);
 
         return (
             <Layout title="Users Management" router={this.props.router}>
@@ -34,7 +36,7 @@ class Classes extends Component {
 
                 <Button onClick={this.pressMeClick}>Press me</Button>
 
-                <ModalDetails onClose={this.onCloseModal} onSave={this.onSaveModal} onDelete={this.onDeleteModal}>
+                <ModalDetails visible={this.props.member.details.status > 0} onClose={this.onCloseModal} onSave={this.onSaveModal} onDelete={this.onDeleteModal}>
                     <Form dataset={{}}>
                         <Form.Row title="User Name">
                             <Form.Input.Text name="user.name" />
@@ -76,17 +78,18 @@ class Classes extends Component {
 
                         <DataTable.Column title="" width="85" field="id">
                             <DataTable.Cell.Default>
-                                <Button icon="write" color="primary" size="mini" />
+                                <Button onClick={this.onGetMemberDetails} icon="write" color="primary" size="mini" />
                                 <Button icon="trash" color="negative" size="mini" />
                             </DataTable.Cell.Default>
                         </DataTable.Column>
                     </DataTable.Row>
                 </DataTable>
-
-
-
             </Layout>
         )
+    }
+
+    onGetMemberDetails = (e, button) => {
+        this.props.actions.details.get(button.props.record.id);
     }
 
     onSaveMember = (record, field, type) => {
@@ -105,6 +108,10 @@ class Classes extends Component {
         console.log(props);
     }
 
+    componentDidMount = () => {
+        this.props.actions.collection.findAll();
+    }
+
     pressMeClick = (e) => {
         this.props.actions.collection.findAll();
     }
@@ -120,7 +127,8 @@ function mapDispatchToProps(dispatch) {
     return {
         actions: {
             collection: bindActionCreators(CollectionAction.create('member'), dispatch),
-            update: bindActionCreators(UpdateAction.create('member'), dispatch)
+            update: bindActionCreators(UpdateAction.create('member'), dispatch),
+            details: bindActionCreators(DetailsAction.create('member'), dispatch)
         }
     }
 }

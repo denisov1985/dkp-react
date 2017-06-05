@@ -25,6 +25,9 @@ export default class ModalDimmer extends CoreComponent {
 
     onClick = (e) => {
         console.log('dimmer click');
+        console.log(e);
+        e.stopPropagation();
+
         this.props.onClick();
     }
 
