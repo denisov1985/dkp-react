@@ -11,11 +11,10 @@ class DetailsReducer
         };
 
         return (state = initialState, action) => {
-
-            console.log(action);
-            console.log( ActionHelper.format('receive', entity, 'details'));
-
             switch (action.type) {
+                /**
+                 * Request details
+                 */
                 case ActionHelper.format('request', entity, 'details'):
                     return {
                         ...state,
@@ -24,6 +23,9 @@ class DetailsReducer
                     };
                     break;
 
+                /**
+                 * Receive details
+                  */
                 case ActionHelper.format('receive', entity, 'details'):
                     return {
                         ...state,
@@ -32,6 +34,9 @@ class DetailsReducer
                     };
                     break;
 
+                /**
+                 * Unset details
+                  */
                 case ActionHelper.format('unset', entity, 'details'):
                     return {
                         ...state,
@@ -40,6 +45,9 @@ class DetailsReducer
                     };
                     break;
 
+                /**
+                 * Update details
+                  */
                 case ActionHelper.format('update', entity, 'details'):
                     let dataset = {...state.dataset};
                     dataset[action.payload.field] = action.payload.value;
@@ -49,6 +57,9 @@ class DetailsReducer
                     };
                     break;
 
+                /**
+                 * Delete details
+                  */
                 case ActionHelper.format('receive', entity, 'delete'):
                     if (action.request.data.id !== state.dataset.id) {
                         return state;
