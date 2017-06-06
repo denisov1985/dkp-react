@@ -134,7 +134,8 @@ export default class DataPager extends CoreComponent {
      * @returns {XML}
      */
     render() {
-        return (<div className="ui right floated pagination menu">
+        return (
+         <div className="ui right floated pagination menu">
             {this.renderPrevious()}
             {this.getPages().map((page, index) => this.renderItem(page, index))}
             {this.renderNext()}

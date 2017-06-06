@@ -77,6 +77,11 @@ export default class DataTable extends CoreComponent {
             <DataTableHeader parent={this} columns={this.props.children.props.children} />
             <DataTableBody parent={this} dataset={this.getDataset()} column={this.props.children} />
             <DataTableFooter columns={this.props.children.props.children} >
+                <div className="ui secondary  menu left floated">
+                    <a className="item">
+                        Showing {this.state.min} to {this.state.max ? this.state.max : this.props.dataset.length} from {this.props.dataset.length} records
+                    </a>
+                </div>
                 <DataPager parent={this} />
             </DataTableFooter>
         </table>)

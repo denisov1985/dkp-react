@@ -10,11 +10,18 @@ import Layout from '../Layout';
 import Button from 'components/controls/Button';
 import DataTable from 'components/data-table/DataTable';
 import ModalDetails from 'components/modal/common/ModalDetails';
+import ModalDialog from 'components/modal/common/ModalDialog';
 import Form from '../../components/form/Form'
 
 class Classes extends Component {
 
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            confirmDelete: false,
+            record: {}
+        }
+    }
 
     onCloseModal = () => {
         this.props.actions.details.unset();
@@ -40,8 +47,6 @@ class Classes extends Component {
                         <div className="sub header">Manage your guild members, roles and settings</div>
                     </div>
                 </h2>
-
-
 
                 <Button onClick={this.pressMeClick}>Press me</Button>
 
@@ -93,13 +98,41 @@ class Classes extends Component {
                         <DataTable.Column title="" width="85" field="id">
                             <DataTable.Cell.Default>
                                 <Button onClick={this.onGetMemberDetails} icon="write" color="primary" size="mini" />
-                                <Button icon="trash" color="negative" size="mini" />
+                                <Button onClick={this.onDeleteMemberDetails} icon="trash" color="negative" size="mini" />
                             </DataTable.Cell.Default>
                         </DataTable.Column>
                     </DataTable.Row>
                 </DataTable>
+
+                <ModalDialog
+                    onConfirm={this.onDialogConfirm}
+                    onCancel={this.onDialogCancel}
+                    visible={this.state.confirmDelete}
+                    title="Are you sure want to delete?" />
+
             </Layout>
         )
+    }
+
+    onDialogConfirm = () => {
+        this.props.actions.delete.delete(this.state.record);
+        this.setState({
+            confirmDelete: false
+        })
+    }
+
+    onDialogCancel = () => {
+        this.setState({
+            confirmDelete: false
+        })
+    }
+
+    onDeleteMemberDetails = (e, button) => {
+        console.log(button);
+        this.setState({
+            confirmDelete: true,
+            record: button.props.record
+        })
     }
 
     onGetMemberDetails = (e, button) => {

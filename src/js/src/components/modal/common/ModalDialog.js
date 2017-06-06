@@ -8,7 +8,7 @@ export default class ModalDialog extends CoreComponent {
 
     render() {
         return (
-            <Modal order="20" top="-20%" width="450px" visible={this.props.visible} key="1">
+            <Modal onClose={this.props.onCancel} order="20" top="-20%" width="450px" visible={this.props.visible} key="1">
                 <Modal.Header>{this.getProp('title')}</Modal.Header>
                 <Modal.Body >
                     {this.props.children}
