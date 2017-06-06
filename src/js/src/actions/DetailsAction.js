@@ -12,6 +12,14 @@ class DetailsAction
     create(entity) {
         return {
 
+            add() {
+                return {
+                    type: ActionHelper.format('receive', entity, 'details'),
+                    payload: {},
+                    request: {}
+                };
+            },
+
             get(id, params) {
                 let request = {
                     id: id,

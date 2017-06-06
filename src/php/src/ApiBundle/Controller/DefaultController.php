@@ -148,6 +148,7 @@ abstract class DefaultController extends Controller
 
     protected function _createEntity() {
         $entity = $this->_getEntityName();
+        $entity = 'ApiBundle\\Entity\\' . $entity;
         return new $entity();
     }
 }

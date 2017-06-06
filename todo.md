@@ -4,3 +4,4 @@
 [DONE] 2. Split big action to smaller one
 3. Decompose DataTable, use inheritance
 4. Create DataTable control column
+5. Create add record

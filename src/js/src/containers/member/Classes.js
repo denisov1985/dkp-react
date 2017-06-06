@@ -48,7 +48,8 @@ class Classes extends Component {
                     </div>
                 </h2>
 
-                <Button onClick={this.pressMeClick}>Press me</Button>
+                <Button onClick={this.pressMeClick}>Refresh</Button>
+                <Button color="primary" onClick={this.addUserClick}>Add user</Button>
 
                 <ModalDetails
                     title="Edit user details"
@@ -137,6 +138,10 @@ class Classes extends Component {
 
     onGetMemberDetails = (e, button) => {
         this.props.actions.details.get(button.props.record.id);
+    }
+
+    addUserClick = () => {
+        this.props.actions.details.add();
     }
 
     onSaveMember = (record, field, type) => {
