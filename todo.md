@@ -5,3 +5,4 @@
 3. Decompose DataTable, use inheritance
 4. Create DataTable control column
 5. Create add record
+6. Create validation and error handling
