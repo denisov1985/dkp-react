@@ -48,8 +48,7 @@ class Classes extends Component {
                     </div>
                 </h2>
 
-                <Button onClick={this.pressMeClick}>Refresh</Button>
-                <Button color="primary" onClick={this.addUserClick}>Add user</Button>
+                <Button onClick={this.pressMeClick}>Refresh</Button><span className="margin-left-5"></span><Button color="primary" onClick={this.addUserClick}>Add user</Button>
 
                 <ModalDetails
                     title="Edit user details"

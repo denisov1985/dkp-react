@@ -145,7 +145,7 @@ export default class DataPager extends CoreComponent {
 
 
 DataPager.const = {
-    DEFAULT_LIMIT: 5,
+    DEFAULT_LIMIT: 10,
     DEFAULT_OFFSET: 0,
     DEFAULT_BUTTONS_OFFSET: 2
 }

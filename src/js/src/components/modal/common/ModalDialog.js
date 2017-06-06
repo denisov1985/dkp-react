@@ -9,9 +9,9 @@ export default class ModalDialog extends CoreComponent {
     render() {
         return (
             <Modal onClose={this.props.onCancel} order="20" top="-20%" width="450px" visible={this.props.visible} key="1">
-                <Modal.Header>{this.getProp('title')}</Modal.Header>
+                <Modal.Header>Message</Modal.Header>
                 <Modal.Body >
-                    {this.props.children}
+                    <h3>{this.getProp('title')}</h3>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.props.onConfirm} color="positive" icon="check">Yes</Button>
