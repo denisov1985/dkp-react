@@ -33,7 +33,6 @@ abstract class DefaultController extends Controller
      */
     public function getAction($id)
     {
-        sleep(2);
         $item = $this->getDoctrine()
             ->getRepository('ApiBundle:' . $this->_getEntityName())
             ->find($id);

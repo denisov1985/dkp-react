@@ -11,18 +11,23 @@ import DataTable from 'components/data-table/DataTable';
 import ModalDetails from 'components/modal/common/ModalDetails';
 import Form from '../../components/form/Form'
 
+
+
 class Classes extends Component {
+
+
 
     onCloseModal = () => {
         this.props.actions.details.unset();
     };
 
-    onSaveModal = () => {};
+    onSaveModal = () => {
+        console.log('SAVEEE');
+    };
 
     onDeleteModal = () => {};
 
     render() {
-        console.log(this);
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -33,9 +38,16 @@ class Classes extends Component {
                     </div>
                 </h2>
 
+
+
                 <Button onClick={this.pressMeClick}>Press me</Button>
 
-                <ModalDetails details={this.props.member.details} onClose={this.onCloseModal} onSave={this.onSaveModal} onDelete={this.onDeleteModal}>
+                <ModalDetails
+                    title="Edit user details"
+                    details={this.props.member.details}
+                    onClose={this.onCloseModal}
+                    onSave={this.onSaveModal}
+                    onDelete={this.onDeleteModal}>
                     <Form handler={this.props.actions.details.update} dataset={this.props.member.details.dataset}>
                         <Form.Row title="User Name">
                             <Form.Input.Text name="user.name" />
@@ -102,10 +114,7 @@ class Classes extends Component {
         });
     }
 
-    onSelectTableRow = (props) => {
-        console.log('select row');
-        console.log(props);
-    }
+    onSelectTableRow = (props) => {}
 
     componentDidMount = () => {
         this.props.actions.collection.findAll();

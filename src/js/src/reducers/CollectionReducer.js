@@ -46,8 +46,6 @@ class CollectionReducer
                     break;
 
                 case ActionHelper.format('receive', entity, 'update'):
-                    console.log('Before update');
-                    console.log(state);
                     return {
                         ...state,
                         dataset: CollectionHelper.updateData(action.payload.data, state.dataset),

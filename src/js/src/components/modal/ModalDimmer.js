@@ -11,6 +11,7 @@ export default class ModalDimmer extends CoreComponent {
         if (this.props.visible) {
             this.addStyle('display', 'block !important')
         }
+        this.props.order ? this.addStyle('zIndex', (this.props.order * 1000) - 1) : this.addStyle('zIndex', 1000)
     }
 
     /**
@@ -24,10 +25,7 @@ export default class ModalDimmer extends CoreComponent {
     }
 
     onClick = (e) => {
-        console.log('dimmer click');
-        console.log(e);
         e.stopPropagation();
-
         this.props.onClick();
     }
 

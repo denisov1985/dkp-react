@@ -30,13 +30,13 @@ export default class Element extends CoreComponent {
     getValue() {
         let name = this.props.name;
         let parts = name.split('.');
-        if (this.props.form.state == undefined) {
+        if (this.props.form.props.dataset == undefined) {
             return '';
         }
-        if (this.props.form.state[parts[1]] == null) {
+        if (this.props.form.props.dataset[parts[1]] == null) {
             return '';
         }
-        let item = this.props.form.state;
+        let item = this.props.form.props.dataset;
         for (let i in parts) {
             if (i > 0) {
                 item = item[parts[i]];
@@ -50,14 +50,7 @@ export default class Element extends CoreComponent {
      * @param e
      */
     onChange = (e) => {
-        let state = this.props.form.state;
-        if (e === undefined) {
-            state[this.getFieldName()] = '';
-        }   else  {
-            state[this.getFieldName()] = e.target.value;
-        }
         this.props.form.props.handler(this.getFieldName(), e.target.value);
-        this.props.form.setState(state);
     }
 
     /**

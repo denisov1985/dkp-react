@@ -5,7 +5,6 @@ import Checkbox from '../../controls/Checkbox';
 export default class DataCheckbox extends CoreComponent {
 
     onChange = (e) => {
-        console.log(this);
         let value = !this.getNested(this.props.table.state, this.getPath(), false);
         let state = this.setNested(this.props.table.state, this.getPath(), value);
         this.props.table.setState(state);
