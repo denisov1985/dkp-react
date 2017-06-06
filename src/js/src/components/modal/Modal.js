@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Body from './ModalBody';
 import Header from './ModalHeader';
 import Footer from './ModalFooter';
@@ -67,7 +68,8 @@ export default class Modal extends CoreComponent {
      */
     buildClass() {
         super.buildClass();
-        this.addClass("ui standard test modal transition small");
+        // ui animating drop in transition small second coupled active transition-height
+        this.addClass("ui  animating drop in test modal transition small");
         if (this.state.visible) {
             this.addClass("visible active")
         }

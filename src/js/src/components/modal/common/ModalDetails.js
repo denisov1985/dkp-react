@@ -14,9 +14,9 @@ export default class ModalDetails extends CoreComponent {
         this.props.onClose();
     }
 
-    render() {
+    renderModal() {
         return (
-            <Modal visible={this.props.visible} onClose={this.props.onClose}>
+           <Modal visible={this.props.details.status === 2} onClose={this.props.onClose}>
                 <Modal.Header>{this.getProp('title')}</Modal.Header>
                 <Modal.Body >
                     {this.props.children}
@@ -27,6 +27,29 @@ export default class ModalDetails extends CoreComponent {
                     {this.props.onSave ? <Button color="positive" icon="checkmark">Save</Button> : null}
                 </Modal.Footer>
             </Modal>
+
         )
+    }
+
+    renderLoading() {
+        return (<Modal visible={true} onClose={this.props.onClose}>
+            <div style={{
+                borderRadius: '0.28571429rem',
+                zIndex: '9999999999999'
+            }} className="ui active inverted dimmer">
+                <div className="ui text loader">Loading</div>
+            </div>
+            <div style={{height: '100px'}}></div>
+        </Modal>);
+    }
+
+    render() {
+        if (this.props.details.status === 0) {
+            return null;
+        }
+        if (this.props.details.status === 1) {
+            return this.renderLoading();
+        }
+        return this.renderModal();
     }
 }

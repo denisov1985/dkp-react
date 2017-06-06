@@ -12,7 +12,7 @@ export default class DataTableEmpty extends CoreComponent {
         let loadingClass = "ui dimmer";
         this.props.loading && (loadingClass += " visible active")
 
-        return (<div className="ui center aligned segment">
+        return (<div style={{zIndex: 1}} className="ui center aligned segment">
             <div className={loadingClass}>
                 <div className="content">
                     <div className="center">
