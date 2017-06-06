@@ -19,7 +19,15 @@ class CollectionAction
                         .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'find', payload)))
                         .catch(payload => dispatch(ActionHelper.errorAction(entity, 'find', payload)));
                 }
-            }
+            },
+
+            unset() {
+                return {
+                    type: ActionHelper.format('unset', entity, 'find'),
+                    payload: [],
+                    request: {}
+                };
+            },
         }
     }
 }

@@ -32,12 +32,10 @@ class Classes extends Component {
     };
 
     onDeleteModal = () => {
-        console.log('ON DELETE');
         this.props.actions.delete.delete(this.props.member.details.dataset);
     };
 
     render() {
-        console.log(this);
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -128,7 +126,6 @@ class Classes extends Component {
     }
 
     onDeleteMemberDetails = (e, button) => {
-        console.log(button);
         this.setState({
             confirmDelete: true,
             record: button.props.record
@@ -157,11 +154,15 @@ class Classes extends Component {
     onSelectTableRow = (props) => {}
 
     componentDidMount = () => {
-        this.props.actions.collection.findAll();
+        setTimeout(() => this.props.actions.collection.findAll() , 100);
     }
 
     pressMeClick = (e) => {
         this.props.actions.collection.findAll();
+    }
+
+    componentWillUnmount() {
+        this.props.actions.collection.unset()
     }
 }
 

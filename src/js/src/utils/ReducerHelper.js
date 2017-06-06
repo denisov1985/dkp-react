@@ -7,7 +7,6 @@ export default class ReducerHelper
     }
 
     static getNested(obj, keyPath, value) {
-        console.log('result');
         let result = {...obj}
         let lastKeyIndex = keyPath.length-1;
         for (let i = 0; i < lastKeyIndex; ++ i) {

@@ -17,9 +17,6 @@ class Member extends Component {
 
 
     render() {
-
-        console.log(this);
-
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">

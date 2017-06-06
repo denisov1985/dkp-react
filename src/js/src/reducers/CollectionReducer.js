@@ -13,8 +13,15 @@ class CollectionReducer
         };
 
         return (state = initialState, action) => {
-            console.log(action);
             switch (action.type) {
+                case ActionHelper.format('unset', entity, 'find'):
+                    return {
+                        ...state,
+                        dataset: [],
+                        status: ActionFactory.STATUS_EMPTY
+                    };
+                    break;
+
                 /**
                  * COLLECTION
                  */
