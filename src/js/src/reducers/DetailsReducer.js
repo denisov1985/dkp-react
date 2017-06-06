@@ -48,6 +48,18 @@ class DetailsReducer
                         dataset: dataset
                     };
                     break;
+
+                case ActionHelper.format('receive', entity, 'delete'):
+                    if (action.request.data.id !== state.dataset.id) {
+                        return state;
+                    }
+                    return {
+                        ...state,
+                        dataset: {},
+                        status: ActionFactory.STATUS_EMPTY
+                    };
+
+                    break;
             }
             return state;
         }

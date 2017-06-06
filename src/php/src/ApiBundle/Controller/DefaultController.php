@@ -114,16 +114,23 @@ abstract class DefaultController extends Controller
             $params = isset($data['params']) ? $data['params'] : [];
             $data   = $data['data'];
         }
+
         $em = $this->getDoctrine()->getEntityManager();
-        foreach ($data as $recordToDelete) {
+
+        if (isset($data['id'])) {
             $record = $this->getDoctrine()
                 ->getRepository('ApiBundle:' . $this->_getEntityName())
-                ->find($recordToDelete['data']['id']);
+                ->find($data['id']);
             $em->remove($record);
+        }   else  {
+            foreach ($data as $recordToDelete) {
+                $record = $this->getDoctrine()
+                    ->getRepository('ApiBundle:' . $this->_getEntityName())
+                    ->find($recordToDelete['data']['id']);
+                $em->remove($record);
+            }
         }
-
         $em->flush();
-
         return new JsonResponse([
             'valid'  => true,
             'errors' => [],

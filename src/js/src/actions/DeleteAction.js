@@ -1,6 +1,6 @@
 import ActionHelper from './helpers/ActionHelper';
 
-class UpdateAction
+class DeleteAction
 {
     constructor(){
         this.STATUS_EMPTY    = 0;
@@ -11,7 +11,7 @@ class UpdateAction
 
     create(entity) {
         return {
-            save(data, params) {
+            delete(data, params) {
                 if (typeof params === 'undefined') {
                     params = {};
                 }
@@ -23,8 +23,8 @@ class UpdateAction
                     params: params
                 }
                 return (dispatch, getState) => {
-                    dispatch(ActionHelper.requestAction(entity, 'update', request));
-                    return fetch('/api/' + entity.replace('_', '/') + '/save/', {
+                    dispatch(ActionHelper.requestAction(entity, 'delete', request));
+                    return fetch('/api/' + entity.replace('_', '/') + '/delete/', {
                         method: 'post',
                         headers: {
                             'Accept': 'application/json, text/plain, */*',
@@ -34,13 +34,13 @@ class UpdateAction
                             data: data
                         })
                     })
-                        .then(response  => response.json())
-                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'update', payload, request)))
-                        .catch(payload  => dispatch(ActionHelper.errorAction(entity, 'update', payload)));
+                        .then(response => response.json())
+                        .then(payload => dispatch(ActionHelper.receiveAction(entity, 'delete', payload, request)))
+                        .catch(payload => dispatch(ActionHelper.errorAction(entity, 'delete', payload)));
                 }
             }
         }
     }
 }
 
-export default new UpdateAction();
+export default new DeleteAction();

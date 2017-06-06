@@ -13,7 +13,7 @@ class CollectionReducer
         };
 
         return (state = initialState, action) => {
-
+            console.log(action);
             switch (action.type) {
                 /**
                  * COLLECTION
@@ -41,7 +41,9 @@ class CollectionReducer
                 case ActionHelper.format('request', entity, 'update'):
                     return {
                         ...state,
-                        join: ReducerHelper.setNested(state.join, this.getPath(action.payload.data.id, action.payload.params.field, action.payload.params.type), ActionFactory.STATUS_FETCHING)
+                        join: ReducerHelper.setNested(state.join, this.getPath(action.payload.data.id,
+                            ReducerHelper.getNested(action, ['payload', 'params', 'field'], 'id'),
+                            ReducerHelper.getNested(action, ['payload', 'params', 'type'], 'default')), ActionFactory.STATUS_FETCHING)
                     };
                     break;
 
@@ -49,7 +51,33 @@ class CollectionReducer
                     return {
                         ...state,
                         dataset: CollectionHelper.updateData(action.payload.data, state.dataset),
-                        join: ReducerHelper.setNested(state.join, this.getPath(action.request.data.id, action.request.params.field, action.request.params.type), ActionFactory.STATUS_COMPLETE)
+                        join: ReducerHelper.setNested(
+                            state.join, this.getPath(action.request.data.id,
+                                ReducerHelper.getNested(action, ['request', 'params', 'field'], 'id'),
+                                ReducerHelper.getNested(action, ['request', 'params', 'type'], 'default')), ActionFactory.STATUS_COMPLETE
+                        )
+                    };
+
+                    break;
+
+                case ActionHelper.format('request', entity, 'delete'):
+                    return {
+                        ...state,
+                        join: ReducerHelper.setNested(state.join, this.getPath(action.payload.data.id,
+                            ReducerHelper.getNested(action, ['payload', 'params', 'field'], 'id'),
+                            ReducerHelper.getNested(action, ['payload', 'params', 'type'], 'default')), ActionFactory.STATUS_FETCHING)
+                    };
+                    break;
+
+                case ActionHelper.format('receive', entity, 'delete'):
+                    return {
+                        ...state,
+                        dataset: CollectionHelper.deleteData(action.payload.data, state.dataset),
+                        join: ReducerHelper.setNested(
+                            state.join, this.getPath(action.request.data.id,
+                                ReducerHelper.getNested(action, ['request', 'params', 'field'], 'id'),
+                                ReducerHelper.getNested(action, ['request', 'params', 'type'], 'default')), ActionFactory.STATUS_COMPLETE
+                        )
                     };
 
                     break;

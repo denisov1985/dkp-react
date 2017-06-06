@@ -4,14 +4,13 @@ import {connect} from 'react-redux'
 import ActionFactory from '../../actions/ActionFactory';
 import CollectionAction from '../../actions/CollectionAction';
 import UpdateAction from '../../actions/UpdateAction';
+import DeleteAction from '../../actions/DeleteAction';
 import DetailsAction from '../../actions/DetailsAction';
 import Layout from '../Layout';
 import Button from 'components/controls/Button';
 import DataTable from 'components/data-table/DataTable';
 import ModalDetails from 'components/modal/common/ModalDetails';
 import Form from '../../components/form/Form'
-
-
 
 class Classes extends Component {
 
@@ -22,12 +21,16 @@ class Classes extends Component {
     };
 
     onSaveModal = () => {
-        console.log('SAVEEE');
+        this.props.actions.update.save(this.props.member.details.dataset);
     };
 
-    onDeleteModal = () => {};
+    onDeleteModal = () => {
+        console.log('ON DELETE');
+        this.props.actions.delete.delete(this.props.member.details.dataset);
+    };
 
     render() {
+        console.log(this);
         return (
             <Layout title="Users Management" router={this.props.router}>
                 <h2 className="ui header">
@@ -44,7 +47,7 @@ class Classes extends Component {
 
                 <ModalDetails
                     title="Edit user details"
-                    details={this.props.member.details}
+                    entity={this.props.member}
                     onClose={this.onCloseModal}
                     onSave={this.onSaveModal}
                     onDelete={this.onDeleteModal}>
@@ -136,6 +139,7 @@ function mapDispatchToProps(dispatch) {
         actions: {
             collection: bindActionCreators(CollectionAction.create('member'), dispatch),
             update: bindActionCreators(UpdateAction.create('member'), dispatch),
+            delete: bindActionCreators(DeleteAction.create('member'), dispatch),
             details: bindActionCreators(DetailsAction.create('member'), dispatch)
         }
     }

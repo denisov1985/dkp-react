@@ -14,6 +14,9 @@ export default class Button extends CoreComponent {
         if (this.isLoading()) {
             this.addLoading();
         }
+        if (this.props.disabled) {
+            this.addClass('disabled');
+        }
     }
 
     isLoading() {

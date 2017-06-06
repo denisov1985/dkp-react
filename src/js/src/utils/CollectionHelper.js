@@ -22,6 +22,10 @@ export default class CollectionHelper
         return [...collection];
     }
 
+    static deleteData(data, collection) {
+        return collection.filter(element => element.id !== data.id)
+    }
+
     static updateCollection(action, collection) {
         collection.map((element, index) => {
             action(element, index);
