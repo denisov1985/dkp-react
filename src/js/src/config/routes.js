@@ -1,5 +1,6 @@
 import Member from '../containers/member/Member';
 import Classes from '../containers/member/Classes';
+import Login from '../containers/profile/Login';
 import UnderConstruction from '../containers/common/UnderConstruction';
  
 /**
@@ -8,6 +9,12 @@ import UnderConstruction from '../containers/common/UnderConstruction';
  */
 export const routes =
     [
+        {
+            title: "Login",
+            path: "/login",
+            alias: "dkp_users",
+            component: Login,
+        },
         {
             title: "Members",
             path: "/member",

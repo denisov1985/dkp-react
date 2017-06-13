@@ -13,7 +13,10 @@ export default class Layout extends Component {
         return (
             <div className="app-layout">
                 <Menu itemTitle="title" itemData="route" items={this.props.router.routes[0].children} ><Link /></Menu>
-                <div className="ui container">
+                <div style={{
+                    marginRight: 14 + 'px',
+                    marginLeft: 14 + 'px',
+                }} className="ui">
                     <Breadcrumbs router={this.props.router} />
 
                     {this.props.children}

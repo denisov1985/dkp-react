@@ -1,4 +1,5 @@
 import semanticUi from 'semantic-ui-css/semantic.css';
+import semanticGridUi from 'semantic-ui-css/components/grid.css';
 import React from 'react';
 import thunkMiddleware from 'redux-thunk'
 import { render } from 'react-dom'
