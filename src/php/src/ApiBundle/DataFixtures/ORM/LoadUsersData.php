@@ -4,9 +4,9 @@ namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use ApiBundle\Entity\Member;
+use ApiBundle\Entity\User;
 
-class LoadMemberData implements FixtureInterface
+class LoadUsersData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -15,7 +15,7 @@ class LoadMemberData implements FixtureInterface
         $data = json_decode($content, true);
 
         foreach ($data as $item) {
-            $member = new Member();
+            $member = new User();
             $member->setIsActive($item['isActive']);
             $member->setName($item['name']);
             $member->setPassword(md5(rand(1, 1000)));

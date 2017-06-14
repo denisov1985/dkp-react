@@ -3,12 +3,12 @@
 namespace ApiBundle\Entity;
 
 /**
- * Member
+ * User
  */
-class Member
+class User
 {
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
@@ -28,7 +28,7 @@ class Member
     private $password;
 
     /**
-     * @var bool
+     * @var boolean
      */
     private $isActive;
 
@@ -36,7 +36,7 @@ class Member
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -48,7 +48,7 @@ class Member
      *
      * @param string $name
      *
-     * @return Member
+     * @return User
      */
     public function setName($name)
     {
@@ -72,7 +72,7 @@ class Member
      *
      * @param string $email
      *
-     * @return Member
+     * @return User
      */
     public function setEmail($email)
     {
@@ -96,7 +96,7 @@ class Member
      *
      * @param string $password
      *
-     * @return Member
+     * @return User
      */
     public function setPassword($password)
     {
@@ -120,7 +120,7 @@ class Member
      *
      * @param boolean $isActive
      *
-     * @return Member
+     * @return User
      */
     public function setIsActive($isActive)
     {
@@ -132,10 +132,11 @@ class Member
     /**
      * Get isActive
      *
-     * @return bool
+     * @return boolean
      */
     public function getIsActive()
     {
         return $this->isActive;
     }
 }
+
