@@ -8,22 +8,33 @@ use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class DefaultController extends Controller
+class DefaultController extends Controller
 {
     /**
-     * Index action (find all)
+     * Resolve action and class
+     * @param $path
+     * @param Request $request
      * @return Response
      */
-    public function indexAction()
+    public function indexAction($path, Request $request)
     {
+        $actionResolver = $this->get('api.action_resolver');
+        return $actionResolver->resolve($path, $request);
+
         $collection = $this->getDoctrine()
-            ->getRepository('ApiBundle:' . $this->_getEntityName())
+            ->getRepository('ApiBundle:' . $this->resolveEntity($path))
             ->findAll();
         return new Response(
             $this->serialize($collection),
             Response::HTTP_OK,
             ['Content-Type', 'application/json']
         );
+    }
+
+    public function resolveEntity($path)
+    {
+        $parts = explode('/', $path);
+        return ucfirst($parts[0]);
     }
 
     /**
@@ -143,8 +154,6 @@ abstract class DefaultController extends Controller
         $serializer = $this->get('jms_serializer');
         return $serializer->serialize($content, 'json', SerializationContext::create()->setSerializeNull(true));
     }
-
-    abstract protected function _getEntityName();
 
     protected function _createEntity() {
         $entity = $this->_getEntityName();

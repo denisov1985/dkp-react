@@ -14,13 +14,14 @@ module.exports = {
         root: path.resolve(__dirname),
         alias: {
             components: 'src/components',
+            actions: 'src/actions',
         },
         extensions: ['', '.js', '.jsx']
     },
 
     module: {
         loaders: [{
-            test: /\.js?$/,
+            test: /\.(js|jsx)?$/,
             exclude: /node_modules/,
             loader: 'babel',
             query: {

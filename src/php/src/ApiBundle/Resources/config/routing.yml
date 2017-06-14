@@ -1,23 +1,5 @@
 api_homepage:
-    path:     /
+    path:     /{path}
     defaults: { _controller: ApiBundle:Default:index }
-
-api_get:
-    path:     /get
-    defaults: { _controller: ApiBundle:Default:index }
-
-index:
-    path:     /member
-    defaults: { _controller: ApiBundle:Member:index }
-
-index_get:
-    path:     /member/{id}
-    defaults: { _controller: ApiBundle:Member:get }
-
-index_save:
-    path:     /member/save/
-    defaults: { _controller: ApiBundle:Member:save }
-
-index_delete:
-    path:     /member/delete/
-    defaults: { _controller: ApiBundle:Member:delete }
+    requirements:
+        path: ".+"

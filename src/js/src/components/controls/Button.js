@@ -11,6 +11,11 @@ export default class Button extends CoreComponent {
         if (this.props.children !== undefined && this.props.icon !== undefined) {
             this.addClass('labeled');
         }
+
+        if (this.props.fluid !== undefined) {
+            this.addClass('fluid');
+        }
+
         if (this.isLoading()) {
             this.addLoading();
         }

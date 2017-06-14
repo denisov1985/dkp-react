@@ -56,10 +56,10 @@ class Classes extends Component {
                     onDelete={this.onDeleteModal}>
                     <Form handler={this.props.actions.details.update} dataset={this.props.member.details.dataset}>
                         <Form.Row title="User Name">
-                            <Form.Input.Text name="user.name" />
+                            <Form.Input.Text name="user.email" />
                         </Form.Row>
                         <Form.Row title="User Email">
-                            <Form.Input.Text name="user.email" />
+                            <Form.Input.Text name="user.password" />
                         </Form.Row>
                     </Form>
                 </ModalDetails>

@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
 import InputText from './elements/InputText';
+import InputIconText from './elements/InputIconText';
 import Row from './Row';
+import FormWrapper from './FormWrapper';
+import FormButton from './FormButton';
 
 export default class Form extends CoreComponent {
 
@@ -15,5 +18,8 @@ export default class Form extends CoreComponent {
 }
 
 Form.Row        = Row;
+Form.Button     = FormButton;
+Form.Wrapper    = FormWrapper;
 Form.Input      = InputText;
 Form.Input.Text = InputText;
+Form.Input.IconText = InputIconText;

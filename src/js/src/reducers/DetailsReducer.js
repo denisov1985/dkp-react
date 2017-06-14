@@ -11,6 +11,9 @@ class DetailsReducer
         };
 
         return (state = initialState, action) => {
+            let dataset = {};
+            console.log(action);
+            console.log(ActionHelper.format('update', entity, 'login'));
             switch (action.type) {
                 /**
                  * Request details
@@ -49,13 +52,24 @@ class DetailsReducer
                  * Update details
                   */
                 case ActionHelper.format('update', entity, 'details'):
-                    let dataset = {...state.dataset};
+                    dataset = {...state.dataset};
                     dataset[action.payload.field] = action.payload.value;
                     return {
                         ...state,
                         dataset: dataset
                     };
                     break;
+
+                case ActionHelper.format('update', entity, 'login'):
+                    console.log('lalalalal');
+                    dataset = {...state.dataset};
+                    dataset[action.payload.field] = action.payload.value;
+                    return {
+                        ...state,
+                        dataset: dataset
+                    };
+                    break;
+
 
                 /**
                  * Delete details

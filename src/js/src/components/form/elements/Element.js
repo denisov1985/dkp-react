@@ -28,6 +28,7 @@ export default class Element extends CoreComponent {
      * @returns {*}
      */
     getValue() {
+        console.log(this);
         let name = this.props.name;
         let parts = name.split('.');
         if (this.props.form.props.dataset == undefined) {

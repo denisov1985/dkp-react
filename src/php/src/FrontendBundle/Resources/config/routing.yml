@@ -1,3 +1,9 @@
 frontend_homepage:
+    path:     /{path}
+    defaults: { _controller: FrontendBundle:Default:index }
+    requirements:
+        path: "^(?!img|api|build).+"
+
+frontend_homepage_default:
     path:     /
     defaults: { _controller: FrontendBundle:Default:index }
