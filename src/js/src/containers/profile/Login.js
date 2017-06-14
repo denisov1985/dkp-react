@@ -21,7 +21,7 @@ class Login extends Component {
                             Log-in to your account
                         </div>
                     </h2>
-                    <LoginForm dataset={this.props.login.dataset} handler={this.props.actions.login.update} onLogin={this.onLogin} />
+                    <LoginForm dataset={this.props.login.dataset} handler={this.props.actions.auth.update} onLogin={this.onLogin} />
                 </div>
             </div>
         )
@@ -29,6 +29,8 @@ class Login extends Component {
 
     onLogin = () => {
         console.log(this);
+        console.log(this.props.actions.auth);
+        this.props.actions.auth.login(this.props.login.dataset);
     }
 
 }
@@ -43,7 +45,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            login: bindActionCreators(AuthAction.create('member'), dispatch)
+            auth: bindActionCreators(AuthAction.create('member'), dispatch)
         }
     }
 }

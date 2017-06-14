@@ -4,22 +4,19 @@ class AuthAction
 {
     create(entity) {
         return {
-            login(id, params) {
-                let request = {
-                    id: id,
-                    params: params
-                }
-                if (typeof params === 'undefined') {
-                    params = {};
-                }
-                if (typeof params.type === 'undefined') {
-                    params.type = 'default';
-                }
+            login(credentials) {
+                console.log('LOGIN');
+                let request = credentials
                 return (dispatch, getState) => {
-                    dispatch(ActionHelper.requestAction(entity, 'login', {
-                        id: id
-                    }));
-                    return fetch('/api/login')
+                    dispatch(ActionHelper.requestAction(entity, 'login', credentials));
+                    return fetch('/api/user/login', {
+                        method: 'post',
+                        headers: {
+                            'Accept': 'application/json, text/plain, */*',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(credentials)
+                    })
                         .then(response  => response.json())
                         .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'login', payload, request)))
                         .catch(payload => dispatch(ActionHelper.errorAction(entity, 'login', payload)));

@@ -7,7 +7,7 @@ const LoginForm = ({onLogin, handler, dataset}) => (
 
         <Form.Wrapper tag="div" className="ui teal segment">
             <Form.Row>
-                <Form.Input.IconText icon="user" name="user.name" placeholder="Email" />
+                <Form.Input.IconText icon="user" name="user.email" placeholder="Email" />
             </Form.Row>
             <Form.Row>
                 <Form.Input.IconText icon="lock" name="user.password" placeholder="Password" />

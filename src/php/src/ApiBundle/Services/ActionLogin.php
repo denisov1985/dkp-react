@@ -8,14 +8,25 @@
 
 namespace ApiBundle\Services;
 
-
 use Symfony\Component\HttpFoundation\Request;
 
-class ActionGet extends ActionAbstract  implements ActionInterface
+class ActionLogin extends ActionAbstract  implements ActionInterface
 {
 
     public function handle(Request $request, $params)
     {
-        return $this->getRepository()->find($params[0]);
+        $data = $this->getData($request);
+
+        $user = $this->getRepository()->findOneBy(
+            array(
+                'email' => $data['email'],
+                'password' => md5($data['password'])
+            )
+        );
+
+        return [
+            'result' => !empty($user),
+            'user' => $user
+        ];
     }
 }
