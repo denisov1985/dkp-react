@@ -14,7 +14,7 @@ class ActionResolver
     public function __construct($actionFactory, $serializer)
     {
         $this->actionFactory = $actionFactory;
-        $this->serializer = $serializer;
+        $this->serializer    = $serializer;
     }
 
     /**
@@ -30,6 +30,7 @@ class ActionResolver
         $params     = $this->resolveParams($path);
         try {
             $action     = $this->actionFactory->create($entity, $actionType, $params);
+
             return new JsonResponse([
                 'result' => $this->serialize($action->handle($request, $params))
             ]);

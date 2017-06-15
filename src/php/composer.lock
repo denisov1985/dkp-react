@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "36f8dcf7265bdc971ab747a14f7f4dc1",
-    "content-hash": "27d93ba8af21b8a82ea1968eed783eba",
+    "hash": "9e7038378ea22648cd0ce4072fa75003",
+    "content-hash": "0bf9a14d11c270b423718666280618d4",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -834,6 +834,56 @@
                 "orm"
             ],
             "time": "2016-12-18 15:42:34"
+        },
+        {
+            "name": "gamegos/jws",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Gamegos/php-jws.git",
+                "reference": "a94218e43f45d4e818eecaaa4063ff436b4a5ee0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Gamegos/php-jws/zipball/a94218e43f45d4e818eecaaa4063ff436b4a5ee0",
+                "reference": "a94218e43f45d4e818eecaaa4063ff436b4a5ee0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gamegos\\JWS\\": [
+                        "src",
+                        "tests"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mustafa Altun",
+                    "email": "gmail@mustafaaltun.com"
+                }
+            ],
+            "description": "Json Web Signature (JWS) PHP implementation",
+            "keywords": [
+                "JSON Web Signature",
+                "JSON Web Token",
+                "JWS",
+                "digital signature",
+                "jwa",
+                "jwt"
+            ],
+            "time": "2015-04-09 08:33:49"
         },
         {
             "name": "incenteev/composer-parameter-handler",

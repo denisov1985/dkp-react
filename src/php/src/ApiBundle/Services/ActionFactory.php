@@ -12,16 +12,18 @@ class ActionFactory
 
     protected $em;
     protected $entity;
+    protected $jwsProvider;
 
-    public function __construct($entityManager) {
+    public function __construct($entityManager, $jwsProvider) {
         $this->em = $entityManager;
+        $this->jwsProvider   = $jwsProvider;
     }
 
     public function create($entity, $action, $params)
     {
         switch ($action) {
             case self::ACTION_LOGIN:
-                return new ActionLogin($entity, $this->em);
+                return new ActionLogin($entity, $this->em, $this->jwsProvider);
                 break;
 
             case self::ACTION_FIND:

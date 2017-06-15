@@ -5,6 +5,7 @@ import InputIconText from './elements/InputIconText';
 import Row from './Row';
 import FormWrapper from './FormWrapper';
 import FormButton from './FormButton';
+import FormError from './FormError';
 
 export default class Form extends CoreComponent {
 
@@ -18,6 +19,7 @@ export default class Form extends CoreComponent {
 }
 
 Form.Row        = Row;
+Form.Error      = FormError;
 Form.Button     = FormButton;
 Form.Wrapper    = FormWrapper;
 Form.Input      = InputText;

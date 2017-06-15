@@ -23,7 +23,7 @@ class ActionAbstract
      * @param $entity
      * @param EntityManager $em
      */
-    public function __construct($entity, EntityManager $em)
+    public function __construct($entity, $em)
     {
         $this->entity = $entity;
         $this->em     = $em;

@@ -13,7 +13,8 @@ class AuthAction
                         method: 'post',
                         headers: {
                             'Accept': 'application/json, text/plain, */*',
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+                            'Bearer': window.sessionStorage.getItem('token')
                         },
                         body: JSON.stringify(credentials)
                     })

@@ -10,8 +10,16 @@ class Login extends Component {
         document.body.style.backgroundColor = "#DADADA";
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log('PROPS');
+        console.log(nextProps.login.response.result);
+        if (nextProps.login.response.result && nextProps.login.response.result.success) {
+            window.sessionStorage.setItem('token', nextProps.login.response.result.token)
+            this.props.router.push('/');
+        }
+    }
+
     render() {
-        console.log(this);
         return (
             <div className="ui three column centered grid">
                 <div className="column center aligned" style={{position: 'fixed', top: '25%'}}>
@@ -21,7 +29,7 @@ class Login extends Component {
                             Log-in to your account
                         </div>
                     </h2>
-                    <LoginForm dataset={this.props.login.dataset} handler={this.props.actions.auth.update} onLogin={this.onLogin} />
+                    <LoginForm provider={this.props.login} handler={this.props.actions.auth.update} onLogin={this.onLogin} />
                 </div>
             </div>
         )
@@ -38,14 +46,14 @@ class Login extends Component {
 function mapStateToProps(state, ownProps) {
     console.log(state);
     return {
-        login: state.users.details
+        login: state.user.login
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            auth: bindActionCreators(AuthAction.create('member'), dispatch)
+            auth: bindActionCreators(AuthAction.create('user'), dispatch)
         }
     }
 }

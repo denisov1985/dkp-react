@@ -4,6 +4,7 @@ import CollectionReducer from './CollectionReducer';
 import UpdateReducer from './UpdateReducer';
 import DeleteReducer from './DeleteReducer';
 import DetailsReducer from './DetailsReducer';
+import LoginReducer from './LoginReducer';
 
 const initialState = {};
 
@@ -15,17 +16,18 @@ let memberReducer = ReducerFactory.create('member');
 let userReducer = ReducerFactory.create('user');
 let testReducer = ReducerFactory.create('test');
 
-let users = combineReducers({
-    collection: CollectionReducer.create('member'),
-    update: UpdateReducer.create('member'),
-    delete: DeleteReducer.create('member'),
-    details: DetailsReducer.create('member')
+let user = combineReducers({
+    collection: CollectionReducer.create('user'),
+    update: UpdateReducer.create('user'),
+    delete: DeleteReducer.create('user'),
+    details: DetailsReducer.create('user'),
+    login: LoginReducer.create('user')
 });
 
 const rootReducer = combineReducers({
     initialReducer,
     memberReducer,
-    users
+    user
 });
 
 export default rootReducer;

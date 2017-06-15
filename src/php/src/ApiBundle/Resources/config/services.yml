@@ -5,4 +5,8 @@ services:
 
     api.action_factory:
         class: ApiBundle\Services\ActionFactory
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: ["@doctrine.orm.entity_manager", "@api.security_jws_provider"]
+
+    api.security_jws_provider:
+            class: ApiBundle\Services\Security\JWSProvider
+            arguments: []
