@@ -22,6 +22,14 @@ class LoadUsersData implements FixtureInterface
             $member->setEmail($item['email']);
             $manager->persist($member);
         }
+
+        $member = new User();
+        $member->setIsActive(1);
+        $member->setName('Dimon');
+        $member->setPassword(md5('555935'));
+        $member->setEmail('denisov1985@gmail.com');
+        $manager->persist($member);
+
         $manager->flush();
    }
 }

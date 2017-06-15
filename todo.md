@@ -7,3 +7,4 @@
 5. Create add record
 6. Create validation and error handling
 7. Authorization and authentication . Roles levels. Operation by roles. Sync with backend.
+8. Re-rendering problem using layout

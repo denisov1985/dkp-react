@@ -12,6 +12,7 @@ import * as routes from './config/routes';
 
 import Login from './containers/profile/Login';
 import Register from './containers/profile/Register';
+import Dashboard from './containers/dashboard/Dashboard';
 
 const store = createStore(
     rootReducer,
@@ -24,7 +25,8 @@ render(
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Register} />
-            <Route path="/login/(:filter)" component={Login} />
+            <Route path="/login" component={Login} />
+            <Route path="/dashboard" component={Dashboard} />
         </Router>
     </Provider>,
     document.getElementById('root')
