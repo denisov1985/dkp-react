@@ -13,6 +13,7 @@ import Logout from './containers/profile/Logout';
 import Register from './containers/profile/Register';
 import Dashboard from './containers/dashboard/Dashboard';
 import Classes from './containers/member/Classes';
+import Products from './containers/products/Products';
 import UnderConstruction from './containers/common/UnderConstruction';
 
 const store = createStore(
@@ -35,7 +36,7 @@ render(
                 <Route  roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Отчеты" path="/reports" component={UnderConstruction} />
             </Route>
             <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Заказы" path="/orders" component={Classes} />
-            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Товары" path="/products" component={UnderConstruction} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Товары" path="/products" component={Products} />
             <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Бренды" path="/brands" component={UnderConstruction} />
             <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Персонал" path="/employers" component={UnderConstruction} />
             <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Настройки" path="/settings" component={UnderConstruction} />
