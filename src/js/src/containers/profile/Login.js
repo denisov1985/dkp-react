@@ -7,20 +7,22 @@ import AuthAction from 'actions/AuthAction';
 
 class Login extends Component {
     componentWillMount() {
-        document.body.style.backgroundColor = "#DADADA";
+        if (this.props.auth.loggedIn) {
+            this.props.router.push('/dashboard');
+            return false;
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('PROPS');
-        console.log(nextProps.login.response.result);
-        if (nextProps.login.response.result && nextProps.login.response.result.success) {
+        console.log(nextProps.auth.response.result);
+        if (nextProps.auth.loggedIn) {
             document.body.style.backgroundColor = "#FFFFFF";
-            window.sessionStorage.setItem('token', nextProps.login.response.result.token)
             this.props.router.push('/dashboard');
         }
     }
 
     render() {
+        console.log(this);
         return (
             <div className="ui three column centered grid">
                 <div className="column center aligned" style={{position: 'fixed', top: '25%'}}>
@@ -30,7 +32,7 @@ class Login extends Component {
                             Log-in to your account
                         </div>
                     </h2>
-                    <LoginForm provider={this.props.login} handler={this.props.actions.auth.update} onLogin={this.onLogin} />
+                    <LoginForm provider={this.props.auth} handler={this.props.actions.auth.update} onLogin={this.onLogin} />
                 </div>
             </div>
         )
@@ -39,7 +41,7 @@ class Login extends Component {
     onLogin = () => {
         console.log(this);
         console.log(this.props.actions.auth);
-        this.props.actions.auth.login(this.props.login.dataset);
+        this.props.actions.auth.login(this.props.auth.dataset);
     }
 
 }
@@ -47,7 +49,7 @@ class Login extends Component {
 function mapStateToProps(state, ownProps) {
     console.log(state);
     return {
-        login: state.user.login
+        auth: state.auth
     }
 }
 

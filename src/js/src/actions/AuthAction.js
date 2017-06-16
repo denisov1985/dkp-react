@@ -24,6 +24,14 @@ class AuthAction
                 }
             },
 
+            logout() {
+                window.sessionStorage.removeItem('token')
+                return {
+                    type: ActionHelper.format('logout', entity, 'login'),
+                    payload: {}
+                };
+            },
+
             update(field, value) {
                 return {
                     type: ActionHelper.format('update', entity, 'login'),

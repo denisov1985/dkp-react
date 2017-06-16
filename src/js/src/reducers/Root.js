@@ -4,7 +4,7 @@ import CollectionReducer from './CollectionReducer';
 import UpdateReducer from './UpdateReducer';
 import DeleteReducer from './DeleteReducer';
 import DetailsReducer from './DetailsReducer';
-import LoginReducer from './LoginReducer';
+import AuthReducer from './AuthReducer';
 
 const initialState = {};
 
@@ -16,13 +16,15 @@ let user = combineReducers({
     collection: CollectionReducer.create('user'),
     update: UpdateReducer.create('user'),
     delete: DeleteReducer.create('user'),
-    details: DetailsReducer.create('user'),
-    login: LoginReducer.create('user')
+    details: DetailsReducer.create('user')
 });
+
+let auth = AuthReducer.create('user');
 
 const rootReducer = combineReducers({
     initialReducer,
-    user
+    user,
+    auth
 });
 
 export default rootReducer;

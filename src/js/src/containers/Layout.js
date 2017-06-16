@@ -16,6 +16,7 @@ export default class Layout extends Component {
      * @returns {XML}
      */
     render() {
+        console.log(this);
         return (
             <div>
                 <Navigation router={this.props.router}>
@@ -25,6 +26,9 @@ export default class Layout extends Component {
                     <Navigation.Item path="/brands">Бренды</Navigation.Item>
                     <Navigation.Item path="/employers">Персонал</Navigation.Item>
                     <Navigation.Item path="/settings">Настройки</Navigation.Item>
+                    {this.props.loggedIn ?
+                        <Navigation.Item align="right" path="/logout">Выход</Navigation.Item> :
+                        <Navigation.Item align="right" path="/login">Вход</Navigation.Item>}
                 </Navigation>
 
                 <div style={{marginLeft: '14px', mmarginRight: '14px'}}>

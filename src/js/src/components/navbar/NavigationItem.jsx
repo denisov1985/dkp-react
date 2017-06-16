@@ -12,12 +12,19 @@ class NavigationItem extends CoreComponent {
         return false;
     }
 
+    buildClass() {
+        this.addClass('item');
+        if (this.props.align && this.props.align === 'right') {
+            this.addClass('right');
+        }
+    }
+
     /**
      * Render item
      * @returns {XML}
      */
     render() {
-        return (<Link to={this.props.path} className="item" activeClassName="active">
+        return (<Link to={this.props.path} className={this.getClass()} activeClassName="active">
             {this.props.children}
         </Link>)
     }

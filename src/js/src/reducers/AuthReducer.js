@@ -2,13 +2,14 @@ import ActionHelper from '../utils/ActionHelper';
 import CollectionHelper from '../utils/CollectionHelper';
 import ActionFactory from '../actions/ActionFactory';
 
-class LoginReducer
+class AuthReducer
 {
     create(entity) {
         let initialState = {
             status: ActionFactory.STATUS_EMPTY,
             dataset: {},
-            response: {}
+            response: {},
+            loggedIn: window.sessionStorage.getItem('token') ? true : false
         };
 
         return (state = initialState, action) => {
@@ -32,8 +33,12 @@ class LoginReducer
                  * Receive details
                   */
                 case ActionHelper.format('receive', entity, 'login'):
+                    if (action.payload.result.success) {
+                        window.sessionStorage.setItem('token', action.payload.result.token)
+                    }
                     return {
                         ...state,
+                        loggedIn: action.payload.result.success,
                         response: action.payload,
                         status: ActionFactory.STATUS_COMPLETE
                     };
@@ -42,11 +47,11 @@ class LoginReducer
                 /**
                  * Unset details
                   */
-                case ActionHelper.format('unset', entity, 'login'):
+                case ActionHelper.format('logout', entity, 'login'):
                     return {
                         ...state,
                         dataset: {},
-                        status: ActionFactory.STATUS_EMPTY
+                        loggedIn: false
                     };
                     break;
 
@@ -67,4 +72,4 @@ class LoginReducer
     }
 }
 
-export default new LoginReducer();
+export default new AuthReducer();

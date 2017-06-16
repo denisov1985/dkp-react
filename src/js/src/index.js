@@ -9,6 +9,7 @@ import rootReducer from './reducers/Root';
 import { Router, Route, browserHistory } from 'react-router';
 
 import Login from './containers/profile/Login';
+import Logout from './containers/profile/Logout';
 import Register from './containers/profile/Register';
 import Dashboard from './containers/dashboard/Dashboard';
 import UnderConstruction from './containers/common/UnderConstruction';
@@ -25,6 +26,7 @@ render(
         <Router history={browserHistory}>
             <Route name="Register" path="/" component={Register} />
             <Route name="Login" path="/login" component={Login} />
+            <Route name="Logout" path="/logout" component={Logout} />
             <Route name="Главная" path="/dashboard" component={Dashboard} >
                 <Route name="Отчеты" path="/reports" component={UnderConstruction} />
             </Route>

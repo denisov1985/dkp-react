@@ -4,14 +4,22 @@ import {connect} from 'react-redux'
 import DataTable from 'components/data-table/DataTable';
 import Button from 'components/controls/Button';
 import CollectionAction from '../../actions/CollectionAction';
+import AuthAction from '../../actions/AuthAction';
 import Layout from '../Layout';
 
 class Dashboard extends Component {
 
+    componentWillMount() {
+        if (!this.props.auth.loggedIn) {
+            this.props.router.push('/login');
+            return false;
+        }
+    }
+
     render() {
         console.log(this);
         return (
-            <Layout router={this.props.router}>
+            <Layout loggedIn={this.props.auth.loggedIn} router={this.props.router}>
                     <h2 className="ui header">
                         Account Settings
                         <div className="sub header">Manage your account settings and set e-mail preferences.</div>
@@ -68,14 +76,15 @@ class Dashboard extends Component {
 
 function mapStateToProps(state, ownProps) {
     return {
-        user: state.user
+        user: state.user,
+        auth: state.auth
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            collection: bindActionCreators(CollectionAction.create('user'), dispatch),
+            collection: bindActionCreators(CollectionAction.create('user'), dispatch)
         }
     }
 }
