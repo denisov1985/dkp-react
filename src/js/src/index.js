@@ -23,10 +23,16 @@ const store = createStore(
 render(
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route path="/" component={Register} />
-            <Route path="/login" component={Login} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/orders" component={UnderConstruction} />
+            <Route name="Register" path="/" component={Register} />
+            <Route name="Login" path="/login" component={Login} />
+            <Route name="Главная" path="/dashboard" component={Dashboard} >
+                <Route name="Отчеты" path="/reports" component={UnderConstruction} />
+            </Route>
+            <Route name="Заказы" path="/orders" component={UnderConstruction} />
+            <Route name="Товары" path="/products" component={UnderConstruction} />
+            <Route name="Бренды" path="/brands" component={UnderConstruction} />
+            <Route name="Персонал" path="/employers" component={UnderConstruction} />
+            <Route name="Настройки" path="/settings" component={UnderConstruction} />
         </Router>
     </Provider>,
     document.getElementById('root')

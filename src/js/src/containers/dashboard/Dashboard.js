@@ -9,20 +9,9 @@ import Layout from '../Layout';
 class Dashboard extends Component {
 
     render() {
+        console.log(this);
         return (
             <Layout router={this.props.router}>
-                <div style={{
-                    marginRight: '14px',
-                    marginLeft: '14px',
-                }}>
-                    <div className="ui breadcrumb">
-                        <a className="section">Home</a>
-                        <i className="right angle icon divider"/>
-                        <a className="section">Store</a>
-                        <i className="right angle icon divider"/>
-                        <div className="active section">T-Shirt</div>
-                    </div>
-
                     <h2 className="ui header">
                         Account Settings
                         <div className="sub header">Manage your account settings and set e-mail preferences.</div>
@@ -67,7 +56,6 @@ class Dashboard extends Component {
                             </DataTable.Column>
                         </DataTable.Row>
                     </DataTable>
-                </div>
             </Layout>
         )
     }
