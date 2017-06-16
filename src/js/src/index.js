@@ -22,20 +22,23 @@ const store = createStore(
     )
 );
 
+const ROLE_ADMIN   = 'admin';
+const ROLE_MANAGER = 'manager';
+
 render(
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route name="Register" path="/" component={Register} />
-            <Route name="Login" path="/login" component={Login} />
-            <Route name="Logout" path="/logout" component={Logout} />
-            <Route name="Главная" path="/dashboard" component={Dashboard} >
-                <Route name="Отчеты" path="/reports" component={UnderConstruction} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Register" path="/" component={Register} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Login" path="/login" component={Login} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Logout" path="/logout" component={Logout} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} someData="ololo" name="Главная" path="/dashboard" component={Dashboard} >
+                <Route  roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Отчеты" path="/reports" component={UnderConstruction} />
             </Route>
-            <Route name="Заказы" path="/orders" component={Classes} />
-            <Route name="Товары" path="/products" component={UnderConstruction} />
-            <Route name="Бренды" path="/brands" component={UnderConstruction} />
-            <Route name="Персонал" path="/employers" component={UnderConstruction} />
-            <Route name="Настройки" path="/settings" component={UnderConstruction} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Заказы" path="/orders" component={Classes} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Товары" path="/products" component={UnderConstruction} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Бренды" path="/brands" component={UnderConstruction} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Персонал" path="/employers" component={UnderConstruction} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Настройки" path="/settings" component={UnderConstruction} />
         </Router>
     </Provider>,
     document.getElementById('root')

@@ -14,6 +14,7 @@ class Dashboard extends Component {
     }
 
     render() {
+        console.log(this);
         return (
             <Layout loggedIn={this.props.auth.loggedIn} router={this.props.router}>
                     <h2 className="ui header">
