@@ -7,13 +7,14 @@ import AuthAction from 'actions/AuthAction';
 
 class Login extends Component {
     componentWillMount() {
-        //document.body.style.backgroundColor = "#DADADA";
+        document.body.style.backgroundColor = "#DADADA";
     }
 
     componentWillReceiveProps(nextProps) {
         console.log('PROPS');
         console.log(nextProps.login.response.result);
         if (nextProps.login.response.result && nextProps.login.response.result.success) {
+            document.body.style.backgroundColor = "#FFFFFF";
             window.sessionStorage.setItem('token', nextProps.login.response.result.token)
             this.props.router.push('/dashboard');
         }

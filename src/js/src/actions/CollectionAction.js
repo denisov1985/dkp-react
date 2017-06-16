@@ -16,7 +16,7 @@ class CollectionAction
                     dispatch(ActionHelper.requestAction(entity, 'find', {}));
                     return fetch('/api/' + entity.replace('_', '/'))
                         .then(response  => response.json())
-                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'find', payload)))
+                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'find', payload.result)))
                         .catch(payload => dispatch(ActionHelper.errorAction(entity, 'find', payload)));
                 }
             },

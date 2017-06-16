@@ -12,10 +12,6 @@ function initialReducer(state = initialState, action) {
     return state;
 }
 
-let memberReducer = ReducerFactory.create('member');
-let userReducer = ReducerFactory.create('user');
-let testReducer = ReducerFactory.create('test');
-
 let user = combineReducers({
     collection: CollectionReducer.create('user'),
     update: UpdateReducer.create('user'),
@@ -26,7 +22,6 @@ let user = combineReducers({
 
 const rootReducer = combineReducers({
     initialReducer,
-    memberReducer,
     user
 });
 
