@@ -12,6 +12,7 @@ import Login from './containers/profile/Login';
 import Logout from './containers/profile/Logout';
 import Register from './containers/profile/Register';
 import Dashboard from './containers/dashboard/Dashboard';
+import Classes from './containers/member/Classes';
 import UnderConstruction from './containers/common/UnderConstruction';
 
 const store = createStore(
@@ -30,7 +31,7 @@ render(
             <Route name="Главная" path="/dashboard" component={Dashboard} >
                 <Route name="Отчеты" path="/reports" component={UnderConstruction} />
             </Route>
-            <Route name="Заказы" path="/orders" component={UnderConstruction} />
+            <Route name="Заказы" path="/orders" component={Classes} />
             <Route name="Товары" path="/products" component={UnderConstruction} />
             <Route name="Бренды" path="/brands" component={UnderConstruction} />
             <Route name="Персонал" path="/employers" component={UnderConstruction} />

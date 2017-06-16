@@ -36,16 +36,9 @@ class Classes extends Component {
     };
 
     render() {
+        console.log(this.props);
         return (
-            <Layout title="Users Management" router={this.props.router}>
-                <h2 className="ui header">
-                    <i className="users icon" />
-                    <div className="content">
-                        Classes
-                        <div className="sub header">Manage your guild members, roles and settings</div>
-                    </div>
-                </h2>
-
+            <Layout loggedIn={this.props.auth.loggedIn} router={this.props.router}>
                 <Button onClick={this.pressMeClick}>Refresh</Button><span className="margin-left-5"></span><Button color="primary" onClick={this.addUserClick}>Add user</Button>
 
                 <ModalDetails
@@ -168,17 +161,18 @@ class Classes extends Component {
 
 function mapStateToProps(state) {
     return {
-        member: state.users
+        member: state.user,
+        auth: state.auth
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            collection: bindActionCreators(CollectionAction.create('member'), dispatch),
-            update: bindActionCreators(UpdateAction.create('member'), dispatch),
-            delete: bindActionCreators(DeleteAction.create('member'), dispatch),
-            details: bindActionCreators(DetailsAction.create('member'), dispatch)
+            collection: bindActionCreators(CollectionAction.create('user'), dispatch),
+            update: bindActionCreators(UpdateAction.create('user'), dispatch),
+            delete: bindActionCreators(DeleteAction.create('user'), dispatch),
+            details: bindActionCreators(DetailsAction.create('user'), dispatch)
         }
     }
 }

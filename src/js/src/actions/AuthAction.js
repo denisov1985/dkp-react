@@ -27,7 +27,7 @@ class AuthAction
             logout() {
                 window.sessionStorage.removeItem('token')
                 return {
-                    type: ActionHelper.format('logout', entity, 'login'),
+                    type: ActionHelper.format('receive', entity, 'logout'),
                     payload: {}
                 };
             },

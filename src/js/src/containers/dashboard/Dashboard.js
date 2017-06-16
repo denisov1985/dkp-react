@@ -9,15 +9,11 @@ import Layout from '../Layout';
 
 class Dashboard extends Component {
 
-    componentWillMount() {
-        if (!this.props.auth.loggedIn) {
-            this.props.router.push('/login');
-            return false;
-        }
+    componentWillUnmount() {
+        this.props.actions.collection.unset();
     }
 
     render() {
-        console.log(this);
         return (
             <Layout loggedIn={this.props.auth.loggedIn} router={this.props.router}>
                     <h2 className="ui header">
@@ -66,6 +62,10 @@ class Dashboard extends Component {
                     </DataTable>
             </Layout>
         )
+    }
+
+    componentWillMount() {
+        this.props.actions.collection.findAll();
     }
 
     onRefreshClick = () => {

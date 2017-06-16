@@ -9,6 +9,10 @@ export default class Layout extends Component {
      */
     componentWillMount() {
         window.document.title = this.props.title || 'ISM Admin';
+        if (!this.props.loggedIn) {
+            this.props.router.push('/login');
+            return false;
+        }
     }
 
     /**

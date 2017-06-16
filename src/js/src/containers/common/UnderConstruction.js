@@ -7,19 +7,17 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <Layout router={this.props.router}>
+            <Layout loggedIn={this.props.auth.loggedIn} router={this.props.router}>
                 <h1>Under construction</h1>
             </Layout>
         )
     }
 }
 
-function mapStateToProps(state, ownProps) {
-    return {}
-}
+const mapStateToProps = (state, ownProps) => ({
+    auth: state.auth
+})
 
-function mapDispatchToProps(dispatch) {
-    return {}
-}
+const mapDispatchToProps = (dispatch) => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

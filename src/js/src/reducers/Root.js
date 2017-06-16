@@ -19,7 +19,7 @@ let user = combineReducers({
     details: DetailsReducer.create('user')
 });
 
-let auth = AuthReducer.create('user');
+let auth = AuthReducer.create('auth');
 
 const rootReducer = combineReducers({
     initialReducer,

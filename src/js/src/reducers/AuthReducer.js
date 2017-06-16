@@ -14,8 +14,6 @@ class AuthReducer
 
         return (state = initialState, action) => {
             let dataset = {};
-            console.log(action);
-            console.log(ActionHelper.format('request', entity, 'login'));
             switch (action.type) {
                 /**
                  * Request details
@@ -47,7 +45,7 @@ class AuthReducer
                 /**
                  * Unset details
                   */
-                case ActionHelper.format('logout', entity, 'login'):
+                case ActionHelper.format('receive', entity, 'logout'):
                     return {
                         ...state,
                         dataset: {},
