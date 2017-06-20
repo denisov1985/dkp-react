@@ -1,52 +1,33 @@
-import ActionHelper from './helpers/ActionHelper';
+import Action from './Action';
 
-class AuthAction
+class AuthAction extends Action
 {
     create() {
         return {
-            login: (credentials) => this.getApi().sendPost('login', credentials)
-        }
-    }
+            /**
+             * Login action
+             * @param credentials
+             */
+            login: (credentials) => this.getApi().sendPost('login', credentials),
 
-    create2(entity) {
-        return {
-            login(credentials) {
-                let request = credentials
-                return (dispatch, getState) => {
-                    dispatch(ActionHelper.requestAction(entity, 'login', credentials));
-                    return fetch('/api/user/login', {
-                        method: 'post',
-                        headers: {
-                            'Accept': 'application/json, text/plain, */*',
-                            'Content-Type': 'application/json',
-                            'Bearer': window.sessionStorage.getItem('token')
-                        },
-                        body: JSON.stringify(credentials)
-                    })
-                        .then(response  => response.json())
-                        .then(payload   => dispatch(ActionHelper.receiveAction(entity, 'login', payload, request)))
-                        .catch(payload => dispatch(ActionHelper.errorAction(entity, 'login', payload)));
-                }
+            /**
+             * Logout action
+             * @returns {*}
+             */
+            logout: () => {
+                window.sessionStorage.removeItem('token');
+                return this.createReceiveAction('logout', {});
             },
 
-            logout() {
-                window.sessionStorage.removeItem('token')
-                return {
-                    type: ActionHelper.format('receive', entity, 'logout'),
-                    payload: {}
-                };
-            },
-
-            update(field, value) {
-                return {
-                    type: ActionHelper.format('update', entity, 'login'),
-                    payload: {
-                        field: field,
-                        value: value
-                    },
-                    request: {}
-                };
-            }
+            /**
+             * Update login form action
+             * @param field
+             * @param value
+             */
+            update: (field, value) => this.createReceiveAction('update', {
+                field: field,
+                value: value
+            })
         }
     }
 }

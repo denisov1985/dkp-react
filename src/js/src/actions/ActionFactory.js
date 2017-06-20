@@ -22,7 +22,7 @@ class ActionFactory
      * @returns {auth|B|N}
      */
     createAuthActions(dispatch) {
-        return bindActionCreators(AuthAction.create('auth'), dispatch)
+        return bindActionCreators(new AuthAction('auth').create(), dispatch)
     }
 }
 
