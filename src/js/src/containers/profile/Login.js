@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import { Link } from 'react-router';
 import LoginForm from './forms/LoginForm';
 import AuthAction from 'actions/AuthAction';
+import ActionFactory from 'actions/ActionFactory';
 
 class Login extends Component {
     componentWillMount() {
@@ -39,9 +40,13 @@ class Login extends Component {
     }
 
     onLogin = () => {
-        console.log(this);
-        console.log(this.props.actions.auth);
         this.props.actions.auth.login(this.props.auth.dataset);
+    }
+
+    static mapStateToProps(state, ownProps) {
+        return {
+            auth: state.auth
+        }
     }
 
 }
@@ -56,9 +61,9 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            auth: bindActionCreators(AuthAction.create('auth'), dispatch)
+            auth: ActionFactory.createAuthActions(dispatch)
         }
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(Login.mapStateToProps, mapDispatchToProps)(Login)

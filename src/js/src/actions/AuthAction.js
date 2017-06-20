@@ -5,7 +5,6 @@ class AuthAction
     create(entity) {
         return {
             login(credentials) {
-                console.log('LOGIN');
                 let request = credentials
                 return (dispatch, getState) => {
                     dispatch(ActionHelper.requestAction(entity, 'login', credentials));

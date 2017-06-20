@@ -35,7 +35,7 @@ export default class Layout extends Component {
                         <Navigation.Item align="right" path="/login">Вход</Navigation.Item>}
                 </Navigation>
 
-                <div style={{marginLeft: '14px', mmarginRight: '14px'}}>
+                <div style={{marginLeft: '14px', marginRight: '14px'}}>
                     <Breadcrumbs
                         separator={<i className="right angle icon divider"/>}
                         wrapperClass="ui breadcrumb"
