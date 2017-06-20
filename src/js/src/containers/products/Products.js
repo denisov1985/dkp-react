@@ -4,11 +4,9 @@ import {connect} from 'react-redux'
 import Layout from '../Layout';
 import Container from '../common/Container';
 
-class Products extends Container {
+class Products extends Component {
 
-    test() {
-        console.log('test');
-    }
+
     render() {
         console.log(this);
         return (<h1>123123</h1>)
@@ -16,4 +14,4 @@ class Products extends Container {
 
 }
 
-export default Products.connect(Products);
+export default Products;
