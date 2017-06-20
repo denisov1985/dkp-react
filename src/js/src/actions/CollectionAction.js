@@ -1,23 +1,13 @@
-import ActionHelper from './helpers/ActionHelper';
-import ApiRequest from '../middleware/ApiRequest';
+import Action from './Action';
 
-class CollectionAction
+class CollectionAction extends Action
 {
-    create(entity) {
+    create() {
         return {
-            findAll() {
-                return ApiRequest.create(entity, 'find').get();
-            },
-
-            unset() {
-                return {
-                    type: ActionHelper.format('unset', entity, 'find'),
-                    payload: [],
-                    request: {}
-                };
-            },
+            findAll: () => this.getApi().sendGet('find', {}),
+            unset: () => this.createReceiveAction('unset', {}),
         }
     }
 }
 
-export default new CollectionAction();
+export default CollectionAction;

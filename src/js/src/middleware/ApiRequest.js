@@ -1,65 +1,72 @@
 class ApiRequest
 {
-    create(entity, action) {
-        const createAction = (payload, type) => ({
-            type: [type.toUpperCase(), entity.toUpperCase(), action.toUpperCase()].join('_'),
-            payload: payload
-        });
 
-        const createEndpointUrl = () => ApiRequest.ENDPOINT_URL + entity.replace('_', '/').toLowerCase() + '/' + action.toLowerCase();
+    /**
+     * Class constructor
+     */
+    constructor(entity, actionProvider) {
+        this.entity = entity;
+        this.actionProvider = actionProvider;
+    }
 
-        const createHeaders = () => {
-            let headers = {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json',
-            }
-            let token = window.sessionStorage.getItem('token');
-            if (token) {
-                headers.Bearer = token;
-            }
-            return headers;
+    /**
+     * Get all headers
+     */
+    getHeaders() {
+        let headers = {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
         }
-
-        return {
-            /**
-             * Get request
-             * @param payload
-             * @returns {function(*, *)}
-             */
-            get: (payload) => {
-                return (dispatch, getState) => {
-                    dispatch(createAction(payload, 'request'));
-                    return fetch(createEndpointUrl(), {
-                        method: 'get',
-                        headers: createHeaders()
-                    })
-                        .then(raw => raw.json())
-                        .then(response  => dispatch(createAction(response.result, 'receive')))
-                        .catch(response => dispatch(createAction(response.result, 'error')))
-                };
-            },
-
-            /**
-             * Post request
-             * @param payload
-             * @returns {function(*, *)}
-             */
-            post: (payload) => {
-                return (dispatch, getState) => {
-                    dispatch(createAction(payload, 'request'));
-                    return fetch(createEndpointUrl(), {
-                        method: 'get',
-                        headers: createHeaders(),
-                        body: JSON.stringify(payload)
-                    })
-                        .then(raw => raw.json())
-                        .then(response  => dispatch(createAction(response.result, 'receive')))
-                        .catch(response => dispatch(createAction(response.result, 'error')))
-                };
-            }
+        let token = window.sessionStorage.getItem('token');
+        if (token) {
+            headers.Bearer = token;
         }
+        return headers;
+    }
+
+    /**
+     * Create endpoint URL helper
+     */
+    getEndpoint = (action) => {
+        return ApiRequest.ENDPOINT_URL + this.entity.replace('_', '/').toLowerCase() + '/' + action.toLowerCase()
+    };
+
+    /**
+     * Get request action
+     */
+    sendGet(action, payload) {
+        return (dispatch, getState) => {
+            dispatch(this.actionProvider.createRequestAction(action, payload));
+            return fetch(this.getEndpoint(action), {
+                method: 'get',
+                headers: this.getHeaders()
+            })
+                .then(raw => raw.json())
+                .then(response  => dispatch(this.actionProvider.createReceiveAction(action, response.result)))
+                .catch(response => dispatch(this.actionProvider.createErrorAction(action, response.result)))
+        };
+    };
+
+    /**
+     * Send POST request
+     * @param action
+     * @param payload
+     * @returns {function(*, *)}
+     */
+    sendPost(action, payload) {
+        return (dispatch, getState) => {
+            dispatch(this.actionProvider.createRequestAction(action, payload));
+            return fetch(this.getEndpoint(action), {
+                method: 'post',
+                headers: this.getHeaders(),
+                body: JSON.stringify(payload)
+            })
+                .then(raw => raw.json())
+                .then(response  => dispatch(this.actionProvider.createReceiveAction(action, response.result)))
+                .catch(response => dispatch(this.actionProvider.createErrorAction(action, response.result)))
+        };
     }
 }
 
 ApiRequest.ENDPOINT_URL = '/api/';
-export default new ApiRequest();
+export default ApiRequest;

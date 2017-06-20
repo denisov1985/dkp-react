@@ -41,7 +41,7 @@ class Dashboard extends Component {
                                 <DataTable.Cell.Text />
                             </DataTable.Column>
 
-                            <DataTable.Column title="User Name" width="300" field="name" sortable="1">
+                            <DataTable.Column sortType="date" title="User Name" width="300" field="name" sortable="1">
                                 <DataTable.Cell.Text  />
                             </DataTable.Column>
 
@@ -85,7 +85,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            collection: bindActionCreators(CollectionAction.create('user'), dispatch)
+            collection: bindActionCreators(new CollectionAction('user').create(), dispatch)
         }
     }
 }

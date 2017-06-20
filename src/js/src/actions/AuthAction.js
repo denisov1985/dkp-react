@@ -2,7 +2,13 @@ import ActionHelper from './helpers/ActionHelper';
 
 class AuthAction
 {
-    create(entity) {
+    create() {
+        return {
+            login: (credentials) => this.getApi().sendPost('login', credentials)
+        }
+    }
+
+    create2(entity) {
         return {
             login(credentials) {
                 let request = credentials
@@ -45,4 +51,4 @@ class AuthAction
     }
 }
 
-export default new AuthAction();
+export default AuthAction;

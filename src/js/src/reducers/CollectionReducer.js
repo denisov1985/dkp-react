@@ -13,6 +13,7 @@ class CollectionReducer
         };
 
         return (state = initialState, action) => {
+            console.log(action);
             switch (action.type) {
                 case ActionHelper.format('unset', entity, 'find'):
                     return {
