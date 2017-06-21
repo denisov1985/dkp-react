@@ -9,6 +9,7 @@
 namespace ApiBundle\Services;
 
 
+use ApiBundle\Services\Security\JWSProvider;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,6 +17,7 @@ class ActionAbstract
 {
     protected $em;
     protected $entity;
+    protected $jwsProvider;
 
     /**
      * Constructor
@@ -23,10 +25,19 @@ class ActionAbstract
      * @param $entity
      * @param EntityManager $em
      */
-    public function __construct($entity, $em)
+    public function __construct($entity, $em, $jwsProvider)
     {
-        $this->entity = $entity;
-        $this->em     = $em;
+        $this->entity      = $entity;
+        $this->em          = $em;
+        $this->jwsProvider = $jwsProvider;
+    }
+
+    /**
+     * Get JWT provider
+     * @return JWSProvider
+     */
+    protected function getJWSProvider() {
+        return $this->jwsProvider;
     }
 
     /**
@@ -50,5 +61,35 @@ class ActionAbstract
             $data = json_decode($content, true); // 2nd param to get as array
         }
         return $data;
+    }
+
+    /**
+     * Get user data from token
+     * @param Request $request
+     * @return array|null|object
+     */
+    protected function getUserDataFromToken(Request $request) {
+        $headers = $request->headers->all();
+        if (!isset($headers['bearer'])) {
+            return [];
+        }
+        $token = $headers['bearer'][0];
+        try {
+            $userData = $this->getJWSProvider()->decode($token);
+        }   catch (\Exception $e) {
+            return [];
+        }
+        $userId = $userData['payload']['id'];
+
+        if (!isset($userData['payload']['id'])) {
+            return [];
+        }
+
+        $user = $this->em->getRepository('ApiBundle:User')->find($userId);
+        return $user;
+    }
+
+    protected function createResponse(Request $request, $data) {
+
     }
 }

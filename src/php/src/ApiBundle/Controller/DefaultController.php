@@ -20,15 +20,6 @@ class DefaultController extends Controller
     {
         $actionResolver = $this->get('api.action_resolver');
         return $actionResolver->resolve($path, $request);
-
-        $collection = $this->getDoctrine()
-            ->getRepository('ApiBundle:' . $this->resolveEntity($path))
-            ->findAll();
-        return new Response(
-            $this->serialize($collection),
-            Response::HTTP_OK,
-            ['Content-Type', 'application/json']
-        );
     }
 
     public function resolveEntity($path)

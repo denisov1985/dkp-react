@@ -8,7 +8,6 @@
 
 namespace ApiBundle\Services;
 
-
 use Symfony\Component\HttpFoundation\Request;
 
 class ActionFind extends ActionAbstract implements ActionInterface

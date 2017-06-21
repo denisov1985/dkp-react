@@ -12,26 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ActionLogin extends ActionAbstract  implements ActionInterface
 {
-
-    protected $jwsProvider;
-
-    /**
-     * ActionLogin constructor.
-     * @param $entity
-     * @param EntityManager $em
-     * @param $jwsProvider
-     */
-    public function __construct($entity, $em, $jwsProvider)
-    {
-        parent::__construct($entity, $em);
-        $this->jwsProvider = $jwsProvider;
-    }
-
     /**
      * Handle request
      * @param Request $request
      * @param $params
      * @return array
+     * @throws \Exception
      */
     public function handle(Request $request, $params)
     {

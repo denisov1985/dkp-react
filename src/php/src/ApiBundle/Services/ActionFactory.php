@@ -27,11 +27,11 @@ class ActionFactory
                 break;
 
             case self::ACTION_FIND:
-                return new ActionFind($entity, $this->em);
+                return new ActionFind($entity, $this->em, $this->jwsProvider);
                 break;
 
             case self::ACTION_GET:
-                return new ActionGet($entity, $this->em);
+                return new ActionGet($entity, $this->em, $this->jwsProvider);
                 break;
         }
     }
