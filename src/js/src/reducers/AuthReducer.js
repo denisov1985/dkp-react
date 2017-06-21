@@ -1,68 +1,56 @@
-import ActionHelper from '../utils/ActionHelper';
-import CollectionHelper from '../utils/CollectionHelper';
-import ActionFactory from '../actions/ActionFactory';
+import Reducer from './Reducer';
+import { Map } from 'immutable';
 
-class AuthReducer
+/**
+ * Authenticate reducer
+ */
+class AuthReducer extends Reducer
 {
-    create(entity) {
-        let initialState = {
-            status: ActionFactory.STATUS_EMPTY,
-            dataset: {},
-            response: {},
-            loggedIn: window.sessionStorage.getItem('token') ? true : false
-        };
+    initState = () => ({
+        response: {
+            errorMessage: '',
+            result: {}
+        },
+        loggedIn: window.sessionStorage.getItem('token') ? true : false
+    })
 
-        return (state = initialState, action) => {
+    create() {
+        return (state = this.getInitialState(), action) => {
             let dataset = {};
             switch (action.type) {
                 /**
-                 * Request details
+                 * Request login
                  */
-                case ActionHelper.format('request', entity, 'login'):
-                    console.log('request login');
-                    return {
-                        ...state,
-                        response: {},
-                        status: ActionFactory.STATUS_FETCHING
-                    };
+                case this.formatRequestAction('login'):
+                    return state.set('response', Map({}))
+                        .set('status', this.statusLoading())
                     break;
 
                 /**
-                 * Receive details
+                 * Receive login
                   */
-                case ActionHelper.format('receive', entity, 'login'):
+                case this.formatReceiveAction('login'):
                     if (action.payload.result.success) {
                         window.sessionStorage.setItem('token', action.payload.result.token)
                     }
-                    return {
-                        ...state,
-                        loggedIn: action.payload.result.success,
-                        response: action.payload,
-                        status: ActionFactory.STATUS_COMPLETE
-                    };
+                    return state.set('loggedIn', action.payload.result.success)
+                        .set('response', Map(action.payload))
+                        .set('status', this.statusComplete())
                     break;
 
                 /**
-                 * Unset details
+                 * Logout user
                   */
-                case ActionHelper.format('receive', entity, 'logout'):
-                    return {
-                        ...state,
-                        dataset: {},
-                        loggedIn: false
-                    };
+                case this.formatReceiveAction('logout'):
+                    return state.set('dataset', Map({}))
+                        .set('loggedIn', false);
                     break;
 
                 /**
-                 * Update details
+                 * Update login form
                   */
-                case ActionHelper.format('update', entity, 'login'):
-                    dataset = {...state.dataset};
-                    dataset[action.payload.field] = action.payload.value;
-                    return {
-                        ...state,
-                        dataset: dataset
-                    };
+                case this.formatReceiveAction('update'):
+                    return state.updateIn(['dataset'], dataset => dataset.set(action.payload.field, action.payload.value))
                     break;
             }
             return state;
@@ -70,4 +58,4 @@ class AuthReducer
     }
 }
 
-export default new AuthReducer();
+export default AuthReducer;

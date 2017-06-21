@@ -7,6 +7,11 @@ class ApiRequest
     constructor(entity, actionProvider) {
         this.entity = entity;
         this.actionProvider = actionProvider;
+
+        this.STATUS_EMPTY    = 0;
+        this.STATUS_LOADING  = 1;
+        this.STATUS_COMPLETE = 2;
+        this.STATUS_ERROR    = 3;
     }
 
     /**
@@ -61,8 +66,12 @@ class ApiRequest
                 headers: this.getHeaders(),
                 body: JSON.stringify(payload)
             })
-                .then(raw => raw.json())
-                .then(response  => dispatch(this.actionProvider.createReceiveAction(action, response.result)))
+                .then(response => {
+                    return response.json();
+                })
+                .then(response  => {
+                    return dispatch(this.actionProvider.createReceiveAction(action, response))
+                })
                 .catch(response => dispatch(this.actionProvider.createErrorAction(action, response.result)))
         };
     }

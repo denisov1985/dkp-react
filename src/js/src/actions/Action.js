@@ -11,6 +11,10 @@ export default class Action
     constructor(entity) {
         this.entity = entity;
         this.api    = new ApiRequest(entity, this);
+
+        this.TYPE_REQUEST = 'request'
+        this.TYPE_RECEIVE = 'receive'
+        this.TYPE_ERROR   = 'error'
     }
 
     /**

@@ -56,6 +56,7 @@ class CollectionReducer
                     break;
 
                 case ActionHelper.format('receive', entity, 'update'):
+                    return state;
                     return {
                         ...state,
                         dataset: CollectionHelper.updateData(action.payload.data, state.dataset),

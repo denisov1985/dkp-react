@@ -1,13 +1,9 @@
 import React, {Component} from 'react'
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
-import { Link } from 'react-router';
-import LoginForm from './forms/LoginForm';
-import AuthAction from 'actions/AuthAction';
+import ActionFactory from 'actions/ActionFactory';
+import Container from '../common/Container';
 
-class Logout extends Component {
+class Logout extends Container {
     componentWillMount() {
-        console.log(this.props.actions.auth.logout);
         this.props.actions.auth.logout();
         this.props.router.push('/login');
         return false;
@@ -22,20 +18,14 @@ class Logout extends Component {
             </div>
         )
     }
-}
 
-function mapStateToProps(state, ownProps) {
-    return {
+    static mapStateToProps = (state, ownProps) => ({
         auth: state.auth
-    }
+    })
+
+    static mapDispatchToProps = (dispatch) => ({
+        auth: ActionFactory.createAuthActions(dispatch)
+    })
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: {
-            auth: bindActionCreators(AuthAction.create('auth'), dispatch)
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Logout)
+export default Logout.connect();

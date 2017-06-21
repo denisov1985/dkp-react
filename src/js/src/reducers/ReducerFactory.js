@@ -11,7 +11,7 @@ import UpdateReducer from './UpdateReducer';
 export default class ReducerFactory
 {
     static createAuthReducer() {
-        return AuthReducer.create('auth')
+        return new AuthReducer('user').create()
     }
 
     static createCrudReducer(entity) {
