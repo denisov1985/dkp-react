@@ -27,9 +27,34 @@ class AuthAction extends Action
             update: (field, value) => this.createReceiveAction('update', {
                 field: field,
                 value: value
-            })
+            }),
+
+            /**
+             * Init user session
+             */
+            initSession: () => {
+                return this.createReceiveAction('init_session', {
+                    token: window.sessionStorage.getItem('token')
+                });
+            }
         }
     }
+
+    /**
+     * Save token to session storage
+     * @param action
+     * @param response
+     */
+    onReceiveResponse(action, response) {
+        switch (action) {
+            case 'login':
+                if (response.result.success) {
+                    window.sessionStorage.setItem('token', response.result.token)
+                }
+                break;
+        }
+    }
+
 }
 
 export default AuthAction;

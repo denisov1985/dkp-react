@@ -70,6 +70,13 @@ class ApiRequest
                     return response.json();
                 })
                 .then(response  => {
+                    console.log('receive login');
+                    console.log(response);
+                    if (typeof this.actionProvider.onReceiveResponse === 'function') {
+                        console.log('check begin');
+                        this.actionProvider.onReceiveResponse(action, response)
+                    }
+                    console.log('check complete');
                     return dispatch(this.actionProvider.createReceiveAction(action, response))
                 })
                 .catch(response => dispatch(this.actionProvider.createErrorAction(action, response.result)))

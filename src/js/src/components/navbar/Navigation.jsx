@@ -5,10 +5,6 @@ import NavigationItem from './NavigationItem';
 
 class Navigation extends CoreComponent {
 
-    shouldComponentUpdate() {
-        return false;
-    }
-
     buildClass() {
         this.addClass('ui inverted secondary menu');
     }

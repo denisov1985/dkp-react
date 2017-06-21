@@ -12,8 +12,6 @@ export default class Reducer
     constructor(entity) {
         this.entity = entity;
         this.action = new Action(entity);
-
-        console.log(this);
     }
 
     /**

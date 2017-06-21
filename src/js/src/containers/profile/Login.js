@@ -1,26 +1,25 @@
 import React, {Component} from 'react'
 import LoginForm from './forms/LoginForm';
-import ActionFactory from 'actions/ActionFactory';
 import Container from '../common/Container';
 import Background from 'components/view/Background';
 
 class Login extends Container {
 
     componentWillMount() {
-        if (this.props.auth.loggedIn) {
-            this.props.router.push('/dashboard');
+        this.props.actions.auth.initSession();
+        if (this.props.auth.get('loggedIn')) {
+            this.redirect('dashboard');
             return false;
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.auth.loggedIn) {
-            this.props.router.push('/dashboard');
+        if (nextProps.auth.get('loggedIn')) {
+            this.redirect('dashboard');
         }
     }
 
     render() {
-        console.log(this.props.auth.toObject())
         return (
             <Background>
                 <div className="ui three column centered grid">
@@ -39,16 +38,9 @@ class Login extends Container {
     }
 
     onLogin = () => {
-        this.props.actions.auth.login(this.props.auth.dataset);
+        this.props.actions.auth.login(this.props.auth.get('dataset').toObject());
     }
 
-    static mapStateToProps = (state, ownProps) => ({
-        auth: state.auth
-    })
-
-    static mapDispatchToProps = (dispatch) => ({
-        auth: ActionFactory.createAuthActions(dispatch)
-    })
 }
 
 export default Login.connect();

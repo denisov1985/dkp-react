@@ -6,17 +6,24 @@ import { Map } from 'immutable';
  */
 class AuthReducer extends Reducer
 {
+    /**
+     * Initial state
+     */
     initState = () => ({
         response: {
             errorMessage: '',
             result: {}
         },
-        loggedIn: window.sessionStorage.getItem('token') ? true : false
+        loggedIn: false
     })
 
+    /**
+     * Create reducer
+     * @returns {function(*=, *)}
+     */
     create() {
         return (state = this.getInitialState(), action) => {
-            let dataset = {};
+
             switch (action.type) {
                 /**
                  * Request login
@@ -30,12 +37,16 @@ class AuthReducer extends Reducer
                  * Receive login
                   */
                 case this.formatReceiveAction('login'):
-                    if (action.payload.result.success) {
-                        window.sessionStorage.setItem('token', action.payload.result.token)
-                    }
                     return state.set('loggedIn', action.payload.result.success)
                         .set('response', Map(action.payload))
                         .set('status', this.statusComplete())
+                    break;
+
+                /**
+                 * Init user session
+                 */
+                case this.formatReceiveAction('init_session'):
+                    return state.set('loggedIn', !!action.payload.token);
                     break;
 
                 /**

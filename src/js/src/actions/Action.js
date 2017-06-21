@@ -25,6 +25,18 @@ export default class Action
     formatAction = (action, type) => [type.toUpperCase(), this.entity.toUpperCase(), action.toUpperCase()].join('_');
 
     /**
+     * Format receive action
+     * @param action
+     */
+    formatReceiveAction = (action) => [Action.TYPE_RECEIVE.toUpperCase(), this.entity.toUpperCase(), action.toUpperCase()].join('_');
+
+    /**
+     * Format request action
+     * @param action
+     */
+    formatRequestAction = (action) => [Action.TYPE_REQUEST.toUpperCase(), this.entity.toUpperCase(), action.toUpperCase()].join('_');
+
+    /**
      * Create action helper
      * @param action
      * @param type
@@ -44,7 +56,10 @@ export default class Action
      * Create receive action
      * @param action
      */
-    createReceiveAction = (action, payload) => this.createAction(action, Action.TYPE_RECEIVE, payload);
+    createReceiveAction = (action, payload) => {
+        //console.log(this.createAction(action, Action.TYPE_RECEIVE, payload));
+        return this.createAction(action, Action.TYPE_RECEIVE, payload)
+    };
 
     /**
      * Create error action

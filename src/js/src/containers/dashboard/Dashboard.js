@@ -1,22 +1,22 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
 import DataTable from 'components/data-table/DataTable';
 import Button from 'components/controls/Button';
 import CollectionAction from '../../actions/CollectionAction';
-import AuthAction from '../../actions/AuthAction';
 import Layout from '../Layout';
+import Container from '../common/Container';
 
-class Dashboard extends Component {
+class Dashboard extends Container {
 
     componentWillUnmount() {
         this.props.actions.collection.unset();
     }
 
     render() {
-        console.log(this);
+        console.log('Is logged in');
+        console.log(this.isLoggedIn());
         return (
-            <Layout loggedIn={this.props.auth.loggedIn} router={this.props.router}>
+            <Layout loggedIn={this.isLoggedIn()} router={this.props.router}>
                     <h2 className="ui header">
                         Account Settings
                         <div className="sub header">Manage your account settings and set e-mail preferences.</div>
@@ -66,6 +66,7 @@ class Dashboard extends Component {
     }
 
     componentWillMount() {
+        super.componentWillMount();
         this.props.actions.collection.findAll();
     }
 
@@ -73,21 +74,13 @@ class Dashboard extends Component {
         this.props.actions.collection.findAll();
     }
 
-}
-
-function mapStateToProps(state, ownProps) {
-    return {
+    static mapStateToProps = (state, ownProps) => ({
         user: state.user,
-        auth: state.auth
-    }
+    })
+
+    static mapDispatchToProps = (dispatch) => ({
+        collection: bindActionCreators(new CollectionAction('user').create(), dispatch)
+    })
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: {
-            collection: bindActionCreators(new CollectionAction('user').create(), dispatch)
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default Dashboard.connect();

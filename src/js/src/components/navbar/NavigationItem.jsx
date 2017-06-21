@@ -4,14 +4,6 @@ import CoreComponent from '../core/CoreComponent';
 
 class NavigationItem extends CoreComponent {
 
-    /**
-     * Optimize unnecessary rendering
-     * @returns {boolean}
-     */
-    shouldComponentUpdate() {
-        return false;
-    }
-
     buildClass() {
         this.addClass('item');
         if (this.props.align && this.props.align === 'right') {
