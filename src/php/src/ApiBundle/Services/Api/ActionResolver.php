@@ -11,8 +11,70 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ActionResolver
 {
-    public function resolve(Request $request)
-    {
+    protected $actionFactory;
 
+    function __construct($actionFactory)
+    {
+        $this->actionFactory = $actionFactory;
+    }
+
+    public function resolve(Request $request, $path)
+    {
+        $actionParams = new ActionParams(
+            $this->resolveEntity($path),
+            $this->resolveAction($path),
+            $this->resolveParams($path),
+            $this->resolveData($request)
+        );
+        $action = $this->actionFactory->create($actionParams);
+        return $action->getResponse();
+    }
+
+    /**
+     * Resolve data fro request
+     * @param Request $request
+     * @return array
+     */
+    protected function resolveData(Request $request) {
+        $content = $request->getContent();
+        if (!empty($content))
+        {
+            return json_decode($content, true);
+        }
+        return [];
+    }
+
+    /**
+     * Resolve api entity
+     * @param $path
+     * @return string
+     */
+    protected function resolveEntity($path) {
+        $parts = explode('/', $path);
+        return ucfirst($parts[0]);
+    }
+
+    /**
+     * Resolve api action
+     * @param $path
+     * @return string
+     */
+    protected function resolveAction($path) {
+        $parts = explode('/', $path);
+        return isset($parts[1]) ? $parts[1] : 'find';
+    }
+
+    /**
+     * Resolve params
+     * @param $path
+     * @return string
+     */
+    protected function resolveParams($path) {
+        $parts = explode('/', $path);
+        if (!isset($parts[2])) {
+            return [];
+        }
+        unset($parts[0], $parts[1]);
+        return array_values($parts);
     }
 }

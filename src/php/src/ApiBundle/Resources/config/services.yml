@@ -1,11 +1,15 @@
 services:
     api.action_resolver:
-        class: ApiBundle\Services\ActionResolver
-        arguments: ["@api.action_factory", "@jms_serializer"]
+        class: ApiBundle\Services\Api\ActionResolver
+        arguments: ["@api.action_factory"]
 
     api.action_factory:
-        class: ApiBundle\Services\ActionFactory
-        arguments: ["@doctrine.orm.entity_manager", "@api.security_jws_provider"]
+        class: ApiBundle\Services\Api\ActionFactory
+        arguments: ["@doctrine.orm.entity_manager"]
+
+    api.action_serializer:
+        class: ApiBundle\Services\Api\ActionSerializer
+        arguments: ["@jms_serializer"]
 
     api.security_jws_provider:
             class: ApiBundle\Services\Security\JWSProvider

@@ -19,7 +19,11 @@ class DefaultController extends Controller
     public function indexAction($path, Request $request)
     {
         $actionResolver = $this->get('api.action_resolver');
-        return $actionResolver->resolve($path, $request);
+        $actionSerializer = $this->get('api.action_serializer');
+        $response = $actionResolver->resolve($request, $path);
+        return new JsonResponse([
+            'result' => $response->getResult($actionSerializer)
+        ]);
     }
 
     public function resolveEntity($path)
