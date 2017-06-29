@@ -14,13 +14,24 @@ class ActionParams
     protected $action;
     protected $params;
     protected $data;
+    protected $token;
 
-    public function __construct($entity, $action, $params, $data)
+    public function __construct($entity, $action, $params, $data, $token)
     {
         $this->entity = $entity;
         $this->action = $action;
         $this->params = $params;
         $this->data   = $data;
+        $this->token  = $token;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 
     /**

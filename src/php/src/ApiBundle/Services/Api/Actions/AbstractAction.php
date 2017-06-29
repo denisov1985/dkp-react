@@ -9,12 +9,19 @@
 namespace ApiBundle\Services\Api\Actions;
 
 
-use ApiBundle\Services\Api\ActionResponse;
+use ApiBundle\Services\Api\ActionParams;
+use ApiBundle\Services\Api\ErrorResponse;
+use ApiBundle\Services\Api\Exceptions\ApiException;
+use ApiBundle\Services\Api\Response;
+use JMS\Serializer\SerializationContext;
 
 abstract class AbstractAction
 {
     protected $actionParams;
     protected $status = 200;
+    protected $serializer;
+
+
     /**
      * AbstractAction constructor.
      * @param $em
@@ -23,6 +30,24 @@ abstract class AbstractAction
     {
         $this->em = $em;
         $this->actionParams = $actionParams;
+        $this->serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+    }
+
+    /**
+     * Serialize data
+     * @param $content
+     * @return mixed
+     */
+    protected function serialize($content) {
+        return json_decode($this->serializer->serialize($content, 'json', SerializationContext::create()->setSerializeNull(true)));
+    }
+
+    /**
+     * @return ActionParams
+     */
+    public function getActionParams()
+    {
+        return $this->actionParams;
     }
 
     /**
@@ -37,6 +62,15 @@ abstract class AbstractAction
 
     public function getResponse()
     {
-        return new ActionResponse($this->handle(), $this->status);
+        try {
+            $result = $this->handle();
+        }   catch (ApiException $e) {
+            return new ErrorResponse($e->getMessage(), $e->getCode(), $e->getErrors());
+        }
+        return $this->getResponseInstance($this->handle());
+    }
+
+    protected function getResponseInstance($result) {
+        return new Response($result);
     }
 }

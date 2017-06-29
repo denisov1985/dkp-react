@@ -23,7 +23,7 @@ class Login extends Container {
         return (
             <Background>
                 <div className="ui three column centered grid">
-                    <div className="column center aligned" style={{position: 'fixed', top: '25%'}}>
+                    <div className="column center aligned" style={{position: 'fixed', top: '25%', maxWidth: '400px'}}>
                         <h2 className="ui teal image  header  center aligned">
                             <img src="/img/login.png" className="image"/>
                             <div className="content">

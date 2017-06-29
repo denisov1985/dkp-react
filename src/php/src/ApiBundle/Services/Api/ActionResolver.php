@@ -24,10 +24,22 @@ class ActionResolver
             $this->resolveEntity($path),
             $this->resolveAction($path),
             $this->resolveParams($path),
-            $this->resolveData($request)
+            $this->resolveData($request),
+            $this->resolveToken($request)
         );
-        $action = $this->actionFactory->create($actionParams);
-        return $action->getResponse();
+
+        return $this->actionFactory
+            ->create($actionParams)
+            ->getResponse();
+    }
+
+    /**
+     * Resolve request token
+     * @param Request $request
+     * @return array
+     */
+    protected function resolveToken(Request $request) {
+        return [];
     }
 
     /**

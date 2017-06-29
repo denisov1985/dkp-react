@@ -2,6 +2,7 @@
 
 namespace ApiBundle\Entity;
 
+use JMS\Serializer\Annotation\Exclude;
 /**
  * User
  */
@@ -23,6 +24,7 @@ class User
     private $email;
 
     /**
+     * @Exclude
      * @var string
      */
     private $password;

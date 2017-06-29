@@ -8,6 +8,11 @@ use JMS\Serializer\SerializationContext;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class DefaultController
+ * @package ApiBundle\Controller
+ */
+
 class DefaultController extends Controller
 {
     /**
@@ -21,9 +26,7 @@ class DefaultController extends Controller
         $actionResolver = $this->get('api.action_resolver');
         $actionSerializer = $this->get('api.action_serializer');
         $response = $actionResolver->resolve($request, $path);
-        return new JsonResponse([
-            'result' => $response->getResult($actionSerializer)
-        ]);
+        return new JsonResponse($response->getResult(), $response->getStatus());
     }
 
     public function resolveEntity($path)
