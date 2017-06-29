@@ -24,6 +24,12 @@ class ActionFactory
     createAuthActions(dispatch) {
         return bindActionCreators(new AuthAction('user').create(), dispatch)
     }
+
+    createCrudActions(dispatch) {
+        return {
+            collection: bindActionCreators(new CollectionAction('user').create(), dispatch)
+        }
+    }
 }
 
 export default new ActionFactory();

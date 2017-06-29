@@ -21,7 +21,6 @@ export default class Layout extends Component {
      * @returns {XML}
      */
     render() {
-        console.log(this);
         return (
             <div>
                 <Navigation router={this.props.router}>

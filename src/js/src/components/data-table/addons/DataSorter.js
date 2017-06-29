@@ -34,16 +34,19 @@ export default class DataSorter extends CoreComponent {
 DataSorter.sort = (field, order) => {
     let result = order ? -1 : 1;
     let sorters = {
-        default: (a, b) => {
-            if (a[field] > b[field]) {
+        default: (aa, bb) => {
+            let a = aa.getIn(['attributes', field]);
+            let b = bb.getIn(['attributes', field]);
+
+            if (a > b) {
                 return result;
             }
 
-            if (a[field] < b[field]) {
+            if (a < b) {
                 return result * -1
             }
 
-            if (a[field] === b[field]) {
+            if (a === b) {
                 return 0
             }
         }

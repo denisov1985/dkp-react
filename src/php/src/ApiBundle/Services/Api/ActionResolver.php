@@ -39,7 +39,11 @@ class ActionResolver
      * @return array
      */
     protected function resolveToken(Request $request) {
-        return [];
+        $headers = $request->headers->all();
+        if (!isset($headers['bearer'])) {
+            return null;
+        }
+        return $headers['bearer'][0];
     }
 
     /**

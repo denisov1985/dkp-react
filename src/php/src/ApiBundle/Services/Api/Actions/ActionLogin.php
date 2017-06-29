@@ -26,7 +26,7 @@ class ActionLogin extends AbstractAction
 
     protected function getResponseInstance($response) {
         $encoder = new JWSProvider();
-        return new AuthResponse($response, $encoder->encode($this->user));
+        return new AuthResponse($response, $encoder->encode($this->serialize($this->user)));
     }
 
     protected function handle()
@@ -34,11 +34,11 @@ class ActionLogin extends AbstractAction
         $data = $this->getActionParams()->getData();
 
         if (empty($data['email'])) {
-            throw new ApiException('Email is not set', 403);
+            throw new ApiException('Email is not set');
         }
 
         if (empty($data['password'])) {
-            throw new ApiException('Password is not set', 403);
+            throw new ApiException('Password is not set');
         }
 
         $user = $this->getRepository('user')->findOneBy([
@@ -47,7 +47,7 @@ class ActionLogin extends AbstractAction
         ]);
 
         if (is_null($user)) {
-            throw new ApiException('Bad credentials', 403);
+            throw new ApiException('Bad credentials');
         }
 
         $this->user = $user;

@@ -1,5 +1,5 @@
 import Reducer from './Reducer';
-import { Map } from 'immutable';
+import { fromJS, Map } from 'immutable';
 
 /**
  * Authenticate reducer
@@ -10,10 +10,7 @@ class AuthReducer extends Reducer
      * Initial state
      */
     initState = () => ({
-        response: {
-            errorMessage: '',
-            result: {}
-        },
+        response: {},
         loggedIn: false
     })
 
@@ -37,8 +34,8 @@ class AuthReducer extends Reducer
                  * Receive login
                   */
                 case this.formatReceiveAction('login'):
-                    return state.set('loggedIn', action.payload.result.success)
-                        .set('response', Map(action.payload))
+                    return state.set('response', fromJS(action.payload))
+                        .set('loggedIn', !!action.payload.token)
                         .set('status', this.statusComplete())
                     break;
 

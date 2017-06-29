@@ -29,7 +29,6 @@ export default class Reducer
      * @returns {*}
      */
     formatRequestAction(action) {
-        console.log(this.action.TYPE_REQUEST);
         return this.formatAction(action, this.action.TYPE_REQUEST);
     }
 
@@ -76,7 +75,7 @@ export default class Reducer
     /**
      * Init client state
      */
-    initState = () => {}
+    initState = () => ({})
 
     /**
      * Get reducer initial state

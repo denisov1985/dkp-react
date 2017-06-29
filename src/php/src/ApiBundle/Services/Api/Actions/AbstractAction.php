@@ -54,7 +54,10 @@ abstract class AbstractAction
      * Get repository helper
      * @return \Doctrine\ORM\EntityRepository
      */
-    protected function getRepository($entity) {
+    protected function getRepository($entity = null) {
+        if (is_null($entity)) {
+            $entity = $this->getActionParams()->getEntity();
+        }
         return $this->em->getRepository('ApiBundle:' . ucfirst($entity));
     }
 
@@ -63,12 +66,18 @@ abstract class AbstractAction
     public function getResponse()
     {
         try {
+            $this->preAction();
             $result = $this->handle();
+            $this->postAction();
         }   catch (ApiException $e) {
             return new ErrorResponse($e->getMessage(), $e->getCode(), $e->getErrors());
         }
-        return $this->getResponseInstance($this->handle());
+        return $this->getResponseInstance($result);
     }
+
+    protected function preAction() {}
+
+    protected function postAction() {}
 
     protected function getResponseInstance($result) {
         return new Response($result);

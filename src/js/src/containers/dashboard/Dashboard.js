@@ -13,8 +13,6 @@ class Dashboard extends Container {
     }
 
     render() {
-        console.log('Is logged in');
-        console.log(this.isLoggedIn());
         return (
             <Layout loggedIn={this.isLoggedIn()} router={this.props.router}>
                     <h2 className="ui header">
@@ -25,9 +23,9 @@ class Dashboard extends Container {
                     <Button onClick={this.onRefreshClick}>Refresh</Button><span className="margin-left-5"></span>
 
                     <DataTable
-                        dataset={this.props.user.collection.dataset}
-                        status={this.props.user.collection.status}
-                        join={this.props.user.collection.join}
+                        dataset={this.props.user.collection.get('dataset')}
+                        status={this.props.user.collection.get('status')}
+                        join={this.props.user.collection.get('join')}
                         pagination="default"
                     >
                         <DataTable.Row>
@@ -47,10 +45,6 @@ class Dashboard extends Container {
 
                             <DataTable.Column title="User Email" field="email" sortable="1">
                                 <DataTable.Cell.Text  />
-                            </DataTable.Column>
-
-                            <DataTable.Column title="Actions" width="300" field="password" sortable="1">
-                                <DataTable.Cell.Text />
                             </DataTable.Column>
 
                             <DataTable.Column title="" width="85" field="id">

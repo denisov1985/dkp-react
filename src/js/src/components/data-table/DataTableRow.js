@@ -8,8 +8,8 @@ export default class DataTableRow extends CoreComponent {
         if (this.isSelected()) {
             this.addClass('active');
         }
-        let status = this.getNested(this.props.table.props, ['join', this.props.record.id, 'id', 'default', 'status'], 0)
-
+        //let status = this.getNested(this.props.table.props, ['join', this.props.record.id, 'id', 'default', 'status'], 0)
+        let status = 0;
         if (status === 1) {
             this.addClass('disabled');
         }

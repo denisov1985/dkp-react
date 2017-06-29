@@ -16,7 +16,7 @@ const LoginForm = ({onLogin, handler, provider}) => (
                          fluid="yes">Login</Form.Button>
         </Form.Wrapper>
 
-        <Form.Error errorMessage={provider.getIn(['response', 'errorMessage'])} />
+        <Form.Error errorMessage={provider.getIn(['response', 'error', 'message'])} />
 
         <div className="ui message">
             New to us? <Link to="/" activeStyle={{textDecoration: 'none', color: 'black'}}>

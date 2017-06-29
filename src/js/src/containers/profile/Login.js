@@ -30,7 +30,10 @@ class Login extends Container {
                                 Log-in to your account
                             </div>
                         </h2>
-                        <LoginForm provider={this.props.auth} handler={this.props.actions.auth.update} onLogin={this.onLogin} />
+                        <LoginForm
+                            provider={this.props.auth}
+                            handler={this.props.actions.auth.update}
+                            onLogin={this.onLogin} />
                     </div>
                 </div>
             </Background>

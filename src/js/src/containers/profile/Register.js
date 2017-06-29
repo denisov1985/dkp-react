@@ -9,9 +9,6 @@ class Register extends Component {
     }
 
     render() {
-
-        console.log(this);
-
         return (
             <div className="ui three column centered grid">
                 <div className="column center aligned" style={{position: 'fixed', top: '25%'}}>

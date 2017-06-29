@@ -11,12 +11,7 @@ export default class CoreCell extends CoreComponent {
     }
 
     getFieldValue(props) {
-        let parts = props.column.props.field.split('.');
-        let item = props.record;
-        for (let i in parts) {
-            item = item[parts[i]];
-        }
-        return item
+        return props.record.getIn(['attributes', props.column.props.field]);
     }
 
     /**

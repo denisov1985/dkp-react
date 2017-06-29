@@ -48,8 +48,8 @@ class AuthAction extends Action
     onReceiveResponse(action, response) {
         switch (action) {
             case 'login':
-                if (response.result.success) {
-                    window.sessionStorage.setItem('token', response.result.token)
+                if (response.token) {
+                    window.sessionStorage.setItem('token', response.token)
                 }
                 break;
         }

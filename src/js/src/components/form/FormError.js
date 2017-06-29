@@ -11,7 +11,6 @@ export default class FormError extends CoreComponent {
     }
 
     render() {
-        console.log(this);
         return (<div className={this.getClass()}>
             <ul className="list">
                 <li>{this.props.errorMessage}</li>

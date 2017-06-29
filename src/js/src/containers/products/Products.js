@@ -8,7 +8,6 @@ class Products extends Component {
 
 
     render() {
-        console.log(this);
         return (<h1>123123</h1>)
     }
 

@@ -8,7 +8,9 @@
 
 namespace ApiBundle\Services\Api;
 
+use ApiBundle\Services\Api\Actions\AbstractAction;
 use ApiBundle\Services\Api\Actions\ActionLogin;
+use ApiBundle\Services\Api\Actions\ActionFind;
 
 /**
  * Class ActionFactory
@@ -36,7 +38,7 @@ class ActionFactory
     /**
      * Create action from params
      * @param ActionParams $actionParams
-     * @return ActionLogin
+     * @return AbstractAction
      */
     public function create(ActionParams $actionParams)
     {
@@ -46,7 +48,7 @@ class ActionFactory
                 break;
 
             case self::ACTION_FIND:
-                //return new ActionFind();
+                return new ActionFind($this->em, $actionParams);
                 break;
 
             case self::ACTION_GET:

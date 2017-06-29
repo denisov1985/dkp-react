@@ -16,17 +16,13 @@ export default class ReducerFactory
 
     static createCrudReducer(entity) {
         return combineReducers({
-            collection: CollectionReducer.create(entity),
-            update: UpdateReducer.create(entity),
-            delete: DeleteReducer.create(entity),
-            details: DetailsReducer.create(entity)
+            collection: new CollectionReducer('user').create(),
         })
     }
 
     static createReadReducer(entity) {
         return combineReducers({
-            collection: CollectionReducer.create(entity),
-            details: DetailsReducer.create(entity)
+            collection: CollectionReducer.create(entity)
         })
     }
 

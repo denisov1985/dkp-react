@@ -36,7 +36,6 @@ class Classes extends Component {
     };
 
     render() {
-        console.log(this.props);
         return (
             <Layout loggedIn={this.props.auth.loggedIn} router={this.props.router}>
                 <Button onClick={this.pressMeClick}>Refresh</Button><span className="margin-left-5"></span><Button color="primary" onClick={this.addUserClick}>Add user</Button>
