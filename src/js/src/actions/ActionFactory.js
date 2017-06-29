@@ -25,9 +25,10 @@ class ActionFactory
         return bindActionCreators(new AuthAction('user').create(), dispatch)
     }
 
-    createCrudActions(dispatch) {
+    createCrudActions(dispatch, entity) {
         return {
-            collection: bindActionCreators(new CollectionAction('user').create(), dispatch)
+            collection: bindActionCreators(new CollectionAction(entity).create(), dispatch),
+            details: bindActionCreators(new DetailsAction(entity).create(), dispatch),
         }
     }
 }

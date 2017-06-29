@@ -106,6 +106,15 @@ export default class DefaultComponent extends Component {
 
     getStyle() {
         this.reset();
+
+        if (this.getProp('shiftLeft', false)) {
+            this.addStyle('marginLeft', this.getProp('shiftLeft') + 'px')
+        }
+
+        if (this.getProp('shiftRight', false)) {
+            this.addStyle('marginRight', this.getProp('shiftRight') + 'px')
+        }
+
         this.buildStyle();
         return this.styleData;
     }

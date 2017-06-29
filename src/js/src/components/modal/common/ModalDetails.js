@@ -44,21 +44,27 @@ export default class ModalDetails extends CoreComponent {
     }
 
     renderModal() {
+        const status = {
+            details: this.props.provider.details.get('status'),
+            update: 0,
+            delete: 0,
+        }
+
         return (<div>{this.showDeleteConfirm()}
-           <Modal order="1" animation="none" key="1" visible={this.props.entity.details.status === 2} onClose={this.props.onClose}>
-                <Modal.Header>{this.getProp('title')}</Modal.Header>
+           <Modal order="1" animation="none" key="1" visible={status.details === 2} onClose={this.props.onClose}>
+                <Modal.Header>{this.getProp('title', 'Modal Dialog')}</Modal.Header>
                 <Modal.Body >
                     {this.props.children}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button disabled={this.props.entity.update.status === 1}
-                            loading={this.props.entity.delete.status === 1}
+                    <Button disabled={status.update === 1}
+                            loading={status.delete === 1}
                             onClick={this.onDelete}
                             position="left"
                             color="negative"
                             icon="trash">Delete</Button>
                     <Button onClick={this.onClose} icon="remove">Close</Button>
-                    <Button disabled={this.props.entity.delete.status === 1} loading={this.props.entity.update.status === 1} onClick={this.onSave} color="positive" icon="checkmark">Save</Button>
+                    <Button disabled={status.delete === 1} loading={status.update === 1} onClick={this.onSave} color="positive" icon="checkmark">Save</Button>
                 </Modal.Footer>
             </Modal>
             </div>
@@ -86,10 +92,11 @@ export default class ModalDetails extends CoreComponent {
     }
 
     render() {
-        if (this.props.entity.details.status === 0) {
+        const status = this.props.provider.details.get('status');
+        if (status === 0) {
             return null;
         }
-        if (this.props.entity.details.status === 1) {
+        if (status === 1) {
             return this.renderLoading();
         }
         return this.renderModal();

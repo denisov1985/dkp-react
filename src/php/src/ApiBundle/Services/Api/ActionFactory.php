@@ -11,6 +11,7 @@ namespace ApiBundle\Services\Api;
 use ApiBundle\Services\Api\Actions\AbstractAction;
 use ApiBundle\Services\Api\Actions\ActionLogin;
 use ApiBundle\Services\Api\Actions\ActionFind;
+use ApiBundle\Services\Api\Actions\ActionGet;
 
 /**
  * Class ActionFactory
@@ -52,7 +53,7 @@ class ActionFactory
                 break;
 
             case self::ACTION_GET:
-                //return new ActionGet();
+                return new ActionGet($this->em, $actionParams);
                 break;
         }
     }

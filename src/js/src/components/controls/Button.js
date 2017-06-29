@@ -42,6 +42,6 @@ export default class Button extends CoreComponent {
     }
 
     render() {
-        return (<button onClick={this.onClick} className={this.getClass()} type="button">{this.getIcon()}{this.props.children}</button>)
+        return (<button onClick={this.onClick} style={this.getStyle()} className={this.getClass()} type="button">{this.getIcon()}{this.props.children}</button>)
     }
 }

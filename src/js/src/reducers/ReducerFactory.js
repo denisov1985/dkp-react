@@ -16,7 +16,8 @@ export default class ReducerFactory
 
     static createCrudReducer(entity) {
         return combineReducers({
-            collection: new CollectionReducer('user').create(),
+            collection: new CollectionReducer(entity).create(),
+            details: new DetailsReducer(entity).create(),
         })
     }
 

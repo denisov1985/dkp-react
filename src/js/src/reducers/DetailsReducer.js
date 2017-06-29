@@ -1,86 +1,35 @@
-import ActionHelper from '../utils/ActionHelper';
-import CollectionHelper from '../utils/CollectionHelper';
-import ActionFactory from '../actions/ActionFactory';
+import Reducer from './Reducer';
+import { fromJS, Map, List } from 'immutable';
 
-class DetailsReducer
+class DetailsReducer extends Reducer
 {
-    create(entity) {
-        let initialState = {
-            status: ActionFactory.STATUS_EMPTY,
-            dataset: {}
-        };
-
-        return (state = initialState, action) => {
-            let dataset = {};
+    create() {
+        return (state = this.getInitialState(), action) => {
+            let payload = fromJS(action.payload);
+            console.log(action);
             switch (action.type) {
                 /**
-                 * Request details
+                 * Request login
                  */
-                case ActionHelper.format('request', entity, 'details'):
-                    return {
-                        ...state,
-                        dataset: {},
-                        status: ActionFactory.STATUS_FETCHING
-                    };
+                case this.formatRequestAction('get'):
+                    return state.set('dataset', Map([]))
+                        .set('status', this.statusLoading())
                     break;
 
                 /**
-                 * Receive details
-                  */
-                case ActionHelper.format('receive', entity, 'details'):
-                    return {
-                        ...state,
-                        dataset: action.payload,
-                        status: ActionFactory.STATUS_COMPLETE
-                    };
+                 * Receive login
+                 */
+                case this.formatReceiveAction('get'):
+                    return state.set('dataset', payload.get('data'))
+                        .set('status', this.statusComplete())
                     break;
 
                 /**
-                 * Unset details
-                  */
-                case ActionHelper.format('unset', entity, 'details'):
-                    return {
-                        ...state,
-                        dataset: {},
-                        status: ActionFactory.STATUS_EMPTY
-                    };
-                    break;
-
-                /**
-                 * Update details
-                  */
-                case ActionHelper.format('update', entity, 'details'):
-                    dataset = {...state.dataset};
-                    dataset[action.payload.field] = action.payload.value;
-                    return {
-                        ...state,
-                        dataset: dataset
-                    };
-                    break;
-
-                case ActionHelper.format('update', entity, 'login'):
-                    dataset = {...state.dataset};
-                    dataset[action.payload.field] = action.payload.value;
-                    return {
-                        ...state,
-                        dataset: dataset
-                    };
-                    break;
-
-
-                /**
-                 * Delete details
-                  */
-                case ActionHelper.format('receive', entity, 'delete'):
-                    if (action.request.data.id !== state.dataset.id) {
-                        return state;
-                    }
-                    return {
-                        ...state,
-                        dataset: {},
-                        status: ActionFactory.STATUS_EMPTY
-                    };
-
+                 * Receive login
+                 */
+                case this.formatReceiveAction('unset'):
+                    return state.set('dataset', payload.get('data'))
+                        .set('status', this.statusEmpty())
                     break;
             }
             return state;
@@ -88,4 +37,4 @@ class DetailsReducer
     }
 }
 
-export default new DetailsReducer();
+export default DetailsReducer;

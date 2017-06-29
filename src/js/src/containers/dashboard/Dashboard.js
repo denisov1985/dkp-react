@@ -3,8 +3,11 @@ import {bindActionCreators} from 'redux'
 import DataTable from 'components/data-table/DataTable';
 import Button from 'components/controls/Button';
 import CollectionAction from '../../actions/CollectionAction';
+import ActionFactory from '../../actions/ActionFactory';
 import Layout from '../Layout';
 import Container from '../common/Container';
+
+import ModalDetails from 'components/modal/common/ModalDetails';;
 
 class Dashboard extends Container {
 
@@ -13,6 +16,7 @@ class Dashboard extends Container {
     }
 
     render() {
+        console.log(this);
         return (
             <Layout loggedIn={this.isLoggedIn()} router={this.props.router}>
                     <h2 className="ui header">
@@ -21,6 +25,10 @@ class Dashboard extends Container {
                     </h2>
 
                     <Button onClick={this.onRefreshClick}>Refresh</Button><span className="margin-left-5"></span>
+
+                    <ModalDetails onClose={this.onCloseDetails} provider={this.props.user}>
+                        lalala
+                    </ModalDetails>
 
                     <DataTable
                         dataset={this.props.user.collection.get('dataset')}
@@ -47,9 +55,9 @@ class Dashboard extends Container {
                                 <DataTable.Cell.Text  />
                             </DataTable.Column>
 
-                            <DataTable.Column title="" width="85" field="id">
+                            <DataTable.Column title="" width="88" field="id">
                                 <DataTable.Cell.Default>
-                                    <Button  icon="write" color="primary" size="mini" />
+                                    <Button onClick={this.onGetUserDetails} icon="write" size="mini" shiftRight="5" />
                                     <Button  icon="trash" color="negative" size="mini" />
                                 </DataTable.Cell.Default>
                             </DataTable.Column>
@@ -68,13 +76,22 @@ class Dashboard extends Container {
         this.props.actions.collection.findAll();
     }
 
+    onGetUserDetails = (event, target) => {
+        console.log(target);
+        this.props.actions.details.get(
+            target.props.record.getIn(['attributes', 'id'])
+        )
+    }
+
+    onCloseDetails = (event, target) => {
+        this.props.actions.details.unset()
+    }
+
     static mapStateToProps = (state, ownProps) => ({
         user: state.user,
     })
 
-    static mapDispatchToProps = (dispatch) => ({
-        collection: bindActionCreators(new CollectionAction('user').create(), dispatch)
-    })
+    static mapDispatchToProps = (dispatch) => ActionFactory.createCrudActions(dispatch, 'user')
 }
 
 export default Dashboard.connect();

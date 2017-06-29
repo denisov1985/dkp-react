@@ -32,8 +32,14 @@ class ApiRequest
     /**
      * Create endpoint URL helper
      */
-    getEndpoint = (action) => {
-        return ApiRequest.ENDPOINT_URL + this.entity.replace('_', '/').toLowerCase() + '/' + action.toLowerCase()
+    getEndpoint = (action, payload) => {
+        const query = (payload && payload.query) ? payload.query : {};
+        const parts = Object.values(query);
+        let params = parts.join('/');
+        if (params) {
+            params = '/' + params;
+        }
+        return ApiRequest.ENDPOINT_URL + this.entity.replace('_', '/').toLowerCase() + '/' + action.toLowerCase() + params
     };
 
     /**
@@ -42,7 +48,7 @@ class ApiRequest
     sendGet(action, payload) {
         return (dispatch, getState) => {
             dispatch(this.actionProvider.createRequestAction(action, payload));
-            return fetch(this.getEndpoint(action), {
+            return fetch(this.getEndpoint(action, payload), {
                 method: 'get',
                 headers: this.getHeaders()
             })
