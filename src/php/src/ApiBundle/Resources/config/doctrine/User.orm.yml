@@ -9,7 +9,11 @@ ApiBundle\Entity\User:
             generator:
                 strategy: AUTO
     fields:
-        name:
+        first_name:
+            type: string
+            length: 255
+            nullable: true
+        last_name:
             type: string
             length: 255
         email:
@@ -18,6 +22,8 @@ ApiBundle\Entity\User:
         password:
             type: string
             length: 255
+        gender:
+            type: smallint
         isActive:
             type: boolean
             column: is_active

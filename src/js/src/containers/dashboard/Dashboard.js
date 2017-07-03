@@ -6,8 +6,10 @@ import CollectionAction from '../../actions/CollectionAction';
 import ActionFactory from '../../actions/ActionFactory';
 import Layout from '../Layout';
 import Container from '../common/Container';
+import Form from 'components/form/Form';
 
-import ModalDetails from 'components/modal/common/ModalDetails';;
+import ModalDetails from 'components/modal/common/ModalDetails';
+;
 
 class Dashboard extends Container {
 
@@ -16,53 +18,71 @@ class Dashboard extends Container {
     }
 
     render() {
-        console.log(this);
         return (
             <Layout loggedIn={this.isLoggedIn()} router={this.props.router}>
-                    <h2 className="ui header">
-                        Account Settings
-                        <div className="sub header">Manage your account settings and set e-mail preferences.</div>
-                    </h2>
+                <h2 className="ui header">
+                    Account Settings
+                    <div className="sub header">Manage your account settings and set e-mail preferences.</div>
+                </h2>
 
-                    <Button onClick={this.onRefreshClick}>Refresh</Button><span className="margin-left-5"></span>
+                <Button onClick={this.onRefreshClick}>Refresh</Button><span className="margin-left-5"></span>
 
-                    <ModalDetails onClose={this.onCloseDetails} provider={this.props.user}>
-                        lalala
-                    </ModalDetails>
+                <ModalDetails onClose={this.onCloseDetails} provider={this.props.user}>
+                    <Form provider={this.props.user.details} handler={this.props.actions.details.update} className="ui form">
+                        <Form.Row>
+                            <Form.Input.Text name="first_name" />
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Input.Text name="last_name" />
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Input.Text name="email" />
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Input.Text name="password" />
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Input.Number name="gender" />
+                        </Form.Row>
+                        <Form.Row>
+                            <input type="checkbox" id="apibundle_user_isActive" name="apibundle_user[isActive]" value="1" />
+                        </Form.Row><Form.Input.Hidden name="_token" />
+                    </Form>
+                </ModalDetails>
 
-                    <DataTable
-                        dataset={this.props.user.collection.get('dataset')}
-                        status={this.props.user.collection.get('status')}
-                        join={this.props.user.collection.get('join')}
-                        pagination="default"
-                    >
-                        <DataTable.Row>
-                            <DataTable.Column title="" width="40" field="id">
-                                <DataTable.Cell.Default>
-                                    <DataTable.Controls.Checkbox />
-                                </DataTable.Cell.Default>
-                            </DataTable.Column>
+                <DataTable
+                    dataset={this.props.user.collection.get('dataset')}
+                    status={this.props.user.collection.get('status')}
+                    join={this.props.user.collection.get('join')}
+                    pagination="default"
+                >
+                    <DataTable.Row>
+                        <DataTable.Column title="" width="40" field="id">
+                            <DataTable.Cell.Default>
+                                <DataTable.Controls.Checkbox />
+                            </DataTable.Cell.Default>
+                        </DataTable.Column>
 
-                            <DataTable.Column title="ID" width="50" sortable="1" field="id">
-                                <DataTable.Cell.Text />
-                            </DataTable.Column>
+                        <DataTable.Column title="ID" width="50" sortable="1" field="id">
+                            <DataTable.Cell.Text />
+                        </DataTable.Column>
 
-                            <DataTable.Column sortType="date" title="User Name" width="300" field="name" sortable="1">
-                                <DataTable.Cell.Text  />
-                            </DataTable.Column>
+                        <DataTable.Column sortType="date" title="User Name" width="300" field="name" sortable="1">
+                            <DataTable.Cell.Text  />
+                        </DataTable.Column>
 
-                            <DataTable.Column title="User Email" field="email" sortable="1">
-                                <DataTable.Cell.Text  />
-                            </DataTable.Column>
+                        <DataTable.Column title="User Email" field="email" sortable="1">
+                            <DataTable.Cell.Text  />
+                        </DataTable.Column>
 
-                            <DataTable.Column title="" width="88" field="id">
-                                <DataTable.Cell.Default>
-                                    <Button onClick={this.onGetUserDetails} icon="write" size="mini" shiftRight="5" />
-                                    <Button  icon="trash" color="negative" size="mini" />
-                                </DataTable.Cell.Default>
-                            </DataTable.Column>
-                        </DataTable.Row>
-                    </DataTable>
+                        <DataTable.Column title="" width="88" field="id">
+                            <DataTable.Cell.Default>
+                                <Button onClick={this.onGetUserDetails} icon="write" size="mini" shiftRight="5"/>
+                                <Button icon="trash" color="negative" size="mini"/>
+                            </DataTable.Cell.Default>
+                        </DataTable.Column>
+                    </DataTable.Row>
+                </DataTable>
             </Layout>
         )
     }

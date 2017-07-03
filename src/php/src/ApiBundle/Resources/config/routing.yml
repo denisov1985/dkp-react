@@ -3,3 +3,4 @@ api_homepage:
     defaults: { _controller: ApiBundle:Default:index }
     requirements:
         path: ".+"
+

@@ -1,0 +1,40 @@
+{% extends 'base2.html.twig' %}
+
+{% form_theme form _self %}
+
+{%- block form_start -%}
+PHP_EOL<Form provider={this.props.user.details} handler={this.props.actions.details.update} className="ui form">
+{%- endblock form_start -%}
+
+{%- block form_end -%}
+PHP_EOL</Form>
+{%- endblock form_end -%}
+
+{%- block form_row -%}
+    PHP_EOL#<Form.Row>
+    #{{- form_widget(form) -}}
+    PHP_EOL#</Form.Row>
+{%- endblock form_row -%}
+
+{%- block widget_attributes -%}
+    id="{{ id }}" name="{{ full_name }}"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required="required"{% endif -%}
+    {{ block('attributes') }}
+{%- endblock widget_attributes -%}
+
+{%- block form_widget_simple -%}
+    {%- set type = type|default('text') -%}
+    <Form.Input.{{ type|capitalize }} name="{{ name }}" />
+{%- endblock form_widget_simple -%}
+
+{%- block form_widget_compound -%}
+    {{- block('form_rows') -}}
+    {{- form_rest(form) -}}
+{%- endblock form_widget_compound -%}
+
+{% block body %}
+    {# ... render the form #}
+    <textarea cols="160" rows="20">{{ form(form)|replace({"PHP_EOL": "\n", "#": " "}) }}</textarea>
+    {{ entity }}
+{% endblock %}

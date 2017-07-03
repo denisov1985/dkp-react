@@ -140,5 +140,120 @@ class User
     {
         return $this->isActive;
     }
-}
+    /**
+     * @var string
+     */
+    private $first_name;
 
+    /**
+     * @var string
+     */
+    private $last_name;
+
+    /**
+     * @var integer
+     */
+    private $gander;
+
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->first_name = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->last_name = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
+
+    /**
+     * Set gander
+     *
+     * @param integer $gander
+     *
+     * @return User
+     */
+    public function setGander($gander)
+    {
+        $this->gander = $gander;
+
+        return $this;
+    }
+
+    /**
+     * Get gander
+     *
+     * @return integer
+     */
+    public function getGander()
+    {
+        return $this->gander;
+    }
+    /**
+     * @var integer
+     */
+    private $gender;
+
+
+    /**
+     * Set gender
+     *
+     * @param integer $gender
+     *
+     * @return User
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return integer
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+}

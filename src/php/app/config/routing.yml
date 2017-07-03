@@ -5,3 +5,7 @@ frontend:
 api:
     resource: "@ApiBundle/Resources/config/routing.yml"
     prefix:   /api
+
+api_test:
+    path:     /test/{entity}
+    defaults: { _controller: ApiBundle:Default:test }

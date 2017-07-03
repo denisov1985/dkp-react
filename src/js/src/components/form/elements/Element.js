@@ -18,9 +18,7 @@ export default class Element extends CoreComponent {
      * @returns {*}
      */
     getFieldName() {
-        let name = this.props.name;
-        let parts = name.split('.');
-        return parts[1];
+        return this.props.name
     }
 
     /**
@@ -28,21 +26,7 @@ export default class Element extends CoreComponent {
      * @returns {*}
      */
     getValue() {
-        let name = this.props.name;
-        let parts = name.split('.');
-        if (this.props.form.props.dataset == undefined) {
-            return '';
-        }
-        if (this.props.form.props.dataset[parts[1]] == null) {
-            return '';
-        }
-        let item = this.props.form.props.dataset;
-        for (let i in parts) {
-            if (i > 0) {
-                item = item[parts[i]];
-            }
-        }
-        return item;
+        return this.props.form.props.provider.getIn(['dataset', 'attributes', this.props.name]);
     }
 
     /**

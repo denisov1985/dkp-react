@@ -2,7 +2,7 @@ frontend_homepage:
     path:     /{path}
     defaults: { _controller: FrontendBundle:Default:index }
     requirements:
-        path: "^(?!img|api|build).+"
+        path: "^(?!img|api|build|test).+"
 
 frontend_homepage_default:
     path:     /

@@ -25,11 +25,18 @@ class DetailsReducer extends Reducer
                     break;
 
                 /**
-                 * Receive login
+                 *
                  */
                 case this.formatReceiveAction('unset'):
                     return state.set('dataset', payload.get('data'))
                         .set('status', this.statusEmpty())
+                    break;
+
+                /**
+                 * Update details
+                 */
+                case this.formatReceiveAction('update'):
+                    return state.updateIn(['dataset', 'attributes'], attributes => attributes.set(action.payload.field, action.payload.value))
                     break;
             }
             return state;

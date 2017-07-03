@@ -17,15 +17,19 @@ class LoadUsersData implements FixtureInterface
         foreach ($data as $item) {
             $member = new User();
             $member->setIsActive($item['isActive']);
-            $member->setName($item['name']);
+            $member->setFirstName($item['name']);
+            $member->setLastName($item['name'] . ' last Name');
             $member->setPassword(md5(rand(1, 1000)));
+            $member->setGender(rand(0, 2));
             $member->setEmail($item['email']);
             $manager->persist($member);
         }
 
         $member = new User();
         $member->setIsActive(1);
-        $member->setName('Dimon');
+        $member->setFirstName('Dimon');
+        $member->setLastName('Denisov');
+        $member->setGender(1);
         $member->setPassword(md5('555935'));
         $member->setEmail('denisov1985@gmail.com');
         $manager->persist($member);
