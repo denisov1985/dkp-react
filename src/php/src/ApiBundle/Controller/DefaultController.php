@@ -25,17 +25,7 @@ class DefaultController extends Controller
      */
     public function indexAction($path, Request $request)
     {
-        // 1) build the form
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-
-        $view =  $form->createView();
-
-        var_dump($view);
-        die();
-
         $actionResolver = $this->get('api.action_resolver');
-        $actionSerializer = $this->get('api.action_serializer');
         $response = $actionResolver->resolve($request, $path);
         return new JsonResponse($response->getResult(), $response->getStatus());
     }

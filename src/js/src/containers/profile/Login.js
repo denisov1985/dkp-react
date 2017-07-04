@@ -20,6 +20,7 @@ class Login extends Container {
     }
 
     render() {
+        console.log(this);
         return (
             <Background>
                 <div className="ui three column centered grid">
@@ -41,6 +42,7 @@ class Login extends Container {
     }
 
     onLogin = () => {
+        console.log(this.props.auth);
         this.props.actions.auth.login(this.props.auth.get('dataset').toObject());
     }
 
