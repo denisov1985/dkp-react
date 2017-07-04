@@ -67,7 +67,11 @@ class Dashboard extends Container {
                             <DataTable.Cell.Text />
                         </DataTable.Column>
 
-                        <DataTable.Column sortType="date" title="User Name" width="300" field="name" sortable="1">
+                        <DataTable.Column sortType="date" title="User Name" width="300" field="first_name" sortable="1">
+                            <DataTable.Cell.Text  />
+                        </DataTable.Column>
+
+                        <DataTable.Column sortType="date" title="User Name" width="300" field="last_name" sortable="1">
                             <DataTable.Cell.Text  />
                         </DataTable.Column>
 
