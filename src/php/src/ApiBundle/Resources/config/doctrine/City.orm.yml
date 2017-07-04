@@ -1,7 +1,7 @@
-ApiBundle\Entity\Member:
+ApiBundle\Entity\City:
     type: entity
     table: null
-    repositoryClass: ApiBundle\Repository\MemberRepository
+    repositoryClass: ApiBundle\Repository\CityRepository
     id:
         id:
             type: integer
@@ -12,13 +12,19 @@ ApiBundle\Entity\Member:
         name:
             type: string
             length: 255
-        email:
+        lat:
             type: string
             length: 255
-        password:
+        lon:
             type: string
             length: 255
-        isActive:
-            type: boolean
-            column: is_active
+        region_id:
+            type: integer
     lifecycleCallbacks: {  }
+    manyToOne:
+        region:
+            targetEntity: Region
+            inversedBy: cities
+            joinColumn:
+                name: region_id
+                referencedColumnName: id

@@ -256,4 +256,178 @@ class User
     {
         return $this->gender;
     }
+    /**
+     * @var integer
+     */
+    private $address_id;
+
+    /**
+     * @var \ApiBundle\Entity\Address
+     */
+    private $address;
+
+
+    /**
+     * Set addressId
+     *
+     * @param integer $addressId
+     *
+     * @return User
+     */
+    public function setAddressId($addressId)
+    {
+        $this->address_id = $addressId;
+
+        return $this;
+    }
+
+    /**
+     * Get addressId
+     *
+     * @return integer
+     */
+    public function getAddressId()
+    {
+        return $this->address_id;
+    }
+
+    /**
+     * Set address
+     *
+     * @param \ApiBundle\Entity\Address $address
+     *
+     * @return User
+     */
+    public function setAddress(\ApiBundle\Entity\Address $address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \ApiBundle\Entity\Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+    /**
+     * @var integer
+     */
+    private $cityId;
+
+    /**
+     * @var integer
+     */
+    private $regionId;
+
+    /**
+     * @var \ApiBundle\Entity\Region
+     */
+    private $region;
+
+    /**
+     * @var \ApiBundle\Entity\City
+     */
+    private $city;
+
+
+    /**
+     * Set cityId
+     *
+     * @param integer $cityId
+     *
+     * @return User
+     */
+    public function setCityId($cityId)
+    {
+        $this->cityId = $cityId;
+
+        return $this;
+    }
+
+    /**
+     * Get cityId
+     *
+     * @return integer
+     */
+    public function getCityId()
+    {
+        return $this->cityId;
+    }
+
+    /**
+     * Set regionId
+     *
+     * @param integer $regionId
+     *
+     * @return User
+     */
+    public function setRegionId($regionId)
+    {
+        $this->regionId = $regionId;
+
+        return $this;
+    }
+
+    /**
+     * Get regionId
+     *
+     * @return integer
+     */
+    public function getRegionId()
+    {
+        return $this->regionId;
+    }
+
+    /**
+     * Set region
+     *
+     * @param \ApiBundle\Entity\Region $region
+     *
+     * @return User
+     */
+    public function setRegion(\ApiBundle\Entity\Region $region = null)
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * Get region
+     *
+     * @return \ApiBundle\Entity\Region
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * Set city
+     *
+     * @param \ApiBundle\Entity\City $city
+     *
+     * @return User
+     */
+    public function setCity(\ApiBundle\Entity\City $city = null)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return \ApiBundle\Entity\City
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
 }

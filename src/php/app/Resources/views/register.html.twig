@@ -33,6 +33,10 @@ PHP_EOL</Form>
     {{- form_rest(form) -}}
 {%- endblock form_widget_compound -%}
 
+{%- block choice_widget_collapsed -%}
+    <Form.Select name="{{ name }}" provider={this.props.{{ name }}.details} />
+{%- endblock choice_widget_collapsed -%}
+
 {% block body %}
     {# ... render the form #}
     <textarea cols="160" rows="20">{{ form(form)|replace({"PHP_EOL": "\n", "#": " "}) }}</textarea>

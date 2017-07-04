@@ -1,7 +1,7 @@
-ApiBundle\Entity\User:
+ApiBundle\Entity\Address:
     type: entity
     table: null
-    repositoryClass: ApiBundle\Repository\UserRepository
+    repositoryClass: ApiBundle\Repository\AddressRepository
     id:
         id:
             type: integer
@@ -9,21 +9,6 @@ ApiBundle\Entity\User:
             generator:
                 strategy: AUTO
     fields:
-        first_name:
-            type: string
-            length: 255
-            nullable: true
-        last_name:
-            type: string
-            length: 255
-        email:
-            type: string
-            length: 255
-        password:
-            type: string
-            length: 255
-        gender:
-            type: smallint
         cityId:
             type: integer
             column: city_id
@@ -32,9 +17,6 @@ ApiBundle\Entity\User:
             type: integer
             column: region_id
             nullable: true
-        isActive:
-            type: boolean
-            column: is_active
     lifecycleCallbacks: {  }
     manyToOne:
         region:
