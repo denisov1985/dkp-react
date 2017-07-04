@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
 import InputText from './elements/InputText';
+import Dropdown from './elements/Dropdown';
 import InputIconText from './elements/InputIconText';
 import Row from './Row';
 import FormWrapper from './FormWrapper';
@@ -23,5 +24,6 @@ Form.Error      = FormError;
 Form.Button     = FormButton;
 Form.Wrapper    = FormWrapper;
 Form.Input      = InputText;
+Form.Dropdown   = Dropdown;
 Form.Input.Text = InputText;
 Form.Input.IconText = InputIconText;

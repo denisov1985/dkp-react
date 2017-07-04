@@ -18,6 +18,7 @@ class Dashboard extends Container {
     }
 
     render() {
+        console.log(this);
         return (
             <Layout loggedIn={this.isLoggedIn()} router={this.props.router}>
                 <h2 className="ui header">
@@ -38,15 +39,14 @@ class Dashboard extends Container {
                         <Form.Row>
                             <Form.Input.Text name="email" />
                         </Form.Row>
+
+                        <Form.Row>
+                            <Form.Dropdown name="address" />
+                        </Form.Row>
+
                         <Form.Row>
                             <Form.Input.Text name="password" />
                         </Form.Row>
-                        <Form.Row>
-                            <Form.Input.Number name="gender" />
-                        </Form.Row>
-                        <Form.Row>
-                            <input type="checkbox" id="apibundle_user_isActive" name="apibundle_user[isActive]" value="1" />
-                        </Form.Row><Form.Input.Hidden name="_token" />
                     </Form>
                 </ModalDetails>
 
