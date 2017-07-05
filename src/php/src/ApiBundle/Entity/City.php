@@ -2,6 +2,7 @@
 
 namespace ApiBundle\Entity;
 
+use JMS\Serializer\Annotation\Exclude;
 /**
  * City
  */
@@ -139,6 +140,7 @@ class City
         return $this->region_id;
     }
     /**
+     * @Exclude
      * @var \ApiBundle\Entity\Region
      */
     private $region;

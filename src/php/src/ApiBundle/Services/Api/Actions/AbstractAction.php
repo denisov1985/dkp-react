@@ -14,6 +14,7 @@ use ApiBundle\Services\Api\ErrorResponse;
 use ApiBundle\Services\Api\Exceptions\ApiException;
 use ApiBundle\Services\Api\Response;
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\EventDispatcher\EventDispatcher;
 
 abstract class AbstractAction
 {
@@ -30,7 +31,31 @@ abstract class AbstractAction
     {
         $this->em = $em;
         $this->actionParams = $actionParams;
-        $this->serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+        $this->serializer = \JMS\Serializer\SerializerBuilder::create()
+            ->configureListeners(function(EventDispatcher $dispatcher) {
+                $dispatcher->addSubscriber(new \ApiBundle\Event\AvoidDoctrineProxySubscriber());
+            })
+            ->build();
+    }
+
+    protected function format($data) {
+        if (is_array($data)) {
+            $result = [];
+            foreach ($data as $item) {
+                $result[] = [
+                    'type' => str_ireplace("ApiBundle\\Entity\\", '', get_class($item)),
+                    'id' => $item->getId(),
+                    'attributes' => $this->serialize($item)
+                ];
+            }
+            return $result;
+        }   else  {
+            return [
+                'type' => str_ireplace("ApiBundle\\Entity\\", '', get_class($data)),
+                'id' => $data->getId(),
+                'attributes' => $this->serialize($data)
+            ];
+        }
     }
 
     /**

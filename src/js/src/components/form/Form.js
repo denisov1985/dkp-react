@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
 import InputText from './elements/InputText';
-import Dropdown from './elements/Dropdown';
+import Dropdown from './elements/dropdown/Dropdown';
 import InputIconText from './elements/InputIconText';
 import Row from './Row';
 import FormWrapper from './FormWrapper';

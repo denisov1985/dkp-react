@@ -41,7 +41,11 @@ class Dashboard extends Container {
                         </Form.Row>
 
                         <Form.Row>
-                            <Form.Dropdown name="address" />
+                            <Form.Dropdown name="region" />
+                        </Form.Row>
+
+                        <Form.Row>
+                            <Form.Dropdown name="city" />
                         </Form.Row>
 
                         <Form.Row>

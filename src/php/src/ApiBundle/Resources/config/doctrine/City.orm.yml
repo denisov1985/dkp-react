@@ -24,6 +24,7 @@ ApiBundle\Entity\City:
     manyToOne:
         region:
             targetEntity: Region
+            fetch: EXTRA_LAZY
             inversedBy: cities
             joinColumn:
                 name: region_id

@@ -15,15 +15,25 @@ class ActionParams
     protected $params;
     protected $data;
     protected $token;
+    protected $query;
 
-    public function __construct($entity, $action, $params, $data, $token)
+    public function __construct($entity, $action, $params, $data, $token, $query)
     {
         $this->entity = $entity;
         $this->action = $action;
         $this->params = $params;
         $this->data   = $data;
         $this->token  = $token;
+        $this->query  = $query;
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuery()
+    {
+        return $this->query;
     }
 
     /**
