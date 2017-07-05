@@ -26,8 +26,8 @@ export default class Element extends CoreComponent {
      * @returns {*}
      */
     getValue() {
-        console.log(this.props.form);
-        return this.props.form.props.provider.getIn(['dataset', 'attributes', this.props.name]);
+        const path =['dataset', 'attributes'].concat(this.getProp('field', this.props.name).split('.'));
+        return this.props.form.props.provider.getIn(path);
     }
 
     /**

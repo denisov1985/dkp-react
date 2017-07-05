@@ -3,10 +3,18 @@ import { fromJS, Map, List } from 'immutable';
 
 class DetailsReducer extends Reducer
 {
+    /**
+     * Initial state
+     */
+    initState = () => ({
+        form: {
+            fields: {}
+        },
+    })
+
     create() {
         return (state = this.getInitialState(), action) => {
             let payload = fromJS(action.payload);
-            console.log(action);
             switch (action.type) {
                 /**
                  * Request login

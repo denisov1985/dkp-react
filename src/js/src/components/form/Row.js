@@ -6,7 +6,7 @@ import InputText from './elements/InputText';
 export default class Form extends CoreComponent {
 
     render() {
-        return (<div className="field">
+        return (<div className="field error">
             <label>{this.getProp('title')}</label>
             {this.renderElementWithProps({
                 form: this.props.form

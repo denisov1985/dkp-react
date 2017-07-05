@@ -30,27 +30,32 @@ class Dashboard extends Container {
 
                 <ModalDetails onClose={this.onCloseDetails} provider={this.props.user}>
                     <Form provider={this.props.user.details} handler={this.props.actions.details.update} className="ui form">
-                        <Form.Row>
+                        <Form.Row title="First Name">
                             <Form.Input.Text name="first_name" />
                         </Form.Row>
-                        <Form.Row>
+                        <Form.Row title="Last Name">
                             <Form.Input.Text name="last_name" />
                         </Form.Row>
-                        <Form.Row>
+                        <Form.Row title="Email">
                             <Form.Input.Text name="email" />
                         </Form.Row>
 
-                        <Form.Row>
-                            <Form.Dropdown name="region" />
+                        <Form.Row title="Region">
+                            <Form.Dropdown name="region" field="region.id" />
                         </Form.Row>
 
-                        <Form.Row>
-                            <Form.Dropdown name="city" />
+                        <Form.Row title="City">
+                            <Form.Dropdown refColumn="region_id" name="city" field="city.id" />
                         </Form.Row>
+                        <div className="ui segment">
+                            <div className="field error">
+                                <div className="ui toggle checkbox checked">
+                                    <input type="checkbox" name="gift" tabIndex="0" className="hidden" checked={true} />
+                                        <label>Check to activate user</label>
+                                </div>
+                            </div>
+                        </div>
 
-                        <Form.Row>
-                            <Form.Input.Text name="password" />
-                        </Form.Row>
                     </Form>
                 </ModalDetails>
 

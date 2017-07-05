@@ -121,11 +121,14 @@ export default class DefaultComponent extends Component {
 
     getClassName = () => this.getClass();
 
-    getProp(propName, defaultValue) {
+    getProp(propName, defaultValue, target) {
+        if (typeof target === 'undefined') {
+            target = this.props;
+        }
         if (defaultValue === undefined) {
             defaultValue = '';
         }
-        return this.props[propName] == undefined ? defaultValue : this.props[propName];
+        return target[propName] == undefined ? defaultValue : target[propName];
     }
 
     addHidden() {

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { fromJS, Map, List } from 'immutable';
 import CoreComponent from '../core/CoreComponent';
 import InputText from './elements/InputText';
 import Dropdown from './elements/dropdown/Dropdown';
@@ -10,10 +11,23 @@ import FormError from './FormError';
 
 export default class Form extends CoreComponent {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: fromJS({
+                fields: this.props.provider.getIn(['dataset', 'attributes'])
+            })
+        };
+    }
+
     render() {
+        console.log('Form State');
+        console.log('__________________________');
+        console.log(this);
         return (<form  className="ui form">
             {this.renderElementWithProps({
-                form: this
+                form: this,
+                data: this.state.data,
             }, this.props.children)}
         </form>);
     }
