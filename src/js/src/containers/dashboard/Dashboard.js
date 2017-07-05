@@ -30,23 +30,27 @@ class Dashboard extends Container {
 
                 <ModalDetails onClose={this.onCloseDetails} provider={this.props.user}>
                     <Form provider={this.props.user.details} handler={this.props.actions.details.update} className="ui form">
-                        <Form.Row title="First Name">
-                            <Form.Input.Text name="first_name" />
-                        </Form.Row>
-                        <Form.Row title="Last Name">
-                            <Form.Input.Text name="last_name" />
-                        </Form.Row>
+                        <Form.Wrapper tag="div" className="two fields">
+                            <Form.Row title="First Name">
+                                <Form.Input.Text name="first_name" />
+                            </Form.Row>
+                            <Form.Row title="Last Name">
+                                <Form.Input.Text name="last_name" />
+                            </Form.Row>
+                        </Form.Wrapper>
                         <Form.Row title="Email">
                             <Form.Input.Text name="email" />
                         </Form.Row>
 
-                        <Form.Row title="Region">
-                            <Form.Dropdown name="region" field="region.id" />
-                        </Form.Row>
+                        <Form.Wrapper tag="div" className="two fields">
+                            <Form.Row title="Region">
+                                <Form.Dropdown name="region" field="region.id" />
+                            </Form.Row>
 
-                        <Form.Row title="City">
-                            <Form.Dropdown refColumn="region_id" name="city" field="city.id" />
-                        </Form.Row>
+                            <Form.Row title="City">
+                                <Form.Dropdown refColumn="region_id" name="city" field="city.id" />
+                            </Form.Row>
+                        </Form.Wrapper>
                         <div className="ui segment">
                             <div className="field error">
                                 <div className="ui toggle checkbox checked">

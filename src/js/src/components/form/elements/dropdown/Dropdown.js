@@ -10,7 +10,7 @@ import SearchText from './SearchText';
 export default class Dropdown extends Element {
 
     /**
-     *
+     * Class constructor
      */
     constructor(props) {
         super(props);
@@ -23,14 +23,8 @@ export default class Dropdown extends Element {
     }
 
     /**
-     * Get initial value
+     * Common class logic
      */
-    getInitialValue() {
-        const id = this.getValue();
-        const data = this.props.form.props.provider.getIn(['dataset', 'include', this.props.name]).filter(record => record.get('id') == id);
-        return data.get(0, null);
-    }
-
     buildClass() {
         this.addClass("ui search dropdown selection visible");
         if (this.state.expanded) {
@@ -43,60 +37,59 @@ export default class Dropdown extends Element {
         }
     }
 
+    /**
+     * Common style logic
+     */
     buildStyle() {
         if (this.state.expanded) {
             this.addStyle('zIndex', 2000)
         }
     }
 
-    render() {
-        console.log('render ' + this.props.name);
-        console.log(this);
-        return (
-            <div onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} className={this.getClass()} style={this.getStyle()}>
-                <i className="dropdown icon" onClick={this.onToggle}/>
-                <input value={this.state.search} className="search" onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} />
-                <SearchText search={this.state.search}>{this.getSelectedValue()}</SearchText>
-                <Menu
-                    expanded={this.state.expanded}
-                    selected={this.state.value}
-                    onSelect={this.onSelect}
-                    search={this.state.search}
-                    visible={this.state.expanded}
-                    options={this.getOptions()} />
-            </div>);
+    /**
+     * Update fields
+     * @TODO Maybe better to move it to redux
+     * @param item
+     */
+    updateFormState(item) {
+        if (item !== null) {
+            this.props.form.setState({
+                data: this.props.form.state.data
+                    .updateIn([
+                        'fields', this.props.field.replace('.', '_')
+                    ], field => item.get('id'))
+            });
+        }
     }
 
+    /**
+     * Get initial value
+     * Required if dropdown has initial value
+     */
+    getInitialValue() {
+        return this.props.form.props.provider
+            .getIn(['dataset', 'include', this.props.name])
+            .filter(record => record.get('id') == this.getValue())
+            .get(0, null);
+    }
+
+    /**
+     * Returns selected value
+     * @returns {*}
+     */
     getSelectedValue() {
         if (this.state.value === null) {
             return '';
         }
-        console.log(this.state.value);
         return this.state.value.getIn(['attributes', 'name'])
     }
 
-    getSelectedId() {
-        if (this.state.value === null) {
-            return '';
-        }
-        return this.state.value.get('id')
-    }
-
-    onMouseEnter = () => {
-        this.setState({
-            hovered: true
-        })
-    }
-
-    onMouseLeave = () => {
-        this.setState({
-            hovered: false
-        })
-    }
-
+    /**
+     * On select item
+     * Close menu and empty search and set selected item to state
+     * @param item
+     */
     onSelect = (item) => {
-        console.log('on select');
-        console.log(item);
         this.setState({
             value: item,
             search: '',
@@ -105,39 +98,66 @@ export default class Dropdown extends Element {
         this.updateFormState(item)
     }
 
-    updateFormState(item) {
-        const data = this.props.form.state.data;
-        if (item !== null) {
-            this.props.form.setState({
-                data: data.updateIn(['fields', this.props.field.replace('.', '_')], field => item.get('id'))
-            });
-        }
-    }
-
+    /**
+     * On search change
+     * @param e
+     */
     onChange = (e) => {
-        console.log('on change');
         this.setState({
             search: e.target.value
         })
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.getProp('refColumn')) {
-            const fields = nextProps.form.state.data.get('fields');
-            if (typeof fields === 'undefined') {
-                return true;
-            }
-            // if changed parent empty child
-            const id = fields.get(this.getProp('refColumn'));
-            if (this.state.value !== null) {
-                let oldRefId = this.state.value.getIn(['attributes', this.getProp('refColumn')]);
-                if (oldRefId != id) {
-                    this.setState({
-                        value: null
-                    })
-                }
-            }
+    /**
+     * On toggle dropdown
+     * @param e
+     */
+    onToggle = (e) => {
+        this.setState({
+            expanded: !this.state.expanded,
+        })
+    }
+
+    /**
+     * On mouse enter
+     */
+    onMouseEnter = () => {
+        this.setState({
+            hovered: true
+        })
+    }
+
+    /**
+     * On mouse leave
+     */
+    onMouseLeave = () => {
+        this.setState({
+            hovered: false
+        })
+    }
+
+    /**
+     * On search focus
+     */
+    onFocus = () => {
+        this.setState({
+            expanded: true
+        })
+    }
+
+    /**
+     * On search blur
+     * Do not fire if mouse under menu list
+     * @param e
+     * @returns {boolean}
+     */
+    onBlur = (e) => {
+        if (this.state.hovered) {
+            return true;
         }
+        this.setState({
+            expanded: false
+        })
     }
 
     /**
@@ -151,33 +171,56 @@ export default class Dropdown extends Element {
                 return [];
             }
             const id = fields.get(this.getProp('refColumn'));
-            return this.props.form.props.provider.getIn(['dataset', 'include', this.props.name]).filter(record => record.getIn(['attributes', this.getProp('refColumn')]) == id)
+            return this.props.form.props.provider
+                .getIn(['dataset', 'include', this.props.name])
+                .filter(record => record.getIn(['attributes', this.getProp('refColumn')]) == id)
         }   else  {
-            return this.props.form.props.provider.getIn(['dataset', 'include', this.props.name])
+            return this.props.form.props.provider
+                .getIn(['dataset', 'include', this.props.name])
         }
 
     }
 
-    onFocus = () => {
-        console.log('on focus');
-        this.setState({
-            expanded: true
-        })
-    }
-
-    onBlur = (e) => {
-        if (this.state.hovered) {
-            return true;
+    /**
+     * Empty search value and search if reference value has changes
+     * @param nextProps
+     * @returns {boolean}
+     */
+    componentWillReceiveProps(nextProps) {
+        if (this.getProp('refColumn')) {
+            const fields = nextProps.form.state.data.get('fields');
+            if (typeof fields === 'undefined') {
+                return true;
+            }
+            const id = fields.get(this.getProp('refColumn'));
+            if (this.state.value !== null) {
+                let oldRefId = this.state.value.getIn(['attributes', this.getProp('refColumn')]);
+                if (oldRefId != id) {
+                    this.setState({
+                        value: null
+                    })
+                }
+            }
         }
-        this.setState({
-            expanded: false
-        })
     }
 
-    onToggle = (e) => {
-        console.log('on toggle');
-        this.setState({
-            expanded: !this.state.expanded,
-        })
+    /**
+     * Render element
+     * @TODO replace input ane icon to components
+     * @returns {XML}
+     */
+    render() {
+        return (
+            <div onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} className={this.getClass()} style={this.getStyle()}>
+                <i className="dropdown icon" onClick={this.onToggle}/>
+                <input value={this.state.search} className="search" onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} />
+                <SearchText search={this.state.search}>{this.getSelectedValue()}</SearchText>
+                <Menu
+                    selected={this.state.value}
+                    onSelect={this.onSelect}
+                    search={this.state.search}
+                    visible={this.state.expanded}
+                    options={this.getOptions()} />
+            </div>);
     }
 }

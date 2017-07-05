@@ -18,7 +18,7 @@ export default class Menu extends Element {
     }
 
     getOptions() {
-        if (!this.props.expanded) {
+        if (!this.props.visible) {
             return [];
         }
         return this.props.options;
