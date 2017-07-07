@@ -24,24 +24,11 @@ ApiBundle\Entity\User:
             length: 255
         gender:
             type: smallint
-        cityId:
-            type: integer
-            column: city_id
-            nullable: true
-        regionId:
-            type: integer
-            column: region_id
-            nullable: true
         isActive:
             type: boolean
             column: is_active
     lifecycleCallbacks: {  }
     manyToOne:
-        region:
-            targetEntity: Region
-            joinColumn:
-                name: region_id
-                referencedColumnName: id
         city:
             targetEntity: City
             joinColumn:

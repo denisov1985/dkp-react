@@ -44,11 +44,11 @@ class Dashboard extends Container {
 
                         <Form.Wrapper tag="div" className="two fields">
                             <Form.Row title="Region">
-                                <Form.Dropdown name="region" field="region.id" />
+                                <Form.Dropdown virtual={true} name="region" field="city.region.id" />
                             </Form.Row>
 
                             <Form.Row title="City">
-                                <Form.Dropdown refColumn="region_id" name="city" field="city.id" />
+                                <Form.Dropdown refColumn="city.region.id" name="city" field="city.id" />
                             </Form.Row>
                         </Form.Wrapper>
                         <div className="ui segment">

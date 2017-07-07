@@ -38,6 +38,13 @@ abstract class AbstractAction
             ->build();
     }
 
+    /**
+     * Restore default serializer
+     */
+    protected function restoreSerializer() {
+        $this->serializer = \JMS\Serializer\SerializerBuilder::create()->build();
+    }
+
     protected function format($data) {
         if (is_array($data)) {
             $result = [];
@@ -64,7 +71,8 @@ abstract class AbstractAction
      * @return mixed
      */
     protected function serialize($content) {
-        return json_decode($this->serializer->serialize($content, 'json', SerializationContext::create()->setSerializeNull(true)));
+        $data = json_decode($this->serializer->serialize($content, 'json', SerializationContext::create()->setSerializeNull(true)));
+        return $data;
     }
 
     /**

@@ -14,6 +14,8 @@ class DetailsReducer extends Reducer
 
     create() {
         return (state = this.getInitialState(), action) => {
+            console.log(action);
+
             let payload = fromJS(action.payload);
             switch (action.type) {
                 /**

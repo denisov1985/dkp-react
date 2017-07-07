@@ -3,6 +3,7 @@ import { fromJS, Map, List } from 'immutable';
 import Element from '../Element';
 import Menu from './Menu';
 import SearchText from './SearchText';
+import Icon from 'components/icon/Icon';
 
 /**
  * @TODO Refactor referenced fields
@@ -53,11 +54,14 @@ export default class Dropdown extends Element {
      */
     updateFormState(item) {
         if (item !== null) {
+            let state = this.props.form.state.data;
+            let fieldParts = this.props.field.split('.');
+            if (state.getIn(['fields', fieldParts[0]]) === null) {
+                state = state.setIn(['fields', fieldParts[0]], new Map({}))
+            }
+            state = state.setIn(['fields'].concat(this.props.field.split('.')), item.get('id'));
             this.props.form.setState({
-                data: this.props.form.state.data
-                    .updateIn([
-                        'fields', this.props.field.replace('.', '_')
-                    ], field => item.get('id'))
+                data: state
             });
         }
     }
@@ -96,6 +100,10 @@ export default class Dropdown extends Element {
             expanded: false
         });
         this.updateFormState(item)
+
+        if (this.props.virtual !== true) {
+            this.props.form.props.handler(this.props.name, item.get('attributes'));
+        }
     }
 
     /**
@@ -170,10 +178,14 @@ export default class Dropdown extends Element {
             if (typeof fields === 'undefined') {
                 return [];
             }
-            const id = fields.get(this.getProp('refColumn'));
+            const id = fields.getIn(this.getProp('refColumn').split('.'));
+            let column = this.getProp('refColumn').split('.');
+            column.shift();
             return this.props.form.props.provider
                 .getIn(['dataset', 'include', this.props.name])
-                .filter(record => record.getIn(['attributes', this.getProp('refColumn')]) == id)
+                .filter(record => {
+                    return record.getIn(['attributes'].concat(column)) == id;
+                })
         }   else  {
             return this.props.form.props.provider
                 .getIn(['dataset', 'include', this.props.name])
@@ -187,21 +199,15 @@ export default class Dropdown extends Element {
      * @returns {boolean}
      */
     componentWillReceiveProps(nextProps) {
-        if (this.getProp('refColumn')) {
-            const fields = nextProps.form.state.data.get('fields');
-            if (typeof fields === 'undefined') {
-                return true;
-            }
-            const id = fields.get(this.getProp('refColumn'));
-            if (this.state.value !== null) {
-                let oldRefId = this.state.value.getIn(['attributes', this.getProp('refColumn')]);
-                if (oldRefId != id) {
-                    this.setState({
-                        value: null
-                    })
-                }
-            }
+        if (typeof nextProps.refColumn === 'undefined') {
+            return true;
         }
+        // @TODO REFACTOR
+        console.log(nextProps);
+        let referenceId = nextProps.form.state.data.getIn(['fields'].concat(nextProps.refColumn.split('.')));
+        let currentId   = this.props.form.state.data.getIn(['fields'].concat(nextProps.refColumn.split('.')));
+        console.log(currentId);
+        console.log(referenceId);
     }
 
     /**
@@ -212,7 +218,7 @@ export default class Dropdown extends Element {
     render() {
         return (
             <div onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} className={this.getClass()} style={this.getStyle()}>
-                <i className="dropdown icon" onClick={this.onToggle}/>
+                <Icon icon="dropdown" onClick={this.onToggle}/>
                 <input value={this.state.search} className="search" onFocus={this.onFocus} onBlur={this.onBlur} onChange={this.onChange} />
                 <SearchText search={this.state.search}>{this.getSelectedValue()}</SearchText>
                 <Menu

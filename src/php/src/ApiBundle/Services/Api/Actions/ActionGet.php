@@ -36,6 +36,7 @@ class ActionGet extends ActionSecure
             }
         }
 
+        $this->restoreSerializer();
         return [
             'type' => $this->getActionParams()->getEntity(),
             'id' => $item->getId(),

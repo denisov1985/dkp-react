@@ -51,10 +51,6 @@ class Region
     {
         return $this->name;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $cities;
 
     /**
      * Constructor
@@ -62,40 +58,6 @@ class Region
     public function __construct()
     {
         $this->cities = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add city
-     *
-     * @param \ApiBundle\Entity\City $city
-     *
-     * @return Region
-     */
-    public function addCity(\ApiBundle\Entity\City $city)
-    {
-        $this->cities[] = $city;
-
-        return $this;
-    }
-
-    /**
-     * Remove city
-     *
-     * @param \ApiBundle\Entity\City $city
-     */
-    public function removeCity(\ApiBundle\Entity\City $city)
-    {
-        $this->cities->removeElement($city);
-    }
-
-    /**
-     * Get cities
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCities()
-    {
-        return $this->cities;
     }
 
     public function __toString() {

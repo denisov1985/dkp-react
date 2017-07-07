@@ -110,37 +110,8 @@ class City
     {
         return $this->lon;
     }
-    /**
-     * @var integer
-     */
-    private $region_id;
-
 
     /**
-     * Set regionId
-     *
-     * @param integer $regionId
-     *
-     * @return City
-     */
-    public function setRegionId($regionId)
-    {
-        $this->region_id = $regionId;
-
-        return $this;
-    }
-
-    /**
-     * Get regionId
-     *
-     * @return integer
-     */
-    public function getRegionId()
-    {
-        return $this->region_id;
-    }
-    /**
-     * @Exclude
      * @var \ApiBundle\Entity\Region
      */
     private $region;
