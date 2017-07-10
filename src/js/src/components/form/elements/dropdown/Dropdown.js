@@ -33,7 +33,7 @@ export default class Dropdown extends Element {
         }
 
         let options = this.getOptions();
-        if (options.length === 0) {
+        if (options.size === 0) {
             this.addClass('disabled');
         }
     }
@@ -202,12 +202,20 @@ export default class Dropdown extends Element {
         if (typeof nextProps.refColumn === 'undefined') {
             return true;
         }
-        // @TODO REFACTOR
-        console.log(nextProps);
         let referenceId = nextProps.form.state.data.getIn(['fields'].concat(nextProps.refColumn.split('.')));
-        let currentId   = this.props.form.state.data.getIn(['fields'].concat(nextProps.refColumn.split('.')));
-        console.log(currentId);
-        console.log(referenceId);
+        let currentId   = nextProps.form.props.provider.getIn(['dataset', 'attributes'].concat(nextProps.refColumn.split('.')));
+
+        if (typeof currentId === 'undefined') {
+            return true;
+        }
+
+        if (currentId != referenceId) {
+            this.setState({
+                value: null,
+                search: '',
+                expanded: false
+            });
+        }
     }
 
     /**
