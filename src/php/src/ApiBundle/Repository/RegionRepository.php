@@ -10,4 +10,5 @@ namespace ApiBundle\Repository;
  */
 class RegionRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

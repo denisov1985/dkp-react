@@ -13,3 +13,7 @@ ApiBundle\Entity\Region:
             type: string
             length: 255
     lifecycleCallbacks: {  }
+    oneToMany:
+        cities:
+            targetEntity: City
+            mappedBy: region

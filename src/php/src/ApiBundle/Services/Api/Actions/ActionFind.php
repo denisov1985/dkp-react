@@ -19,6 +19,7 @@ class ActionFind extends ActionSecure
         $result = [];
 
         foreach ($collection as $item) {
+
             $result[] = [
                 'type' => $this->getActionParams()->getEntity(),
                 'id' => $item->getId(),
