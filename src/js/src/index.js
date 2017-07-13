@@ -41,6 +41,13 @@ render(
                     <Route name="Продукты" path="products">
                         <IndexRoute name="Главная" component={Products} />
                         <Route name="Просмотр продукта" path="view/:id" component={ProductView} />
+                        <Route name="Просмотр продукта" path="attributes/:id" component={ProductView} />
+                        <Route name="Просмотр продукта" path="inventory/:id" component={ProductView} />
+                        <Route name="Просмотр продукта" path="related/:id" component={ProductView} />
+                        <Route name="Просмотр продукта" path="review/:id" component={ProductView} />
+                        <Route name="Просмотр продукта" path="tabs/:id" component={ProductView} />
+                        <Route name="Просмотр продукта" path="coupons/:id" component={ProductView} />
+                        <Route name="Просмотр продукта" path="attachments/:id" component={ProductView} />
                     </Route>
                     <Route name="Категории" path="category" component={UnderConstruction} />
                     <Route name="Отзывы" path="reviews" component={UnderConstruction} />
