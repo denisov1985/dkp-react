@@ -99,6 +99,7 @@ export default class Dropdown extends Element {
             search: '',
             expanded: false
         });
+        console.log(item);
         this.updateFormState(item)
 
         if (this.props.virtual !== true) {
@@ -179,8 +180,12 @@ export default class Dropdown extends Element {
                 return [];
             }
             const id = fields.getIn(this.getProp('refColumn').split('.'));
-            let column = this.getProp('refColumn').split('.');
-            column.shift();
+
+            let columnParts = this.getProp('refColumn').split('.');
+            let column = [];
+            column.push(columnParts[columnParts.length - 2]);
+            column.push(columnParts[columnParts.length - 1]);
+
             return this.props.form.props.provider
                 .getIn(['dataset', 'include', this.props.name])
                 .filter(record => {
@@ -202,8 +207,11 @@ export default class Dropdown extends Element {
         if (typeof nextProps.refColumn === 'undefined') {
             return true;
         }
+        if (this.state.value === null) {
+            return true;
+        }
         let referenceId = nextProps.form.state.data.getIn(['fields'].concat(nextProps.refColumn.split('.')));
-        let currentId   = nextProps.form.props.provider.getIn(['dataset', 'attributes'].concat(nextProps.refColumn.split('.')));
+        let currentId   = this.state.value.getIn(['attributes', 'id']);
 
         if (typeof currentId === 'undefined') {
             return true;

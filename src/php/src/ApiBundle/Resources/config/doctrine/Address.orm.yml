@@ -9,21 +9,20 @@ ApiBundle\Entity\Address:
             generator:
                 strategy: AUTO
     fields:
-        cityId:
-            type: integer
-            column: city_id
-            nullable: true
-        regionId:
-            type: integer
-            column: region_id
-            nullable: true
+        street1:
+            type: string
+            length: 255
+        street2:
+            type: string
+            length: 255
+        zip:
+            type: string
+            length: 255
+        phone:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }
     manyToOne:
-        region:
-            targetEntity: Region
-            joinColumn:
-                name: region_id
-                referencedColumnName: id
         city:
             targetEntity: City
             joinColumn:

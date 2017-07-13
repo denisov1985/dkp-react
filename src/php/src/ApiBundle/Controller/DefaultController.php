@@ -35,19 +35,23 @@ class DefaultController extends Controller
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
-        return $this->render('register.html.twig', [
+        $rendered = $this->render('register.html.twig', [
             "form" => $form->createView(),
             "entity" => $entity
         ]);
 
-        $rendered = $twig->render(
-            "{{ form(form) }}",
-            array("form" => $form->createView())
-        );
+        $rendered = $rendered->getContent();
 
-        echo "<pre>" . htmlentities($rendered) . "</pre>";
+        $rendered = str_ireplace('apibundle_', '', $rendered);
+        $rendered = str_ireplace('][', '.', $rendered);
+        $rendered = str_ireplace('user[', '', $rendered);
+        $rendered = str_ireplace('[', '', $rendered);
+        $rendered = str_ireplace(']', '', $rendered);
+        $rendered = str_ireplace('style="display: none"', '', $rendered);
 
-        die('ok');
+        echo $rendered; die();
+
+
     }
 
 

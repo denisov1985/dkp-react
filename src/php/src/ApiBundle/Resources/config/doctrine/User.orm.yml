@@ -28,9 +28,9 @@ ApiBundle\Entity\User:
             type: boolean
             column: is_active
     lifecycleCallbacks: {  }
-    manyToOne:
-        city:
-            targetEntity: City
+    oneToOne:
+        address:
+            targetEntity: Address
             joinColumn:
-                name: city_id
-                referencedColumnName: id
+              name: address_id
+              referencedColumnName: id

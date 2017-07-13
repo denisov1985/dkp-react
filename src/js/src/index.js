@@ -30,19 +30,23 @@ const ROLE_MANAGER = 'manager';
 render(
     <Provider store={store}>
         <Router history={browserHistory}>
-            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Register" path="/" component={Register} />
+            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Register" path="/register" component={Register} />
             <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Login" path="/login" component={Login} />
             <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Logout" path="/logout" component={Logout} />
-            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} someData="ololo" name="Главная" path="dashboard" >
-                <IndexRoute  roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Админка" component={Dashboard} />
-                <Route  roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Отчеты" path="reports" component={UnderConstruction} />
-                <Route  roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Регионы" path="regions" component={Regions} />
+
+            <Route name="Главная" path="/">
+                <IndexRoute name="Главная" component={Dashboard} />
+                <Route name="Каталог" path="catalog" component={UnderConstruction}>
+                    <Route name="Продукты" path="products" component={UnderConstruction} />
+                    <Route name="Категории" path="category" component={UnderConstruction} />
+                    <Route name="Отзывы" path="reviews" component={UnderConstruction} />
+                    <Route name="Закладки" path="tabs" component={UnderConstruction} />
+                    <Route name="Атрибуты" path="attributes" component={UnderConstruction} />
+                    <Route name="Запросы" path="requests" component={UnderConstruction} />
+                    <Route name="Импорт" path="import" component={UnderConstruction} />
+                    <Route name="Експорт" path="export" component={UnderConstruction} />
+                </Route>
             </Route>
-            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Заказы" path="/orders" component={Classes} />
-            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Товары" path="/products" component={Products} />
-            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Бренды" path="/brands" component={UnderConstruction} />
-            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Персонал" path="/employers" component={UnderConstruction} />
-            <Route roles={[ROLE_ADMIN, ROLE_MANAGER]} name="Настройки" path="/settings" component={UnderConstruction} />
         </Router>
     </Provider>,
     document.getElementById('root')

@@ -25,7 +25,7 @@ PHP_EOL</Form>
 
 {%- block form_widget_simple -%}
     {%- set type = type|default('text') -%}
-    <Form.Input.{{ type|capitalize }} name="{{ name }}" />
+    <Form.Input.{{ type|capitalize }} name="{{ full_name }}" />
 {%- endblock form_widget_simple -%}
 
 {%- block form_widget_compound -%}
@@ -34,11 +34,12 @@ PHP_EOL</Form>
 {%- endblock form_widget_compound -%}
 
 {%- block choice_widget_collapsed -%}
-    <Form.Select name="{{ name }}" provider={this.props.{{ name }}.details} />
+    <Form.Select name="{{ full_name }}" provider={this.props.{{ name }}.details} />
 {%- endblock choice_widget_collapsed -%}
 
 {% block body %}
+    <div style="display: none">
     {# ... render the form #}
     <textarea cols="160" rows="20">{{ form(form)|replace({"PHP_EOL": "\n", "#": " "}) }}</textarea>
-    {{ entity }}
+    </div>
 {% endblock %}

@@ -314,33 +314,4 @@ class User
     {
         return $this->address;
     }
-
-    /**
-     * @var \ApiBundle\Entity\City
-     */
-    private $city;
-
-    /**
-     * Set city
-     *
-     * @param \ApiBundle\Entity\City $city
-     *
-     * @return User
-     */
-    public function setCity(\ApiBundle\Entity\City $city = null)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    /**
-     * Get city
-     *
-     * @return \ApiBundle\Entity\City
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
 }

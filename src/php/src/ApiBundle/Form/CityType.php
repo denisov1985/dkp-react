@@ -13,7 +13,7 @@ class CityType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('lat')->add('lon')->add('region_id')->add('region');
+        $builder->add('name')->add('lat')->add('lon')->add('region');
     }
     
     /**

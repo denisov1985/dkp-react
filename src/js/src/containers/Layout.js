@@ -21,21 +21,41 @@ export default class Layout extends Component {
      * @returns {XML}
      */
     render() {
+        console.log(this);
+        const routes = this.props.router.routes[0].childRoutes;
+        let routeData = [];
+
+        for(let i in routes) {
+            routeData.push({
+                name: routes[i].name,
+                path: routes[i].path
+            })
+        }
+        console.log(routeData);
+
         return (
             <div>
                 <Navigation router={this.props.router}>
-                    <Navigation.Item path="/dashboard">Главная</Navigation.Item>
-                    <Navigation.Item path="/orders">Заказы</Navigation.Item>
-                    <Navigation.Item path="/products">Товары</Navigation.Item>
-                    <Navigation.Item path="/brands">Бренды</Navigation.Item>
-                    <Navigation.Item path="/employers">Персонал</Navigation.Item>
-                    <Navigation.Item path="/settings">Настройки</Navigation.Item>
+                    <Navigation.Item key="-1" active={this.props.router.location.pathname === '/'} root={true} path="/">Главная</Navigation.Item>
+
+                    {routes.map((route, index) => {
+                        console.log(route.path)
+                        console.log(this.props.router.isActive(route.path))
+                        console.log('')
+                        return (<Navigation.Group active={this.props.router.isActive(route.path)} key={index} path={route.path}  title={route.name}>
+                            {route.childRoutes.map((r, i) => {
+                                let path = '/' + route.path + '/' + r.path;
+                                return (<Navigation.Item key={i} path={path}>{r.name}</Navigation.Item>)
+                            })}
+                        </Navigation.Group>);
+                    })}
+
                     {this.props.loggedIn ?
                         <Navigation.Item align="right" path="/logout">Выход</Navigation.Item> :
                         <Navigation.Item align="right" path="/login">Вход</Navigation.Item>}
                 </Navigation>
 
-                <div style={{marginLeft: '14px', marginRight: '14px'}}>
+                <div style={{marginLeft:  '14px', marginRight: '14px'}}>
                     <Breadcrumbs
                         separator={<i className="right angle icon divider"/>}
                         wrapperClass="ui breadcrumb"

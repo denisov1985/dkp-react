@@ -28,6 +28,13 @@ class Dashboard extends Container {
 
                 <Button onClick={this.onRefreshClick}>Refresh</Button><span className="margin-left-5"></span>
 
+                <div className="ui pointing secondary menu pull right">
+                    <a className="item active">First1</a>
+                    <a className="item">Second</a>
+                    <a className="item">Third</a>
+                </div>
+
+
                 <ModalDetails onClose={this.onCloseDetails} provider={this.props.user}>
                     <Form provider={this.props.user.details} handler={this.props.actions.details.update} className="ui form">
                         <Form.Wrapper tag="div" className="two fields">
@@ -42,13 +49,25 @@ class Dashboard extends Container {
                             <Form.Input.Text name="email" />
                         </Form.Row>
 
+                        <Form.Row title="Street Address 1">
+                            <Form.Input.Text name="address.street1" />
+                        </Form.Row>
+
+                        <Form.Row title="Street Address 1">
+                            <Form.Input.Text name="address.street2" />
+                        </Form.Row>
+
+                        <Form.Row title="Phone">
+                            <Form.Input.Text name="address.phone" />
+                        </Form.Row>
+
                         <Form.Wrapper tag="div" className="two fields">
                             <Form.Row title="Region">
-                                <Form.Dropdown virtual={true} name="region" field="city.region.id" />
+                                <Form.Dropdown virtual={true} name="region" field="address.city.region.id" />
                             </Form.Row>
 
                             <Form.Row title="City">
-                                <Form.Dropdown refColumn="city.region.id" name="city" field="city.id" />
+                                <Form.Dropdown refColumn="address.city.region.id" name="city" field="address.city.id" />
                             </Form.Row>
                         </Form.Wrapper>
                         <div className="ui segment">

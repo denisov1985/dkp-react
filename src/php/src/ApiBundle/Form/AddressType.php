@@ -3,37 +3,26 @@
 namespace ApiBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class bak extends AbstractType
+class AddressType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('first_name')
-            ->add('last_name')
-            ->add('email')
-            ->add('password')
-            ->add('gender', ChoiceType::class, array(
-                'choices'  => array(
-                    'Maybe' => null,
-                    'Yes' => true,
-                    'No' => false,
-                )))
-            ->add('isActive');
+        $builder->add('street1')->add('street2')->add('zip')->add('phone')->add('city');
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ApiBundle\Entity\User'
+            'data_class' => 'ApiBundle\Entity\Address'
         ));
     }
 
@@ -42,7 +31,7 @@ class bak extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'apibundle_user';
+        return 'apibundle_address';
     }
 
 

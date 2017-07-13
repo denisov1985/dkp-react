@@ -8,30 +8,35 @@ namespace ApiBundle\Entity;
 class Address
 {
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
     /**
-     * @var int
+     * @var string
      */
-    private $cityId;
+    private $street1;
 
     /**
-     * @var int
+     * @var string
      */
-    private $regionId;
+    private $street2;
 
     /**
-     * @var int
+     * @var string
      */
-    private $userId;
+    private $zip;
+
+    /**
+     * @var string
+     */
+    private $phone;
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -39,110 +44,105 @@ class Address
     }
 
     /**
-     * Set cityId
+     * Set street1
      *
-     * @param integer $cityId
+     * @param string $street1
      *
      * @return Address
      */
-    public function setCityId($cityId)
+    public function setStreet1($street1)
     {
-        $this->cityId = $cityId;
+        $this->street1 = $street1;
 
         return $this;
     }
 
     /**
-     * Get cityId
+     * Get street1
      *
-     * @return int
+     * @return string
      */
-    public function getCityId()
+    public function getStreet1()
     {
-        return $this->cityId;
+        return $this->street1;
     }
 
     /**
-     * Set regionId
+     * Set street2
      *
-     * @param integer $regionId
+     * @param string $street2
      *
      * @return Address
      */
-    public function setRegionId($regionId)
+    public function setStreet2($street2)
     {
-        $this->regionId = $regionId;
+        $this->street2 = $street2;
 
         return $this;
     }
 
     /**
-     * Get regionId
+     * Get street2
      *
-     * @return int
+     * @return string
      */
-    public function getRegionId()
+    public function getStreet2()
     {
-        return $this->regionId;
+        return $this->street2;
     }
 
     /**
-     * Set userId
+     * Set zip
      *
-     * @param integer $userId
+     * @param string $zip
      *
      * @return Address
      */
-    public function setUserId($userId)
+    public function setZip($zip)
     {
-        $this->userId = $userId;
+        $this->zip = $zip;
 
         return $this;
     }
 
     /**
-     * Get userId
+     * Get zip
      *
-     * @return int
+     * @return string
      */
-    public function getUserId()
+    public function getZip()
     {
-        return $this->userId;
+        return $this->zip;
     }
-    /**
-     * @var \ApiBundle\Entity\Region
-     */
-    private $region;
 
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Address
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
     /**
      * @var \ApiBundle\Entity\City
      */
     private $city;
 
-
-    /**
-     * Set region
-     *
-     * @param \ApiBundle\Entity\Region $region
-     *
-     * @return Address
-     */
-    public function setRegion(\ApiBundle\Entity\Region $region = null)
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    /**
-     * Get region
-     *
-     * @return \ApiBundle\Entity\Region
-     */
-    public function getRegion()
-    {
-        return $this->region;
-    }
 
     /**
      * Set city

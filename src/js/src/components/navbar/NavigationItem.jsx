@@ -16,9 +16,15 @@ class NavigationItem extends CoreComponent {
      * @returns {XML}
      */
     render() {
-        return (<Link to={this.props.path} className={this.getClass()} activeClassName="active">
-            {this.props.children}
-        </Link>)
+        if (this.props.root && this.props.active !== true) {
+            return (<Link to={this.props.path} className={this.getClass()}>
+                {this.props.children}
+            </Link>)
+        }   else  {
+            return (<Link to={this.props.path} className={this.getClass()} activeClassName="active">
+                {this.props.children}
+            </Link>)
+        }
     }
 }
 
