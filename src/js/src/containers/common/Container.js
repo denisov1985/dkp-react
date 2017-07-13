@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import ActionFactory from 'actions/ActionFactory';
@@ -101,5 +102,7 @@ class Container extends Component {
         })(this)
     }
 }
+
+Container.Link = Link;
 
 export default Container;

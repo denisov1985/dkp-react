@@ -1,0 +1,30 @@
+ApiBundle\Entity\Product:
+    type: entity
+    table: null
+    repositoryClass: ApiBundle\Repository\ProductRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+            nullable: true
+        fullDescription:
+            type: text
+            column: full_description
+            nullable: true
+        available:
+            type: boolean
+        price:
+            type: integer
+        salePrice:
+            type: integer
+            nullable: true
+            column: sale_price
+    lifecycleCallbacks: {  }

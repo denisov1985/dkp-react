@@ -15,6 +15,7 @@ import Dashboard from './containers/dashboard/Dashboard';
 import Regions from './containers/dashboard/Regions';
 import Classes from './containers/member/Classes';
 import Products from './containers/products/Products';
+import ProductView from './containers/products/ProductView';
 import UnderConstruction from './containers/common/UnderConstruction';
 
 const store = createStore(
@@ -36,8 +37,11 @@ render(
 
             <Route name="Главная" path="/">
                 <IndexRoute name="Главная" component={Dashboard} />
-                <Route name="Каталог" path="catalog" component={UnderConstruction}>
-                    <Route name="Продукты" path="products" component={UnderConstruction} />
+                <Route name="Каталог" path="catalog">
+                    <Route name="Продукты" path="products">
+                        <IndexRoute name="Главная" component={Products} />
+                        <Route name="Просмотр продукта" path="view/:id" component={ProductView} />
+                    </Route>
                     <Route name="Категории" path="category" component={UnderConstruction} />
                     <Route name="Отзывы" path="reviews" component={UnderConstruction} />
                     <Route name="Закладки" path="tabs" component={UnderConstruction} />

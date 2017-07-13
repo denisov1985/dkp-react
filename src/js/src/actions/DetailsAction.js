@@ -15,6 +15,12 @@ class DetailsAction extends Action
             }),
 
             /**
+             * Get local
+             * @param id
+             */
+            getLocal: (record) => this.createReceiveAction('get_local', record),
+
+            /**
              * Unset entity resource
              */
             unset: () => this.createReceiveAction('unset', {}),

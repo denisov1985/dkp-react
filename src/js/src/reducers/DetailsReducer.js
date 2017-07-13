@@ -35,6 +35,18 @@ class DetailsReducer extends Reducer
                     break;
 
                 /**
+                 * Receive login
+                 */
+                case this.formatReceiveAction('get_local'):
+                    console.log('ACTION');
+                    console.log(action);
+                    console.log(payload);
+
+                    return state.set('dataset', payload)
+                        .set('status', this.statusComplete())
+                    break;
+
+                /**
                  *
                  */
                 case this.formatReceiveAction('unset'):

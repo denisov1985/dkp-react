@@ -15,11 +15,10 @@ class ActionFind extends ActionSecure
     {
         $this->getActionParams()->getEntity();
 
-        $collection = $this->getRepository()->findAll();
+        $collection = $this->getRepository()->findBy([], ['id' => 'DESC'],5);
         $result = [];
 
         foreach ($collection as $item) {
-
             $result[] = [
                 'type' => $this->getActionParams()->getEntity(),
                 'id' => $item->getId(),
