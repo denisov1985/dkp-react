@@ -8,8 +8,11 @@ class CollectionReducer extends Reducer
      */
     initState = () => ({
         dataset: [],
-        test: []
-    })
+        test: [],
+        repository: {
+            findBy: (id) => null
+        }
+    });
 
     /**
      * Create reducer
@@ -31,8 +34,22 @@ class CollectionReducer extends Reducer
                  * Receive login
                  */
                 case this.formatReceiveAction('find'):
+                    const dataset = payload.get('data');
+                    let repository = state.get('repository');
+                    repository = repository.set('findBy', (id) => {
+                        let data = dataset.filter((record) => {
+                            return record.get('id') == id;
+                        });
+                        return data.get(0);
+                    });
+
+                    console.log('rep');
+                    console.log(repository);
+
                     return state.set('dataset', payload.get('data'))
                         .set('status', this.statusComplete())
+                        .set('repository', repository);
+
                     break;
             }
             return state;

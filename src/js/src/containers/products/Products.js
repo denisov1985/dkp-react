@@ -20,7 +20,9 @@ class Products extends Container {
     }
 
     render() {
-        console.log(this);
+        let data = this.props.product.collection.getIn(['repository', 'findBy'])(29999);
+        console.log(data);
+
         return (
             <Layout loggedIn={this.isLoggedIn()} router={this.props.router}>
                 <h2 className="ui header">
