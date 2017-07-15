@@ -7,14 +7,15 @@ import Group from './Group';
 class Navigation extends CoreComponent {
 
     buildClass() {
-        this.addClass('ui inverted secondary menu');
+        this.addClass('ui stackable container fluid menu');
     }
 
     render() {
-        return (<div className="ui inverted segment" style={{ borderRadius: 0}}>
-            <div className={this.getClass()}>
-                { this.props.children}
+        return (<div className="ui stackable fluid container menu">
+            <div className="item">
+                <img src="/img/logo.png" />
             </div>
+            {this.props.children}
         </div>);
     }
 }

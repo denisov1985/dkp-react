@@ -39,7 +39,7 @@ class ProductView extends Container {
                                 </div>
                                 <div className="field">
                                     <label>Billing Address</label>
-                                    <div className="fields">
+                                    <div className="two fields">
                                         <div className="twelve wide field">
                                             <input type="text" name="shipping[address]" placeholder="Street Address" />
                                         </div>
