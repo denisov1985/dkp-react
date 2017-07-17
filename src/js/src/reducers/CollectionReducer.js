@@ -26,8 +26,7 @@ class CollectionReducer extends Reducer
                  * Request login
                  */
                 case this.formatRequestAction('find'):
-                    return state.set('dataset', List([]))
-                        .set('status', this.statusLoading())
+                    return state.set('status', this.statusLoading())
                     break;
 
                 /**

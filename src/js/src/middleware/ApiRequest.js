@@ -39,17 +39,9 @@ class ApiRequest
         if (params) {
             params = '/' + params;
         }
-
-        let attrs = '';
-
-        if (typeof attributes !== 'undefined') {
-            attrs = Object.keys(attributes).map(function(key){
-                return encodeURIComponent(key) + '=' + encodeURIComponent(attributes[key]);
-            }).join('&');
-        }
-
+        let attrs = JSON.stringify(attributes)
         if (attrs !== '') {
-            attrs = '?' + attrs;
+            attrs = '?params=' + attrs;
         }
 
         return ApiRequest.ENDPOINT_URL + this.entity.replace('_', '/').toLowerCase() + '/' + action.toLowerCase() + params + attrs;
@@ -58,10 +50,11 @@ class ApiRequest
     /**
      * Get request action
      */
-    sendGet(action, payload) {
+    sendGet(action, payload, attributes) {
+        console.log(attributes);
         return (dispatch, getState) => {
             dispatch(this.actionProvider.createRequestAction(action, payload));
-            return fetch(this.getEndpoint(action, payload, {include: 'region,city'}), {
+            return fetch(this.getEndpoint(action, payload, attributes), {
                 method: 'get',
                 headers: this.getHeaders()
             })

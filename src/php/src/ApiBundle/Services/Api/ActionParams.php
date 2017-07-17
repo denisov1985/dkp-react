@@ -33,7 +33,7 @@ class ActionParams
      */
     public function getQuery()
     {
-        return $this->query;
+        return json_decode($this->query['params'], true);
     }
 
     /**

@@ -10,14 +10,24 @@ class Category extends Container {
     componentWillMount() {
         super.componentWillMount();
         if (this.props.category.collection.get('status') === 0) {
-            this.props.actions.category.collection.findAll();
+            this.props.actions.category.collection.findAll({
+                page: {
+                    offset: 1,
+                    limit: 10
+                }
+            });
         }
     }
 
     render() {
         return (
             <Layout description="Список категорий продуктов" container={this}>
-                <DataTable provider={this.props.category.collection}>
+
+                <div className="ui section">
+
+                </div>
+
+                <DataTable provider={this.props.category.collection} source={this.props.actions.category.collection}>
                     <DataTable.Column.Data width="40" title="ID" field="id"/>
                     <DataTable.Column.Data title="Category Name" field="name"/>
                     <DataTable.Column.Text title="Static">

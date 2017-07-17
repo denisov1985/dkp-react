@@ -9,11 +9,11 @@ export default class DataTableFooter extends CoreComponent {
      */
     render() {
         return (<tfoot>
-        <tr>
-            <th colSpan={this.props.parent.getColumns().length}>
-                <DataTablePager />
-            </th>
-        </tr>
+            <tr>
+                <th colSpan={this.props.parent.getColumns().length}>
+                    <DataTablePager parent={this.props.parent} />
+                </th>
+            </tr>
         </tfoot>)
     }
 }
