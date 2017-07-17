@@ -2,22 +2,21 @@
 // src/AppBundle/DataFixtures/ORM/LoadUserData.php
 namespace AppBundle\DataFixtures\ORM;
 
-use ApiBundle\Entity\Product;
+use ApiBundle\Entity\Category;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use ApiBundle\Entity\User;
 
-class LoadProductsData implements FixtureInterface
+class LoadCategoryData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $stubFile = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'stubs' . DIRECTORY_SEPARATOR . 'Products.json';
+        $stubFile = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'Resources' . DIRECTORY_SEPARATOR . 'stubs' . DIRECTORY_SEPARATOR . 'Category.json';
         $content = file_get_contents($stubFile);
         $data = json_decode($content, true);
 
         for ($i = 1; $i <= 2; $i++) {
             foreach ($data as $index => $row) {
-                $product = new Product();
+                $product = new Category();
                 foreach ($row  as $key => $value) {
                     if ($key == 'id') {
                         continue;

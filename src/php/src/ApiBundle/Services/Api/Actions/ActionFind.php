@@ -15,7 +15,7 @@ class ActionFind extends ActionSecure
     {
         $this->getActionParams()->getEntity();
 
-        $collection = $this->getRepository()->findBy([], ['id' => 'DESC'],5);
+        $collection = $this->getRepository()->findBy([], ['id' => 'DESC'],20);
         $result = [];
 
         foreach ($collection as $item) {

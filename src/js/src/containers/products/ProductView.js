@@ -18,7 +18,7 @@ class ProductView extends Container {
                     Просмотр продукта
                 </h2>
 
-                <ProductTabs />
+                <ProductTabs id={this.props.routeParams.id} />
                 <div className="ui bottom attached active tab segment">
 
                         <div style={{

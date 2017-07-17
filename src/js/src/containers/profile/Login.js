@@ -8,14 +8,14 @@ class Login extends Container {
     componentWillMount() {
         this.props.actions.auth.initSession();
         if (this.props.auth.get('loggedIn')) {
-            this.redirect('dashboard');
+            this.redirect('');
             return false;
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.auth.get('loggedIn')) {
-            this.redirect('dashboard');
+            this.redirect('');
         }
     }
 

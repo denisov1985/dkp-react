@@ -2,13 +2,17 @@ import React, {Component} from 'react'
 import {Link} from 'react-router';
 
 export default class ProductTabs extends Component {
+    link(path) {
+        return path + '/' + this.props.id;
+    }
+
     render() {
         return (
             <div className="ui top attached tabular menu">
-                <Link to="/catalog/products/view/29998" className="item" activeClassName="active">
+                <Link to={this.link('/catalog/products/view')} className="item" activeClassName="active">
                     Информация
                 </Link>
-                <Link to="/catalog/products/attributes/29998" className="item" activeClassName="active">
+                <Link to={this.link('/catalog/products/attributes')}  className="item" activeClassName="active">
                     Аттрибуты
                 </Link>
                 <Link to="/catalog/products/inventory/29998" className="item" activeClassName="active">

@@ -42,7 +42,9 @@ class Container extends Component {
      * @returns {{}}
      */
     static mapStateToProps(state, ownProps) {
-        return {}
+        let result = {};
+        result[this.getEntity().toLowerCase()] = state[this.getEntity().toLowerCase()];
+        return result;
     }
 
     /**
@@ -51,7 +53,9 @@ class Container extends Component {
      * @returns {{}}
      */
     static mapDispatchToProps(dispatch) {
-        return {}
+        let result = {};
+        result[this.getEntity().toLowerCase()] = Container.getActionFactory().createCrudActions(dispatch, this.getEntity().toLowerCase())
+        return result;
     }
 
     /**
@@ -78,6 +82,14 @@ class Container extends Component {
     }
 
     /**
+     * Init redux
+     * @returns {null}
+     */
+    static getEntity() {
+        return 'Product';
+    }
+
+    /**
      * Redux connect wrapper
      * @returns {*}
      */
@@ -100,6 +112,12 @@ class Container extends Component {
                 actions: actions
             }
         })(this)
+    }
+
+    static getActionFactory = () => ActionFactory;
+
+    getEntity = () => {
+        null;
     }
 }
 

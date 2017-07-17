@@ -13,8 +13,8 @@ import Logout from './containers/profile/Logout';
 import Register from './containers/profile/Register';
 import Dashboard from './containers/dashboard/Dashboard';
 import Regions from './containers/dashboard/Regions';
-import Classes from './containers/member/Classes';
 import Products from './containers/products/Products';
+import Category from './containers/category/Category';
 import ProductView from './containers/products/ProductView';
 import UnderConstruction from './containers/common/UnderConstruction';
 
@@ -49,7 +49,7 @@ render(
                         <Route name="Просмотр продукта" path="coupons/:id" component={ProductView} />
                         <Route name="Просмотр продукта" path="attachments/:id" component={ProductView} />
                     </Route>
-                    <Route name="Категории" path="category" component={UnderConstruction} />
+                    <Route name="Категории" path="category" component={Category} />
                     <Route name="Отзывы" path="reviews" component={UnderConstruction} />
                     <Route name="Закладки" path="tabs" component={UnderConstruction} />
                     <Route name="Атрибуты" path="attributes" component={UnderConstruction} />
