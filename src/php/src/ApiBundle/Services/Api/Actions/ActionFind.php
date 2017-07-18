@@ -11,14 +11,33 @@ namespace ApiBundle\Services\Api\Actions;
 class ActionFind extends ActionSecure
 {
 
+    protected function _initQueryParams() {
+        if (!isset($this->query['page'])) {
+            $this->query['page'] = [
+                'limit'   => 7,
+                'offset'  => 1,
+            ];
+        }
+
+        if (!isset($this->query['page']['limit'])) {
+            $this->query['page']['limit'] = 7;
+        }
+
+        if (!isset($this->query['page']['offset'])) {
+            $this->query['page']['offset'] = 1;
+        }
+    }
+
     protected function handle()
     {
-        $this->getActionParams()->getEntity();
-        $query = $this->getActionParams()->getQuery();
+        $query = $this->getQuery();
+        //$collection = $this->getRepository()->findBy([], [], $query['page']['limit'], ($query['page']['offset'] - 1) * $query['page']['limit']);
+        $collection = $this->findAll();
+        $count = $this->countAll();
 
-        $collection = $this->getRepository()->findBy([], ['id' => 'DESC'], $query['page']['limit'], ($query['page']['offset'] - 1) * $query['page']['limit']);
+        $this->query['page']['total'] = $count;
+
         $result = [];
-
         foreach ($collection as $item) {
             $result[] = [
                 'type' => $this->getActionParams()->getEntity(),

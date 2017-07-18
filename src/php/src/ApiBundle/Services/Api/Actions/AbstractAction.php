@@ -21,14 +21,15 @@ abstract class AbstractAction
     protected $actionParams;
     protected $status = 200;
     protected $serializer;
-
+    protected $query;
 
     /**
      * AbstractAction constructor.
      * @param $em
      */
-    public function __construct($em, $actionParams)
+    public function __construct($em, ActionParams $actionParams)
     {
+        $this->query = $actionParams->getQuery();
         $this->em = $em;
         $this->actionParams = $actionParams;
         $this->serializer = \JMS\Serializer\SerializerBuilder::create()
@@ -36,7 +37,10 @@ abstract class AbstractAction
                 $dispatcher->addSubscriber(new \ApiBundle\Event\AvoidDoctrineProxySubscriber());
             })
             ->build();
+        $this->_initQueryParams();
     }
+
+    protected function _initQueryParams() {}
 
     /**
      * Restore default serializer
@@ -113,6 +117,37 @@ abstract class AbstractAction
     protected function postAction() {}
 
     protected function getResponseInstance($result) {
-        return new Response($result);
+        return new Response($result, $this);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    protected function getBuilder() {
+        $builder = $this->getRepository()
+            ->createQueryBuilder('p');
+        $builder->setMaxResults($this->getQuery()['page']['limit']);
+        return $builder;
+    }
+
+    protected function findAll() {
+        return $this->getBuilder()
+            ->setFirstResult($this->getQuery()['page']['limit'] * ($this->getQuery()['page']['offset'] - 1))
+            ->getQuery()
+            ->getResult();
+    }
+
+    protected function countAll() {
+        return $this->getBuilder()
+            ->select('COUNT(p)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+
 }

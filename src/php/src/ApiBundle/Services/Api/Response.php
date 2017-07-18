@@ -8,20 +8,24 @@
 
 namespace ApiBundle\Services\Api;
 
+use ApiBundle\Services\Api\Actions\AbstractAction;
+
 class Response
 {
     protected $data;
+    protected $action;
 
-    public function __construct($data)
+    public function __construct($data, AbstractAction $action = null)
     {
         $this->data   = $data;
+        $this->action = $action;
     }
 
     public function getResult()
     {
         return [
-            'data' => $this->data
-        ];
+            'data' => $this->data,
+        ] + $this->action->getQuery();
     }
 
     public function getStatus()

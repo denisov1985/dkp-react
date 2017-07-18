@@ -61,9 +61,14 @@ export default class DataTable extends CoreComponent {
      * Find All
      * @returns {*}
      */
-    request(params) {
-        console.log('on clcik');
-        return this.props.source.findAll(params);
+    update(provider) {
+        return this.props.source.findAll(
+            provider
+                .delete('repository')
+                .delete('status')
+                .delete('dataset')
+                .toJS()
+        );
     }
 
     /**

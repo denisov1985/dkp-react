@@ -8,7 +8,7 @@ class CollectionReducer extends Reducer
      */
     initState = () => ({
         dataset: [],
-        test: [],
+        page: {},
         repository: {
             findBy: (id) => null
         }
@@ -42,11 +42,9 @@ class CollectionReducer extends Reducer
                         return data.get(0);
                     });
 
-                    console.log('rep');
-                    console.log(repository);
-
                     return state.set('dataset', payload.get('data'))
                         .set('status', this.statusComplete())
+                        .set('page', payload.get('page'))
                         .set('repository', repository);
 
                     break;
