@@ -136,10 +136,12 @@ abstract class AbstractAction
     }
 
     protected function findAll() {
-        return $this->getBuilder()
-            ->setFirstResult($this->getQuery()['page']['limit'] * ($this->getQuery()['page']['offset'] - 1))
-            ->getQuery()
-            ->getResult();
+        $builder = $this->getBuilder()
+            ->setFirstResult($this->getQuery()['page']['limit'] * ($this->getQuery()['page']['offset'] - 1));
+        if (!empty($this->getQuery()['sort']['field'])) {
+            $builder->addOrderBy('p.' . $this->getQuery()['sort']['field'], $this->getQuery()['sort']['order']);
+        }
+        return $builder->getQuery()->getResult();
     }
 
     protected function countAll() {

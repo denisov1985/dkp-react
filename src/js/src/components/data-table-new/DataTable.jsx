@@ -20,7 +20,7 @@ export default class DataTable extends CoreComponent {
      * Build class data
      */
     buildClass() {
-        this.addClass("ui celled table");
+        this.addClass("ui celled table sortable");
     }
 
     /**

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
+import DataTableSorter from './addons/DataTableSorter';
 
 export default class DataTableHeader extends CoreComponent {
 
@@ -9,8 +10,12 @@ export default class DataTableHeader extends CoreComponent {
      * @param index
      * @returns {XML}
      */
-    renderHeaderColumn(element, index) {
-        return (<th width={element.props.width} key={index}>{element.props.title}</th>);
+    renderHeaderColumn = (element, index) => {
+        if (element.props.sortable) {
+            return <DataTableSorter parent={this.props.parent} element={element} width={element.props.width} key={index}>{element.props.title}</DataTableSorter>
+        }   else  {
+            return (<th width={element.props.width} key={index}>{element.props.title}</th>);
+        }
     }
 
     /**

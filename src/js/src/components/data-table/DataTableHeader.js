@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
 import DataSorter from './addons/DataSorter';
 
+
 export default class DataTableHeader extends CoreComponent {
 
     /**

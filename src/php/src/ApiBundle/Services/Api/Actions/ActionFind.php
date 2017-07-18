@@ -26,6 +26,13 @@ class ActionFind extends ActionSecure
         if (!isset($this->query['page']['offset'])) {
             $this->query['page']['offset'] = 1;
         }
+
+        if (!isset($this->query['sort'])) {
+            $this->query['sort'] = [
+                'field'   => null,
+                'order'   => 'asc',
+            ];
+        }
     }
 
     protected function handle()

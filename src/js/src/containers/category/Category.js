@@ -54,8 +54,8 @@ class Category extends Container {
                 <div style={{height: 12 + 'px'}}></div>
 
                 <DataTable provider={this.props.category.collection} source={this.props.actions.category.collection}>
-                    <DataTable.Column.Data width="40" title="ID" field="id"/>
-                    <DataTable.Column.Data title="Category Name" field="name"/>
+                    <DataTable.Column.Data width="40" title="ID" field="id" sortable={true} />
+                    <DataTable.Column.Data title="Category Name" field="name"  sortable={true}/>
                     <DataTable.Column.Text title="Static">
                         Some text
                     </DataTable.Column.Text>
