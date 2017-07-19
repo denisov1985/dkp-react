@@ -33,6 +33,10 @@ class ActionFind extends ActionSecure
                 'order'   => 'asc',
             ];
         }
+
+        if (!isset($this->query['filter'])) {
+            $this->query['filter'] = [];
+        }
     }
 
     protected function handle()

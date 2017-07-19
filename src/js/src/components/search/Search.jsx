@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
 import Menu from './Menu';
+import Params from './Params';
 
 class Search extends CoreComponent {
 
@@ -100,7 +101,17 @@ class Search extends CoreComponent {
 
     renderSearchParams() {
         return this.state.searchParams.map((item, index) => {
-            return (<a className="ui label transition visible" style={{display: 'inline-block !important'}}>{item.field.value} {item.operator.value} {item.value.value}<i className="delete icon" /></a>)
+            return (<Params onClose={this.onCloseParam} item={item} index={index} />)
+        })
+    }
+
+    onCloseParam = (index) => {
+        this.setState({
+            searchParams: this.state.searchParams.filter((item, key) => {
+                return key != index
+            })
+        }, () => {
+            this.props.onSearch(this.state.searchParams);
         })
     }
 
@@ -109,8 +120,6 @@ class Search extends CoreComponent {
      * @returns {XML}
      */
     render() {
-        console.log(this);
-
         return (
             <div onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} className={this.getClass()} onClick={this.onDropdownClick}>
                 <input name="tags" type="hidden" defaultValue="angular,design"/>

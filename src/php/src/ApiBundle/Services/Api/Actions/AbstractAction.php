@@ -132,6 +132,16 @@ abstract class AbstractAction
         $builder = $this->getRepository()
             ->createQueryBuilder('p');
         $builder->setMaxResults($this->getQuery()['page']['limit']);
+
+        $filter = $this->getQuery()['filter'];
+        foreach($filter as $key => $value) {
+            //echo "p.{$value['field']} {$value['operator']} {$value['value']}" . PHP_EOL;
+            $builder->andWhere("p.{$value['field']} {$value['operator']} :var{$key}");
+            $builder->setParameter("var{$key}", $value['value']);
+        }
+
+        //die();
+
         return $builder;
     }
 
