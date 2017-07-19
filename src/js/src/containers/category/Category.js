@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux'
 import DataTable from 'components/data-table-new/DataTable';
 import Segment from 'components/segment/Segment';
 import Button from 'components/button/Button';
+import Search from 'components/search/Search';
 import ActionFactory from '../../actions/ActionFactory';
 import Layout from '../Layout';
 import Container from '../common/Container';
@@ -23,16 +24,13 @@ class Category extends Container {
 
     render() {
         console.log(this);
+        console.log(this.props.category.collection.get('dataset'));
         return (
             <Layout description="Список категорий продуктов" container={this}>
 
                 <Segment>
-                    <div className="ui action input fluid">
-                        <input  type="text" placeholder="Search..." />
-                            <button className="ui icon button">
-                                <i className="search icon"></i>
-                            </button>
-                    </div>
+
+                    <Search options={this.formatOptions()} />
 
                     <div style={{marginTop: 12 + 'px'}}>
                         <a className="ui teal label">
@@ -49,24 +47,33 @@ class Category extends Container {
 
                 </Segment>
 
-                <Button>Добавить продукт</Button>
+                <Button icon="add">Добавить продукт</Button>
 
-                <div style={{height: 12 + 'px'}}></div>
+                <div style={{height: 16 + 'px'}}></div>
 
                 <DataTable provider={this.props.category.collection} source={this.props.actions.category.collection}>
-                    <DataTable.Column.Data width="40" title="ID" field="id" sortable={true} />
-                    <DataTable.Column.Data title="Category Name" field="name"  sortable={true}/>
+                    <DataTable.Column.Data width="40" title="ID" field="id" sortable={true}/>
+                    <DataTable.Column.Data title="Category Name" field="name" sortable={true}/>
                     <DataTable.Column.Text title="Static">
                         Some text
                     </DataTable.Column.Text>
 
                     <DataTable.Column.Control width="100" title="Действия">
-                        <DataTable.Controls.Button fluid >Просмотр</DataTable.Controls.Button>
+                        <DataTable.Controls.Button fluid>Просмотр</DataTable.Controls.Button>
                     </DataTable.Column.Control>
                 </DataTable>
 
             </Layout>
         )
+    }
+
+    formatOptions = () => {
+        return this.props.category.collection.get('dataset').map((item, index) => {
+            return {
+                key:  item.getIn(['attributes', 'id']),
+                value: item.getIn(['attributes', 'name']),
+            }
+        }).toJS();
     }
 
     static getEntity() {
