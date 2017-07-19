@@ -9,14 +9,15 @@ class CollectionReducer extends Reducer
     initState = () => ({
         dataset: [],
         page: {
-            offset: 0,
-            limit:  0,
+            offset: 1,
+            limit:  10,
             total:  0
         },
         sort: {
             field: null,
             order: 'asc'
         },
+        filter: [],
         repository: {
             findBy: (id) => null
         }
@@ -53,6 +54,7 @@ class CollectionReducer extends Reducer
                     return state.set('dataset', payload.get('data'))
                         .set('status', this.statusComplete())
                         .set('page', payload.get('page'))
+                        .set('filter', payload.get('filter', fromJS([])))
                         .set('sort', payload.get('sort'))
                         .set('repository', repository);
 

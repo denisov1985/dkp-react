@@ -15,10 +15,17 @@ export default class Menu extends CoreComponent {
      * @param item
      * @returns {XML}
      */
-    renderItem(item) {
+    renderItem = (item) => {
+        if (item.value.indexOf(this.props.search) == -1) {
+            return null;
+        }
         return (<div onClick={this.props.onSelect.bind(this, item)} className="item">{item.value}</div>);
     }
 
+    /**
+     * Render menu
+     * @returns {XML}
+     */
     render() {
         return (
             <div className={this.getClass()}>

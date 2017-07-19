@@ -26,7 +26,6 @@ class Search extends CoreComponent {
         if (nextState.searchField !== null
             && nextState.searchOperator !== null
             && nextState.searchValue !== null) {
-            console.log('suka');
             let params = this.state.searchParams;
             params.push({
                 field: nextState.searchField,
@@ -38,7 +37,10 @@ class Search extends CoreComponent {
                 searchField: null,
                 searchOperator: null,
                 searchValue: null,
-                expanded: true
+                expanded: false
+            }, () => {
+                this.refs.search.blur();
+                this.props.onSearch(this.state.searchParams);
             })
         }
     }
@@ -118,7 +120,11 @@ class Search extends CoreComponent {
                 {this.renderSearchOperator()}
                 <input value={this.state.search} onKeyPress={this.onKeyPress} ref="search" onChange={this.onChange} className="search" autoComplete="off" tabIndex={0}/><span className="sizer" />
                 <div className="default text"></div>
-                <Menu onSelect={this.onSelect} options={this.getOptions()} visible={this.state.expanded} />
+                <Menu
+                    search={this.state.search}
+                    onSelect={this.onSelect}
+                    options={this.getOptions()}
+                    visible={this.state.expanded} />
             </div>
         )
     }

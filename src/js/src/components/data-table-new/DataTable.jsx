@@ -62,13 +62,7 @@ export default class DataTable extends CoreComponent {
      * @returns {*}
      */
     update(provider) {
-        return this.props.source.findAll(
-            provider
-                .delete('repository')
-                .delete('status')
-                .delete('dataset')
-                .toJS()
-        );
+        return this.props.source.findAll(provider);
     }
 
     /**

@@ -13,24 +13,31 @@ class Category extends Container {
     componentWillMount() {
         super.componentWillMount();
         if (this.props.category.collection.get('status') === 0) {
-            this.props.actions.category.collection.findAll({
-                page: {
-                    offset: 1,
-                    limit: 7
-                }
-            });
+            this.props.actions.category.collection.findAll(this.props.category.collection);
         }
+    }
+
+    onSearch = (data) => {
+        let filter = data.map((item, index) => {
+            return {
+                field: item.field.key,
+                operator: item.operator.key,
+                value: item.value.key,
+            }
+        })
+
+        let params = this.props.category.collection.set('filter', filter);
+        this.props.actions.category.collection.findAll(params);
     }
 
     render() {
         console.log(this);
-        console.log(this.props.category.collection.get('dataset'));
         return (
             <Layout description="Список категорий продуктов" container={this}>
 
                 <Segment>
-
-                    <Search options={this.formatOptions()} />
+                    <h4>Поиск категорий</h4>
+                    <Search options={this.formatOptions()} onSearch={this.onSearch} />
 
                     <div style={{marginTop: 12 + 'px'}}>
                         <a className="ui teal label">
@@ -68,12 +75,10 @@ class Category extends Container {
     }
 
     formatOptions = () => {
-        return this.props.category.collection.get('dataset').map((item, index) => {
-            return {
-                key:  item.getIn(['attributes', 'id']),
-                value: item.getIn(['attributes', 'name']),
-            }
-        }).toJS();
+        return [
+            {key: 'id', value: 'Индекс'},
+            {key: 'name', value: 'Категория'},
+        ];
     }
 
     static getEntity() {
