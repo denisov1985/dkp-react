@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
-import DataTable from 'components/data-table/DataTable';
+import DataTable from 'components/data-table-new/DataTable';
 import Button from 'components/controls/Button';
 import CollectionAction from '../../actions/CollectionAction';
 import ActionFactory from '../../actions/ActionFactory';
@@ -15,7 +15,7 @@ class Products extends Container {
     componentWillMount() {
         super.componentWillMount();
         if (this.props.product.collection.get('status') === 0) {
-            this.props.actions.product.collection.findAll();
+            this.props.actions.product.collection.findAll(this.props.product.collection);
         }
     }
 
@@ -24,52 +24,29 @@ class Products extends Container {
         console.log(data);
 
         return (
-            <Layout loggedIn={this.isLoggedIn()} router={this.props.router}>
+            <Layout container={this}>
                 <h2 className="ui header">
                     Продукты
                     <div className="sub header">Список продуктов на складе</div>
                 </h2>
 
-                <DataTable
-                    dataset={this.props.product.collection.get('dataset')}
-                    status={this.props.product.collection.get('status')}
-                    join={this.props.product.collection.get('join')}
-                    pagination="default"
-                >
-                    <DataTable.Row>
-                        <DataTable.Column title="" width="40" field="id">
-                            <DataTable.Cell.Default>
-                                <DataTable.Controls.Checkbox />
-                            </DataTable.Cell.Default>
-                        </DataTable.Column>
+                <DataTable provider={this.props.product.collection} source={this.props.actions.product.collection}>
+                    <DataTable.Column.Data width="40" title="ID" field="id" sortable={true}/>
+                    <DataTable.Column.Data title="Product Name" field="name" sortable={true}/>
+                    <DataTable.Column.Text title="Static">
+                        Some text
+                    </DataTable.Column.Text>
 
-                        <DataTable.Column title="ID" width="50" sortable="1" field="id">
-                            <DataTable.Cell.Text />
-                        </DataTable.Column>
-
-                        <DataTable.Column sortType="date" title="Product Name" field="name" sortable="1">
-                            <DataTable.Cell.Text  />
-                        </DataTable.Column>
-
-                        <DataTable.Column width="80"  title="Price" field="price" sortable="1">
-                            <DataTable.Cell.Text  />
-                        </DataTable.Column>
-
-                        <DataTable.Column title="" width="180" field="id">
-                            <DataTable.Cell.Default>
-                                <Button onClick={this.onView} icon="write" size="mini" shiftRight="5">Просмотр</Button>
-                                <Button icon="trash" color="negative" size="mini"/>
-                            </DataTable.Cell.Default>
-                        </DataTable.Column>
-                    </DataTable.Row>
+                    <DataTable.Column.Control width="100" title="Действия">
+                        <DataTable.Controls.Button fluid onClick={this.onView}>Просмотр</DataTable.Controls.Button>
+                    </DataTable.Column.Control>
                 </DataTable>
             </Layout>
         )
     }
 
     onView = (event, target) => {
-        console.log(target);
-        this.props.actions.product.details.getLocal(target.props.record);
+        //this.props.actions.product.details.getLocal(target.props.record);
         this.redirect('catalog/products/view/' + target.props.record.get('id'));
     }
 

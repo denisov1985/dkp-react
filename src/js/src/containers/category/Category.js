@@ -77,7 +77,7 @@ class Category extends Container {
     formatOptions = () => {
         return [
             {key: 'id', value: 'Индекс'},
-            {key: 'name', value: 'Категория'},
+            {key: 'name', value: 'Модель авто'},
         ];
     }
 

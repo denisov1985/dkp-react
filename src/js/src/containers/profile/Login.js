@@ -26,7 +26,7 @@ class Login extends Container {
                 <div className="ui three column centered grid">
                     <div className="column center aligned" style={{position: 'fixed', top: '25%', maxWidth: '400px'}}>
                         <h2 className="ui teal image  header  center aligned">
-                            <img src="/img/login.png" className="image"/>
+                            <img src="/img/logo.png" className="image"/>
                             <div className="content">
                                 Log-in to your account555
                             </div>
@@ -42,7 +42,6 @@ class Login extends Container {
     }
 
     onLogin = () => {
-        console.log(this.props.auth);
         this.props.actions.auth.login(this.props.auth.get('dataset').toObject());
     }
 

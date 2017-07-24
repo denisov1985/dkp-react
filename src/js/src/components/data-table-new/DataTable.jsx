@@ -8,7 +8,7 @@ import DataTableColumnData from './columns/DataTableColumnData';
 import DataTableColumnText from './columns/DataTableColumnText';
 import DataTableColumnControl from './columns/DataTableColumnControl';
 
-import Button from '../button/Button';
+import Button from '../controls/Button';
 import Dimmer from '../dimmer/Dimmer';
 
 /**

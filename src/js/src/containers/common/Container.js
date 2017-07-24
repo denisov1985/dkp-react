@@ -10,7 +10,7 @@ class Container extends Component {
      * Init user session
      */
     componentWillMount() {
-        this.props.actions.auth.initSession();
+        //this.props.actions.auth.initSession();
     }
 
     /**

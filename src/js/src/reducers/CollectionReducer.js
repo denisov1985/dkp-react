@@ -19,7 +19,7 @@ class CollectionReducer extends Reducer
         },
         filter: [],
         repository: {
-            findBy: (id) => null
+            findBy: (id) => {}
         }
     });
 

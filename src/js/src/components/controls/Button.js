@@ -38,10 +38,12 @@ export default class Button extends CoreComponent {
     }
 
     onClick = (e) => {
+        console.log('okokok');
         this.props.onClick(e, this);
     }
 
     render() {
+        console.log('button');
         return (<button onClick={this.onClick} style={this.getStyle()} className={this.getClass()} type="button">{this.getIcon()}{this.props.children}</button>)
     }
 }

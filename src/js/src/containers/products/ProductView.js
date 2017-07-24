@@ -10,12 +10,23 @@ import ModalDetails from 'components/modal/common/ModalDetails';
 
 class ProductView extends Container {
 
+    componentWillMount() {
+        super.componentWillMount();
+        if (this.props.product.collection.get('status') === 0) {
+            this.props.actions.product.collection.findAll();
+        }
+    }
+
     render() {
+        let id = this.props.routeParams.id;
+        console.log('THIS');
         console.log(this);
+        let data = this.props.product.collection.getIn(['repository', 'findBy'])(id);
+        console.log(data);
         return (
-            <Layout loggedIn={this.isLoggedIn()} router={this.props.router}>
+            <Layout container={this}>
                 <h2 className="ui header">
-                    Просмотр продукта
+                    Просмотр продукта123
                 </h2>
 
                 <ProductTabs id={this.props.routeParams.id} />
@@ -30,7 +41,7 @@ class ProductView extends Container {
                                     <label>Name</label>
                                     <div className="two fields">
                                         <div className="field">
-                                            <input type="text" name="shipping[first-name]" placeholder="First Name" />
+                                            <input  type="text" name="shipping[first-name]"  />
                                         </div>
                                         <div className="field">
                                             <input type="text" name="shipping[last-name]" placeholder="Last Name" />
@@ -337,11 +348,11 @@ class ProductView extends Container {
                                 <div className="fields">
                                     <div className="seven wide field">
                                         <label>Card Number</label>
-                                        <input type="text" name="card[number]" maxlength="16" placeholder="Card #" />
+                                        <input type="text" name="card[number]" maxLength="16" placeholder="Card #" />
                                     </div>
                                     <div className="three wide field">
                                         <label>CVC</label>
-                                        <input type="text" name="card[cvc]" maxlength="3" placeholder="CVC" />
+                                        <input type="text" name="card[cvc]" maxLength="3" placeholder="CVC" />
                                     </div>
                                     <div className="six wide field">
                                         <label>Expiration</label>
