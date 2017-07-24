@@ -7,6 +7,7 @@ import ActionFactory from '../../actions/ActionFactory';
 import Layout from '../Layout';
 import Container from '../common/Container';
 import Form from 'components/form/Form';
+import Search from 'components/search/Search';
 
 import ModalDetails from 'components/modal/common/ModalDetails';
 
@@ -19,6 +20,28 @@ class Products extends Container {
         }
     }
 
+    onSearch = (data) => {
+        let filter = data.map((item, index) => {
+            return {
+                field: item.field.key,
+                operator: item.operator.key,
+                value: item.value.key,
+            }
+        });
+
+
+        this.props.actions.product.collection.findAll(
+            this.props.product.collection.set('filter', filter)
+        );
+    }
+
+    formatOptions = () => {
+        return [
+            {key: 'id', value: 'Индекс'},
+            {key: 'name', value: 'Модель авто'},
+        ];
+    }
+
     render() {
         let data = this.props.product.collection.getIn(['repository', 'findBy'])(29999);
         console.log(data);
@@ -29,6 +52,8 @@ class Products extends Container {
                     Продукты
                     <div className="sub header">Список продуктов на складе</div>
                 </h2>
+
+                <Search options={this.formatOptions()} onSearch={this.onSearch} />
 
                 <DataTable provider={this.props.product.collection} source={this.props.actions.product.collection}>
                     <DataTable.Column.Data width="40" title="ID" field="id" sortable={true}/>

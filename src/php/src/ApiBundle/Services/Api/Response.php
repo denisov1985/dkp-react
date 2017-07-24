@@ -23,9 +23,10 @@ class Response
 
     public function getResult()
     {
+        $query = $this->action->getQuery() === null ? [] : $this->action->getQuery();
         return [
             'data' => $this->data,
-        ] + $this->action->getQuery();
+        ] + $query;
     }
 
     public function getStatus()

@@ -2,7 +2,9 @@
 
 namespace ApiBundle\Controller;
 
+use ApiBundle\Entity\Product;
 use ApiBundle\Entity\User;
+use ApiBundle\Form\ProductType;
 use ApiBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,8 +34,8 @@ class DefaultController extends Controller
 
     public function testAction($entity)
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $user = new Product();
+        $form = $this->createForm(ProductType::class, $user);
 
         $rendered = $this->render('register.html.twig', [
             "form" => $form->createView(),
@@ -44,7 +46,7 @@ class DefaultController extends Controller
 
         $rendered = str_ireplace('apibundle_', '', $rendered);
         $rendered = str_ireplace('][', '.', $rendered);
-        $rendered = str_ireplace('user[', '', $rendered);
+        $rendered = str_ireplace('product[', '', $rendered);
         $rendered = str_ireplace('[', '', $rendered);
         $rendered = str_ireplace(']', '', $rendered);
         $rendered = str_ireplace('style="display: none"', '', $rendered);

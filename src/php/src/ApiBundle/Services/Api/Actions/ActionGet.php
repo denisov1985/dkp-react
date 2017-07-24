@@ -24,6 +24,7 @@ class ActionGet extends ActionSecure
 
         $item = $this->getRepository()->find($params[0]);
 
+
         $query = $this->getActionParams()->getQuery();
         $include = [
             'include' => []

@@ -95,6 +95,7 @@ abstract class AbstractAction
         if (is_null($entity)) {
             $entity = $this->getActionParams()->getEntity();
         }
+
         return $this->em->getRepository('ApiBundle:' . ucfirst($entity));
     }
 

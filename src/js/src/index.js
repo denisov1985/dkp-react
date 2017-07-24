@@ -16,6 +16,7 @@ import Regions from './containers/dashboard/Regions';
 import Products from './containers/products/Products';
 import Category from './containers/category/Category';
 import ProductView from './containers/products/ProductView';
+import ProductDev from './containers/products/ProductDev';
 import UnderConstruction from './containers/common/UnderConstruction';
 
 const store = createStore(
@@ -41,13 +42,13 @@ render(
                     <Route name="Продукты" path="products">
                         <IndexRoute name="Главная" component={Products} />
                         <Route name="Просмотр продукта" path="view/:id" component={ProductView} />
-                        <Route name="Просмотр продукта" path="attributes/:id" component={ProductView} />
-                        <Route name="Просмотр продукта" path="inventory/:id" component={ProductView} />
-                        <Route name="Просмотр продукта" path="related/:id" component={ProductView} />
-                        <Route name="Просмотр продукта" path="review/:id" component={ProductView} />
-                        <Route name="Просмотр продукта" path="tabs/:id" component={ProductView} />
-                        <Route name="Просмотр продукта" path="coupons/:id" component={ProductView} />
-                        <Route name="Просмотр продукта" path="attachments/:id" component={ProductView} />
+                        <Route name="Просмотр продукта" path="attributes/:id" component={ProductDev} />
+                        <Route name="Просмотр продукта" path="inventory/:id" component={ProductDev} />
+                        <Route name="Просмотр продукта" path="related/:id" component={ProductDev} />
+                        <Route name="Просмотр продукта" path="review/:id" component={ProductDev} />
+                        <Route name="Просмотр продукта" path="tabs/:id" component={ProductDev} />
+                        <Route name="Просмотр продукта" path="coupons/:id" component={ProductDev} />
+                        <Route name="Просмотр продукта" path="attachments/:id" component={ProductDev} />
                     </Route>
                     <Route name="Категории" path="category" component={Category} />
                     <Route name="Отзывы" path="reviews" component={UnderConstruction} />
