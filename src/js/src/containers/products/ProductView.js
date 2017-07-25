@@ -27,6 +27,18 @@ class ProductView extends Container {
         }
     }
 
+    componentDidMount() {
+        console.log('did mount');
+        let id = this.props.routeParams.id;
+        let data = this.props.product.collection.getIn(['repository', 'findBy'])(id);
+
+        if (typeof data === 'undefined') {
+            this.props.actions.product.details.get(id);
+        } else {
+            this.props.actions.product.details.set(data);
+        }
+    }
+
     render() {
         return (
             <Layout container={this}>
@@ -44,15 +56,23 @@ class ProductView extends Container {
                             <div className="ui secondary raised segment">
                                 <h4 className="ui dividing header">Информация</h4>
                                 <Form provider={this.props.product.details} handler={this.props.actions.product.details.update} className="ui form">
-                                    <Form.Row title="Lalala">
-                                        <Form.Input.Text name="productname"/>
+                                    <Form.Row title="Name">
+                                        <Form.Input.Text name="name" />
                                     </Form.Row>
-
-                                    <Form.Row>
-                                        <Form.Input.Text name="productprice"/>
+                                    <Form.Row title="Description">
+                                        <Form.Input.Textarea name="description" />
                                     </Form.Row>
-                                    <Form.Row>
-                                        <Form.Input.Text name="productsalePrice"/>
+                                    <Form.Row title="Fulldescription">
+                                        <Form.Input.Textarea name="fullDescription" />
+                                    </Form.Row>
+                                    <Form.Row title="Available">
+                                        <Form.Input.Checkbox name="available" />
+                                    </Form.Row>
+                                    <Form.Row title="Price">
+                                        <Form.Input.Number name="price" />
+                                    </Form.Row>
+                                    <Form.Row title="Saleprice">
+                                        <Form.Input.Number name="salePrice" />
                                     </Form.Row>
                                 </Form>
                             </div>

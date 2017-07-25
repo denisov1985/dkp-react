@@ -45,6 +45,7 @@ class DefaultController extends Controller
         $rendered = $rendered->getContent();
 
         $rendered = str_ireplace('apibundle_', '', $rendered);
+        $rendered = str_ireplace('{PLACEHOLDER}', $entity, $rendered);
         $rendered = str_ireplace('][', '.', $rendered);
         $rendered = str_ireplace('product[', '', $rendered);
         $rendered = str_ireplace('[', '', $rendered);

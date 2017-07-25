@@ -37,7 +37,7 @@ class DetailsReducer extends Reducer
                 /**
                  * Receive login
                  */
-                case this.formatReceiveAction('get_local'):
+                case this.formatReceiveAction('set'):
                     console.log('ACTION');
                     console.log(action);
                     console.log(payload);

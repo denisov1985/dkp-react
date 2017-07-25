@@ -4,6 +4,11 @@ import CoreComponent from '../core/CoreComponent';
 import InputText from './elements/InputText';
 import Dropdown from './elements/dropdown/Dropdown';
 import InputIconText from './elements/InputIconText';
+
+import Checkbox from './elements/Checkbox';
+import InputTextarea from './elements/InputTextarea';
+import InputNumber from './elements/InputNumber';
+
 import Row from './Row';
 import FormWrapper from './FormWrapper';
 import FormButton from './FormButton';
@@ -41,3 +46,6 @@ Form.Input      = InputText;
 Form.Dropdown   = Dropdown;
 Form.Input.Text = InputText;
 Form.Input.IconText = InputIconText;
+Form.Input.Checkbox = Checkbox;
+Form.Input.Textarea = InputTextarea;
+Form.Input.Number = InputNumber;
