@@ -31,7 +31,6 @@ class Category extends Container {
     }
 
     render() {
-        console.log(this);
         return (
             <Layout description="Список категорий продуктов" container={this}>
 

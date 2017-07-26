@@ -14,9 +14,9 @@ class DetailsReducer extends Reducer
 
     create() {
         return (state = this.getInitialState(), action) => {
-            console.log(action);
-
             let payload = fromJS(action.payload);
+            console.log(action);
+            console.log(action.payload);
             switch (action.type) {
                 /**
                  * Request login
@@ -30,6 +30,7 @@ class DetailsReducer extends Reducer
                  * Receive login
                  */
                 case this.formatReceiveAction('get'):
+                    console.log(payload);
                     return state.set('dataset', payload.get('data'))
                         .set('status', this.statusComplete())
                     break;
@@ -38,10 +39,6 @@ class DetailsReducer extends Reducer
                  * Receive login
                  */
                 case this.formatReceiveAction('set'):
-                    console.log('ACTION');
-                    console.log(action);
-                    console.log(payload);
-
                     return state.set('dataset', payload)
                         .set('status', this.statusComplete())
                     break;

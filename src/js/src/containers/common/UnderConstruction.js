@@ -6,7 +6,6 @@ import Layout from '../Layout';
 class Dashboard extends Component {
 
     render() {
-        console.log(this);
         return (
             <Layout loggedIn={this.props.auth.loggedIn} router={this.props.router}>
                 <h1>Under construction</h1>

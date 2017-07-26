@@ -51,7 +51,6 @@ class ApiRequest
      * Get request action
      */
     sendGet(action, payload, attributes) {
-        console.log(attributes);
         return (dispatch, getState) => {
             dispatch(this.actionProvider.createRequestAction(action, payload));
             return fetch(this.getEndpoint(action, payload, attributes), {

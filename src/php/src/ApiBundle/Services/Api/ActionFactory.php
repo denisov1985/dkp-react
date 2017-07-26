@@ -12,6 +12,7 @@ use ApiBundle\Services\Api\Actions\AbstractAction;
 use ApiBundle\Services\Api\Actions\ActionLogin;
 use ApiBundle\Services\Api\Actions\ActionFind;
 use ApiBundle\Services\Api\Actions\ActionGet;
+use ApiBundle\Services\Api\Actions\ActionSave;
 
 /**
  * Class ActionFactory
@@ -21,7 +22,7 @@ class ActionFactory
 {
     const ACTION_GET    = 'get';
     const ACTION_FIND   = 'find';
-    const ACTION_UPDATE = 'update';
+    const ACTION_SAVE   = 'save';
     const ACTION_DELETE = 'delete';
     const ACTION_LOGIN  = 'login';
 
@@ -54,6 +55,10 @@ class ActionFactory
 
             case self::ACTION_GET:
                 return new ActionGet($this->em, $actionParams);
+                break;
+
+            case self::ACTION_SAVE:
+                return new ActionSave($this->em, $actionParams);
                 break;
         }
     }

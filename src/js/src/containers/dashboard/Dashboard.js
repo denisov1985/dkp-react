@@ -18,7 +18,6 @@ class Dashboard extends Container {
     }
 
     render() {
-        console.log(this);
         return (
             <Layout loggedIn={this.isLoggedIn()} router={this.props.router}>
                 <h2 className="ui header">
@@ -133,7 +132,6 @@ class Dashboard extends Container {
     }
 
     onGetUserDetails = (event, target) => {
-        console.log(target);
         this.props.actions.details.get(
             target.props.record.getIn(['attributes', 'id'])
         )

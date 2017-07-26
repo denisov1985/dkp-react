@@ -7,6 +7,7 @@ export default class ProductTabs extends Component {
     }
 
     render() {
+        console.log('re-render tabs')
         return (
             <div className="ui top attached tabular menu">
                 <Link to={this.link('/catalog/products/view')} className="item" activeClassName="active">

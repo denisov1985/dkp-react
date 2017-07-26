@@ -20,7 +20,6 @@ class Login extends Container {
     }
 
     render() {
-        console.log(this);
         return (
             <Background>
                 <div className="ui three column centered grid">

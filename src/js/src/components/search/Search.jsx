@@ -256,7 +256,6 @@ class Search extends CoreComponent {
         this.setState({
             search: e.target.value
         })
-        console.log(e.target.value)
     }
 }
 

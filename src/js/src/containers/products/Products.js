@@ -44,8 +44,6 @@ class Products extends Container {
 
     render() {
         let data = this.props.product.collection.getIn(['repository', 'findBy'])(29999);
-        console.log(data);
-
         return (
             <Layout container={this}>
                 <h2 className="ui header">

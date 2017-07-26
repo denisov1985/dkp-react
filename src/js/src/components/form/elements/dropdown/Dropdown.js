@@ -99,7 +99,6 @@ export default class Dropdown extends Element {
             search: '',
             expanded: false
         });
-        console.log(item);
         this.updateFormState(item)
 
         if (this.props.virtual !== true) {

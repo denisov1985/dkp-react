@@ -20,15 +20,14 @@ export default class Form extends CoreComponent {
         super(props);
         this.state = {
             data: fromJS({
-                fields: this.props.provider.getIn(['dataset', 'attributes'])
+                fields: this.props.provider.getIn(['dataset', 'attributes'], [])
             })
         };
     }
 
     render() {
-        console.log('Form State');
-        console.log('__________________________');
-        console.log(this);
+        console.log('re render form')
+        console.log(this.props.provider)
         return (<form  className="ui form">
             {this.renderElementWithProps({
                 form: this,

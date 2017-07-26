@@ -57,7 +57,6 @@ export default class Action
      * @param action
      */
     createReceiveAction = (action, payload) => {
-        //console.log(this.createAction(action, Action.TYPE_RECEIVE, payload));
         return this.createAction(action, Action.TYPE_RECEIVE, payload)
     };
 

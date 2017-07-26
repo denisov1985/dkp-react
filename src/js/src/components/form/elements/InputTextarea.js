@@ -1,47 +1,83 @@
 import React, {Component} from 'react'
 import Element from './Element';
 import {stateToHTML} from 'draft-js-export-html';
-import {Editor, EditorState, RichUtils, convertToRaw, convertToHTML} from 'draft-js';
-
+import {stateFromHTML} from 'draft-js-import-html';
+import {EditorState, RichUtils, convertToRaw, convertFromHTML, ContentState} from 'draft-js';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import {Editor} from 'react-draft-wysiwyg'
+import htmlToDraft from 'html-to-draftjs';
+import draftToHtml from 'draftjs-to-html';
+/**
+ * @TODO BIG HUGE REFACTOR
+ */
 export default class InputTextarea extends Element {
     constructor(props) {
         super(props);
-        this.state = {editorState: EditorState.createEmpty()};
+        console.log('construct')
+        if (this.getValue()) {
+            this.state = {
+                editorState: this.getEditorStateFromProps(this.props),
+            };
+
+        }   else  {
+            this.state = {editorState: EditorState.createEmpty()};
+        }
+
     }
 
-    onInput = (editorState) => this.setState({editorState});
-
-    _onBoldClick = () => {
-        this.onInput(RichUtils.toggleInlineStyle(this.state.editorState, 'BOLD'));
+    getEditorStateFromProps = (props) => {
+        const blocksFromHtml = htmlToDraft('<p>' + this.getValue(props) + '</p>');
+        const contentBlocks  = blocksFromHtml.contentBlocks;
+        const contentState   = ContentState.createFromBlockArray(contentBlocks);
+        return EditorState.createWithContent(contentState);
     }
 
-    toggleBlockType = (blockType) => {
-        this.onInput(
-            RichUtils.toggleBlockType(
-                this.state.editorState,
-                blockType
-            )
-        );
+    onEditorStateChange = (editorState) => {
+        this.setState({
+            editorState,
+        });
     }
 
-    logState = () => {
-        const content = this.state.editorState.getCurrentContent();
-        console.log(stateToHTML(content));
-    };
+    onBlur = () => {
+        const rawContentState = convertToRaw(this.state.editorState.getCurrentContent());
+        const markup = draftToHtml(rawContentState);
+        this.props.form.props.handler(this.getFieldName(), markup);
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        console.log('NEW PROPS')
+        console.log(this.getValue(nextProps))
+
+        if (this.getValue(nextProps) === '') {
+            return true;
+        }
+        this.setState({
+            editorState: this.getEditorStateFromProps(nextProps)
+        })
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return true;
+    }
 
     render() {
+        console.log('re-render textarea')
+
+        const {editorState} = this.state;
         return (
-            <div>
-                <button type="button" className="ui button" onClick={this.logState}></button>
-                <BlockStyleControls
-                    editorState={this.state.editorState}
-                    onToggle={this.toggleBlockType}
-                />
-                <div className="ui segment">
-                    <Editor editorState={this.state.editorState} onChange={this.onInput} />
-                </div>
-            </div>
-        );
+            <div style={{
+                padding: '0.67857143em 1em',
+                fontSize: '1em',
+                background: '#FFFFFF',
+                border: '1px solid rgba(34, 36, 38, 0.15)',
+                color: 'rgba(0, 0, 0, 0.87)',
+                borderRadius: '0.28571429rem'
+            }}><Editor
+                onBlur={this.onBlur}
+                editorState={editorState}
+                onEditorStateChange={this.onEditorStateChange}
+            /></div>)
     }
 }
 
@@ -55,7 +91,6 @@ class StyleButton extends React.Component {
     }
 
 
-
     render() {
         let className = 'RichEditor-styleButton';
         if (this.props.active) {
@@ -64,7 +99,7 @@ class StyleButton extends React.Component {
 
         return (
             <button type="button" className="ui button tiny" onMouseDown={this.onToggle}>
-              {this.props.label}
+                {this.props.label}
             </button>
         );
     }

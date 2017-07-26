@@ -15,6 +15,12 @@ class DetailsAction extends Action
             }),
 
             /**
+             * Save record
+              * @param record
+             */
+            save: (record) => this.getApi().sendPost('save', record.getIn(['dataset', 'attributes']).toObject()),
+
+            /**
              * Get local
              * @param record
              */

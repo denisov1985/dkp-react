@@ -11,35 +11,14 @@ import ModalDetails from 'components/modal/common/ModalDetails';
 class ProductView extends Container {
 
     componentWillMount() {
+        console.log('WILL MOUNT')
         super.componentWillMount();
-        if (this.props.product.collection.get('status') === 0) {
-            // /this.props.actions.product.collection.findAll();
-            let id = this.props.routeParams.id;
-            console.log('THIS');
-            console.log(this);
-            let data = this.props.product.collection.getIn(['repository', 'findBy'])(id);
-            if (typeof data === 'undefined') {
-                this.props.actions.product.details.get(id);
-            } else {
-                this.props.actions.product.details.set(data);
-            }
-
-        }
-    }
-
-    componentDidMount() {
-        console.log('did mount');
         let id = this.props.routeParams.id;
-        let data = this.props.product.collection.getIn(['repository', 'findBy'])(id);
-
-        if (typeof data === 'undefined') {
-            this.props.actions.product.details.get(id);
-        } else {
-            this.props.actions.product.details.set(data);
-        }
+        this.props.actions.product.details.get(id);
     }
 
     render() {
+        console.log('re-render template')
         return (
             <Layout container={this}>
                 <h2 className="ui header">
@@ -50,10 +29,10 @@ class ProductView extends Container {
                 <div className="ui bottom attached active tab segment">
 
                     <div style={{
-                        maxWidth: 970 + 'px'
+
                     }}>
 
-                            <div className="ui secondary raised segment">
+                            <div className="ui  raised segment">
                                 <h4 className="ui dividing header">Информация</h4>
                                 <Form provider={this.props.product.details} handler={this.props.actions.product.details.update} className="ui form">
                                     <Form.Row title="Name">
@@ -63,7 +42,7 @@ class ProductView extends Container {
                                         <Form.Input.Textarea name="description" />
                                     </Form.Row>
                                     <Form.Row title="Fulldescription">
-                                        <Form.Input.Textarea name="fullDescription" />
+                                        <Form.Input.Textarea name="full_description" />
                                     </Form.Row>
                                     <Form.Row title="Available">
                                         <Form.Input.Checkbox name="available" />
@@ -72,11 +51,12 @@ class ProductView extends Container {
                                         <Form.Input.Number name="price" />
                                     </Form.Row>
                                     <Form.Row title="Saleprice">
-                                        <Form.Input.Number name="salePrice" />
+                                        <Form.Input.Number name="sale_price" />
                                     </Form.Row>
                                 </Form>
                             </div>
-                            <div className="ui button">Submit Order</div>
+
+                        <div onClick={this.onSave} className="ui button">Сохранить</div>
 
                     </div>
 
@@ -85,6 +65,10 @@ class ProductView extends Container {
 
             </Layout>
         )
+    }
+
+    onSave = () => {
+        this.props.actions.product.details.save(this.props.product.details);
     }
 
     onView = (event, target) => {

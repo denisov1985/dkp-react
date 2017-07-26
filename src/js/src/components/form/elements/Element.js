@@ -3,6 +3,19 @@ import CoreComponent from '../../core/CoreComponent';
 
 export default class Element extends CoreComponent {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: this.getValue()
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            value: this.getValue(nextProps)
+        })
+    }
+
     /**
      * Get full name
      * @returns {string}
@@ -25,9 +38,12 @@ export default class Element extends CoreComponent {
      * Get field value
      * @returns {*}
      */
-    getValue() {
-        const path =['dataset', 'attributes'].concat(this.getProp('field', this.props.name).split('.'));
-        return this.props.form.props.provider.getIn(path);
+    getValue(props) {
+        if (typeof props === 'undefined') {
+            props = this.props;
+        }
+        const path =['dataset', 'attributes'].concat(this.getProp('field', props.name).split('.'));
+        return props.form.props.provider.getIn(path, '');
     }
 
     /**
@@ -35,7 +51,13 @@ export default class Element extends CoreComponent {
      * @param e
      */
     onChange = (e) => {
-        this.props.form.props.handler(this.getFieldName(), e.target.value);
+        this.setState({
+            value: e.target.value
+        })
+    }
+
+    onBlur = () => {
+        this.props.form.props.handler(this.getFieldName(), this.state.value);
     }
 
     /**
