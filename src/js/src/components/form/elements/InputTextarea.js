@@ -26,7 +26,12 @@ export default class InputTextarea extends Element {
     }
 
     getEditorStateFromProps = (props) => {
-        const blocksFromHtml = htmlToDraft('<p>' + this.getValue(props) + '</p>');
+        let value = this.getValue(props);
+        if (/<[a-z][\s\S]*>/i.test(value) === false) {
+            value = '<p>' + value + '</p>';
+        }
+
+        const blocksFromHtml = htmlToDraft(value);
         const contentBlocks  = blocksFromHtml.contentBlocks;
         const contentState   = ContentState.createFromBlockArray(contentBlocks);
         return EditorState.createWithContent(contentState);

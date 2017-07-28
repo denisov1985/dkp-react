@@ -13,6 +13,7 @@ use ApiBundle\Services\Api\Actions\ActionLogin;
 use ApiBundle\Services\Api\Actions\ActionFind;
 use ApiBundle\Services\Api\Actions\ActionGet;
 use ApiBundle\Services\Api\Actions\ActionSave;
+use ApiBundle\Services\Api\Actions\ActionUpload;
 
 /**
  * Class ActionFactory
@@ -23,6 +24,7 @@ class ActionFactory
     const ACTION_GET    = 'get';
     const ACTION_FIND   = 'find';
     const ACTION_SAVE   = 'save';
+    const ACTION_UPLOAD = 'upload';
     const ACTION_DELETE = 'delete';
     const ACTION_LOGIN  = 'login';
 
@@ -59,6 +61,10 @@ class ActionFactory
 
             case self::ACTION_SAVE:
                 return new ActionSave($this->em, $actionParams);
+                break;
+
+            case self::ACTION_UPLOAD:
+                return new ActionUpload($this->em, $actionParams);
                 break;
         }
     }

@@ -8,6 +8,7 @@ import InputIconText from './elements/InputIconText';
 import Checkbox from './elements/Checkbox';
 import InputTextarea from './elements/InputTextarea';
 import InputNumber from './elements/InputNumber';
+import InputImage from './elements/InputImage';
 
 import Row from './Row';
 import FormWrapper from './FormWrapper';
@@ -48,3 +49,4 @@ Form.Input.IconText = InputIconText;
 Form.Input.Checkbox = Checkbox;
 Form.Input.Textarea = InputTextarea;
 Form.Input.Number = InputNumber;
+Form.Input.Image = InputImage;

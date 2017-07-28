@@ -13,10 +13,6 @@ class ProductDev extends Container {
     render() {
         return (
             <Layout container={this}>
-                <h2 className="ui header">
-                    Просмотр продукта123
-                </h2>
-
                 <ProductTabs id={this.props.routeParams.id} />
                 <div className="ui bottom attached active tab segment">
                     In development

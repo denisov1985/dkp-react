@@ -21,10 +21,6 @@ class ProductView extends Container {
         console.log('re-render template')
         return (
             <Layout container={this}>
-                <h2 className="ui header">
-                    Просмотр продукта123
-                </h2>
-
                 <ProductTabs id={this.props.routeParams.id}/>
                 <div className="ui bottom attached active tab segment">
 
@@ -38,6 +34,11 @@ class ProductView extends Container {
                                     <Form.Row title="Name">
                                         <Form.Input.Text name="name" />
                                     </Form.Row>
+
+                                    <Form.Row title="Name">
+                                        <Form.Input.Image name="name" />
+                                    </Form.Row>
+
                                     <Form.Row title="Description">
                                         <Form.Input.Textarea name="description" />
                                     </Form.Row>
