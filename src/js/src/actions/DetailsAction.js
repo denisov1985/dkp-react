@@ -12,6 +12,27 @@ class DetailsAction extends Action
                 query: {
                     id: id
                 }
+            }, {ololo: 'trololo'}),
+
+            /**
+             * Get related data from server in one call
+             * @param id
+             */
+            collect: (id) => this.getApi().sendGet('collect', {
+                query: {
+                    id: id
+                }
+            }, {
+                join: [
+                    {
+                        type: 'Product',
+                        result: 'details'
+
+                    },
+                    {
+                        type: 'Product'
+                    },
+                ]
             }),
 
             /**

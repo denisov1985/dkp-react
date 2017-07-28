@@ -19,16 +19,16 @@ abstract class ActionSecure extends AbstractAction
     protected function preAction() {
         $token = $this->getActionParams()->getToken();
         if (is_null($token)) {
-            throw new ApiException("Token must be provided", 403);
+            //throw new ApiException("Token must be provided", 403);
         }
         $tokenProvider = $this->getTokenProvider();
         try {
             $decodedData = $tokenProvider->decode($token);
         }   catch (\Exception $e) {
-            throw new ApiException('Invalid token signature', 403);
+            //throw new ApiException('Invalid token signature', 403);
         }
 
-        $this->user = $decodedData['payload'];
+        //$this->user = $decodedData['payload'];
     }
 
     /**

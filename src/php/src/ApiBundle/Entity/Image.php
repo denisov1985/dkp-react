@@ -2,10 +2,12 @@
 
 namespace ApiBundle\Entity;
 
+use JMS\Serializer\Annotation\VirtualProperty;
+use JMS\Serializer\Annotation\Exclude;
 /**
- * Category
+ * Image
  */
-class Category
+class Image
 {
     /**
      * @var int
@@ -33,7 +35,7 @@ class Category
      *
      * @param string $name
      *
-     * @return Category
+     * @return Image
      */
     public function setName($name)
     {
@@ -50,5 +52,25 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+    /**
+     * @Exclude
+     * @var \ApiBundle\Entity\Product
+     */
+    private $product;
+
+
+    /**
+     * Set product
+     *
+     * @param \ApiBundle\Entity\Product $product
+     *
+     * @return Image
+     */
+    public function setProduct(\ApiBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
     }
 }

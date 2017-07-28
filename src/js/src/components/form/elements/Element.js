@@ -38,12 +38,15 @@ export default class Element extends CoreComponent {
      * Get field value
      * @returns {*}
      */
-    getValue(props) {
+    getValue(props, defaultValue) {
         if (typeof props === 'undefined') {
             props = this.props;
         }
+        if (typeof defaultValue === 'undefined') {
+            defaultValue = '';
+        }
         const path =['dataset', 'attributes'].concat(this.getProp('field', props.name).split('.'));
-        return props.form.props.provider.getIn(path, '');
+        return props.form.props.provider.getIn(path, defaultValue);
     }
 
     /**

@@ -2,6 +2,7 @@
 // src/AppBundle/DataFixtures/ORM/LoadUserData.php
 namespace AppBundle\DataFixtures\ORM;
 
+use ApiBundle\Entity\Image;
 use ApiBundle\Entity\Product;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -26,6 +27,21 @@ class LoadProductsData implements FixtureInterface
                     $value = $value === '' ? null : $value;
                     $product->$method($value);
                 }
+
+                if ($index === 0) {
+                    $image = new Image();
+                    $image->setName('product1.jpg');
+                    $image->setProduct($product);
+                    $manager->persist($image);
+
+                    $image2 = new Image();
+                    $image2->setName('product2.jpg');
+                    $image2->setProduct($product);
+                    $manager->persist($image2);
+
+
+                }
+
                 $manager->persist($product);
             }
             $manager->flush();

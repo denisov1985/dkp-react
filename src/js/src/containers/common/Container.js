@@ -19,7 +19,7 @@ class Container extends Component {
      */
     componentWillReceiveProps(nextProps) {
         if (!nextProps.auth.get('loggedIn', false)) {
-            this.redirect('login');
+            //this.redirect('login');
         }
     }
 

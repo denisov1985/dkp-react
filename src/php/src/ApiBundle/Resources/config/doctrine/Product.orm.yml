@@ -28,3 +28,7 @@ ApiBundle\Entity\Product:
             nullable: true
             column: sale_price
     lifecycleCallbacks: {  }
+    oneToMany:
+        images:
+            targetEntity: Image
+            mappedBy: product

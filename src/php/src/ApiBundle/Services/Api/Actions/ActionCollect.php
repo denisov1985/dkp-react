@@ -10,39 +10,10 @@ namespace ApiBundle\Services\Api\Actions;
 
 use ApiBundle\Services\Api\Exceptions\ApiException;
 
-class ActionSave extends ActionSecure
+class ActionCollect extends ActionSecure
 {
-
     protected function handle()
     {
-
-        $data = $this->getActionParams()->getData();
-        $entityClass = "ApiBundle\\Entity\\" . ucfirst($this->getActionParams()->getEntity());
-        if ($data['id']) {
-            $entity = $this->getRepository()->find($data['id']);
-        }   else  {
-            $entity = new $entityClass;
-        }
-        foreach ($data  as $key => $value) {
-            if ($key == 'id') {
-                continue;
-            }
-
-            if (is_array($value)) {
-                $method = "set" . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-                $value = $value === '' ? null : $value;
-                $entity->$method($value);
-            }   else  {
-
-            }
-
-        }
-        $this->em->persist($entity);
-        $this->em->flush();
-
-        die();
-
-        die('ok');
 
         $params = $this->getActionParams()->getParams();
         if (!isset($params[0])) {

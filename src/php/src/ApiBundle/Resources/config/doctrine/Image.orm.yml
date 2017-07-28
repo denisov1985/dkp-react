@@ -1,0 +1,22 @@
+ApiBundle\Entity\Image:
+    type: entity
+    table: null
+    repositoryClass: ApiBundle\Repository\ImageRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
+    manyToOne:
+        product:
+            targetEntity: Product
+            inversedBy: images
+            joinColumn:
+              name: product_id
+              referencedColumnName: id

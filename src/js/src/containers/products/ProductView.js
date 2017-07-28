@@ -35,8 +35,8 @@ class ProductView extends Container {
                                         <Form.Input.Text name="name" />
                                     </Form.Row>
 
-                                    <Form.Row title="Name">
-                                        <Form.Input.Image name="name" />
+                                    <Form.Row title="Images">
+                                        <Form.Input.Image name="images" />
                                     </Form.Row>
 
                                     <Form.Row title="Description">

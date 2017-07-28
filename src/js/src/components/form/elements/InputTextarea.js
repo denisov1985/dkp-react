@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import Element from './Element';
-import {stateToHTML} from 'draft-js-export-html';
-import {stateFromHTML} from 'draft-js-import-html';
 import {EditorState, RichUtils, convertToRaw, convertFromHTML, ContentState} from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {Editor} from 'react-draft-wysiwyg'

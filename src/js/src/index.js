@@ -29,6 +29,8 @@ const store = createStore(
 const ROLE_ADMIN   = 'admin';
 const ROLE_MANAGER = 'manager';
 
+console.log(document);
+
 render(
     <Provider store={store}>
         <Router history={browserHistory}>

@@ -9,6 +9,7 @@
 namespace ApiBundle\Services\Api;
 
 use ApiBundle\Services\Api\Actions\AbstractAction;
+use ApiBundle\Services\Api\Actions\ActionCollect;
 use ApiBundle\Services\Api\Actions\ActionLogin;
 use ApiBundle\Services\Api\Actions\ActionFind;
 use ApiBundle\Services\Api\Actions\ActionGet;
@@ -21,12 +22,13 @@ use ApiBundle\Services\Api\Actions\ActionUpload;
  */
 class ActionFactory
 {
-    const ACTION_GET    = 'get';
-    const ACTION_FIND   = 'find';
-    const ACTION_SAVE   = 'save';
-    const ACTION_UPLOAD = 'upload';
-    const ACTION_DELETE = 'delete';
-    const ACTION_LOGIN  = 'login';
+    const ACTION_GET     = 'get';
+    const ACTION_FIND    = 'find';
+    const ACTION_SAVE    = 'save';
+    const ACTION_UPLOAD  = 'upload';
+    const ACTION_DELETE  = 'delete';
+    const ACTION_LOGIN   = 'login';
+    const ACTION_COLLECT = 'collect';
 
     protected $em;
 
@@ -61,6 +63,10 @@ class ActionFactory
 
             case self::ACTION_SAVE:
                 return new ActionSave($this->em, $actionParams);
+                break;
+
+            case self::ACTION_COLLECT:
+                return new ActionCollect($this->em, $actionParams);
                 break;
 
             case self::ACTION_UPLOAD:
