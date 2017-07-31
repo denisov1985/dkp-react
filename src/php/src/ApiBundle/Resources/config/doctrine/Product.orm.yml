@@ -15,10 +15,6 @@ ApiBundle\Entity\Product:
         description:
             type: text
             nullable: true
-        fullDescription:
-            type: text
-            column: full_description
-            nullable: true
         available:
             type: boolean
         price:

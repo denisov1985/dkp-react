@@ -25,6 +25,11 @@ class LoadProductsData implements FixtureInterface
                     }
                     $method = "set" . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
                     $value = $value === '' ? null : $value;
+
+                    if ($method == 'setFullDescription') {
+                        continue;
+                    }
+
                     $product->$method($value);
                 }
 

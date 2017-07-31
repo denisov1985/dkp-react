@@ -28,7 +28,7 @@ class ActionSave extends ActionSecure
                 continue;
             }
 
-            if (is_array($value)) {
+            if (!is_array($value)) {
                 $method = "set" . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
                 $value = $value === '' ? null : $value;
                 $entity->$method($value);

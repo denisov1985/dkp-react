@@ -64,13 +64,17 @@ export default class InputTextarea extends Element {
         const {editorState} = this.state;
         return (
             <div style={{
-                padding: '0.67857143em 1em',
-                fontSize: '1em',
-                background: '#FFFFFF',
-                border: '1px solid rgba(34, 36, 38, 0.15)',
-                color: 'rgba(0, 0, 0, 0.87)',
-                borderRadius: '0.28571429rem'
+
             }}><Editor
+                editorStyle={{
+                    padding: '0.67857143em 1em',
+                    fontSize: '1em',
+                    background: '#FFFFFF',
+                    border: '1px solid rgba(34, 36, 38, 0.15)',
+                    color: 'rgba(0, 0, 0, 0.87)',
+                    borderRadius: '0.28571429rem',
+                    height: 400 + 'px'
+                }}
                 onBlur={this.onBlur}
                 editorState={editorState}
                 onEditorStateChange={this.onEditorStateChange}
@@ -78,62 +82,3 @@ export default class InputTextarea extends Element {
     }
 }
 
-class StyleButton extends React.Component {
-    constructor() {
-        super();
-        this.onToggle = (e) => {
-            e.preventDefault();
-            this.props.onToggle(this.props.style);
-        };
-    }
-
-
-    render() {
-        let className = 'RichEditor-styleButton';
-        if (this.props.active) {
-            className += ' RichEditor-activeButton';
-        }
-
-        return (
-            <button type="button" className="ui button tiny" onMouseDown={this.onToggle}>
-                {this.props.label}
-            </button>
-        );
-    }
-}
-
-const BLOCK_TYPES = [
-    {label: 'H1', style: 'header-one'},
-    {label: 'H2', style: 'header-two'},
-    {label: 'H3', style: 'header-three'},
-    {label: 'H4', style: 'header-four'},
-    {label: 'H5', style: 'header-five'},
-    {label: 'H6', style: 'header-six'},
-    {label: 'Blockquote', style: 'blockquote'},
-    {label: 'UL', style: 'unordered-list-item'},
-    {label: 'OL', style: 'ordered-list-item'},
-    {label: 'Code Block', style: 'code-block'},
-];
-
-const BlockStyleControls = (props) => {
-    const {editorState} = props;
-    const selection = editorState.getSelection();
-    const blockType = editorState
-        .getCurrentContent()
-        .getBlockForKey(selection.getStartKey())
-        .getType();
-
-    return (
-        <div className="RichEditor-controls">
-            {BLOCK_TYPES.map((type) =>
-                <StyleButton
-                    key={type.label}
-                    active={type.style === blockType}
-                    label={type.label}
-                    onToggle={props.onToggle}
-                    style={type.style}
-                />
-            )}
-        </div>
-    );
-};
