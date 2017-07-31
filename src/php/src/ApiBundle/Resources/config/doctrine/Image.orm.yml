@@ -12,6 +12,9 @@ ApiBundle\Entity\Image:
         name:
             type: string
             length: 255
+        type:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }
     manyToOne:
         product:

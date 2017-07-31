@@ -73,4 +73,43 @@ class Image
 
         return $this;
     }
+    /**
+     * @var string
+     */
+    private $type;
+
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Image
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \ApiBundle\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
 }

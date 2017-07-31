@@ -11,14 +11,13 @@ import ModalDetails from 'components/modal/common/ModalDetails';
 class ProductView extends Container {
 
     componentWillMount() {
-        console.log('WILL MOUNT')
         super.componentWillMount();
         let id = this.props.routeParams.id;
         this.props.actions.product.details.get(id);
     }
 
     render() {
-        console.log('re-render template')
+        console.log(this);
         return (
             <Layout container={this}>
                 <ProductTabs id={this.props.routeParams.id}/>
@@ -30,7 +29,11 @@ class ProductView extends Container {
 
                             <div className="ui  raised segment">
                                 <h4 className="ui dividing header">Информация</h4>
-                                <Form provider={this.props.product.details} handler={this.props.actions.product.details.update} className="ui form">
+                                <Form
+                                    upload={this.props.actions.product.details.upload}
+                                    provider={this.props.product.details}
+                                    handler={this.props.actions.product.details.update}
+                                    className="ui form">
                                     <Form.Row title="Name">
                                         <Form.Input.Text name="name" />
                                     </Form.Row>

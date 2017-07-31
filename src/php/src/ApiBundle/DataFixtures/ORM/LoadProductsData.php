@@ -32,13 +32,14 @@ class LoadProductsData implements FixtureInterface
                     $image = new Image();
                     $image->setName('product1.jpg');
                     $image->setProduct($product);
+                    $image->setType('image/jpeg');
                     $manager->persist($image);
 
                     $image2 = new Image();
                     $image2->setName('product2.jpg');
+                    $image2->setType('image/jpeg');
                     $image2->setProduct($product);
                     $manager->persist($image2);
-
 
                 }
 

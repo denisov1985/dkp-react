@@ -42,6 +42,12 @@ class DetailsAction extends Action
             save: (record) => this.getApi().sendPost('save', record.getIn(['dataset', 'attributes']).toObject()),
 
             /**
+             * Save record
+             * @param record
+             */
+            upload: (fileData) => this.getApi().sendPost('upload_image', fileData),
+
+            /**
              * Get local
              * @param record
              */

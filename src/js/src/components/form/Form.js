@@ -27,8 +27,6 @@ export default class Form extends CoreComponent {
     }
 
     render() {
-        console.log('re render form')
-        console.log(this.props.provider)
         return (<form  className="ui form">
             {this.renderElementWithProps({
                 form: this,

@@ -8,6 +8,7 @@
 
 namespace ApiBundle\Services\Api\Actions;
 
+use ApiBundle\Entity\Image;
 use ApiBundle\Services\Api\Exceptions\ApiException;
 
 class ActionUpload extends ActionSecure
@@ -15,54 +16,37 @@ class ActionUpload extends ActionSecure
 
     protected function handle()
     {
-
         $data = $this->getActionParams()->getData();
-        $entityClass = "ApiBundle\\Entity\\" . ucfirst($this->getActionParams()->getEntity());
-        if ($data['id']) {
-            $entity = $this->getRepository()->find($data['id']);
-        }   else  {
-            $entity = new $entityClass;
+
+        $product = $this->getRepository()->find($data['id']);
+
+        $imgData = str_replace(' ','+',$data['data_uri']);
+        $imgData =  substr($imgData,strpos($imgData,",")+1);
+        $imgData = base64_decode($imgData);
+
+        $uploadPath = dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) .
+            DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'upload' . DIRECTORY_SEPARATOR . md5('Y-m-d');
+
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath);
         }
-        foreach ($data  as $key => $value) {
-            if ($key == 'id') {
-                continue;
-            }
-            $method = "set" . str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-            $value = $value === '' ? null : $value;
-            $entity->$method($value);
-        }
-        $this->em->persist($entity);
+        $parts = explode('.', $data['filename']);
+        $ext = array_pop($parts);
+        $filename = md5(time()) . '.' . $ext;
+        file_put_contents($uploadPath . DIRECTORY_SEPARATOR . $filename, $imgData);
+
+        $image = new Image();
+        $image->setName(md5('Y-m-d') . DIRECTORY_SEPARATOR . $filename);
+        $image->setType($data['filetype']);
+        $image->setProduct($product);
+
+        $this->em->persist($image);
         $this->em->flush();
 
-        die();
-
-        die('ok');
-
-        $params = $this->getActionParams()->getParams();
-        if (!isset($params[0])) {
-            throw new ApiException($this->getActionParams()->getEntity() . ' ID not provided');
-        }
-
-        $item = $this->getRepository()->find($params[0]);
-
-
-        $query = $this->getActionParams()->getQuery();
-        $include = [
-            'include' => []
-        ];
-        if (isset($query['include'])) {
-            $includeParts = explode(',', $query['include']);
-            foreach ($includeParts as $part) {
-                $includeData = $this->getRepository($part)->findAll();
-                $include['include'][$part] = $this->format($includeData);
-            }
-        }
-
-        $this->restoreSerializer();
         return [
-            'type' => $this->getActionParams()->getEntity(),
-            'id' => $item->getId(),
-            'attributes' => $this->serialize($item),
-        ] + $include;
+            'type' => 'Image',
+            'id' => $image->getId(),
+            'attributes' => $this->serialize($image),
+        ];
     }
 }

@@ -11,7 +11,6 @@ import draftToHtml from 'draftjs-to-html';
 export default class InputTextarea extends Element {
     constructor(props) {
         super(props);
-        console.log('construct')
         if (this.getValue()) {
             this.state = {
                 editorState: this.getEditorStateFromProps(this.props),
@@ -49,9 +48,6 @@ export default class InputTextarea extends Element {
 
     componentWillReceiveProps(nextProps) {
 
-        console.log('NEW PROPS')
-        console.log(this.getValue(nextProps))
-
         if (this.getValue(nextProps) === '') {
             return true;
         }
@@ -65,8 +61,6 @@ export default class InputTextarea extends Element {
     }
 
     render() {
-        console.log('re-render textarea')
-
         const {editorState} = this.state;
         return (
             <div style={{

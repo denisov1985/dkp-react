@@ -25,7 +25,7 @@ class ActionFactory
     const ACTION_GET     = 'get';
     const ACTION_FIND    = 'find';
     const ACTION_SAVE    = 'save';
-    const ACTION_UPLOAD  = 'upload';
+    const ACTION_UPLOAD  = 'upload_image';
     const ACTION_DELETE  = 'delete';
     const ACTION_LOGIN   = 'login';
     const ACTION_COLLECT = 'collect';
