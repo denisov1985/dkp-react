@@ -1,68 +1,78 @@
-var webpack = require("webpack");
-var path = require('path');
+const path = require('path');
+
 module.exports = {
-    entry: [
-        './src/index.js'
-    ],
+    entry: {
+        admin: './src/index.js'
+    },
     output: {
-        path: __dirname + '/../../public/build',
-        publicPath: '/build/',
-        filename: 'bundle.js'
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname + '/../../public', 'build'),
+        publicPath: "http://localhost/build/"
     },
-
     resolve: {
-        root: path.resolve(__dirname),
         alias: {
-            components: 'src/components',
-            actions: 'src/actions',
+            components: path.resolve(__dirname, 'src/components/'),
+            actions: path.resolve(__dirname, 'src/actions/')
         },
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
-
     module: {
-        loaders: [{
-            test: /\.(js|jsx)?$/,
-            exclude: /node_modules/,
-            loader: 'babel',
-            query: {
-                presets: ['es2015', 'react', 'stage-2']
-            }
-        },
+        rules: [
             {
                 test: /\.css$/,
-                loader: "style-loader!css-loader"
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
             },
             {
-                test: /\.png$/,
-                loader: "url-loader?limit=100000"
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader'
+                ]
             },
             {
-                test: /\.jpg$/,
-                loader: "file-loader"
+                test: /\.(eot)?$/,
+                use: [
+                    {
+                        loader: 'url-loader'
+                    }
+                ]
             },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff'
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 10000,
+                            mimetype: 'application/font-woff'
+                        }
+                    }
+                ]
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/octet-stream'
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 10000,
+                            mimetype: 'application/octet-stream'
+                        }
+                    }
+                ]
             },
             {
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file'
-            },
-            {
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml'
+                test: /\.(js|jsx)$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    query: {
+                        presets: ['es2015', 'react', 'stage-2']
+                    }
+                }
             }
         ]
-    },
-    devServer: {
-        contentBase: './public'
-    },
-    plugins: [
-        new webpack.OldWatchingPlugin()
-    ],
-
+    }
 };

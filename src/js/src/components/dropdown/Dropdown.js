@@ -1,49 +1,32 @@
 import React, {Component} from 'react'
 import CoreComponent from '../core/CoreComponent';
-import Item from './Item';
+import { Dropdown } from 'semantic-ui-react'
 
-export default class Dropdown extends CoreComponent {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: false
-        }
-    }
-
-    buildClass() {
-        super.buildClass();
-        this.addClass('ui button');
-    }
-
-    onToggleClick = () => {
-        this.setState({
-            open: true
-        })
-    }
-
-    onMouseOut = (event) => {
-        this.setState({
-            open: false
-        })
-    }
+export default class UIDropdown extends CoreComponent {
 
     render() {
-        let menuClass = "menu transition";
-        let buttonClass = "ui floating labeled icon dropdown button visible";
-        this.state.open && (menuClass = menuClass + ' visible') && (buttonClass += ' upward active');
-        return (
-            <div onMouseLeave={this.onMouseOut} onMouseEnter={this.onToggleClick} className={buttonClass} tabIndex="0">
-                <i className="dropdown icon"></i>
-                <span className="text">{this.getProp('title', 'Dropdown')}</span>
-                <div className={menuClass} tabIndex="-1" style={{display: 'block !important'}}>
-                    {this.renderElementWithProps({
-                        parent: this
-                    }, this.props.children)}
-                </div>
-            </div>
-        )
-    }
-}
+        const options = [
+            { key: 'angular', text: 'Angular', value: 'angular' },
+            { key: 'css', text: 'CSS', value: 'css' },
+            { key: 'design', text: 'Graphic Design', value: 'design' },
+            { key: 'ember', text: 'Ember', value: 'ember' },
+            { key: 'html', text: 'HTML', value: 'html' },
+            { key: 'ia', text: 'Information Architecture', value: 'ia' },
+            { key: 'javascript', text: 'Javascript', value: 'javascript' },
+            { key: 'mech', text: 'Mechanical Engineering', value: 'mech' },
+            { key: 'meteor', text: 'Meteor', value: 'meteor' },
+            { key: 'node', text: 'NodeJS', value: 'node' },
+            { key: 'plumbing', text: 'Plumbing', value: 'plumbing' },
+            { key: 'python', text: 'Python', value: 'python' },
+            { key: 'rails', text: 'Rails', value: 'rails' },
+            { key: 'react', text: 'React', value: 'react' },
+            { key: 'repair', text: 'Kitchen Repair', value: 'repair' },
+            { key: 'ruby', text: 'Ruby', value: 'ruby' },
+            { key: 'ui', text: 'UI Design', value: 'ui' },
+            { key: 'ux', text: 'User Experience', value: 'ux' },
+        ]
 
-Dropdown.Item = Item;
+        return (<Dropdown placeholder='Skills' fluid multiple selection options={options} />);
+    }
+
+}

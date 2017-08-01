@@ -8,6 +8,7 @@ import Layout from '../Layout';
 import Container from '../common/Container';
 import Form from 'components/form/Form';
 import Search from 'components/search/Search';
+import UIDropdown from 'components/dropdown/Dropdown';
 
 import ModalDetails from 'components/modal/common/ModalDetails';
 
@@ -51,7 +52,7 @@ class Products extends Container {
                     <div className="sub header">Список продуктов на складе</div>
                 </h2>
 
-                <Search options={this.formatOptions()} onSearch={this.onSearch} />
+                <UIDropdown/>
 
                 <DataTable provider={this.props.product.collection} source={this.props.actions.product.collection}>
                     <DataTable.Column.Data width="40" title="ID" field="id" sortable={true}/>

@@ -12,6 +12,7 @@ import ModalDetails from 'components/modal/common/ModalDetails';
 class ProductView extends Container {
 
     componentWillMount() {
+        console.log('will mount');
         super.componentWillMount();
         let id = this.props.routeParams.id;
         this.props.actions.product.details.get(id);
@@ -69,6 +70,7 @@ class ProductView extends Container {
     }
 
     render() {
+        console.log('LALALLA');
         console.log(this);
         return (
             <Layout container={this}>

@@ -242,4 +242,43 @@ class Product
     {
         return $this->images;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $categories;
+
+
+    /**
+     * Add category
+     *
+     * @param \ApiBundle\Entity\Category $category
+     *
+     * @return Product
+     */
+    public function addCategory(\ApiBundle\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \ApiBundle\Entity\Category $category
+     */
+    public function removeCategory(\ApiBundle\Entity\Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
 }

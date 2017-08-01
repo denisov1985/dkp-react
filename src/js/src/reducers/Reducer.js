@@ -10,6 +10,7 @@ export default class Reducer
      * @param entity
      */
     constructor(entity) {
+        console.log(entity);
         this.entity = entity;
         this.action = new Action(entity);
     }

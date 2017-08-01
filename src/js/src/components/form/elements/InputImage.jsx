@@ -17,7 +17,7 @@ export default class InputImage extends Element {
             <div className="ui six cards">
                 {this.getValue(this.props, []).map((element, index) => {
                     const path = "/img/upload/" + element.get('name');
-                    return (<a className="card">
+                    return (<a key={index} className="card">
                         <div style={{
                             padding: 10 + 'px',
                             backgroundColor: 'white'

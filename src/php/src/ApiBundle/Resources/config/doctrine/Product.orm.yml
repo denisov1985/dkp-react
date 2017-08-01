@@ -28,3 +28,7 @@ ApiBundle\Entity\Product:
         images:
             targetEntity: Image
             mappedBy: product
+
+    manyToMany:
+        categories:
+            targetEntity: Category
